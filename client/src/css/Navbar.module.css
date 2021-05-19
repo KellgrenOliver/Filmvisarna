@@ -1,0 +1,25 @@
+.navbar {
+	text-align: center;
+	border: 1px solid grey;
+	width: 70%;
+	margin: auto;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+}
+
+.link {
+	color: rgb(0, 0, 0);
+	font-size: 1rem;
+	margin: 0 1rem;
+	text-decoration: none;
+}
+
+.link:hover {
+	color: rgb(71, 7, 24);
+}
+
+@media only screen and (max-width: 600px) {
+	.navbar {
+		width: 90%;
+	}
+}
