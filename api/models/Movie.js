@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const movieSchema = new Schema({
-	screenings: { type: Schema.Types.ObjectId, ref: "Screening" },
+	screenings: [{ type: Schema.Types.ObjectId, ref: "Screening" }],
 	title: { type: String, required: true },
 	genre: { type: String, required: true },
 	description: { type: String, required: true },
