@@ -15,13 +15,9 @@ const logout = (req, res) => {
 };
 
 const login = async (req, res) => {
-	// Model.exists return true if at least one matching document is found in the collection, otherwise it returns false. It also returns a promise so we can use async/await without .exec().
 	let userExists = await User.exists({ email: req.body.email });
-
 	if (userExists) {
-		// Model.findOne() always return the first matching document in the collection. It returns a Query object so wee need .exec().
 		let user = await User.findOne({ email: req.body.email }).exec();
-		// Here we shoud encrypt the password in order to compare the hashed password. We will implement later.
 		if (user.password === req.body.password) {
 			req.session.user = user;
 			req.session.user.password = undefined;
@@ -29,7 +25,6 @@ const login = async (req, res) => {
 			return res.json({ message: "Login successfull", loggedInUser: user });
 		}
 	}
-
 	return res.status(401).json({ error: "Bad credentials" });
 };
 
