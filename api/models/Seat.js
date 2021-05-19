@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const seatSchema = new Schema ({
   row: { type: String, required: true },
   number: { type: Number, required: true },
-  type: {type:String, default:"adult", required: true}
+  type: { type:String, default:"adult", required: true },
+  _owner:{ type:Schema.Types.ObjectId, ref:"Auditorium", default:null}
 });
 
 const Seat = mongoose.model("Seat", seatSchema);

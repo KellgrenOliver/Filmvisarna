@@ -1,2 +1,4 @@
 env.json
 node_modules
+insertDummySeatData.js
+seatsData.json
