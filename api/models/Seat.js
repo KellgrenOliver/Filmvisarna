@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const seatSchema = new Schema ({
-  row: { type: String, required: true },
-  number: { type: Number, required: true },
+  row: { type: String, default:null },
   type: { type:String, default:"adult", required: true },
-  _owner:{ type:Schema.Types.ObjectId, ref:"Auditorium", default:null}
+  reserved:{ type:Boolean, required: true, default: false },
+  booked:{ type:Boolean, required: true, default: false },
+  _owners:[ { type:Schema.Types.ObjectId, ref:"Auditorium"} ]
 });
 
 const Seat = mongoose.model("Seat", seatSchema);
