@@ -9,6 +9,7 @@ const uri = `mongodb+srv://aubameyang:${MONGODB_PASSWORD}@cluster0.rvi3m.mongodb
 // Controller
 const userRoutes = require("./routes/usersRoutes");
 const auditoriumRoutes = require("./routes/auditoriumRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 
 // Middleware
 app.use(express.json());
@@ -36,6 +37,7 @@ mongoose
 // Routes
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auditorium", auditoriumRoutes);
+app.use("/api/v1/booking", bookingRoutes);
 
 app.get("/*", (req, res) => {
 	res.sendFile(path.join(__dirname, "../client/build/index.html"));
