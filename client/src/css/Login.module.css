@@ -12,6 +12,7 @@
 p {
 	color: black;
 }
+
 input[type="text"],
 [type="password"] {
 	border-radius: 5px;
@@ -24,9 +25,11 @@ input[type="text"],
 	color: rgb(71, 7, 24);
 	text-decoration: none;
 }
+
 .link:hover {
 	color: rgb(146, 37, 64);
 }
+
 .btn {
 	border-radius: 28px;
 	border-color: rgb(71, 7, 24);
@@ -38,6 +41,7 @@ input[type="text"],
 	text-decoration: none;
 	float: right;
 }
+
 .btn:hover {
 	background-color: rgb(71, 7, 24);
 	color: rgb(235, 235, 235);
