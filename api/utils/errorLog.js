@@ -4,7 +4,7 @@ const fs = require("fs");
 function errorLog(error) {
 	console.error(error);
 
-	const filePath = path.join(__dirname, "../../errorlog.md");
+	const filePath = path.join(__dirname, "../../errorlog.txt");
 	const content = `${new Date()}\n${error.stack}`;
 
 	if (fs.existsSync(filePath)) {
@@ -15,7 +15,7 @@ function errorLog(error) {
 		);
 	} else {
 		fs.writeFile(
-			path.join(__dirname, "../../errorlog.md"),
+			path.join(__dirname, "../../errorlog.txt"),
 			`${content}`,
 			(error) => error && console.error(error)
 		);
