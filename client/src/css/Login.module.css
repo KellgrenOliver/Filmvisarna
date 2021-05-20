@@ -1,0 +1,36 @@
+.card {
+	background: rgb(235, 235, 235);
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	color: rgba(0, 0, 0, 0.2);
+	margin: 2rem auto;
+	height: 260px;
+	padding: 1rem;
+	transition: 0.3s;
+	width: 230px;
+}
+
+.link {
+	cursor: pointer;
+	color: rgb(255, 157, 0);
+	text-decoration: none;
+	font-size: small;
+}
+.link:hover {
+	color: coral;
+}
+.btn {
+	margin-top: 1rem;
+	background-color: ;
+	border-radius: 28px;
+	cursor: pointer;
+	color: rgb(71, 7, 24);
+	font-size: 12px;
+	font-weight: bolder;
+	padding: 5px 21px;
+	text-decoration: none;
+	float: right;
+}
+.btn:hover {
+	background-color: coral;
+}

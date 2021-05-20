@@ -12,7 +12,7 @@ const Login = () => {
 					type="password"
 					placeholder="password"
 				/>
-				<span className={styles.link}>Create new user</span>
+				<p className={styles.link}>Create new user</p>
 				<br />
 				<button type="submit" className={styles.btn}>
 					Login
