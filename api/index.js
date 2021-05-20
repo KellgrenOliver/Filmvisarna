@@ -7,11 +7,16 @@ const errorLog = require("./utils/errorLog");
 const { PORT, MONGODB_PASSWORD, SESSION_SECRET } = require("../env.json");
 const uri = `mongodb+srv://aubameyang:${MONGODB_PASSWORD}@cluster0.rvi3m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
+// Database connection
 mongoose
-	.connect(
-		`mongodb+srv://aubameyang:${MONGODB_PASSWORD}@cluster0.rvi3m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
-	)
-	.then(() => console.log("Connected to MongoDB"));
+	.connect(uri, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
+	.then(() => {
+		console.log("Connected to MongoDB");
+	})
+	.catch((error) => error && errorLog(error));
 
 // Controllers
 const userRoutes = require("./routes/usersRoutes");
@@ -27,17 +32,6 @@ app.use(
 		saveUninitialized: true,
 	})
 );
-
-// Database connection
-mongoose
-	.connect(uri, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	})
-	.then(() => {
-		console.log("Connected to MongoDB");
-	})
-	.catch((error) => error && errorLog(error));
 
 // Routes
 app.use("/api/v1/users", userRoutes);
