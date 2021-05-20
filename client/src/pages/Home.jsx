@@ -10,23 +10,10 @@ const Home = () => {
 		// eslint-disable-next-line
 	}, []);
 
-	// 	return (
-	// 		<div>
-	// 			{movies.map((movie, i) => (
-	// 				<div className={styles.cardWrapper} key={i}>
-	// 					<img className={styles.card} src={movie.poster} alt={movie.title} />
-	// 					<h2>{movie.title}</h2>
-	// 				</div>
-	// 			))}
-	// 		</div>
-	// 	);
-	// };
-
 	const renderMovies = () => {
-		return movies.map((movie) => (
-			<div key={movie.movie} className={styles.card}>
+		return movies.map((movie, i) => (
+			<div key={(movie, i)} className={styles.card}>
 				<img className={styles.img} src={movie.poster} alt={movie.title} />
-				{/* {movie.title} */}
 			</div>
 		));
 	};
