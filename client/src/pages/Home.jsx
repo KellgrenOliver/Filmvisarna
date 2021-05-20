@@ -19,7 +19,7 @@ const Home = () => {
 	};
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<div className={styles.cardWrapper}>{movies && renderMovies()}</div>
 		</div>
 	);

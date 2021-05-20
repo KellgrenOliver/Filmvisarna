@@ -1,7 +1,10 @@
+.container {
+	display: flex;
+	justify-content: center;
+}
+
 .cardWrapper {
-	width: 100%;
-	padding-top: 3rem;
-	padding-bottom: 3rem;
+	width: 80%;
 	display: flex;
 	align-items: center;
 	flex-direction: row;
@@ -18,6 +21,7 @@
 }
 
 .card {
+	margin: 2rem;
 	font-size: 0.5rem;
 	display: flex;
 	justify-content: center;
