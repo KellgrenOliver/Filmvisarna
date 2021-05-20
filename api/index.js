@@ -7,6 +7,7 @@ const { PORT, MONGODB_PASSWORD, SESSION_SECRET } = require("../env.json");
 
 // Controller
 const userRoutes = require("./routes/usersRoutes");
+const moviesRoutes = require("./routes/moviesRoutes");
 
 // Middleware
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use(
 
 // Routes
 app.use("/api/users", userRoutes);
+app.use("/api/v1/movies", moviesRoutes);
 
 mongoose
 	.connect(
