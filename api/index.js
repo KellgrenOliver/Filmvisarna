@@ -36,7 +36,7 @@ app.use(
 // Routes
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auditorium", auditoriumRoutes);
-app.use("/api/users", userRoutes);
+app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/seats", seatRoutes);
 
 app.get("/*", (req, res) => {
