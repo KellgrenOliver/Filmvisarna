@@ -7,7 +7,7 @@ const { PORT, MONGODB_PASSWORD, SESSION_SECRET } = require("../env.json");
 
 // Controller
 const userRoutes = require("./routes/usersRoutes");
-
+const seatRoutes = require("./routes/seatRoutes");
 // Middleware
 app.use(express.json());
 app.use(
@@ -20,7 +20,7 @@ app.use(
 
 // Routes
 app.use("/api/users", userRoutes);
-
+app.use("/api/v1/seats", seatRoutes);
 mongoose
 	.connect(
 		`mongodb+srv://aubameyang:${MONGODB_PASSWORD}@cluster0.rvi3m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
