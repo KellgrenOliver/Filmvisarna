@@ -13,10 +13,6 @@ mongoose
 	)
 	.then(() => console.log("Connected to MongoDB"));
 
-app.get("/*", (req, res) => {
-	res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
-
 // Controllers
 const userRoutes = require("./routes/usersRoutes");
 const auditoriumRoutes = require("./routes/auditoriumRoutes");
@@ -48,5 +44,9 @@ app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auditorium", auditoriumRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/v1/seats", seatRoutes);
+
+app.get("/*", (req, res) => {
+	res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
