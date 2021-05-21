@@ -9,6 +9,15 @@ const getAllMovies = async (req, res) => {
 	}
 };
 
+const getSearchedMovies = async (req, res) => {
+  try {
+    let querySearch = new RegExp(`${req.query.search ? req.query.search: ""}\\w*`, "gi");
+
+  }
+
+}
+
 module.exports = {
 	getAllMovies,
+  getSearchedMovies
 };
