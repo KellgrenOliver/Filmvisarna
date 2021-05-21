@@ -2,13 +2,13 @@ const Auditorium = require("../models/Auditorium");
 const Movie = require("../models/Movie");
 const Screening = require("../models/Screening");
 
-async function createRandomScreening(perAuditorium = 5) {
+async function screeningSeeder(perAuditorium = 5) {
 	await Screening.collection.drop();
 
 	const movieCount = await Movie.countDocuments();
 	const auditoriumCount = await Auditorium.countDocuments();
 
-	for (i = 0; i < auditoriumCount; i++) {
+	for (let i = 0; i < auditoriumCount; i++) {
 		for (let j = 0; j < perAuditorium; j++) {
 			const { _id: movie } = await Movie.findOne().skip(
 				Math.floor(Math.random() * movieCount)
@@ -21,5 +21,5 @@ async function createRandomScreening(perAuditorium = 5) {
 }
 
 module.exports = {
-	createRandomScreening,
+	screeningSeeder,
 };
