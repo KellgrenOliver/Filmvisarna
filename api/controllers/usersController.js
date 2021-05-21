@@ -22,7 +22,7 @@ const login = async (req, res) => {
 			req.session.user = user;
 			req.session.user.password = undefined;
 			user.password = undefined;
-			return res.json({ message: "Login successfull", loggedInUser: user });
+			return res.json({ success: "Login successfull", loggedInUser: user });
 		}
 	}
 	res.status(422).json({ error: "Bad credentials" });
