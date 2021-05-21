@@ -17,7 +17,7 @@ const movieSchema = new Schema(
 		language: { type: String, required: true, default: "English" },
 		subtitles: { type: Boolean, required: true, default: true },
 		directors: { type: Array, required: true },
-		cast: { type: Array, required: true },
+		stars: { type: Array, required: true },
 	},
 	{ timestamps: true }
 );
