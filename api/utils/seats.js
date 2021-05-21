@@ -9,6 +9,7 @@ async function seatsSeeder() {
 			throw new Error(`Expected seats, got ${JSON.stringify(seats)}`);
 		}
 
+		await Seat.createCollection();
 		await Seat.collection.drop();
 
 		for (let i = 0; i < seats.length; i++) {
