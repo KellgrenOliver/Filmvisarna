@@ -13,7 +13,7 @@ const movieSchema = new Schema(
 		length: { type: Number, required: true },
 		trailer: { type: String, required: true },
 		year: { type: Number, required: true },
-		rating: { type: String, required: true, default: "PG13" },
+		rating: { type: String, required: true },
 		language: { type: String, required: true, default: "English" },
 		subtitles: { type: Boolean, required: true, default: true },
 		directors: { type: Array, required: true },
