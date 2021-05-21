@@ -14,6 +14,9 @@ const Navbar = () => {
 			<NavLink className={styles.link} exact to="/booking">
 				Booking
 			</NavLink>
+			<NavLink className={styles.link} exact to="/login">
+				Login
+			</NavLink>
 		</nav>
 	);
 };
