@@ -8,7 +8,7 @@ async function movieSeeder() {
 			throw new Error(`Expected movies, got ${JSON.stringify(movies)}`);
 		}
 		await Movie.collection.drop();
-		await Movie.insertMany(result);
+		await Movie.insertMany(movies);
 	} catch (e) {
 		errorLog(e);
 	}
