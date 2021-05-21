@@ -6,15 +6,13 @@ const userSchema = new Schema({
 	email: { type: String, required: true },
 	password: { type: String, required: true, min: 6, max: 10 },
 	phone: { type: Number, required: true },
-	bookings: [{ type: Schema.Types.ObjectId, ref: "Booking", required: true }],
+	bookings: [{ type: Schema.Types.ObjectId, ref: "Booking" }],
 });
 
 userSchema.pre("save", async function (next) {
 	if (!this.isModified("password")) return next();
-	bcrypt.hash(this.password, 10, (err, passwordHash) => {
-		if (err) return next(err);
-		this.password = passwordHash;
-	});
+	const password = await bcrypt.hash(this.password, 10);
+	this.password = password;
 });
 
 const User = mongoose.model("User", userSchema);
