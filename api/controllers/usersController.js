@@ -2,7 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
 const whoami = (req, res) => {
-	return res.json(req.session.user || null);
+	res.json(req.session.user || null);
 };
 
 const logout = (req, res) => {
@@ -11,7 +11,7 @@ const logout = (req, res) => {
 		return res.json({ message: "Logout successfull" });
 	}
 
-	return res.json({ error: "Already logged out" });
+	res.json({ error: "Already logged out" });
 };
 
 const login = async (req, res) => {
@@ -25,7 +25,7 @@ const login = async (req, res) => {
 			return res.json({ message: "Login successfull", loggedInUser: user });
 		}
 	}
-	return res.status(401).json({ error: "Bad credentials" });
+	res.status(422).json({ error: "Bad credentials" });
 };
 
 async function createUser(req, res) {
@@ -39,7 +39,7 @@ async function createUser(req, res) {
 
 	let user = await User.create(req.body);
 	user.password = undefined;
-	return res.json(user);
+	res.json(user);
 }
 
 module.exports = {
