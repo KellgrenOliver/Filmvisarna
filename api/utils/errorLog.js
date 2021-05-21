@@ -15,7 +15,7 @@ function errorLog(error) {
 		);
 	} else {
 		fs.writeFile(
-			path.join(__dirname, "../../errorlog.txt"),
+			filePath,
 			`${content}`,
 			(error) => error && console.error(error)
 		);
