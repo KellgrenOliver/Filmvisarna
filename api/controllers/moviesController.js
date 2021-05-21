@@ -10,9 +10,7 @@ const getAllMovies = async (req, res) => {
 };
 
 const getMovieById = (req, res) => {
-	console.log("hej");
 	Movie.findById(req.params.movieId).exec((err, movie) => {
-		console.log(movie);
 		if (err) {
 			res.json(err);
 			return;
@@ -24,7 +22,6 @@ const getMovieById = (req, res) => {
 			return;
 		}
 		res.json(movie);
-		console.log(req.params.movieId);
 	});
 };
 

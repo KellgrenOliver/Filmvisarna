@@ -1,21 +1,43 @@
 import { MovieContext } from "../contexts/MoviesProvider";
 import { useContext, useEffect } from "react";
 import YouTube from "react-youtube";
-import styles from "../css/Movie.module.css";
+import styles from "../css/MoviePage.module.css";
 
 const Movie = (props) => {
 	const { singleMovie, fetchMovieById } = useContext(MovieContext);
 
 	useEffect(() => {
 		fetchMovieById(props.match.params.movieId);
-		console.log(props.match);
 	}, [props.match.params.movieId]);
 
 	return (
 		<div className={styles.moviePage}>
-			<h1>HEJ</h1>
-			<img src={singleMovie.poster} alt="Movie Logo" />
-			<YouTube videoId={singleMovie.trailer} />
+			<div className={styles.container}>
+				<img className={styles.img} src={singleMovie.poster} alt="Movie Logo" />
+				<div>
+					<h3>{singleMovie.title}</h3>
+				</div>
+				<span>{singleMovie.genres}</span>
+				<div></div>
+				<hr />
+				<div>
+					<span>{singleMovie.description}</span>
+				</div>
+				<br />
+				<div>
+					<span>Directors: {singleMovie.directors}</span>
+				</div>
+				<div>
+					<span>Length: {singleMovie.length}min</span>
+				</div>
+				<div>
+					<span>Year: {singleMovie.year}</span>
+				</div>
+				<div>
+					<span>Language: {singleMovie.language}</span>
+				</div>
+				<YouTube className={styles.trailer} videoId={singleMovie.trailer} />
+			</div>
 		</div>
 	);
 };

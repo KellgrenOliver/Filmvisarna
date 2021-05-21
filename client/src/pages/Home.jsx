@@ -10,8 +10,6 @@ const Home = () => {
 		fetchAllMovies();
 	}, []);
 
-	console.log("hej");
-
 	const renderMovies = () => {
 		return movies.map((movie, i) => (
 			<Link to={`/movie/${movie._id}`} key={i} className={styles.card}>
