@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import styles from "./css/App.module.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import MovieProvider from "./contexts/MovieProvider";
-import AboutPage from "./pages/AboutPage";
+import AboutPage from "./pages/AboutPage"
 
 const App = () => {
 	return (
-		<div className={styles.app}>
+		<div >
 			<Router>
 				<MovieProvider>
 					<Navbar />
