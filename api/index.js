@@ -21,6 +21,7 @@ mongoose
 // Controllers
 const userRoutes = require("./routes/usersRoutes");
 const auditoriumRoutes = require("./routes/auditoriumRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 const seatRoutes = require("./routes/seatRoutes");
 const moviesRoutes = require("./routes/moviesRoutes");
 
@@ -37,8 +38,6 @@ app.use(
 // Routes
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auditorium", auditoriumRoutes);
-app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/seats", seatRoutes);
 app.use("/api/v1/movies", moviesRoutes);
 
 app.get("/*", (req, res) => {
