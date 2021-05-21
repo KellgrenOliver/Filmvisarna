@@ -9,6 +9,23 @@ const getAllMovies = async (req, res) => {
 	}
 };
 
+const getMovieById = (req, res) => {
+	Movie.findById(req.params.movieId).exec((err, movie) => {
+		if (err) {
+			res.json(err);
+			return;
+		}
+		if (!movie) {
+			res.json({
+				err: `movie with id ${req.params.movieId} does not exist`,
+			});
+			return;
+		}
+		res.json(movie);
+	});
+};
+
 module.exports = {
 	getAllMovies,
+	getMovieById,
 };
