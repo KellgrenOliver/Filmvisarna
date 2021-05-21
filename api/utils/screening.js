@@ -3,6 +3,7 @@ const Movie = require("../models/Movie");
 const Screening = require("../models/Screening");
 
 async function screeningSeeder(perAuditorium = 5) {
+	await Screening.createCollection();
 	await Screening.collection.drop();
 
 	const movieCount = await Movie.countDocuments();
