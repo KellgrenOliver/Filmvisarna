@@ -3,7 +3,7 @@ const Auditorium = require("../models/Auditorium");
 
 const createAuditorium = async (req, res) => {
     Auditorium.create({
-        name: req.body.name
+        id: req.body.id
     }).then((doc) => {
         console.log("doc: ", doc);
         res.send("OK");
