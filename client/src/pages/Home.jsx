@@ -1,5 +1,6 @@
-import { MovieContext } from "../contexts/MovieProvider";
+import { MovieContext } from "../contexts/MoviesProvider";
 import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import styles from "../css/HomePage.module.css";
 
 const Home = () => {
@@ -7,14 +8,15 @@ const Home = () => {
 
 	useEffect(() => {
 		fetchAllMovies();
-		// eslint-disable-next-line
 	}, []);
+
+	console.log("hej");
 
 	const renderMovies = () => {
 		return movies.map((movie, i) => (
-			<div key={(movie, i)} className={styles.card}>
-				<img className={styles.img} src={movie.poster} alt={movie.title} />
-			</div>
+			<Link to={`/movie/${movie._id}`} key={i} className={styles.card}>
+				<img src={movie.poster} className={styles.img} alt={movie.title} />
+			</Link>
 		));
 	};
 

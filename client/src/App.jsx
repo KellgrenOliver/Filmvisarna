@@ -2,16 +2,18 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import MovieProvider from "./contexts/MovieProvider";
+import MoviePage from "./pages/MoviePage";
+import MoviesProvider from "./contexts/MoviesProvider";
 
 const App = () => {
 	return (
 		<div className="App">
 			<Router>
-				<MovieProvider>
+				<MoviesProvider>
 					<Navbar />
 					<Route exact path="/" component={Home} />
-				</MovieProvider>
+					<Route exact path="/movie/:movieId" component={MoviePage} />
+				</MoviesProvider>
 			</Router>
 		</div>
 	);
