@@ -38,6 +38,7 @@ app.use(
 // Routes
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auditorium", auditoriumRoutes);
+app.use("/api/v1/movies", moviesRoutes);
 
 app.get("/*", (req, res) => {
 	res.sendFile(path.join(__dirname, "../client/build/index.html"));
