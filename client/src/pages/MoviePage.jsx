@@ -25,9 +25,6 @@ const Movie = (props) => {
 				</div>
 				<br />
 				<div>
-					<span>Directors: {singleMovie.directors}</span>
-				</div>
-				<div>
 					<span>Length: {singleMovie.length}min</span>
 				</div>
 				<div>
@@ -35,6 +32,12 @@ const Movie = (props) => {
 				</div>
 				<div>
 					<span>Language: {singleMovie.language}</span>
+				</div>
+				<div>
+					<span>Directors: {singleMovie.directors}</span>
+				</div>
+				<div>
+					<span>Stars: {singleMovie.stars}</span>
 				</div>
 				<YouTube className={styles.trailer} videoId={singleMovie.trailer} />
 			</div>
