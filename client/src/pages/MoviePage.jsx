@@ -10,6 +10,10 @@ const Movie = (props) => {
 		fetchMovieById(props.match.params.movieId);
 	}, [props.match.params.movieId]);
 
+	if (!singleMovie) {
+		return null;
+	}
+
 	return (
 		<div className={styles.moviePage}>
 			<div className={styles.container}>
@@ -17,8 +21,7 @@ const Movie = (props) => {
 				<div>
 					<h3>{singleMovie.title}</h3>
 				</div>
-				<span>{singleMovie.genres}</span>
-				<div></div>
+				<span>{singleMovie.genres.join(", ")}</span>
 				<hr />
 				<div>
 					<span>{singleMovie.description}</span>
@@ -34,10 +37,13 @@ const Movie = (props) => {
 					<span>Language: {singleMovie.language}</span>
 				</div>
 				<div>
-					<span>Directors: {singleMovie.directors}</span>
+					<span>Directors: {singleMovie.directors.join(", ")}</span>
 				</div>
 				<div>
-					<span>Stars: {singleMovie.stars}</span>
+					<span>Stars: {singleMovie.stars.join(", ")}</span>
+				</div>
+				<div>
+					<span>Rating: {singleMovie.rating}</span>
 				</div>
 				<YouTube className={styles.trailer} videoId={singleMovie.trailer} />
 			</div>
