@@ -9,6 +9,7 @@ async function auditoriumSeeder() {
 				`Expected auditoriums, got ${JSON.stringify(auditoriums)}`
 			);
 		}
+		await Auditorium.createCollection();
 		await Auditorium.collection.drop();
 		await Auditorium.insertMany(auditoriums);
 	} catch (e) {
