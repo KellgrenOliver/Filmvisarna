@@ -9,7 +9,7 @@ async function seatsSeeder() {
 			throw new Error(`Expected seats, got ${JSON.stringify(seats)}`);
 		}
 
-		Seat.collection.drop();
+		await Seat.collection.drop();
 
 		for (let i = 0; i < seats.length; i++) {
 			const { _id: auditorium } = await Auditorium.findOne().skip(i);
