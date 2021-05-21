@@ -1,2 +1,4 @@
-env.json
-node_modules
+/env.json
+/node_modules
+/errorlog.txt
+/errorlog.*
