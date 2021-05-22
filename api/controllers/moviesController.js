@@ -10,34 +10,37 @@ const getAllMovies = async (req, res) => {
 };
 
 const getMovieById = (req, res) => {
-	Movie.findById(req.params.movieId).exec((err, movie) => {
-		if (err) {
-			res.json(err);
-			return;
-		}
-		if (!movie) {
-			res.json({
-				err: `movie with id ${req.params.movieId} does not exist`,
-			});
-			return;
-		}
-		res.json(movie);
-	});
+  Movie.findById(req.params.movieId).exec((err, movie) => {
+    if (err) {
+      res.json(err);
+      return;
+    }
+    if (!movie) {
+      res.json({
+        err: `movie with id ${req.params.movieId} does not exist`,
+      });
+      return;
+    }
+    res.json(movie);
+  });
 };
 
 const getSearchedMovies = async (req, res) => {
   try {
     let querySearch = new RegExp(`${req.query.search ? req.query.search: ""}\\w*`, "gi");
-    let query = Post.find({
+    let query = Movie.find({
       $or: [{
         title: querySearch
       }, {
+        language: querySearch
+      }, {
         genres: querySearch
       }, {
-        description: querySearch
+        directors: querySearch
+      }, {
+        stars: querySearch
       }]
     });
-
     let movies;
     movies = await query.exec();
     if (movies.length === 0) {
@@ -51,7 +54,7 @@ const getSearchedMovies = async (req, res) => {
 }
 
 module.exports = {
-	getAllMovies,
-	getMovieById,
+  getAllMovies,
+  getMovieById,
   getSearchedMovies
 };
