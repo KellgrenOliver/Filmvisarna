@@ -1,5 +1,4 @@
 const errorLog = require("./errorLog");
-const movies = require("../../movies.json");
 const User = require("../models/User");
 
 async function userSeeder() {
