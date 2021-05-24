@@ -1,6 +1,7 @@
 import { MovieContext } from "../contexts/MoviesProvider";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import FilterGroup from "../components/FilterGroup"
 import styles from "../css/HomePage.module.css";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
 
 	return (
 		<div className={styles.container}>
+      <FilterGroup /> 
 			<div className={styles.cardWrapper}>{movies && renderMovies()}</div>
 		</div>
 	);

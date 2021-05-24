@@ -1,0 +1,11 @@
+.groupContainer {
+	margin: 1rem auto;
+}
+.iconButton {
+	background-color: white;
+}
+
+/* Search conponent */
+.searchField {
+	width: 40vw;
+}
