@@ -7,7 +7,7 @@ const getAllMovies = async (req, res) => {
       res.json(movies);
       return;
     }
-    let querySearch = new RegExp(`${req.query.search ? req.query.search: ""}\\w*`, "gi");
+    let querySearch = new RegExp(`${req.query.search ?? ""}\\w*`, "gi");
     let query = Movie.find({
       $or: [{
         title: querySearch
