@@ -25,7 +25,7 @@ const getMovieById = (req, res) => {
   });
 };
 
-const getSearchedMovies = async (req, res) => {
+const getMoviesBySearch = async (req, res) => {
   try {
     let querySearch = new RegExp(`${req.query.search ? req.query.search: ""}\\w*`, "gi");
     let query = Movie.find({
@@ -56,5 +56,5 @@ const getSearchedMovies = async (req, res) => {
 module.exports = {
   getAllMovies,
   getMovieById,
-  getSearchedMovies
+  getMoviesBySearch
 };
