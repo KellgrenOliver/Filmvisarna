@@ -4,19 +4,23 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const path = require("path");
 const errorLog = require("./utils/errorLog");
-const { PORT, MONGODB_PASSWORD, SESSION_SECRET } = require("../env.json");
+const {
+  PORT,
+  MONGODB_PASSWORD,
+  SESSION_SECRET
+} = require("../env.json");
 const uri = `mongodb+srv://aubameyang:${MONGODB_PASSWORD}@cluster0.rvi3m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 // Database connection
 mongoose
-	.connect(uri, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	})
-	.then(() => {
-		console.log("Connected to MongoDB");
-	})
-	.catch((error) => error && errorLog(error));
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => error && errorLog(error));
 
 // Controllers
 const userRoutes = require("./routes/usersRoutes");
@@ -28,11 +32,11 @@ const moviesRoutes = require("./routes/moviesRoutes");
 // Middlewares
 app.use(express.json());
 app.use(
-	session({
-		secret: SESSION_SECRET,
-		resave: false,
-		saveUninitialized: true,
-	})
+  session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
 );
 
 // Routes
