@@ -4,11 +4,11 @@ const Movie = require("../models/Movie");
 const errorLog = require("../utils/errorLog");
 
 async function placeBooking(req, res) {
-	if (!req.session.user) {
-		return res.status(401).end();
-	}
-	const { seats, screening } = req.body;
 	const { user } = req.session;
+	if (!user) return res.status(401).end();
+
+	const { seats, screening } = req.body;
+
 	try {
 		const { _id: auditorium } = await Auditorium.findOne({
 			_id: screening.auditorium,
