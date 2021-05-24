@@ -1,6 +1,7 @@
 import { MovieContext } from "../contexts/MoviesProvider";
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Search from "../components/Search"
 import styles from "../css/HomePage.module.css";
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
 
 	return (
 		<div className={styles.container}>
+      <Search />
 			<div className={styles.cardWrapper}>{movies && renderMovies()}</div>
 		</div>
 	);
