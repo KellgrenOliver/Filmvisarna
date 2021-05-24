@@ -44,7 +44,7 @@ const getMoviesBySearch = async (req, res) => {
     let movies;
     movies = await query.exec();
     if (movies.length === 0) {
-      res.send("No movied matched the filter ");
+      res.send("No movies matched the search ");
       return
     }
     res.json(movies)
