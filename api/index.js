@@ -10,17 +10,19 @@ const {
   SESSION_SECRET
 } = require("../env.json");
 const uri = `mongodb+srv://aubameyang:${MONGODB_PASSWORD}@cluster0.rvi3m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const {seeder} = require("./utils/seeder") 
 
 // Database connection
 mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => error && errorLog(error));
+	.connect(uri, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
+	.then(() => {
+		console.log("Connected to MongoDB");
+		seeder ();
+	})
+	.catch((error) => error && errorLog(error));
 
 // Controllers
 const userRoutes = require("./routes/usersRoutes");
@@ -28,6 +30,7 @@ const auditoriumRoutes = require("./routes/auditoriumRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const seatRoutes = require("./routes/seatRoutes");
 const moviesRoutes = require("./routes/moviesRoutes");
+const { sensitiveHeaders } = require("http2");
 
 // Middlewares
 app.use(express.json());

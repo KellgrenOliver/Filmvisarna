@@ -7,6 +7,7 @@ import UserProvider from "./contexts/UserProvider";
 import AboutPage from "./pages/AboutPage";
 import MoviePage from "./pages/MoviePage";
 import MoviesProvider from "./contexts/MoviesProvider";
+import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
 	return (
@@ -18,6 +19,7 @@ const App = () => {
 					<Route exact path="/" component={Home} />
 					<Route exact path="/movie/:movieId" component={MoviePage} />
 						<Route exact path="/about" component={AboutPage} />
+						<Route exact path="/profile" component={ProfilePage} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/createUser" component={CreateUser} />
 					</UserProvider>
