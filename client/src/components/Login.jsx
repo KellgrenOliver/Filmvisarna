@@ -15,9 +15,9 @@ const Login = () => {
 	const handlePasswordChange = (e) => {
 		setPassword(e.target.value);
 	};
-	// const handleClick = () => {
-	// 	history.push("/createUser");
-	// };
+	const handleClick = () => {
+		history.push("/createUser");
+	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		let user = {
@@ -51,7 +51,9 @@ const Login = () => {
 					value={password}
 					onChange={handlePasswordChange}
 				/>
-				<p className={styles.link}>Create new user</p>
+				<p className={styles.link} onClick={handleClick}>
+					Create new user
+				</p>
 				<br />
 				<button type="submit" className={styles.btn}>
 					Login

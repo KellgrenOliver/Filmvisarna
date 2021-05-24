@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { UserContext } from "../context/UserProvider";
-import styles from "../components/css/login.module.css";
+import { UserContext } from "../contexts/UserProvider";
+import styles from "../css/CreateUser.module.css";
 
 const CreateUser = () => {
 	const history = useHistory();
@@ -22,13 +22,13 @@ const CreateUser = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		let userToRegister = {
+		let userToCreate = {
 			phone,
 			email,
 			password,
 		};
 
-		let result = await createUser(userToRegister);
+		let result = await createUser(userToCreate);
 		console.log(result);
 		if (result.success) {
 		}
@@ -40,7 +40,7 @@ const CreateUser = () => {
 				<p>Username</p>
 				<input
 					className={styles.inputField}
-					type="number"
+					type="text"
 					placeholder="user name"
 					value={phone}
 					onChange={handlePhoneChange}
