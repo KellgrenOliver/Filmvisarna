@@ -1,9 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const MovieContext = createContext();
 
 const MovieProvider = (props) => {
 	const [movies, setMovies] = useState([]);
+
+	useEffect(() => {
+		fetchAllMovies();
+	}, []);
 
 	const fetchAllMovies = async () => {
 		let movieData = await fetch("/api/v1/movies");
