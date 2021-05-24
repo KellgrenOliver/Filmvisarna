@@ -3,7 +3,7 @@
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	margin: 2rem auto;
-	height: 260px;
+	height: 300px;
 	padding: 2rem;
 	transition: 0.3s;
 	width: 230px;
@@ -40,6 +40,7 @@ input[type="text"],
 	padding: 5px 21px;
 	text-decoration: none;
 	float: right;
+	margin-top: 1.5rem;
 }
 
 .btn:hover {

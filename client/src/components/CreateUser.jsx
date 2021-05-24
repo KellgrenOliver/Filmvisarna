@@ -37,13 +37,14 @@ const CreateUser = () => {
 	return (
 		<div className={styles.card}>
 			<form className={styles.form} onSubmit={handleSubmit}>
-				<p>Username</p>
+				<p>Phone number</p>
 				<input
 					className={styles.inputField}
 					type="text"
-					placeholder="user name"
+					placeholder="phone number"
 					value={phone}
 					onChange={handlePhoneChange}
+					required
 				/>
 				<p>Email</p>
 				<input
@@ -52,6 +53,7 @@ const CreateUser = () => {
 					placeholder="Email"
 					value={email}
 					onChange={handleEmailChange}
+					required
 				/>
 				<p>Password</p>
 				<input
@@ -60,6 +62,7 @@ const CreateUser = () => {
 					placeholder="password"
 					value={password}
 					onChange={handlePasswordChange}
+					required
 				/>
 				<br />
 				<button type="submit" className={styles.btn}>
