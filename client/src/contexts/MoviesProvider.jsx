@@ -4,6 +4,7 @@ export const MovieContext = createContext();
 
 const MovieProvider = (props) => {
 	const [movies, setMovies] = useState([]);
+	const [singleMovie, setSingleMovie] = useState(false);
 
 	const fetchAllMovies = async () => {
 		let movieData = await fetch("/api/v1/movies");
@@ -16,9 +17,22 @@ const MovieProvider = (props) => {
 		}
 	};
 
+	const fetchMovieById = async (movieId) => {
+		let singleMovie = await fetch(`/api/v1/movies/${movieId}`);
+		singleMovie = await singleMovie.json();
+
+		if (!singleMovie) {
+			console.log("error");
+		} else {
+			setSingleMovie(singleMovie);
+		}
+	};
+
 	const values = {
 		movies,
+		singleMovie,
 		fetchAllMovies,
+		fetchMovieById,
 	};
 
 	return (
