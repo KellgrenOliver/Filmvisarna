@@ -17,6 +17,7 @@ const Navbar = () => {
 			<NavLink className={styles.link} exact to="/login">
 				Login
 			</NavLink>
+			{/* <hr className={styles.hr} /> */}
 		</nav>
 	);
 };
