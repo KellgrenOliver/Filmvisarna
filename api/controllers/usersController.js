@@ -39,7 +39,7 @@ async function createUser(req, res) {
 
 	let user = await User.create(req.body);
 	user.password = undefined;
-	res.json(user);
+	res.json({ success: "User created", createdUser: user });
 }
 
 module.exports = {

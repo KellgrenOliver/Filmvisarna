@@ -5,7 +5,7 @@ import styles from "../css/CreateUser.module.css";
 
 const CreateUser = () => {
 	const history = useHistory();
-	const { createUser } = useContext(UserContext);
+	const { createUser, login } = useContext(UserContext);
 	const [phone, setPhone] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -31,6 +31,12 @@ const CreateUser = () => {
 		let result = await createUser(userToCreate);
 		console.log(result);
 		if (result.success) {
+			let user = {
+				email,
+				password,
+			};
+			result = await login(user);
+			history.push("/");
 		}
 	};
 
