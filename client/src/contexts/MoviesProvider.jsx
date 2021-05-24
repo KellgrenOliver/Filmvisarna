@@ -24,6 +24,7 @@ const MovieProvider = (props) => {
 
 	const values = {
 		movies,
+    setMovies,
 		findMovie,
 		fetchAllMovies,
 	};

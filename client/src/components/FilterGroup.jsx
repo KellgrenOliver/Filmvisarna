@@ -7,10 +7,10 @@ const FilterGroup = () => {
 	return (
 		<div className={styles.groupContainer}>
       <button className={styles.iconButton} >
-			<img src="assets/icons/search.svg" alt="search" />
+      <img src="assets/icons/search.svg" alt="search" />
       </button>
       <div className={styles.searchWrapper}>
-			<Search />
+      <Search />
       </div>
 		</div>
 	);

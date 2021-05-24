@@ -1,11 +1,15 @@
 import { MovieContext } from "../contexts/MoviesProvider";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import FilterGroup from "../components/FilterGroup"
 import styles from "../css/HomePage.module.css";
 
 const Home = () => {
 	const { movies } = useContext(MovieContext);
+
+  useEffect(() => {
+    renderMovies()
+  }, [movies])
 
 	const renderMovies = () => {
 		return movies.map((movie, i) => (
