@@ -15,7 +15,7 @@ async function placeBooking(req, res) {
 		});
 		const { _id: movie } = await Movie.findOne({ _id: screening.movie });
 
-		const booking = await Booking.create({
+		await Booking.create({
 			auditorium,
 			movie,
 			user,
