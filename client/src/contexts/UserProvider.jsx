@@ -20,6 +20,7 @@ const UserProvider = (props) => {
 			body: JSON.stringify(userToLogin),
 		});
 		result = await result.json(userToLogin);
+		setUser(result);
 		return result;
 	};
 
@@ -48,6 +49,7 @@ const UserProvider = (props) => {
 		user,
 		setUser,
 		logout,
+		loggedIn: Boolean(user),
 	};
 
 	return (

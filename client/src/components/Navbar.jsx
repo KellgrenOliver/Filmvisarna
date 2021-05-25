@@ -1,15 +1,15 @@
 import { NavLink, useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserProvider";
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import styles from "../css/Navbar.module.css";
 
 const Navbar = () => {
-	const { logout, whoami, user } = useContext(UserContext);
+	const { logout, whoami, loggedIn } = useContext(UserContext);
 	const history = useHistory();
 
 	useEffect(() => {
 		whoami();
-	});
+	}, [whoami, loggedIn]);
 
 	const handleSubmit = async () => {
 		let result = await logout();
@@ -27,15 +27,15 @@ const Navbar = () => {
 			<NavLink className={styles.link} exact to="/about">
 				About
 			</NavLink>
-			{user ? (
-				<React.Fragment>
+			{loggedIn ? (
+				<>
 					<NavLink className={styles.link} exact to="/Profile">
 						Profile
 					</NavLink>
 					<span onClick={handleSubmit} className={styles.link}>
 						Logga ut
 					</span>
-				</React.Fragment>
+				</>
 			) : (
 				<NavLink to="/login" className={styles.link}>
 					Logga In
