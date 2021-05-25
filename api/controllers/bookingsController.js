@@ -24,8 +24,8 @@ async function placeBooking(req, res) {
 		});
 		res.status(200).end();
 	} catch (e) {
-		res.status(500).end();
 		errorLog(e);
+		res.status(500).end();
 	}
 }
 
