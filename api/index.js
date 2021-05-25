@@ -6,6 +6,7 @@ const path = require("path");
 const errorLog = require("./utils/errorLog");
 const { PORT, MONGODB_PASSWORD, SESSION_SECRET } = require("../env.json");
 const uri = `mongodb+srv://aubameyang:${MONGODB_PASSWORD}@cluster0.rvi3m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const { seeder } = require("./utils/seeder");
 
 // Database connection
 mongoose
@@ -15,6 +16,7 @@ mongoose
 	})
 	.then(() => {
 		console.log("Connected to MongoDB");
+		seeder();
 	})
 	.catch((error) => error && errorLog(error));
 
@@ -23,6 +25,7 @@ const userRoutes = require("./routes/usersRoutes");
 const auditoriumRoutes = require("./routes/auditoriumRoutes");
 const seatRoutes = require("./routes/seatRoutes");
 const moviesRoutes = require("./routes/moviesRoutes");
+const { sensitiveHeaders } = require("http2");
 const bookingsRoutes = require("./routes/bookingsRoutes");
 
 // Middlewares

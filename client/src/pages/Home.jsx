@@ -1,14 +1,10 @@
 import { MovieContext } from "../contexts/MoviesProvider";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/HomePage.module.css";
 
 const Home = () => {
-	const { movies, fetchAllMovies } = useContext(MovieContext);
-
-	useEffect(() => {
-		fetchAllMovies();
-	}, []);
+	const { movies } = useContext(MovieContext);
 
 	const renderMovies = () => {
 		return movies.map((movie, i) => (
