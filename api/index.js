@@ -25,7 +25,6 @@ const auditoriumRoutes = require("./routes/auditoriumRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const seatRoutes = require("./routes/seatRoutes");
 const moviesRoutes = require("./routes/moviesRoutes");
-const { sensitiveHeaders } = require("http2");
 
 // Middlewares
 app.use(express.json());
