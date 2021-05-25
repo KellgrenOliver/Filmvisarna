@@ -13,7 +13,6 @@ const Movie = (props) => {
 	const history = useHistory();
 
 	const { findMovie } = useContext(MovieContext);
-	console.log(props);
 	const movie = findMovie(props.match.params.movieId);
 
 	if (!movie) {
