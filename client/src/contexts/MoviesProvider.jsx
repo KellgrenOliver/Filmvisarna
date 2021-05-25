@@ -28,10 +28,10 @@ const MovieProvider = (props) => {
 		console.log(movieData);
 		if (response.status === 404) {
 			setSearchedMovies([]);
-      setMessage(movieData.error)
+			setMessage(movieData.error);
 		} else {
 			setSearchedMovies(movieData);
-      setMessage(null)
+			setMessage(null);
 		}
 	};
 
@@ -44,7 +44,7 @@ const MovieProvider = (props) => {
 		fetchAllMovies,
 		search,
 		searchedMovies,
-    message
+		message,
 	};
 
 	return (
