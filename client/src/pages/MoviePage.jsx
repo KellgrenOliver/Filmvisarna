@@ -1,10 +1,15 @@
 import { MovieContext } from "../contexts/MoviesProvider";
-import { useContext } from "react";
+import { UserContext } from "../contexts/UserProvider";
+import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
 
 const Movie = (props) => {
+	const { loggedIn } = useContext(UserContext);
+
+	useEffect(() => {}, [loggedIn]);
+
 	const history = useHistory();
 
 	const { findMovie } = useContext(MovieContext);
@@ -16,7 +21,11 @@ const Movie = (props) => {
 	}
 
 	const renderTicket = () => {
-		history.push(`/ticket/${movie._id}`);
+		if (loggedIn) {
+			history.push(`/ticket/${movie._id}`);
+		} else {
+			alert("You must be logged in to buy tickets!");
+		}
 	};
 
 	return (
