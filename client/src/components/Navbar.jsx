@@ -1,6 +1,6 @@
 import { NavLink, useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserProvider";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "../css/Navbar.module.css";
 
 const Navbar = () => {
@@ -8,14 +8,13 @@ const Navbar = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		whoami(user);
-	}, []);
+		whoami();
+	});
 
 	const handleSubmit = async () => {
 		let result = await logout();
 		console.log(result);
 		if (result.success) {
-			window.location.reload();
 			history.push("/");
 		}
 	};
