@@ -24,7 +24,7 @@ async function seatsSeeder() {
 
 function getTicketsPrice(seats = [], standard = 100) {
 	return (
-		seats.reduce((total, seat) => {
+		seats?.reduce((total, seat) => {
 			if (!seat.type) return total;
 
 			const calculatePrice = (multiplier) => total + standard * multiplier;
