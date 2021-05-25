@@ -1,4 +1,5 @@
 const Movie = require("../models/Movie");
+const Screening = require("../models/Screening");
 
 const getAllMovies = async (req, res) => {
   try {
@@ -35,6 +36,47 @@ const getAllMovies = async (req, res) => {
   }
 };
 
+// pris, datum, längd på filmen, åldersgräns, genre, skådespelare, regissör och språk.
+
+// const getMoviesByFilter = async (req, res) => {
+//   try {
+//     // let queryPrice = req.query.price ? Number(req.query.price) : ""
+//     let queryLengthMin = req.query.lengthMin ?? 0;
+//     let queryLengthMax = req.query.lengthMax ?? Infinity;
+//     let queryLanuage = req.query.langiage ?? "";
+//     let queryGenre = req.query.genre ?? "";
+//     let queryDirector = req.query.director ?? "";
+//     let queryStar = req.query.star ?? "";
+//     // let queryDate = req.query.filterDate ? req.query.filterDate : new Date()
+
+//     let movies = await Screening.find().select("movie").populate({
+//       path: "movie",
+//       match: {
+//         $and: [{
+//           language: queryLanguage
+//         }, {
+//           genres: queryGenre
+//         }, {
+//           directors: queryDirector
+//         }, {
+//           stars: queryStar
+//         }, {
+//           rating : queryReating
+//         }]
+//       }
+//     }).exec()
+
+
+//     if (movies.length === 0) {
+//       res.send("No movied matched the filter ");
+//       return
+//     }
+//     res.json(movies)
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
 const getMovieById = (req, res) => {
   Movie.findById(req.params.movieId).exec((err, movie) => {
     if (err) {
@@ -55,4 +97,5 @@ const getMovieById = (req, res) => {
 module.exports = {
   getAllMovies,
   getMovieById,
+  getMoviesByFilter
 };
