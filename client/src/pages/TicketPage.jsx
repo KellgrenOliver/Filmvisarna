@@ -22,7 +22,7 @@ const TicketPage = (props) => {
 				<span>Åldersgräns, språk, text</span>
 				<h4>1. Välj stolar</h4>
 				<h4 className={styles.bioduk}>B I O D U K</h4>
-				<h3>Platser</h3>
+				<h4>Platser</h4>
 				<div className={styles.platserContainer}>
 					<div className={styles.tPlatser} />
 					<span className={styles.platserTitle}>Tillgängliga platser</span>
@@ -31,10 +31,12 @@ const TicketPage = (props) => {
 					<div className={styles.dStolval} />
 					<span className={styles.platserTitle}>Ditt stolval</span>
 				</div>
-				<h3>Välj antal biljetter</h3>
-				<h3>Vuxen</h3>
-				<h3>Pensionär</h3>
-				<h3>Under 12 år</h3>
+				<h4>Välj antal biljetter</h4>
+				<span>Vuxen</span>
+				<br />
+				<span>Pensionär</span>
+				<br />
+				<span>Barn</span>
 			</div>
 		</div>
 	);

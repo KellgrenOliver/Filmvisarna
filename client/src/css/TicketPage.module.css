@@ -14,8 +14,9 @@
 	width: 70%;
 	border-radius: 10px;
 	margin: auto;
-	padding-left: 4rem;
-	padding-right: 4rem;
+	/* padding-left: 4rem;
+	padding-right: 4rem; */
+	padding: 2rem;
 }
 
 .bioduk {
