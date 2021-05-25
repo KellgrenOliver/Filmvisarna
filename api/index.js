@@ -4,13 +4,9 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const path = require("path");
 const errorLog = require("./utils/errorLog");
-const {
-  PORT,
-  MONGODB_PASSWORD,
-  SESSION_SECRET
-} = require("../env.json");
+const { PORT, MONGODB_PASSWORD, SESSION_SECRET } = require("../env.json");
 const uri = `mongodb+srv://aubameyang:${MONGODB_PASSWORD}@cluster0.rvi3m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-const {seeder} = require("./utils/seeder") 
+const { seeder } = require("./utils/seeder");
 
 // Database connection
 mongoose
@@ -20,7 +16,6 @@ mongoose
 	})
 	.then(() => {
 		console.log("Connected to MongoDB");
-		seeder ();
 	})
 	.catch((error) => error && errorLog(error));
 
@@ -30,16 +25,15 @@ const auditoriumRoutes = require("./routes/auditoriumRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const seatRoutes = require("./routes/seatRoutes");
 const moviesRoutes = require("./routes/moviesRoutes");
-const { sensitiveHeaders } = require("http2");
 
 // Middlewares
 app.use(express.json());
 app.use(
-  session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-  })
+	session({
+		secret: SESSION_SECRET,
+		resave: false,
+		saveUninitialized: true,
+	})
 );
 
 // Routes
