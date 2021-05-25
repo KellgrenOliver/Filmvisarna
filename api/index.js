@@ -16,7 +16,6 @@ mongoose
 	})
 	.then(() => {
 		console.log("Connected to MongoDB");
-		seeder();
 	})
 	.catch((error) => error && errorLog(error));
 
