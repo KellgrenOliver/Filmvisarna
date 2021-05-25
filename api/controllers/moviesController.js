@@ -2,32 +2,12 @@ const Movie = require("../models/Movie");
 
 const getAllMovies = async (req, res) => {
   try {
-    let movies = await Movie.find().exec();
-    res.json(movies);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const getMovieById = (req, res) => {
-  Movie.findById(req.params.movieId).exec((err, movie) => {
-    if (err) {
-      res.json(err);
+    if (Object.keys(req.query).length === 0) {
+      let movies = await Movie.find().exec();
+      res.json(movies);
       return;
     }
-    if (!movie) {
-      res.json({
-        err: `movie with id ${req.params.movieId} does not exist`,
-      });
-      return;
-    }
-    res.json(movie);
-  });
-};
-
-const getMoviesBySearch = async (req, res) => {
-  try {
-    let querySearch = new RegExp(`${req.query.search ? req.query.search: ""}\\w*`, "gi");
+    let querySearch = new RegExp(`${req.query.search ?? ""}\\w*`, "gi");
     let query = Movie.find({
       $or: [{
         title: querySearch
@@ -51,10 +31,26 @@ const getMoviesBySearch = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+const getMovieById = (req, res) => {
+  Movie.findById(req.params.movieId).exec((err, movie) => {
+    if (err) {
+      res.json(err);
+      return;
+    }
+    if (!movie) {
+      res.json({
+        err: `movie with id ${req.params.movieId} does not exist`,
+      });
+      return;
+    }
+    res.json(movie);
+  });
+};
+
 
 module.exports = {
   getAllMovies,
   getMovieById,
-  getMoviesBySearch
 };
