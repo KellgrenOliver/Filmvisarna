@@ -6,14 +6,14 @@ const FilterProvider = (props)=>{
   const { movies, setMovies, fetchAllMovies} = useContext(MovieContext);
 
   const search = async (searchString)=>{
-    // let movieData = await fetch(`/api/v1/movies?search=${searchString}`);
-		// movieData = await movieData.json();
-    // console.log(movieData)
-		// if (movieData.length === 0) {
-		// 	console.log("error");
-		// } else {
-		// 	setMovies(movieData);
-		// }
+    let movieData = await fetch(`/api/v1/movies?search=${searchString}`);
+		movieData = await movieData.json();
+    console.log(movieData)
+		if (movieData.length === 0) {
+			console.log("error");
+		} else {
+			setMovies(movieData);
+		}
   }
 
   const values ={
