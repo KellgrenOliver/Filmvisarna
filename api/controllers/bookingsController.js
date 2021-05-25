@@ -10,10 +10,23 @@ async function placeBooking(req, res) {
 	const { seats, screening } = req.body;
 
 	try {
+		if (await Booking.exists({ user, screening })) {
+			return res
+				.status(405)
+				.json({ error: "You have already booked this screening." });
+		}
+
 		const { _id: auditorium } = await Auditorium.findOne({
 			_id: screening.auditorium,
 		});
+		if (!auditorium) {
+			return res.status(404).json({ error: "Auditorium not found." });
+		}
+
 		const { _id: movie } = await Movie.findOne({ _id: screening.movie });
+		if (!movie) {
+			return res.status(404).json({ error: "Movie not found." });
+		}
 
 		await Booking.create({
 			auditorium,
@@ -22,6 +35,7 @@ async function placeBooking(req, res) {
 			seats,
 			screening,
 		});
+
 		res.status(200).end();
 	} catch (e) {
 		errorLog(e);
