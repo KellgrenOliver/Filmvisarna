@@ -6,7 +6,6 @@ const path = require("path");
 const errorLog = require("./utils/errorLog");
 const { PORT, MONGODB_PASSWORD, SESSION_SECRET } = require("../env.json");
 const uri = `mongodb+srv://aubameyang:${MONGODB_PASSWORD}@cluster0.rvi3m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-const { seeder } = require("./utils/seeder");
 
 // Database connection
 mongoose
