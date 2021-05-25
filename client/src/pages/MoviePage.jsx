@@ -5,7 +5,7 @@ import styles from "../css/MoviePage.module.css";
 
 const Movie = (props) => {
 	const { findMovie } = useContext(MovieContext);
-
+  console.log(props)
 	const movie = findMovie(props.match.params.movieId);
 
 	if (!movie) {
