@@ -8,7 +8,7 @@ const whoami = (req, res) => {
 const logout = (req, res) => {
 	if (req.session.user) {
 		delete req.session.user;
-		return res.json({ message: "Logout successfull" });
+		return res.json({ success: "Logout successfull" });
 	}
 
 	res.json({ error: "Already logged out" });
