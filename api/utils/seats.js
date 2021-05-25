@@ -22,23 +22,26 @@ async function seatsSeeder() {
 	}
 }
 
-function calculatePrice(seats = [], standard = 100) {
+function combinedTicketsPrice(seats = [], standard = 100) {
 	return seats.reduce((total, seat) => {
 		if (!seat.type) return total;
+
+		const calculatePrice = (multiplier) => total + standard * multiplier;
+
 		switch (seat.type.toLowerCase()) {
 			case "adult":
-				return total + standard * 1;
+				return calculatePrice(1);
 			case "senior":
-				return total + standard * 0.8;
+				return calculatePrice(0.8);
 			case "child":
-				return total + standard * 0.7;
+				return calculatePrice(0.7);
 			default:
-				return total + standard * 1;
+				return calculatePrice(1);
 		}
 	}, 0);
 }
 
 module.exports = {
 	seatsSeeder,
-	calculatePrice,
+	combinedTicketsPrice,
 };
