@@ -1,7 +1,6 @@
 const Auditorium = require("../models/Auditorium");
 const Booking = require("../models/Booking");
 const Movie = require("../models/Movie");
-const User = require("../models/User");
 const errorLog = require("../utils/errorLog");
 
 async function placeBooking(req, res) {
