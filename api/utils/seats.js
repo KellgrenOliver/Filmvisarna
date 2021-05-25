@@ -22,7 +22,7 @@ async function seatsSeeder() {
 	}
 }
 
-function combinedTicketsPrice(seats = [], standard = 100) {
+function getTicketsPrice(seats = [], standard = 100) {
 	return seats.reduce((total, seat) => {
 		if (!seat.type) return total;
 
@@ -43,5 +43,5 @@ function combinedTicketsPrice(seats = [], standard = 100) {
 
 module.exports = {
 	seatsSeeder,
-	combinedTicketsPrice,
+	getTicketsPrice,
 };
