@@ -33,12 +33,12 @@ const Navbar = () => {
 						Profile
 					</NavLink>
 					<span onClick={handleSubmit} className={styles.link}>
-						Logga ut
+						Logout
 					</span>
 				</>
 			) : (
 				<NavLink to="/login" className={styles.link}>
-					Logga In
+					Login
 				</NavLink>
 			)}
 		</nav>
