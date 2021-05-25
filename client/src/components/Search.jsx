@@ -3,7 +3,7 @@ import { FilterContext } from "../contexts/FilterProvider"
 import styles from "../css/FilterGroup.module.css";
 
 const Search = () => {
-  const { search } = useContext(FilterContext);
+  const { search } = useContext(MovieContext);
 
   const handleSearch = (e) =>{
     search(e.target.value)
