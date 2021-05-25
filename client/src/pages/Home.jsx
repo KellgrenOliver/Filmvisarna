@@ -8,7 +8,7 @@ const Home = () => {
 	const { movies } = useContext(MovieContext);
 
   useEffect(() => {
-    renderMovies()
+   renderMovies()
   }, [movies])
 
 	const renderMovies = () => {
@@ -18,6 +18,7 @@ const Home = () => {
 			</Link>
 		));
 	};
+
 
 	return (
 		<div className={styles.container}>

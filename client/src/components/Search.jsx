@@ -1,12 +1,13 @@
 import { useContext } from "react"
-import { FilterContext } from "../contexts/FilterProvider"
+import { MovieContext } from "../contexts/MoviesProvider"
 import styles from "../css/FilterGroup.module.css";
 
 const Search = () => {
   const { search } = useContext(MovieContext);
 
   const handleSearch = (e) =>{
-    search(e.target.value)
+    let searchString = `?search=${e.target.value}`
+    search(searchString)
   }
   
 	return (

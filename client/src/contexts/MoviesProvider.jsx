@@ -19,12 +19,13 @@ const MovieProvider = (props) => {
 			setMovies(movieData);
 		}
 	};
+
   const search = async (searchString)=>{
-    let movieData = await fetch(`/api/v1/movies${searchString}`);
-		movieData = await movieData.json();
+    let response = await fetch(`/api/v1/movies${searchString}`);
+		let movieData = await response.json();
     console.log(movieData)
-		if (movieData.length === 0) {
-			console.log("error");
+		if (response.status===404){
+      fetchAllMovies()
 		} else {
 			setMovies(movieData);
 		}
@@ -37,7 +38,7 @@ const MovieProvider = (props) => {
     setMovies,
 		findMovie,
 		fetchAllMovies,
-    search
+    search,
 	};
 
 	return (
