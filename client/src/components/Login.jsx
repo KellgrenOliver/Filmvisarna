@@ -29,6 +29,7 @@ const Login = () => {
 
 		if (result.success) {
 			history.push("/");
+			window.location.reload();
 		}
 	};
 
