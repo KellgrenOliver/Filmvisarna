@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import UserProvider from "./contexts/UserProvider";
 import AboutPage from "./pages/AboutPage";
 import MoviePage from "./pages/MoviePage";
+import TicketPage from "./pages/TicketPage";
 import MoviesProvider from "./contexts/MoviesProvider";
 import ProfilePage from "./pages/ProfilePage";
 
@@ -15,10 +16,11 @@ const App = () => {
 			<Router>
 				<MoviesProvider>
 					<UserProvider>
-					<Navbar />
-					<Route exact path="/" component={Home} />
-					<Route exact path="/movie/:movieId" component={MoviePage} />
+						<Navbar />
+						<Route exact path="/" component={Home} />
+						<Route exact path="/movie/:movieId" component={MoviePage} />
 						<Route exact path="/about" component={AboutPage} />
+						<Route exact path="/ticket/:movieId" component={TicketPage} />
 						<Route exact path="/profile" component={ProfilePage} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/createUser" component={CreateUser} />

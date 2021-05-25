@@ -1,16 +1,23 @@
 import { MovieContext } from "../contexts/MoviesProvider";
 import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
 
 const Movie = (props) => {
+	const history = useHistory();
+
 	const { findMovie } = useContext(MovieContext);
-  console.log(props)
+	console.log(props);
 	const movie = findMovie(props.match.params.movieId);
 
 	if (!movie) {
 		return null;
 	}
+
+	const renderTicket = () => {
+		history.push(`/ticket/${movie._id}`);
+	};
 
 	return (
 		<div className={styles.moviePage}>
@@ -61,6 +68,10 @@ const Movie = (props) => {
 					<span>
 						<b>Rating:</b> {movie.rating}
 					</span>
+				</div>
+				<div>
+					<span>DATUM, TID, SPRÅK</span>
+					<button onClick={renderTicket}>Buy Tickets</button>
 				</div>
 			</div>
 			<div className={styles.trailerContainer}>
