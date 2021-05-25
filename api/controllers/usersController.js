@@ -8,7 +8,7 @@ const whoami = (req, res) => {
 const logout = (req, res) => {
 	if (req.session.user) {
 		delete req.session.user;
-		return res.json({ message: "Logout successfull" });
+		return res.json({ success: "Logout successfull" });
 	}
 
 	res.json({ error: "Already logged out" });
@@ -17,8 +17,9 @@ const logout = (req, res) => {
 const login = async (req, res) => {
 	let userExists = await User.exists({ email: req.body.email });
 	if (userExists) {
-		let user = await User.findOne({ email: req.body.email }).exec();
-		if (user.password === req.body.password) {
+		let user = await User.findOne({ email: req.body.email });
+		const match = await bcrypt.compare(req.body.password, user.password);
+		if (match) {
 			req.session.user = user;
 			req.session.user.password = undefined;
 			user.password = undefined;
