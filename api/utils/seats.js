@@ -22,6 +22,23 @@ async function seatsSeeder() {
 	}
 }
 
+function calculatePrice(seats = [], standard = 100) {
+	return seats.reduce((total, seat) => {
+		if (!seat.type) return total;
+		switch (seat.type.toLowerCase()) {
+			case "adult":
+				return total + standard * 1;
+			case "senior":
+				return total + standard * 0.8;
+			case "child":
+				return total + standard * 0.7;
+			default:
+				return total + standard * 1;
+		}
+	}, 0);
+}
+
 module.exports = {
 	seatsSeeder,
+	calculatePrice,
 };
