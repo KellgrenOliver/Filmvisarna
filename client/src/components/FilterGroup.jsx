@@ -1,16 +1,13 @@
-import { useState } from "react";
 import Search from "./Search"
 import styles from "../css/FilterGroup.module.css";
 const FilterGroup = () => {
-	const [showSearch, setShowSearch] = useState(false);
+
 
 	return (
 		<div className={styles.groupContainer}>
-      <button className={styles.iconButton} >
-      <img src="assets/icons/search.svg" alt="search" />
-      </button>
+      {/* Filter is here */}
       <div className={styles.searchWrapper}>
-      <Search />
+        <Search />  
       </div>
 		</div>
 	);
