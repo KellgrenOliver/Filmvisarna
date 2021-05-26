@@ -4,7 +4,7 @@ import { UserContext } from "../contexts/UserProvider";
 
 const ProfilePage = () => {
 	const [editMode, setEditMode] = useState(false);
-	const { whoami, user } = useContext(UserContext);
+	const { whoami, user, updateUserInfo} = useContext(UserContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -14,14 +14,24 @@ const ProfilePage = () => {
 	};
 
 	const updateHandler = () => {
+		const user = {};
+		user.email = email;
+		user.password = password;
+		user.phone = phoneNumber;
+		
+
 		setEditMode(false);
+		updateUserInfo(user);
+		
 	};
-	// to be able to edit the phone number in input
+	// to be able to edit the information in input
 	useEffect(() => {
 		console.log(user);
-		if (user) {setPhoneNumber(user.phone);
-		setEmail(user.email);
-		setPassword(user.password);}
+		if (user) {
+			setPhoneNumber(user.phone);
+			setEmail(user.email);
+			setPassword(user.password);
+		}
 	}, [user]);
 
 	useEffect(() => {
@@ -29,7 +39,7 @@ const ProfilePage = () => {
 	}, []);
 
 	if (!user) {
-		return null;
+		return null; // redirect it to homePage
 	} else {
 		let emailContent;
 		let passwordContent;
@@ -65,7 +75,7 @@ const ProfilePage = () => {
 			);
 			passwordContent = (
 				<div>
-					<label >Password</label>
+					<label>Password</label>
 					<input
 						type="text"
 						id="passwordinput"
@@ -86,8 +96,8 @@ const ProfilePage = () => {
 				</div>
 			);
 			buttonContent = (
-				<button className={styles.mainBtn} onClick={updateHandler}>
-					Update changes
+				<button type="submit" className={styles.mainBtn} onClick={updateHandler}>
+					Save changes
 				</button>
 			);
 		}
@@ -103,10 +113,8 @@ const ProfilePage = () => {
 						<hr></hr>
 						<div>{emailContent}</div>
 						<div>{passwordContent}</div>
-						<div>
-							{phoneContent}
-							<div className={styles.flex}>{buttonContent}</div>
-						</div>
+						<div>{phoneContent}</div>
+						<div className={styles.flex}>{buttonContent}</div>
 					</div>
 					<div className={styles.info}>
 						<h6>Last bookings</h6>

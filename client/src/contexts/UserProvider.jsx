@@ -41,6 +41,23 @@ const UserProvider = (props) => {
 		return result;
 	};
 
+	// to save the changes which are coming from profile page
+
+	const updateUserInfo = async (userToUpdate) =>{
+		let result = await fetch("/api/v1/users/", {
+			method: "PUT",
+			headers: {
+				"content-type": "application/json"
+			},
+			body: JSON.stringify(userToUpdate)
+		});
+	// to get the updated info from backend 
+		result = await result.json(userToUpdate);
+		const updatedUser = result.updatedUser;
+		setUser(updatedUser);
+		return result;
+	};
+
 	const values = {
 		login,
 		createUser,
@@ -48,6 +65,7 @@ const UserProvider = (props) => {
 		user,
 		setUser,
 		logout,
+		updateUserInfo
 	};
 
 	return (

@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const { db } = require("../models/User");
+
 
 const whoami = (req, res) => {
 	res.json(req.session.user || null);
@@ -43,9 +45,24 @@ async function createUser(req, res) {
 	res.json({ success: "User created", createdUser: user });
 }
 
+const update = (req, res) => {
+	const user = req.body;
+
+	// update database
+
+
+
+	
+	res.json({ success: "User updated", updatedUser: user });
+}
+
+
+
+
 module.exports = {
 	createUser,
 	whoami,
 	login,
 	logout,
+	update
 };
