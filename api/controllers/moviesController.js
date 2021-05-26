@@ -24,12 +24,14 @@ const getAllMovies = async (req, res) => {
     let movies;
     movies = await query.exec();
     if (movies.length === 0) {
-      res.send("No movies matched the search ");
+      res.status(404).json({
+        error: "The movies doesn't match"
+      })
       return
     }
     res.json(movies)
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    res.status(404).send(err)
   }
 };
 
