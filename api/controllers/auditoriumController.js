@@ -23,7 +23,7 @@ async function getAuditoria(req, res) {
 		res.status(200).json(auditoria);
 	} catch (e) {
 		errorLog(e);
-		res.status(500);
+		res.status(500).end();
 	}
 }
 
@@ -35,7 +35,7 @@ async function getAuditoriumById(req, res) {
 		res.status(200).json(auditorium);
 	} catch (e) {
 		errorLog(e);
-		res.status(500);
+		res.status(500).end();
 	}
 }
 
