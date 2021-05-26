@@ -53,6 +53,29 @@ async function placeBooking(req, res) {
 	}
 }
 
+async function removeBooking(req, res) {
+	const { user } = req.session;
+	const { id } = req.params;
+
+	try {
+		const booking = await Booking.findOne({ _id: id });
+
+		if (!booking) {
+			return res.status(404).end();
+		} else if (String(booking.user) !== String(user._id)) {
+			return res.status(403).end();
+		}
+
+		await Booking.deleteOne(booking);
+
+		res.status(200).end();
+	} catch (e) {
+		errorLog(e);
+		res.status(500).end();
+	}
+}
+
 module.exports = {
 	placeBooking,
+	removeBooking,
 };
