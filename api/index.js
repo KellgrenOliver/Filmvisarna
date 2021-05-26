@@ -23,6 +23,7 @@ mongoose
 const userRoutes = require("./routes/usersRoutes");
 const auditoriumRoutes = require("./routes/auditoriumRoutes");
 const moviesRoutes = require("./routes/moviesRoutes");
+const seatRoutes = require("./routes/seatRoutes");
 const bookingsRoutes = require("./routes/bookingsRoutes");
 const screeningsRoutes = require("./routes/screeningsRoutes");
 
@@ -40,6 +41,7 @@ app.use(
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auditorium", auditoriumRoutes);
 app.use("/api/v1/movies", moviesRoutes);
+app.use("/api/v1/seats", seatRoutes);
 app.use("/api/v1/bookings", bookingsRoutes);
 app.use("/api/v1/screenings", screeningsRoutes);
 
