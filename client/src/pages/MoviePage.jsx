@@ -1,7 +1,7 @@
 import { MovieContext } from "../contexts/MoviesProvider";
 import { UserContext } from "../contexts/UserProvider";
 import { useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
 
@@ -10,22 +10,12 @@ const Movie = (props) => {
 
 	useEffect(() => {}, [loggedIn]);
 
-	const history = useHistory();
-
 	const { findMovie } = useContext(MovieContext);
 	const movie = findMovie(props.match.params.movieId);
 
 	if (!movie) {
 		return null;
 	}
-
-	const renderTicket = () => {
-		if (loggedIn) {
-			history.push(`/ticket/${movie._id}`);
-		} else {
-			alert("You must be logged in to buy tickets!");
-		}
-	};
 
 	return (
 		<div className={styles.moviePage}>
@@ -78,8 +68,14 @@ const Movie = (props) => {
 					</span>
 				</div>
 				<div>
-					<span>DATUM, TID, SPRÅK</span>
-					<button onClick={renderTicket}>Buy Tickets</button>
+					{loggedIn && (
+						<>
+							<span>DATUM, TID, SPRÅK</span>
+							<Link to={`/ticket/${movie._id}`}>
+								<button>Buy Tickets</button>
+							</Link>
+						</>
+					)}
 				</div>
 			</div>
 			<div className={styles.trailerContainer}>

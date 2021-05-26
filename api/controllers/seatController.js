@@ -1,16 +1,6 @@
 const Seat = require("../models/Seat");
 const Auditorium = require("../models/Auditorium");
 
-const getAllSeats = async (req, res) => {
-	try {
-		let seats = await Seat.find().exec();
-		res.json(seats);
-		console.log(seats);
-	} catch (error) {
-		console.log(error);
-	}
-};
-
 const addSeatsToAuditorium = async (req, res) => {
 	let seat;
 	let auditorium;
