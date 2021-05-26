@@ -8,6 +8,7 @@ const screeningSchema = new Schema(
 		auditorium: { type: Schema.Types.ObjectId, ref: "Auditorium" },
 		time: { type: Date, required: true, default: new Date() },
 		price: { type: Number, required: true, default: 100 },
+		bookedSeats: Array,
 	},
 	{ timestamps: true }
 );
