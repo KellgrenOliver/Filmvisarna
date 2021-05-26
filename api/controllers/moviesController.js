@@ -38,44 +38,42 @@ const getAllMovies = async (req, res) => {
 
 // pris, datum, längd på filmen, åldersgräns, genre, skådespelare, regissör och språk.
 
-// const getMoviesByFilter = async (req, res) => {
-//   try {
-//     // let queryPrice = req.query.price ? Number(req.query.price) : ""
-//     let queryLengthMin = req.query.lengthMin ?? 0;
-//     let queryLengthMax = req.query.lengthMax ?? Infinity;
-//     let queryLanuage = req.query.langiage ?? "";
-//     let queryGenre = req.query.genre ?? "";
-//     let queryDirector = req.query.director ?? "";
-//     let queryStar = req.query.star ?? "";
-//     // let queryDate = req.query.filterDate ? req.query.filterDate : new Date()
+const getMoviesByFilter = async (req, res) => {
+  try {
+    // let queryPrice = req.query.price ? Number(req.query.price) : ""
+    // let queryDate = req.query.filterDate ? req.query.filterDate : new Date()
+    let queryLengthMin = req.query.lengthMin ?? 0;
+    let queryLengthMax = req.query.lengthMax ?? Infinity;
+    let queryLanguage = new RegExp(`^${req.query.language ?? ""}\\w*`, 'gi');
+    let queryGenre = new RegExp(`^${req.query.genre ?? ""}\\w*`, 'gi');
+    let queryDirector = new RegExp(`^${req.query.director ?? ""}\\w*`, 'gi');
+    let queryStar = new RegExp(`^${req.query.star ?? ""}\\w*`, 'gi');
+    let queryRating = new RegExp(`^${req.query.rating ?? ""}\\w*`, 'gi');
 
-//     let movies = await Screening.find().select("movie").populate({
-//       path: "movie",
-//       match: {
-//         $and: [{
-//           language: queryLanguage
-//         }, {
-//           genres: queryGenre
-//         }, {
-//           directors: queryDirector
-//         }, {
-//           stars: queryStar
-//         }, {
-//           rating : queryReating
-//         }]
-//       }
-//     }).exec()
+    let movies = await Screening.find().select("movie").populate({
+      path: "movie",
+      match: {
+        $and:[
+          { language: queryLanguage },
+          { genres: queryGenre },
+          { directors: queryDirector },
+          { stars : queryStar },
+          { rating: queryRating }
+      ]
+        }
+      
+    }).exec()
 
 
-//     if (movies.length === 0) {
-//       res.send("No movied matched the filter ");
-//       return
-//     }
-//     res.json(movies)
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+    if (movies.length === 0) {
+      res.send("No movied matched the filter ");
+      return
+    }
+    res.json(movies)
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 const getMovieById = (req, res) => {
   Movie.findById(req.params.movieId).exec((err, movie) => {
