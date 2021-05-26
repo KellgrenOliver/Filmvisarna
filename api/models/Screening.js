@@ -12,6 +12,4 @@ const screeningSchema = new Schema(
 	{ timestamps: true }
 );
 
-const Screening = mongoose.model("Screening", screeningSchema);
-
-module.exports = Screening;
+module.exports = mongoose.model("Screening", screeningSchema);

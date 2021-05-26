@@ -24,6 +24,7 @@ const auditoriumRoutes = require("./routes/auditoriumRoutes");
 const seatRoutes = require("./routes/seatRoutes");
 const moviesRoutes = require("./routes/moviesRoutes");
 const bookingsRoutes = require("./routes/bookingsRoutes");
+const screeningsRoutes = require("./routes/screeningsRoutes");
 
 // Middlewares
 app.use(express.json());
@@ -40,6 +41,7 @@ app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auditorium", auditoriumRoutes);
 app.use("/api/v1/movies", moviesRoutes);
 app.use("/api/v1/bookings", bookingsRoutes);
+app.use("/api/v1/screenings", screeningsRoutes);
 
 app.get("/*", (req, res) => {
 	res.sendFile(path.join(__dirname, "../client/build/index.html"));
