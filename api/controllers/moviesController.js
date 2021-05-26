@@ -32,7 +32,7 @@ const getAllMovies = async (req, res) => {
     }
     res.json(movies)
   } catch (err) {
-    res.status(404).send(err)
+    res.status(400).send(err)
   }
 };
 
@@ -40,11 +40,10 @@ const getAllMovies = async (req, res) => {
 
 const getMoviesByFilter = async (req, res) => {
   try {
-
     let queryPriceMin = req.query.priceMin ?? 0;
     let queryPriceMax = req.query.priceMax ?? Infinity;
-    let queryDate = new RegExp(`^${req.query.date ?? ""}\\w*`, 'gi');
-
+    let startDate = req.query.startDate ?? new Date("0000-01-01");
+    let endDate = req.query.endDate ?? new Date("9999-12-31");
     let queryLengthMin = req.query.lengthMin ?? 0;
     let queryLengthMax = req.query.lengthMax ?? Infinity;
     let queryLanguage = new RegExp(`^${req.query.language ?? ""}\\w*`, 'gi');
@@ -53,32 +52,40 @@ const getMoviesByFilter = async (req, res) => {
     let queryStar = new RegExp(`^${req.query.star ?? ""}\\w*`, 'gi');
     let queryRating = new RegExp(`^${req.query.rating ?? ""}\\w*`, 'gi');
 
-    let movies = await Screening.find(
-      { price:{$qte: queryPriceMin, $lte: queryPriceMax } },
-      { date: queryDate }
-    ).select("movie").populate({
+    console.log(startDate)
+    let movies = await Screening.find({
+      price: {
+        $gte: queryPriceMin,
+        $lte: queryPriceMax
+      },
+      time: {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate)
+      }
+    }).select("movie").populate({
       path: "movie",
       match: {
-        $and:[
-          { language: queryLanguage },
-          { genres: queryGenre },
-          { directors: queryDirector },
-          { stars: queryStar },
-          { rating: queryRating },
-          { length: { $gte: queryLengthMin, $lte: queryLengthMax} }
-      ]
+        language: queryLanguage,
+        genres: queryGenre,
+        directors: queryDirector,
+        stars: queryStar,
+        rating: queryRating,
+        length: {
+          $gte: queryLengthMin,
+          $lte: queryLengthMax
         }
-      
+      }
     }).exec()
 
-
     if (movies.length === 0) {
-      res.send("No movied matched the filter ");
+      res.status(404).json({
+        error: "The movies doesn't match"
+      })
       return
     }
     res.json(movies)
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    res.status(400).send(err)
   }
 }
 
