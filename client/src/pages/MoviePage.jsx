@@ -5,12 +5,22 @@ import styles from "../css/MoviePage.module.css";
 
 const Movie = (props) => {
 	const { findMovie } = useContext(MovieContext);
-  console.log(props)
+	console.log(props);
 	const movie = findMovie(props.match.params.movieId);
 
 	if (!movie) {
 		return null;
 	}
+
+	// const renderScreenings = () => {
+	// 	return screenings.map((screening, i) =>};
+	const content = (
+		<div className={styles.tickets}>
+			<h5 className={styles.ticketInfo}>Time</h5>
+			<h5 className={styles.ticketInfo}>language</h5>
+			<h5 className={styles.ticketBtn}>Biljetter</h5>
+		</div>
+	);
 
 	return (
 		<div className={styles.moviePage}>
@@ -62,6 +72,7 @@ const Movie = (props) => {
 						<b>Rating:</b> {movie.rating}
 					</span>
 				</div>
+				<div>{content}</div>
 			</div>
 			<div className={styles.trailerContainer}>
 				<YouTube className={styles.trailer} videoId={movie.trailer} />

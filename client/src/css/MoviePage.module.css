@@ -45,6 +45,41 @@ hr {
 	margin-right: 1rem;
 }
 
+.tickets {
+	display: flex;
+	justify-content: space-between;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(71, 7, 24);
+	border-top-style: solid;
+	border-top-color: rgb(71, 7, 24);
+	height: 2rem;
+}
+
+.ticketInfo {
+	margin: 0;
+	max-height: 100%;
+}
+
+.ticketBtn {
+	margin: 0;
+	max-height: 100%;
+	border-left: solid;
+	border-right: solid;
+	border-color: rgb(71, 7, 24);
+	cursor: pointer;
+	color: rgb(71, 7, 24);
+
+	font-weight: bolder;
+
+	text-decoration: none;
+	float: right;
+}
+
+.ticketBtn:hover {
+	background-color: rgb(71, 7, 24);
+	color: rgb(235, 235, 235);
+}
+
 @media only screen and (max-width: 600px) {
 	.container {
 		width: 90%;
