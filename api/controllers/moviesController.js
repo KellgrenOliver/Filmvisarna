@@ -57,8 +57,9 @@ const getMoviesByFilter = async (req, res) => {
           { language: queryLanguage },
           { genres: queryGenre },
           { directors: queryDirector },
-          { stars : queryStar },
-          { rating: queryRating }
+          { stars: queryStar },
+          { rating: queryRating },
+          { length: { $gte: queryLengthMin, $lte: queryLengthMax} }
       ]
         }
       
