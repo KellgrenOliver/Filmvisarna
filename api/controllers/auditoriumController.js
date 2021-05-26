@@ -7,7 +7,7 @@ async function addRelations(auditorium) {
 	const seats = await Seat.where({ auditorium: auditorium._id });
 	const screenings = await Screening.where({
 		auditorium: auditorium._id,
-	});
+	}).populate("movie");
 	auditorium.seats = seats;
 	auditorium.screenings = screenings;
 }
