@@ -41,6 +41,7 @@ const getAllMovies = async (req, res) => {
 const getMoviesByFilter = async (req, res) => {
   try {
     // let queryPrice = req.query.price ? Number(req.query.price) : ""
+    let queryPrice = req.query.price ?? "";
     // let queryDate = req.query.filterDate ? req.query.filterDate : new Date()
     let queryLengthMin = req.query.lengthMin ?? 0;
     let queryLengthMax = req.query.lengthMax ?? Infinity;
@@ -50,7 +51,9 @@ const getMoviesByFilter = async (req, res) => {
     let queryStar = new RegExp(`^${req.query.star ?? ""}\\w*`, 'gi');
     let queryRating = new RegExp(`^${req.query.rating ?? ""}\\w*`, 'gi');
 
-    let movies = await Screening.find().select("movie").populate({
+    let movies = await Screening.find(
+      {price: queryPrice}
+    ).select("movie").populate({
       path: "movie",
       match: {
         $and:[
