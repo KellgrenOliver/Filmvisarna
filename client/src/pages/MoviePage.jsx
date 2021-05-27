@@ -1,51 +1,70 @@
 import { MovieContext } from "../contexts/MoviesProvider";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
 
 const Movie = (props) => {
-	const { singleMovie, fetchMovieById } = useContext(MovieContext);
+	const { findMovie } = useContext(MovieContext);
+  console.log(props)
+	const movie = findMovie(props.match.params.movieId);
 
-	useEffect(() => {
-		fetchMovieById(props.match.params.movieId);
-	}, [props.match.params.movieId]);
-
-	if (!singleMovie) {
+	if (!movie) {
 		return null;
 	}
 
 	return (
 		<div className={styles.moviePage}>
 			<div className={styles.container}>
-				<img className={styles.img} src={singleMovie.poster} alt="Movie Logo" />
+				<img className={styles.img} src={movie.poster} alt="Movie Logo" />
 				<div>
-					<h3>{singleMovie.title}</h3>
+					<h3>{movie.title}</h3>
 				</div>
-				<span>{singleMovie.genres.join(", ")}</span>
+				<span>
+					<b>{movie.genres.join(", ")}</b>
+				</span>
 				<hr />
 				<div>
-					<span>{singleMovie.description}</span>
+					<span>{movie.description}</span>
 				</div>
 				<br />
 				<div>
-					<span>Length: {singleMovie.length}min</span>
+					<span>
+						<b>Length: </b>
+						{movie.length}min
+					</span>
 				</div>
 				<div>
-					<span>Year: {singleMovie.year}</span>
+					<span>
+						<b>Year: </b>
+						{movie.year}
+					</span>
 				</div>
 				<div>
-					<span>Language: {singleMovie.language}</span>
+					<span>
+						<b>Language: </b>
+						{movie.language}
+					</span>
 				</div>
 				<div>
-					<span>Directors: {singleMovie.directors.join(", ")}</span>
+					<span>
+						<b>Directors: </b>
+						{movie.directors.join(", ")}
+					</span>
 				</div>
 				<div>
-					<span>Stars: {singleMovie.stars.join(", ")}</span>
+					<span>
+						<b>Stars: </b>
+						{movie.stars.join(", ")}
+					</span>
 				</div>
 				<div>
-					<span>Rating: {singleMovie.rating}</span>
+					<span>
+						<b>Rating:</b> {movie.rating}
+					</span>
 				</div>
-				<YouTube className={styles.trailer} videoId={singleMovie.trailer} />
+			</div>
+			<div className={styles.trailerContainer}>
+				<YouTube className={styles.trailer} videoId={movie.trailer} />
 			</div>
 		</div>
 	);

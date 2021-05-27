@@ -1,10 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const MovieContext = createContext();
 
 const MovieProvider = (props) => {
 	const [movies, setMovies] = useState([]);
-	const [singleMovie, setSingleMovie] = useState(false);
+	const [searchedMovies, setSearchedMovies] = useState(null);
+	const [message, setMessage] = useState(null);
+
+	useEffect(() => {
+		fetchAllMovies();
+	}, []);
 
 	const fetchAllMovies = async () => {
 		let movieData = await fetch("/api/v1/movies");
@@ -17,22 +22,29 @@ const MovieProvider = (props) => {
 		}
 	};
 
-	const fetchMovieById = async (movieId) => {
-		let singleMovie = await fetch(`/api/v1/movies/${movieId}`);
-		singleMovie = await singleMovie.json();
-
-		if (!singleMovie) {
-			console.log("error");
+	const search = async (searchString) => {
+		let response = await fetch(`/api/v1/movies${searchString}`);
+		let movieData = await response.json();
+		console.log(movieData);
+		if (response.status === 404) {
+			setSearchedMovies([]);
+			setMessage(movieData.error);
 		} else {
-			setSingleMovie(singleMovie);
+			setSearchedMovies(movieData);
+			setMessage(null);
 		}
 	};
 
+	const findMovie = (id) => movies.find((movie) => movie._id === id);
+
 	const values = {
 		movies,
-		singleMovie,
+		setMovies,
+		findMovie,
 		fetchAllMovies,
-		fetchMovieById,
+		search,
+		searchedMovies,
+		message,
 	};
 
 	return (
