@@ -1,4 +1,4 @@
-import React, { useState, useContext, history, useEffect } from "react";
+import React, { useState, useContext, useHistory, useEffect } from "react";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
 
@@ -8,6 +8,7 @@ const ProfilePage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
+	
 
 	const onEdit = () => {
 		setEditMode(true);
@@ -26,7 +27,6 @@ const ProfilePage = () => {
 	};
 	// to be able to edit the information in input
 	useEffect(() => {
-		console.log(user);
 		if (user) {
 			setPhoneNumber(user.phone);
 			setEmail(user.email);

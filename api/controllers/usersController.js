@@ -2,7 +2,6 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const { db } = require("../models/User");
 
-
 const whoami = (req, res) => {
 	res.json(req.session.user || null);
 };
@@ -45,24 +44,23 @@ async function createUser(req, res) {
 	res.json({ success: "User created", createdUser: user });
 }
 
-const update = (req, res) => {
-	const user = req.body;
+//To update and save user information in DB 
+const update = async (req, res) => {
+	userFromDb = await User.findById(req.session.user._id);
 
-	// update database
+	if (!userFromDb) {
+		return res.status(401).json({ error: "Unauthorize" });
+	}
 
-
-
-	
-	res.json({ success: "User updated", updatedUser: user });
-}
-
-
-
+	Object.assign(userFromDb, req.body);
+	await userFromDb.save();
+	res.json({ success: "User updated", updatedUser: req.body });
+};
 
 module.exports = {
 	createUser,
 	whoami,
 	login,
 	logout,
-	update
+	update,
 };
