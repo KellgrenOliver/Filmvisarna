@@ -40,7 +40,7 @@ const login = async (req, res) => {
 		req.session.user = user;
 		user.bookings = await getBookings(user);
 
-		res.status(200).json({ success: "Login successfull", loggedInUser: user });
+		res.status(200).json({ success: true, loggedInUser: user });
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
@@ -55,7 +55,7 @@ async function createUser(req, res) {
 	const { email, phone, password } = req.body;
 
 	try {
-		if (userExists({ email, phone })) {
+		if (await userExists({ email, phone })) {
 			return res.status(422).json({
 				error: "A user with that email or phone number already exists",
 			});
