@@ -2,7 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const errorLog = require("../utils/errorLog");
 const { validateBody } = require("../utils/validation");
-const { userExists, getBookings } = require("../utils/user");
+const { userExists, getBookings, validateEmail } = require("../utils/user");
 
 const whoami = async (req, res) => {
 	try {
@@ -68,6 +68,10 @@ async function register(req, res) {
 
 	const { email, phone, password } = req.body;
 
+	if (!validateEmail(email)) {
+		return res.status(422).json({ error: "Invalid email." });
+	}
+
 	try {
 		if (await userExists({ email, phone })) {
 			return res.status(422).json({
@@ -94,6 +98,10 @@ async function update(req, res) {
 	const { email, phone, oldPassword, newPassword } = req.body;
 	const { id } = req.params;
 	const userId = req.session.user._id;
+
+	if (email && !validateEmail(email)) {
+		return res.status(422).json({ error: "Invalid email." });
+	}
 
 	try {
 		if (userId !== id) {
