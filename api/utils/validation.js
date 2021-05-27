@@ -1,4 +1,4 @@
-function validateBody() {
+function validateBody(body, keys) {
 	if (body == null || keys == null) {
 		return false;
 	}
