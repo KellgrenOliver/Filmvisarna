@@ -4,9 +4,14 @@ const errorLog = require("../utils/errorLog");
 const Booking = require("../models/Booking");
 
 const whoami = async (req, res) => {
-	const { user } = req.session;
-	user.bookings = await getBookings(user._id);
-	res.status(200).json(user);
+	try {
+		const user = await User.findById(req.session.user._id);
+		user.bookings = await getBookings(user._id);
+		res.status(200).json(user);
+	} catch (e) {
+		errorLog(e);
+		res.status(500).end();
+	}
 };
 
 const logout = (req, res) => {
