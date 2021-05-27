@@ -80,7 +80,10 @@ async function register(req, res) {
 		}
 
 		const user = await User.create({ email, password, phone });
+
 		user.password = undefined;
+		req.session.user = user;
+
 		user.bookings = await getBookings(user._id);
 
 		res.status(200).json({ success: "User created", createdUser: user });
