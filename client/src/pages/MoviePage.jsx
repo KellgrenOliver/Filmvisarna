@@ -8,7 +8,11 @@ const Movie = (props) => {
 	const { findMovie } = useContext(MovieContext);
 	const { getScreeningsFromMovie, movieScreenings } =
 		useContext(ScreeningContext);
-	console.log("props", props.match.params.movieId);
+	const convertToDateObject = (timeString) => {
+		return new Date(parseInt(timeString.replace(/[\/\(\)date]/gi, "")))
+			.toLocaleString()
+			.split(" ")[1];
+	};
 	const movie = findMovie(props.match.params.movieId);
 
 	useEffect(() => {
@@ -22,9 +26,11 @@ const Movie = (props) => {
 	const renderScreenings = () =>
 		movieScreenings.map((screening, i) => (
 			<div className={styles.tickets} key={i}>
-				<h5 className={styles.ticketInfo}>{screening.time}</h5>
-				<h5 className={styles.ticketInfo}></h5>
-				<h5 className={styles.ticketBtn}>Biljetter</h5>
+				<h6 className={styles.ticketInfo}>
+					{convertToDateObject(screening.time)}
+				</h6>
+				<h6 className={styles.ticketInfo}>Tal: {screening.movie.language}</h6>
+				<h6 className={styles.ticketBtn}>Biljetter</h6>
 			</div>
 		));
 
