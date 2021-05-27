@@ -1,4 +1,5 @@
 import { MovieContext } from "../contexts/MoviesProvider";
+import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { useContext } from "react";
 import NumericInput from "react-numeric-input";
 import React from "react";
@@ -7,7 +8,11 @@ import styles from "../css/TicketPage.module.css";
 const TicketPage = (props) => {
 	const { findMovie } = useContext(MovieContext);
 	const movie = findMovie(props.match.params.movieId);
-	console.log(movie);
+
+	const { getScreeningById } = useContext(ScreeningContext);
+	console.log(props.match.params.screeningId);
+	const screening = getScreeningById(props.match.params.screeningId);
+	console.log(screening);
 
 	if (!movie) {
 		return <h1 className={styles.header}>Loading...</h1>;
@@ -19,7 +24,7 @@ const TicketPage = (props) => {
 				<div className={styles.titleContainer}>
 					<h5>Salon</h5>
 					<h5 className={styles.title}>{movie.title}</h5>
-					<h5>Date, Time</h5>
+					<h5>Datum, Tid</h5>
 					<h5>Age limit, Language, Subtitle</h5>
 				</div>
 				<h5>1. Choose seats</h5>

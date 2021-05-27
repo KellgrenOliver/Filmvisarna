@@ -22,8 +22,12 @@ const ScreeningProvider = (props) => {
 		setMovieScreenings(movieScreenings);
 	};
 
+	const getScreeningById = (id) =>
+		screenings.find((screening) => screening._id === id);
+
 	const values = {
 		screenings,
+		getScreeningById,
 		setScreenings,
 		getScreeningsFromMovie,
 		setMovieScreenings,
