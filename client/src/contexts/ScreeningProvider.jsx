@@ -5,6 +5,7 @@ export const ScreeningContext = createContext();
 const ScreeningProvider = (props) => {
 	const [movieScreenings, setMovieScreenings] = useState([]);
 	const [screenings, setScreenings] = useState([]);
+	const [screening, setScreening] = useState(null);
 
 	useEffect(() => {
 		getScreenings();
@@ -22,8 +23,11 @@ const ScreeningProvider = (props) => {
 		setMovieScreenings(movieScreenings);
 	};
 
-	const getScreeningById = (id) =>
-		screenings.find((screening) => screening._id === id);
+	const getScreeningById = async (screeningId) => {
+		let screening = await fetch(`/api/v1/screenings/${screeningId}`);
+		screening = await screening.json();
+		setScreening(screening);
+	};
 
 	const values = {
 		screenings,
@@ -32,6 +36,8 @@ const ScreeningProvider = (props) => {
 		getScreeningsFromMovie,
 		setMovieScreenings,
 		movieScreenings,
+		screening,
+		setScreening,
 	};
 
 	return (
