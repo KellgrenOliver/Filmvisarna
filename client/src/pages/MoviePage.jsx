@@ -1,7 +1,8 @@
 import { MovieContext } from "../contexts/MoviesProvider";
-import { UserContext } from "../contexts/UserProvider";
-import { useContext, useEffect } from "react";
+import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../contexts/UserProvider";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
 
@@ -11,11 +12,33 @@ const Movie = (props) => {
 	useEffect(() => {}, [loggedIn]);
 
 	const { findMovie } = useContext(MovieContext);
+	const { getScreeningsFromMovie, movieScreenings } =
+		useContext(ScreeningContext);
+	const convertToDateObject = (timeString) => {
+		return new Date(parseInt(timeString.replace(/[\/\(\)date]/gi, "")))
+			.toLocaleString()
+			.split(" ")[1];
+	};
 	const movie = findMovie(props.match.params.movieId);
+
+	useEffect(() => {
+		getScreeningsFromMovie(props.match.params.movieId);
+	}, []);
 
 	if (!movie) {
 		return null;
 	}
+
+	const renderScreenings = () =>
+		movieScreenings.map((screening, i) => (
+			<div className={styles.tickets} key={i}>
+				<h6 className={styles.ticketInfo}>
+					{convertToDateObject(screening.time)}
+				</h6>
+				<h6 className={styles.ticketInfo}>Tal: {screening.movie.language}</h6>
+				<h6 className={styles.ticketBtn}>Biljetter</h6>
+			</div>
+		));
 
 	return (
 		<div className={styles.moviePage}>
@@ -67,6 +90,7 @@ const Movie = (props) => {
 						<b>Rating:</b> {movie.rating}
 					</span>
 				</div>
+				<div>{movieScreenings && renderScreenings()}</div>
 				<div>
 					{loggedIn && (
 						<>
