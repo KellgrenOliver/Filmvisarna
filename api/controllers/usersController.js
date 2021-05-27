@@ -39,9 +39,7 @@ const login = async (req, res) => {
 		req.session.user = user;
 		user.bookings = await getBookings(user);
 
-		return res
-			.status(200)
-			.json({ success: "Login successfull", loggedInUser: user });
+		res.status(200).json({ success: "Login successfull", loggedInUser: user });
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
