@@ -1,4 +1,5 @@
-import React, { useState, useContext, useHistory, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
 
@@ -8,6 +9,7 @@ const ProfilePage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
+	const history = useHistory();
 	
 
 	const onEdit = () => {
