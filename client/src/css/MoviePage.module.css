@@ -7,7 +7,7 @@
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
 	width: 50%;
-	height: 400px;
+	height: 600px;
 	margin: auto;
 }
 
@@ -20,7 +20,7 @@
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
 	width: 50%;
-	height: 400px;
+	height: 100%;
 	margin: auto;
 }
 
@@ -43,6 +43,37 @@
 
 hr {
 	margin-right: 1rem;
+}
+
+.tickets {
+	margin-top: 1rem;
+	display: flex;
+	justify-content: space-between;
+	border-bottom-style: solid;
+	border-width: 3px;
+	border-bottom-color: rgb(71, 7, 24);
+	border-top-style: solid;
+	border-top-color: rgb(71, 7, 24);
+	height: 1.5rem;
+}
+
+.ticketInfo {
+	margin: 0;
+	max-height: 100%;
+}
+
+.ticketBtn {
+	margin: 0;
+	max-height: 100%;
+	border-color: rgb(71, 7, 24);
+	cursor: pointer;
+	color: rgb(71, 7, 24);
+	text-decoration: none;
+}
+
+.ticketBtn:hover {
+	background-color: rgb(71, 7, 24);
+	color: rgb(235, 235, 235);
 }
 
 @media only screen and (max-width: 600px) {
