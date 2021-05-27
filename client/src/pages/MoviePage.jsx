@@ -41,7 +41,6 @@ const Movie = (props) => {
 				</Link>
 			</div>
 		));
-	console.log(movieScreenings);
 
 	return (
 		<div className={styles.moviePage}>
