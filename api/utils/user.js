@@ -1,5 +1,6 @@
 const errorLog = require("./errorLog");
 const User = require("../models/User");
+const Booking = require("../models/Booking");
 
 async function userSeeder() {
 	try {
