@@ -25,6 +25,11 @@ const logout = (req, res) => {
 
 const login = async (req, res) => {
 	const { email, password } = req.body;
+
+	if (!validateBody(req.body, ["email", "password"])) {
+		return res.status(400).json({ error: "Please fill all the fields." });
+	}
+
 	try {
 		const user = await User.findOne({ email });
 		if (!user) {
@@ -38,6 +43,7 @@ const login = async (req, res) => {
 
 		user.password = undefined;
 		req.session.user = user;
+
 		user.bookings = await getBookings(user);
 
 		res.status(200).json({ success: true, loggedInUser: user });
@@ -73,17 +79,17 @@ async function register(req, res) {
 }
 
 async function update(req, res) {
-	if (
-		!validateBody(req.body, ["email", "phone", "oldPassword", "newPassword"])
-	) {
+	if (!validateBody(req.body, ["oldPassword"])) {
 		return res.status(400).json({ error: "Please fill all the fields." });
 	}
 
 	const { email, phone, oldPassword, newPassword } = req.body;
+	const { id } = req.params;
 	const userId = req.session.user._id;
 
 	try {
-		if (req.session.user._id !== req.params.id) {
+		console.log(userId, id);
+		if (userId !== id) {
 			return res.status(403).end();
 		}
 
@@ -92,25 +98,26 @@ async function update(req, res) {
 
 		if (!match) return res.status(401).end();
 
-		if (await userExists({ email, phone })) {
-			return res
-				.status(422)
-				.json({ error: "Email and phone number must not be taken." });
+		if (email && (await User.exists({ email }))) {
+			return res.status(422).json({ error: "Email must not be taken." });
+		} else if (phone && (await User.exists({ phone }))) {
+			return res.status(422).json({ error: "Phone number must not be taken." });
 		}
 
-		const updatedPassword = await bcrypt.hash(newPassword, 10);
+		const data = {
+			email: email ?? user.email,
+			phone: phone ?? user.phone,
+			password: newPassword ?? user.password,
+		};
 
-		await User.updateOne({
-			email,
-			password: updatedPassword,
-			phone,
-		});
+		if (newPassword) data.password = await bcrypt.hash(newPassword, 10);
+
+		await User.findByIdAndUpdate(id, data);
 
 		user.password = undefined;
-		user.phone = phone;
-		user.email = email;
+		req.session.user = user;
 
-		res.status(200).json(user);
+		res.status(200).json(Object.assign(user, data));
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
