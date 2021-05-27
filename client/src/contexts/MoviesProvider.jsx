@@ -25,7 +25,6 @@ const MovieProvider = (props) => {
 	const search = async (searchString) => {
 		let response = await fetch(`/api/v1/movies${searchString}`);
 		let movieData = await response.json();
-		console.log(movieData);
 		if (response.status === 404) {
 			setSearchedMovies([]);
 			setMessage(movieData.error);
