@@ -99,14 +99,17 @@ async function editUser(req, res) {
 		}
 
 		const updatedPassword = await bcrypt.hash(newPassword, 10);
-		const updatedUser = await User.updateOne({
+		await User.updateOne({
 			email,
 			password: updatedPassword,
 			phone,
 		});
-		updatedUser.password = undefined;
 
-		res.status(200).json(updatedUser);
+		user.password = undefined;
+		user.phone = phone;
+		user.email = email;
+
+		res.status(200).json(user);
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
