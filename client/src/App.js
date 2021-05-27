@@ -25,7 +25,11 @@ const App = () => {
 							<Route exact path="/profile" component={ProfilePage} />
 							<Route exact path="/login" component={Login} />
 							<Route exact path="/createUser" component={CreateUser} />
-						<Route exact path="/ticket/:movieId" component={TicketPage} />
+							<Route
+								exact
+								path="/ticket/:movieId/:screeningId"
+								component={TicketPage}
+							/>
 						</UserProvider>
 					</MoviesProvider>
 				</ScreeningProvider>

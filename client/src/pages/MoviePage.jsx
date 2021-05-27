@@ -36,9 +36,12 @@ const Movie = (props) => {
 					{convertToDateObject(screening.time)}
 				</h6>
 				<h6 className={styles.ticketInfo}>Tal: {screening.movie.language}</h6>
-				<h6 className={styles.ticketBtn}>Biljetter</h6>
+				<Link to={`/ticket/${movie._id}/${screening._id}`}>
+					<h6 className={styles.ticketBtn}>Biljetter</h6>
+				</Link>
 			</div>
 		));
+	console.log(movieScreenings);
 
 	return (
 		<div className={styles.moviePage}>
@@ -90,14 +93,10 @@ const Movie = (props) => {
 						<b>Rating:</b> {movie.rating}
 					</span>
 				</div>
-				<div>{movieScreenings && renderScreenings()}</div>
 				<div>
 					{loggedIn && (
 						<>
-							<span>DATUM, TID, SPRÅK</span>
-							<Link to={`/ticket/${movie._id}`}>
-								<button>Buy Tickets</button>
-							</Link>
+							<div>{movieScreenings && renderScreenings()}</div>
 						</>
 					)}
 				</div>
