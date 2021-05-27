@@ -4,6 +4,7 @@ export const UserContext = createContext();
 
 const UserProvider = (props) => {
 	const [user, setUser] = useState(null);
+	const [ message, setMessage ] = useState(null);
 
 	const whoami = async () => {
 		let user = await fetch("/api/v1/users/whoami");
@@ -53,6 +54,7 @@ const UserProvider = (props) => {
 		});
 	// to get the updated info from backend 
 		result = await result.json(userToUpdate);
+		setMessage(result.success);
 		const updatedUser = result.updatedUser;
 		setUser(updatedUser);
 		return result;
@@ -65,7 +67,8 @@ const UserProvider = (props) => {
 		user,
 		setUser,
 		logout,
-		updateUserInfo
+		updateUserInfo,
+		message
 	};
 
 	return (

@@ -54,7 +54,7 @@ const update = async (req, res) => {
 
 	Object.assign(userFromDb, req.body);
 	await userFromDb.save();
-	res.json({ success: "User updated", updatedUser: req.body });
+	res.json({ success: "You have edited information successfully", updatedUser: req.body });
 };
 
 module.exports = {

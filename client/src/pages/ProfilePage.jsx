@@ -5,12 +5,11 @@ import { UserContext } from "../contexts/UserProvider";
 
 const ProfilePage = () => {
 	const [editMode, setEditMode] = useState(false);
-	const { whoami, user, updateUserInfo} = useContext(UserContext);
+	const { whoami, user, updateUserInfo, message } = useContext(UserContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const history = useHistory();
-	
 
 	const onEdit = () => {
 		setEditMode(true);
@@ -21,11 +20,9 @@ const ProfilePage = () => {
 		user.email = email;
 		user.password = password;
 		user.phone = phoneNumber;
-		
 
 		setEditMode(false);
 		updateUserInfo(user);
-		
 	};
 	// to be able to edit the information in input
 	useEffect(() => {
@@ -53,7 +50,7 @@ const ProfilePage = () => {
 				<span className={styles.infoDetail}>Email: {user.email}</span>
 			);
 			passwordContent = (
-				<span className={styles.infoDetail}>Password: {user.password}</span>
+				<span className={styles.infoDetail}>Password: {"*****"}</span>
 			);
 			phoneContent = (
 				<span className={styles.infoDetail}>Phone number: {user.phone}</span>
@@ -98,7 +95,11 @@ const ProfilePage = () => {
 				</div>
 			);
 			buttonContent = (
-				<button type="submit" className={styles.mainBtn} onClick={updateHandler}>
+				<button
+					type="submit"
+					className={styles.mainBtn}
+					onClick={updateHandler}
+				>
 					Save changes
 				</button>
 			);
@@ -117,6 +118,7 @@ const ProfilePage = () => {
 						<div>{passwordContent}</div>
 						<div>{phoneContent}</div>
 						<div className={styles.flex}>{buttonContent}</div>
+						<div>{message ? <p>{message}</p> : ""}</div>
 					</div>
 					<div className={styles.info}>
 						<h6>Last bookings</h6>
