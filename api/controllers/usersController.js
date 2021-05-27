@@ -99,6 +99,7 @@ async function update(req, res) {
 		}
 
 		const updatedPassword = await bcrypt.hash(newPassword, 10);
+
 		await User.updateOne({
 			email,
 			password: updatedPassword,
