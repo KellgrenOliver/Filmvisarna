@@ -1,26 +1,32 @@
 import { MovieContext } from "../contexts/MoviesProvider";
-import { useContext } from "react";
+import { ScreeningContext } from "../contexts/ScreeningProvider";
+import { useContext, useEffect } from "react";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
 
 const Movie = (props) => {
 	const { findMovie } = useContext(MovieContext);
-	console.log(props);
+	const { getScreeningsFromMovie, movieScreenings } =
+		useContext(ScreeningContext);
+	console.log("props", props.match.params.movieId);
 	const movie = findMovie(props.match.params.movieId);
+
+	useEffect(() => {
+		getScreeningsFromMovie(props.match.params.movieId);
+	}, []);
 
 	if (!movie) {
 		return null;
 	}
 
-	// const renderScreenings = () => {
-	// 	return screenings.map((screening, i) =>};
-	const content = (
-		<div className={styles.tickets}>
-			<h5 className={styles.ticketInfo}>Time</h5>
-			<h5 className={styles.ticketInfo}>language</h5>
-			<h5 className={styles.ticketBtn}>Biljetter</h5>
-		</div>
-	);
+	const renderScreenings = () =>
+		movieScreenings.map((screening, i) => (
+			<div className={styles.tickets} key={i}>
+				<h5 className={styles.ticketInfo}>{screening.time}</h5>
+				<h5 className={styles.ticketInfo}></h5>
+				<h5 className={styles.ticketBtn}>Biljetter</h5>
+			</div>
+		));
 
 	return (
 		<div className={styles.moviePage}>
@@ -72,7 +78,7 @@ const Movie = (props) => {
 						<b>Rating:</b> {movie.rating}
 					</span>
 				</div>
-				<div>{content}</div>
+				<div>{movieScreenings && renderScreenings()}</div>
 			</div>
 			<div className={styles.trailerContainer}>
 				<YouTube className={styles.trailer} videoId={movie.trailer} />
