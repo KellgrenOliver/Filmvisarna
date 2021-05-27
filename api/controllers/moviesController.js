@@ -1,28 +1,50 @@
 const Movie = require("../models/Movie");
+const Screening = require("../models/Screening");
 
 const getAllMovies = async (req, res) => {
   try {
-    if (Object.keys(req.query).length === 0) {
-      let movies = await Movie.find().exec();
-      res.json(movies);
-      return;
-    }
+    let movies = await Movie.find().exec();
+    res.json(movies);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getMoviesByFilterAndSearch = async (req, res) => {
+  try {
     let querySearch = new RegExp(`${req.query.search ?? ""}\\w*`, "gi");
-    let query = Movie.find({
-      $or: [{
-        title: querySearch
-      }, {
-        language: querySearch
-      }, {
-        genres: querySearch
-      }, {
-        directors: querySearch
-      }, {
-        stars: querySearch
-      }]
-    });
-    let movies;
-    movies = await query.exec();
+    let queryLengthMin = req.query.lengthMin ?? 0;
+    let queryLengthMax = req.query.lengthMax ?? Infinity;
+    let queryLanguage = new RegExp(`^${req.query.language ?? ""}\\w*`, 'gi');
+    let queryGenre = new RegExp(`^${req.query.genre ?? ""}\\w*`, 'gi');
+    let queryDirector = new RegExp(`^${req.query.director ?? ""}\\w*`, 'gi');
+    let queryStar = new RegExp(`^${req.query.star ?? ""}\\w*`, 'gi');
+    let queryRating = new RegExp(`^${req.query.rating ?? ""}\\w*`, 'gi');
+
+    let movies = await Movie.find({
+        language: queryLanguage,
+        genres: queryGenre,
+        directors: queryDirector,
+        stars: queryStar,
+        rating: queryRating,
+        length: {
+          $gte: queryLengthMin,
+          $lte: queryLengthMax
+        },       
+          $or: [{
+            title: querySearch
+          }, {
+            language: querySearch
+          }, {
+            genres: querySearch
+          }, {
+            directors: querySearch
+          }, {
+            stars: querySearch
+          }]       
+
+    }).exec()
+
     if (movies.length === 0) {
       res.status(404).json({
         error: "The movies doesn't match"
@@ -31,9 +53,10 @@ const getAllMovies = async (req, res) => {
     }
     res.json(movies)
   } catch (err) {
-    res.status(404).send(err)
+    res.status(400).send(err)
   }
-};
+}
+
 
 const getMovieById = (req, res) => {
   Movie.findById(req.params.movieId).exec((err, movie) => {
@@ -55,4 +78,5 @@ const getMovieById = (req, res) => {
 module.exports = {
   getAllMovies,
   getMovieById,
+  getMoviesByFilter
 };
