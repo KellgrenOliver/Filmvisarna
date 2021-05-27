@@ -1,8 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const errorLog = require("../utils/errorLog");
-const Booking = require("../models/Booking");
 const { validateBody } = require("../utils/validation");
+const { userExists, getBookings } = require("../utils/user");
 
 const whoami = async (req, res) => {
 	try {
@@ -17,15 +17,11 @@ const whoami = async (req, res) => {
 
 const logout = (req, res) => {
 	if (!req.session.user) {
-		return res.status(405).json({ error: "Already logged out" });
+		return res.status(405).json({ error: "Already logged out." });
 	}
 	req.session.user = undefined;
 	res.status(200).end();
 };
-
-async function userExists({ email, phone }) {
-	return (await User.countDocuments({ $or: [{ email }, { phone }] })) > 0;
-}
 
 const login = async (req, res) => {
 	const { email, password } = req.body;
@@ -117,16 +113,10 @@ async function editUser(req, res) {
 	}
 }
 
-async function getBookings(user) {
-	if (!user) user = req.session.user;
-	return await Booking.where({ user });
-}
-
 module.exports = {
 	createUser,
 	whoami,
 	login,
 	logout,
-	getBookings,
 	editUser,
 };
