@@ -47,7 +47,7 @@ const login = async (req, res) => {
 	}
 };
 
-async function createUser(req, res) {
+async function register(req, res) {
 	if (!validateBody(req.body, ["email", "password"])) {
 		return res.status(400).json({ error: "Please fill all the fields." });
 	}
@@ -72,7 +72,7 @@ async function createUser(req, res) {
 	}
 }
 
-async function editUser(req, res) {
+async function update(req, res) {
 	if (
 		!validateBody(req.body, ["email", "phone", "oldPassword", "newPassword"])
 	) {
@@ -117,9 +117,9 @@ async function editUser(req, res) {
 }
 
 module.exports = {
-	createUser,
+	register,
 	whoami,
 	login,
 	logout,
-	editUser,
+	update,
 };

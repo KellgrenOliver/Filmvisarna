@@ -7,7 +7,7 @@ router.get("/whoami", auth, usersController.whoami);
 router.get("/logout", usersController.logout);
 
 router.post("/login", usersController.login);
-router.post("", usersController.createUser);
-router.put("/:id", auth, usersController.editUser);
+router.post("", usersController.register);
+router.put("/:id", auth, usersController.update);
 
 module.exports = router;
