@@ -2,6 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const errorLog = require("../utils/errorLog");
 const Booking = require("../models/Booking");
+const { validateBody } = require("../utils/validation");
 
 const whoami = async (req, res) => {
 	try {
@@ -21,26 +22,6 @@ const logout = (req, res) => {
 	req.session.user = undefined;
 	res.status(200).end();
 };
-
-function validateBody(body, keys) {
-	if (body == null || keys == null) {
-		return false;
-	}
-
-	body = Object.keys(body).sort();
-	keys = keys.sort();
-
-	if (body.length !== keys.length) {
-		console.log("did not match");
-		return false;
-	}
-
-	for (let i = 0; i < body.length; ++i) {
-		if (body[i] !== keys[i]) return false;
-	}
-
-	return true;
-}
 
 async function userExists({ email, phone }) {
 	return (await User.countDocuments({ $or: [{ email }, { phone }] })) > 0;
