@@ -88,7 +88,6 @@ async function update(req, res) {
 	const userId = req.session.user._id;
 
 	try {
-		console.log(userId, id);
 		if (userId !== id) {
 			return res.status(403).end();
 		}
@@ -115,6 +114,7 @@ async function update(req, res) {
 		await User.findByIdAndUpdate(id, data);
 
 		user.password = undefined;
+		data.password = undefined;
 		req.session.user = user;
 
 		res.status(200).json(Object.assign(user, data));
