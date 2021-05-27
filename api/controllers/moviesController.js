@@ -52,7 +52,6 @@ const getMoviesByFilter = async (req, res) => {
     let queryStar = new RegExp(`^${req.query.star ?? ""}\\w*`, 'gi');
     let queryRating = new RegExp(`^${req.query.rating ?? ""}\\w*`, 'gi');
 
-    console.log(startDate)
     let movies = await Screening.find({
       price: {
         $gte: queryPriceMin,
