@@ -22,8 +22,8 @@ const MovieProvider = (props) => {
 		}
 	};
 
-	const search = async (searchString) => {
-		let response = await fetch(`/api/v1/movies${searchString}`);
+	const filter = async (searchString) => {
+		let response = await fetch(`/api/v1/movies/filter${searchString}`);
 		let movieData = await response.json();
 		console.log(movieData);
 		if (response.status === 404) {
@@ -42,7 +42,7 @@ const MovieProvider = (props) => {
 		setMovies,
 		findMovie,
 		fetchAllMovies,
-		search,
+		filter,
 		searchedMovies,
 		message,
 	};

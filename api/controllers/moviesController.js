@@ -10,7 +10,7 @@ const getAllMovies = async (req, res) => {
   }
 };
 
-const getMoviesByFilterAndSearch = async (req, res) => {
+const getMoviesByFilter= async (req, res) => {
   try {
     let querySearch = new RegExp(`${req.query.search ?? ""}\\w*`, "gi");
     let queryLengthMin = req.query.lengthMin ?? 0;
@@ -47,7 +47,7 @@ const getMoviesByFilterAndSearch = async (req, res) => {
 
     if (movies.length === 0) {
       res.status(404).json({
-        error: "The movies doesn't match"
+        error: "No movies matched"
       })
       return
     }
