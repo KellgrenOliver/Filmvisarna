@@ -21,13 +21,11 @@ const login = async (req, res) => {
 	const { email, password } = req.body;
 	try {
 		const user = await User.findOne({ email });
-
 		if (!user) {
 			return res.status(422).json({ error: "Bad credentials" });
 		}
 
 		const match = await bcrypt.compare(password, user.password);
-
 		if (!match) {
 			return res.status(422).json({ error: "Bad credentials" });
 		}
@@ -65,7 +63,7 @@ async function createUser(req, res) {
 
 		const user = await User.create({ email, password, phone });
 		user.password = undefined;
-		user.bookings = getBookings(user._id);
+		user.bookings = await getBookings(user._id);
 
 		res.status(200).json({ success: "User created", createdUser: user });
 	} catch (e) {
