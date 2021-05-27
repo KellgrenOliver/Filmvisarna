@@ -17,13 +17,17 @@ const whoami = async (req, res) => {
 
 const logout = (req, res) => {
 	if (!req.session.user) {
-		return res.status(405).json({ error: "Already logged out." });
+		return res.status(405).json({ error: "You are already logged out." });
 	}
 	req.session.user = undefined;
 	res.status(200).end();
 };
 
 const login = async (req, res) => {
+	if (req.session.user) {
+		return res.status(405).json({ error: "You are already logged in." });
+	}
+
 	const { email, password } = req.body;
 
 	if (!validateBody(req.body, ["email", "password"])) {
@@ -54,6 +58,10 @@ const login = async (req, res) => {
 };
 
 async function register(req, res) {
+	if (req.session.user) {
+		return res.status(405).json({ error: "You are already logged in." });
+	}
+
 	if (!validateBody(req.body, ["email", "password"])) {
 		return res.status(400).json({ error: "Please fill all the fields." });
 	}
