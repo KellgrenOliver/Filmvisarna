@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const errorLog = require("../utils/errorLog");
+const Booking = require("../models/Booking");
 
 const whoami = (req, res) => {
 	res.json(req.session.user || null);
@@ -8,7 +10,7 @@ const whoami = (req, res) => {
 const logout = (req, res) => {
 	if (req.session.user) {
 		delete req.session.user;
-		return res.json({ message: "Logout successfull" });
+		return res.json({ success: "Logout successfull" });
 	}
 
 	res.json({ error: "Already logged out" });
@@ -43,9 +45,20 @@ async function createUser(req, res) {
 	res.json({ success: "User created", createdUser: user });
 }
 
+async function getBookings(req, res) {
+	const { user } = req.session;
+	try {
+		res.status(200).json(await Booking.where({ user }));
+	} catch (e) {
+		errorLog(e);
+		res.status(500).end();
+	}
+}
+
 module.exports = {
 	createUser,
 	whoami,
 	login,
 	logout,
+	getBookings,
 };
