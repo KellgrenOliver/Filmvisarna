@@ -8,16 +8,15 @@
 	background-color: rgb(235, 235, 235);
 	box-shadow: 10px 5px 5px rgb(70, 70, 70);
 	line-height: 1.5rem;
-	overflow: scroll;
 }
 
 .container {
 	max-width: 100%;
 }
 
- /* tablet and desktop and extra large */
-  @media only screen and (min-width: 768px) {
-	.container{
+/* tablet and desktop and extra large */
+@media only screen and (min-width: 768px) {
+	.container {
 		max-width: 720px;
 		margin: 2rem auto;
 	}
@@ -25,16 +24,16 @@
 	.box-container {
 		margin: 2rem auto;
 	}
-  }
+}
 /* desktop and extra large*/
-  @media only screen and (min-width: 992px) {
-	.container{
+@media only screen and (min-width: 992px) {
+	.container {
 		max-width: 960px;
 	}
-  }
+}
 
-  @media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1200px) {
 	.container {
 		max-width: 1140px;
 	}
-  }
+}
