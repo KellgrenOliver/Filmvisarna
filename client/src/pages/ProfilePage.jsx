@@ -8,6 +8,7 @@ const ProfilePage = () => {
 	const { whoami, user, updateUserInfo, message } = useContext(UserContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [newPassword, setNewPassword] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const history = useHistory();
 
@@ -19,6 +20,7 @@ const ProfilePage = () => {
 		const user = {};
 		user.email = email;
 		user.password = password;
+		user.newPassword = newPassword;
 		user.phone = phoneNumber;
 
 		setEditMode(false);
@@ -30,6 +32,7 @@ const ProfilePage = () => {
 			setPhoneNumber(user.phone);
 			setEmail(user.email);
 			setPassword(user.password);
+			setNewPassword(user.password);
 		}
 	}, [user]);
 
@@ -42,6 +45,7 @@ const ProfilePage = () => {
 	} else {
 		let emailContent;
 		let passwordContent;
+		let newPasswordContent;
 		let phoneContent;
 		let buttonContent;
 
@@ -50,7 +54,10 @@ const ProfilePage = () => {
 				<span className={styles.infoDetail}>Email: {user.email}</span>
 			);
 			passwordContent = (
-				<span className={styles.infoDetail}>Password: {"*****"}</span>
+				<span className={styles.infoDetail}>Current password: {"*****"}</span>
+			);
+			newPasswordContent = (
+				<span className={styles.infoDetail}>New password: {user.newPassword}</span>
 			);
 			phoneContent = (
 				<span className={styles.infoDetail}>Phone number: {user.phone}</span>
@@ -74,12 +81,23 @@ const ProfilePage = () => {
 			);
 			passwordContent = (
 				<div>
-					<label>Password</label>
+					<label>Current password</label>
 					<input
-						type="text"
+						type="password"
 						id="passwordinput"
 						value={password}
 						onChange={(event) => setPassword(event.target.value)}
+					/>
+				</div>
+			);
+			newPasswordContent = (
+				<div>
+					<label>New password</label>
+					<input
+						type="password"
+						id="passwordinput"
+						value={password}
+						onChange={(event) => setNewPassword(event.target.value)}
 					/>
 				</div>
 			);
@@ -116,6 +134,7 @@ const ProfilePage = () => {
 						<hr></hr>
 						<div>{emailContent}</div>
 						<div>{passwordContent}</div>
+						<div>{newPasswordContent}</div>
 						<div>{phoneContent}</div>
 						<div className={styles.flex}>{buttonContent}</div>
 						<div>{message ? <p>{message}</p> : ""}</div>
