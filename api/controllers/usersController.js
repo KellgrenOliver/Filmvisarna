@@ -75,7 +75,7 @@ async function register(req, res) {
 	try {
 		if (await userExists({ email, phone })) {
 			return res.status(422).json({
-				error: "A user with that email or phone number already exists",
+				error: "A user with that email or phone number already exists.",
 			});
 		}
 
