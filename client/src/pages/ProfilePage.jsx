@@ -56,9 +56,7 @@ const ProfilePage = () => {
 			passwordContent = (
 				<span className={styles.infoDetail}>Current password: {"*****"}</span>
 			);
-			newPasswordContent = (
-				<span className={styles.infoDetail}>New password: {user.newPassword}</span>
-			);
+
 			phoneContent = (
 				<span className={styles.infoDetail}>Phone number: {user.phone}</span>
 			);
