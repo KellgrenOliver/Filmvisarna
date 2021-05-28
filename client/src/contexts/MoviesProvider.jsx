@@ -18,9 +18,9 @@ const MovieProvider = (props) => {
 	}, []);
 
   useEffect(() => {
-    console.log(message)
+    console.log(director)
     filter()
-  }, [searchString, lengthMin, lengthMax, language, director ]);
+  }, [searchString, lengthMin, lengthMax, language, director]);
 
 
 	const fetchAllMovies = async () => {

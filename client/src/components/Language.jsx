@@ -19,13 +19,8 @@ const Language = () => {
 
 	const renderLanguage = () => {
 		return (
-			<select
-				name="language"
-				onChange={(e) => setLanguage(`&language=${e.target.value}`)}
-			>
-				<option value="">
-					Language:
-				</option>
+			<select name="language" onChange={(e)=>setLanguage(`&language=${e.target.value}`)}>
+				<option value="">Language:</option>
 				{items &&
 					items.map((item) => (
 						<option value={item} key={item}>

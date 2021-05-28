@@ -25,9 +25,9 @@ const Director = () => {
 		return (
 			<select
 				name="director"
-				onChange={(e) => setDirector(`&director=${e.target.value}`)}
+        onChange={(e)=>setDirector(`&director=${e.target.value}`)   }			
 			>
-				<option value="">
+				<option value="" >
 					Director:
 				</option>
 				{items &&
