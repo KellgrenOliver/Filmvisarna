@@ -10,7 +10,7 @@ const getAllMovies = async (req, res) => {
   }
 };
 
-const getMoviesByFilter= async (req, res) => {
+const getMoviesByFilter = async (req, res) => {
   try {
     let querySearch = new RegExp(`${req.query.search ?? ""}\\w*`, "gi");
     let queryLengthMin = req.query.lengthMin ?? 0;
