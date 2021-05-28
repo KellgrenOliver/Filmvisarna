@@ -2,8 +2,8 @@ import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
 import styles from "../css/FilterGroup.module.css";
 
-const Director = () => {
-	const { setDirector, movies } = useContext(MovieContext);
+const Genre = () => {
+	const { setGenre, movies } = useContext(MovieContext);
 	const [items, setItems] = useState("");
 
 	useEffect(() => {
@@ -13,7 +13,7 @@ const Director = () => {
 	}, [movies]);
 
 	const getItemsFromAllMovies = () => {
-		let values = movies.map((movie) => movie.directors);
+		let values = movies.map((movie) => movie.genres);
 		let result = [];
 		values.forEach((value) => {
 			result = result.concat(value);
@@ -21,14 +21,14 @@ const Director = () => {
 		setItems([...new Set(result)]);
 	};
 
-	const renderDirector = () => {
+	const renderGenre = () => {
 		return (
 			<select
-				name="director"
-        onChange={(e)=>setDirector(`&director=${e.target.value}`)   }			
+				name="genre"
+        onChange={(e)=>setGenre(`&genre=${e.target.value}`)   }			
 			>
 				<option value="" >
-					Director:
+					Genre:
 				</option>
 				{items &&
 					items.map((item) => (
@@ -40,7 +40,7 @@ const Director = () => {
 		);
 	};
 
-	return <div>{renderDirector()}</div>;
+	return <div>{renderGenre()}</div>;
 };
 
-export default Director;
+export default Genre;

@@ -3,7 +3,7 @@ import { MovieContext } from "../contexts/MoviesProvider";
 import styles from "../css/FilterGroup.module.css";
 
 const Language = () => {
-	const { setLanguage, searchedMovies, movies } = useContext(MovieContext);
+	const { setLanguage, movies } = useContext(MovieContext);
 	const [items, setItems] = useState("");
 
 	useEffect(() => {
@@ -19,7 +19,10 @@ const Language = () => {
 
 	const renderLanguage = () => {
 		return (
-			<select name="language" onChange={(e)=>setLanguage(`&language=${e.target.value}`)}>
+			<select
+				name="language"
+				onChange={(e) => setLanguage(`&language=${e.target.value}`)}
+			>
 				<option value="">Language:</option>
 				{items &&
 					items.map((item) => (

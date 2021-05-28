@@ -2,8 +2,8 @@ import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
 import styles from "../css/FilterGroup.module.css";
 
-const Director = () => {
-	const { setDirector, movies } = useContext(MovieContext);
+const Rating = () => {
+	const { setRating, movies } = useContext(MovieContext);
 	const [items, setItems] = useState("");
 
 	useEffect(() => {
@@ -13,23 +13,17 @@ const Director = () => {
 	}, [movies]);
 
 	const getItemsFromAllMovies = () => {
-		let values = movies.map((movie) => movie.directors);
-		let result = [];
-		values.forEach((value) => {
-			result = result.concat(value);
-		});
-		setItems([...new Set(result)]);
+		let value = movies.map((movie) => movie.rating);
+		setItems([...new Set(value)]);
 	};
 
-	const renderDirector = () => {
+	const renderRating = () => {
 		return (
 			<select
-				name="director"
-        onChange={(e)=>setDirector(`&director=${e.target.value}`)   }			
+				name="rating"
+				onChange={(e) => setRating(`&rating=${e.target.value}`)}
 			>
-				<option value="" >
-					Director:
-				</option>
+				<option value="">Rating:</option>
 				{items &&
 					items.map((item) => (
 						<option value={item} key={item}>
@@ -40,7 +34,7 @@ const Director = () => {
 		);
 	};
 
-	return <div>{renderDirector()}</div>;
+	return <div>{renderRating()}</div>;
 };
 
-export default Director;
+export default Rating;

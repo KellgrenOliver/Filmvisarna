@@ -3,7 +3,7 @@ import { MovieContext } from "../contexts/MoviesProvider";
 import styles from "../css/FilterGroup.module.css";
 
 const Star = () => {
-	const { setStar, searchedMovies, movies } = useContext(MovieContext);
+	const { setStar, movies } = useContext(MovieContext);
 	const [items, setItems] = useState("");
 
 	useEffect(() => {
