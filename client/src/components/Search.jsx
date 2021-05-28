@@ -3,11 +3,10 @@ import { MovieContext } from "../contexts/MoviesProvider"
 import styles from "../css/FilterGroup.module.css";
 
 const Search = () => {
-  const { filter } = useContext(MovieContext);
+  const { filter, setSearchString} = useContext(MovieContext);
 
   const handleSearch = (e) =>{
-    let searchString = `?search=${e.target.value}`
-    filter(searchString)
+    setSearchString(`&search=${e.target.value}`)
   }
   
 	return (
