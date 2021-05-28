@@ -7,7 +7,10 @@ const Length = () => {
 
   const handleLength=(e)=>{
     console.log(e.target.value)
-    if(e.target.value==="1"){
+    if(e.target.value==="0"){
+      setLengthMin(`?lengthMin=`+0);
+      setLengthMax(`&lengthMax=`+1000);
+    }else if(e.target.value==="1"){
       setLengthMin(`?lengthMin=`+0);
       setLengthMax(`&lengthMax=`+99);
     }else if(e.target.value==="2"){
@@ -18,13 +21,11 @@ const Length = () => {
     }
   }
 
-
-
 	const renderLength = () => {
 		return (
 			<form >
 				<select name="length" onChange={handleLength}>
-					<option selected disabled>Length:</option>
+					<option value="0">Length:</option>
 					<option value="1" >0-99 min</option>
 					<option value="2">100-199 min</option>
 					<option value="3">200 min</option>

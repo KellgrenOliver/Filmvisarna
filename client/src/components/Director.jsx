@@ -2,8 +2,8 @@ import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
 import styles from "../css/FilterGroup.module.css";
 
-const Language = () => {
-	const { setLanguage, searchedMovies, movies } = useContext(MovieContext);
+const Director = () => {
+	const { setDirector, searchedMovies, movies } = useContext(MovieContext);
 	const [items, setItems] = useState("");
 
 	useEffect(() => {
@@ -13,18 +13,22 @@ const Language = () => {
 	}, [movies]);
 
 	const getItemsFromAllMovies = () => {
-		let value = movies.map((movie) => movie.language);
-		setItems([...new Set(value)]);
+		let values = movies.map((movie) => movie.directors);
+		let result = [];
+		values.forEach((value) => {
+			result = result.concat(value);
+		});
+		setItems([...new Set(result)]);
 	};
 
-	const renderLanguage = () => {
+	const renderDirector = () => {
 		return (
 			<select
-				name="language"
-				onChange={(e) => setLanguage(`&language=${e.target.value}`)}
+				name="director"
+				onChange={(e) => setDirector(`&director=${e.target.value}`)}
 			>
 				<option value="">
-					Language:
+					Director:
 				</option>
 				{items &&
 					items.map((item) => (
@@ -36,7 +40,7 @@ const Language = () => {
 		);
 	};
 
-	return <div>{renderLanguage()}</div>;
+	return <div>{renderDirector()}</div>;
 };
 
-export default Language;
+export default Director;

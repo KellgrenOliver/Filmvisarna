@@ -10,16 +10,17 @@ const MovieProvider = (props) => {
   const [lengthMin, setLengthMin]=useState("?lengthMin=0");
   const [lengthMax, setLengthMax]=useState("");
   const [language, setLanguage]=useState("");
+  const [director, setDirector]=useState("");
+  const [star, setStar]=useState("");
 
 	useEffect(() => {
-    // setLengthMin("?lengthMin="+0)
 		fetchAllMovies();
 	}, []);
 
   useEffect(() => {
     console.log(message)
     filter()
-  }, [searchString, lengthMin, lengthMax, language ]);
+  }, [searchString, lengthMin, lengthMax, language, director ]);
 
 
 	const fetchAllMovies = async () => {
@@ -34,7 +35,7 @@ const MovieProvider = (props) => {
 	};
 
 	const filter = async () => {
-		let response = await fetch(`/api/v1/movies/filter${lengthMin}${lengthMax}${searchString}${language}`);
+		let response = await fetch(`/api/v1/movies/filter${lengthMin}${lengthMax}${searchString}${language}${director}${star}`);
 		let movieData = await response.json();
 		if (response.status === 404) {
 			setSearchedMovies([]);
@@ -58,7 +59,8 @@ const MovieProvider = (props) => {
     setSearchString,
     setLengthMin,
     setLengthMax,
-    setLanguage
+    setLanguage,
+    setDirector
 	};
 
 	return (
