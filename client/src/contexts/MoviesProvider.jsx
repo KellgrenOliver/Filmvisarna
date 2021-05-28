@@ -20,7 +20,7 @@ const MovieProvider = (props) => {
   useEffect(() => {
     console.log(director)
     filter()
-  }, [searchString, lengthMin, lengthMax, language, director]);
+  }, [searchString, lengthMin, lengthMax, language, director, star]);
 
 
 	const fetchAllMovies = async () => {
@@ -60,7 +60,8 @@ const MovieProvider = (props) => {
     setLengthMin,
     setLengthMax,
     setLanguage,
-    setDirector
+    setDirector,
+    setStar
 	};
 
 	return (
