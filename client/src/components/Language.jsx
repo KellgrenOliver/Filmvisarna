@@ -3,42 +3,40 @@ import { MovieContext } from "../contexts/MoviesProvider";
 import styles from "../css/FilterGroup.module.css";
 
 const Language = () => {
-	const { setLanguage, searchedMovies } = useContext(MovieContext);
-  const [items, setItems] = useState("");
+	const { setLanguage, searchedMovies, movies } = useContext(MovieContext);
+	const [items, setItems] = useState("");
 
-  useEffect(() => {
-    getItems()
-  }, [searchedMovies])
+	useEffect(() => {
+		if (movies) {
+			getItemsFromAllMovies();
+		}
+	}, [movies]);
 
-  const getItems=()=>{
-    if(searchedMovies){
-      let value = searchedMovies.map((movie)=>(movie.language))
-      setItems([...new Set(value)])
-    }
+	const getItemsFromAllMovies = () => {
+		let value = movies.map((movie) => movie.language);
+		setItems([...new Set(value)]);
+	};
 
-  }
-  console.log(items)
-  
-  const handleLanguage =()=>{
+	const renderLanguage = () => {
+		return (
+			<select
+				name="language"
+				onChange={(e) => setLanguage(`&language=${e.target.value}`)}
+			>
+				<option selected disabled>
+					Language:
+				</option>
+				{items &&
+					items.map((item) => (
+						<option value={item} key={item}>
+							{item}
+						</option>
+					))}
+			</select>
+		);
+	};
 
-  }
-
-  const renderLanguage = ()=>{
-    return (
-     <form>
-       <select name="language" onChange={handleLanguage}>
-       <option value="0">Language:</option>
-       </select>
-     </form> 
-    )
-  }
-
-	
-	return (
-		<div>
-      {renderLanguage()}
-		</div>
-	);
+	return <div>{renderLanguage()}</div>;
 };
 
 export default Language;
