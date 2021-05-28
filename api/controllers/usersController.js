@@ -1,8 +1,64 @@
+const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const errorLog = require("../utils/errorLog");
+const Booking = require("../models/Booking");
+
+const whoami = (req, res) => {
+	res.json(req.session.user || null);
+};
+
+const logout = (req, res) => {
+	if (req.session.user) {
+		delete req.session.user;
+		return res.json({ success: "Logout successfull" });
+	}
+
+	res.json({ error: "Already logged out" });
+};
+
+const login = async (req, res) => {
+	let userExists = await User.exists({ email: req.body.email });
+	if (userExists) {
+		let user = await User.findOne({ email: req.body.email });
+		const match = await bcrypt.compare(req.body.password, user.password);
+		if (match) {
+			req.session.user = user;
+			req.session.user.password = undefined;
+			user.password = undefined;
+			return res.json({ success: "Login successfull", loggedInUser: user });
+		}
+	}
+	res.status(422).json({ error: "Bad credentials" });
+};
+
 async function createUser(req, res) {
 	// create a user with Mongoose
-	res.send("Sent from createUser function");
+	let userExists = await User.exists({ email: req.body.email });
+	if (userExists) {
+		return res
+			.status(400)
+			.json({ error: "An user with that email already exists" });
+	}
+
+	let user = await User.create(req.body);
+	user.password = undefined;
+	res.json({ success: "User created", createdUser: user });
+}
+
+async function getBookings(req, res) {
+	const { user } = req.session;
+	try {
+		res.status(200).json(await Booking.where({ user }));
+	} catch (e) {
+		errorLog(e);
+		res.status(500).end();
+	}
 }
 
 module.exports = {
 	createUser,
+	whoami,
+	login,
+	logout,
+	getBookings,
 };

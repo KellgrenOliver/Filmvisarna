@@ -3,9 +3,6 @@ const { Schema } = mongoose;
 
 const movieSchema = new Schema(
 	{
-		screenings: [
-			{ type: Schema.Types.ObjectId, ref: "Screening", required: true },
-		],
 		title: { type: String, required: true },
 		genres: { type: Array, required: true },
 		description: { type: String, required: true },
@@ -13,7 +10,7 @@ const movieSchema = new Schema(
 		length: { type: Number, required: true },
 		trailer: { type: String, required: true },
 		year: { type: Number, required: true },
-		rating: { type: String, required: true, default: "PG13" },
+		rating: { type: String, required: true },
 		language: { type: String, required: true, default: "English" },
 		subtitles: { type: Boolean, required: true, default: true },
 		directors: { type: Array, required: true },
