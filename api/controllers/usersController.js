@@ -107,7 +107,7 @@ async function update(req, res) {
 	}
 
 	try {
-		if (userId !== id) {
+		if (String(userId).toLowerCase() !== String(id).toLowerCase()) {
 			return res.status(403).end();
 		}
 
