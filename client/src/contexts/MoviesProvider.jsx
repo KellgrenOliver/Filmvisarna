@@ -9,6 +9,7 @@ const MovieProvider = (props) => {
   const [searchString, setSearchString] = useState ("")
   const [lengthMin, setLengthMin]=useState("?lengthMin=0");
   const [lengthMax, setLengthMax]=useState("");
+  const [language, setLanguage]=useState("");
 
 	useEffect(() => {
     setLengthMin("?lengthMin="+0)
@@ -57,7 +58,8 @@ const MovieProvider = (props) => {
 		message,
     setSearchString,
     setLengthMin,
-    setLengthMax
+    setLengthMax,
+    setLanguage
 	};
 
 	return (

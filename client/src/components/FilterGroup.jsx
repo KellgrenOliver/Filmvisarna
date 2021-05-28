@@ -1,12 +1,14 @@
 import Search from "./Search"
-import Filter from "./Filter"
+import Length from "./Length"
+import Language from "./Language"
 import styles from "../css/FilterGroup.module.css";
 const FilterGroup = () => {
 
 
 	return (
 		<div className={styles.groupContainer}>
-        <Filter />
+        <Length />
+        <Language />
       <div className={styles.searchWrapper}>
         <Search />  
       </div>

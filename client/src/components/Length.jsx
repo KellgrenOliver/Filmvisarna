@@ -2,11 +2,10 @@ import { useContext } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
 import styles from "../css/FilterGroup.module.css";
 
-const Filter = () => {
-	const { setLengthMin, setLengthMax } = useContext(MovieContext);
+const Length = () => {
+	const { setLengthMin, setLengthMax, searchedMovies } = useContext(MovieContext);
 
-
-  const handleSelect=(e)=>{
+  const handleLength=(e)=>{
     console.log(e.target.value)
     if(e.target.value==="0"){
       setLengthMin(`?lengthMin=`+0);
@@ -22,10 +21,12 @@ const Filter = () => {
     }
   }
 
+
+
 	const renderLength = () => {
 		return (
 			<form >
-				<select name="length" onChange={handleSelect}>
+				<select name="length" onChange={handleLength}>
 					<option value="0">Length:</option>
 					<option value="1" >0-99 min</option>
 					<option value="2">100-199 min</option>
@@ -37,10 +38,9 @@ const Filter = () => {
 
 	return (
 		<div>
-			<h3 style={{ color: "white" }}>Filter</h3>
       {renderLength()}
 		</div>
 	);
 };
 
-export default Filter;
+export default Length;
