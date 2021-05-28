@@ -1,6 +1,7 @@
 .container {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cardWrapper {
@@ -32,4 +33,8 @@
 	border-radius: 10px;
 	box-shadow: 5px 5px 5px rgb(165, 165, 165);
 	cursor: pointer;
+}
+
+.message{
+  color:white
 }
