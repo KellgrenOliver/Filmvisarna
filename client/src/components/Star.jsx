@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
 import Items from "./Items";
-import styles from "../css/FilterGroup.module.css";
 
 const Star = () => {
 	const { setStar, movies } = useContext(MovieContext);
@@ -25,7 +24,7 @@ const Star = () => {
       setItems([...new Set(result)]);  
 	};
 
-	return <Items setVal={ setStar } name={"star"} items={items} />;
+	return <Items setVal={ setStar } name={"stars"} items={items} setItems={setItems}/>;
 };
 
 export default Star;

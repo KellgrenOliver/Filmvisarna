@@ -20,11 +20,9 @@ const MovieProvider = (props) => {
 	}, []);
 
   useEffect(() => {
-    filter()
-   
+    filter() 
   }, [searchString, lengthMin, lengthMax, language, genre, director, star, rating]);
 
-  console.log(star)
 	const fetchAllMovies = async () => {
 		let movieData = await fetch("/api/v1/movies");
 		movieData = await movieData.json();
@@ -42,7 +40,9 @@ const MovieProvider = (props) => {
 		if (response.status === 404) {
 			setSearchedMovies([]);
 			setMessage(movieData.error);
-		} else {
+		}else if (response.status === 400) {
+      setSearchedMovies(null);
+    } else {
 			setSearchedMovies(movieData);
 			setMessage(null);
 		}

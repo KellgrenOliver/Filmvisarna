@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
 import Items from "./Items"
-import styles from "../css/FilterGroup.module.css";
 
 const Genre = () => {
 	const { setGenre, movies } = useContext(MovieContext);
@@ -26,7 +25,7 @@ const Genre = () => {
 	};
   
 
-	return <Items setVal={ setGenre } name={"genre"} items={items}/>
+	return <Items setVal={ setGenre } name={"genres"} items={items}/>
 };
 
 export default Genre;

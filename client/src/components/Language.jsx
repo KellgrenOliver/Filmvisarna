@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
 import Items from "./Items"
-import styles from "../css/FilterGroup.module.css";
 
 const Language = () => {
 	const { setLanguage, movies } = useContext(MovieContext);

@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
 import Items from "./Items";
-import styles from "../css/FilterGroup.module.css";
 
 const Director = () => {
 	const { setDirector, movies } = useContext(MovieContext);
@@ -25,7 +24,7 @@ const Director = () => {
 		setItems([...new Set(result)]);
 	};
 
-	return <Items setVal={setDirector} name={"director"} items={items} />;
+	return <Items setVal={setDirector} name={"directors"} items={items} />;
 };
 
 export default Director;
