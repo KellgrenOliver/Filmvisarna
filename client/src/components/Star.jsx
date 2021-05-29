@@ -19,8 +19,6 @@ const Star = () => {
 	const getItemsFromAllMovies =() => {
       let values = movies.map((movie) => movie.stars);
       let result = [];
-      console.log(values)
-      console.log(typeof(values[0]))
       values.forEach((value) => {
         result = result.concat(value);
       });

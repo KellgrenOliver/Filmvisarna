@@ -16,13 +16,9 @@ const Language = () => {
     };
 	}, [movies]);
 
-	const getItemsFromAllMovies = () => {
-  
+	const getItemsFromAllMovies = () => { 
       let values = movies.map((movie) => movie.language);
-      console.log(values)
-      console.log(typeof(values[0]))
       setItems([...new Set(values)]);
-
 	};
 
 	return <Items setVal ={setLanguage} name={"language"} items={items}/>

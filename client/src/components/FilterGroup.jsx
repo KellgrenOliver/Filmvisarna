@@ -9,13 +9,15 @@ import styles from "../css/FilterGroup.module.css";
 const FilterGroup = () => {
 	return (
 		<div className={styles.groupContainer}>
-			<Length />
-			<Language />
-      <Genre />
-			<Director />
-      <Star />
-      <Rating />
-			<div className={styles.searchWrapper}>
+			<div className={styles.filterContainer}>
+				<Length />
+				<Language />
+				<Genre />
+				<Director />
+				<Star />
+				<Rating />
+			</div>
+			<div className={styles.searchContainer}>
 				<Search />
 			</div>
 		</div>

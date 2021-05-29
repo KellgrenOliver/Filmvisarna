@@ -11,12 +11,12 @@ const Items = (props) => {
 	};
   
 	return (
-		<div>
-			<select name={props.name} onChange={handleOnChange}>
-				<option value="">{props.name}:</option>
+		<div className={styles.customSelect}>
+			<select className={styles.select} name={props.name} onChange={handleOnChange}>
+				<option className={styles.option} value="">{props.name}:</option>
 				{props.items &&
 					props.items.map((item) => (
-						<option value={item} key={item}>
+						<option className={styles.option} value={item} key={item}>
 							{item}
 						</option>
 					))}

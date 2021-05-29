@@ -31,14 +31,14 @@ const Length = () => {
 
 	const renderLength = () => {
 		return (
-			<form>
-				<select onChange={handleLength}>
-					<option value="0">length:</option>
-					<option value="1">0-99 min</option>
-					<option value="2">100-199 min</option>
-					<option value="3">200 min</option>
+			<div className={styles.customSelect}>
+				<select className={styles.select} onChange={handleLength}>
+					<option className={styles.option} value="0">length:</option>
+					<option className={styles.option} value="1">0-99 min</option>
+					<option className={styles.option} value="2">100-199 min</option>
+					<option className={styles.option} value="3">200 min</option>
 				</select>
-			</form>
+			</div>
 		);
 	};
 
