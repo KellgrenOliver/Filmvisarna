@@ -1,40 +1,36 @@
 import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
+import Items from "./Items";
 import styles from "../css/FilterGroup.module.css";
 
 const Rating = () => {
-	const { setRating, movies } = useContext(MovieContext);
+	const { rating, setRating, movies } = useContext(MovieContext);
 	const [items, setItems] = useState("");
 
 	useEffect(() => {
 		if (movies) {
 			getItemsFromAllMovies();
 		}
+    return ()=>{
+      setRating("")
+    }
 	}, [movies]);
 
 	const getItemsFromAllMovies = () => {
 		let value = movies.map((movie) => movie.rating);
 		setItems([...new Set(value)]);
 	};
-
-	const renderRating = () => {
-		return (
-			<select
-				name="rating"
-				onChange={(e) => setRating(`&rating=${e.target.value}`)}
-			>
-				<option value="">Rating:</option>
-				{items &&
-					items.map((item) => (
-						<option value={item} key={item}>
-							{item}
-						</option>
-					))}
-			</select>
-		);
+	const handleOnChange = (e) => {
+		if (e.target.value === "") {
+			setRating("");
+		} else {
+			setRating(`&rating=${e.target.value}`);
+		}
 	};
 
-	return <div>{renderRating()}</div>;
-};
+	return (
+		<Items setVal={setRating} handleOnChange={handleOnChange} name={"rating"} items={items} />
+	);
+};     
 
 export default Rating;

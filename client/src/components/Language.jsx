@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
+import Items from "./Items"
 import styles from "../css/FilterGroup.module.css";
 
 const Language = () => {
@@ -10,31 +11,21 @@ const Language = () => {
 		if (movies) {
 			getItemsFromAllMovies();
 		}
+    return () => {
+      setLanguage("");
+    };
 	}, [movies]);
 
 	const getItemsFromAllMovies = () => {
-		let value = movies.map((movie) => movie.language);
-		setItems([...new Set(value)]);
+  
+      let values = movies.map((movie) => movie.language);
+      console.log(values)
+      console.log(typeof(values[0]))
+      setItems([...new Set(values)]);
+
 	};
 
-	const renderLanguage = () => {
-		return (
-			<select
-				name="language"
-				onChange={(e) => setLanguage(`&language=${e.target.value}`)}
-			>
-				<option value="">Language:</option>
-				{items &&
-					items.map((item) => (
-						<option value={item} key={item}>
-							{item}
-						</option>
-					))}
-			</select>
-		);
-	};
-
-	return <div>{renderLanguage()}</div>;
+	return <Items setVal ={setLanguage} name={"language"} items={items}/>
 };
 
 export default Language;

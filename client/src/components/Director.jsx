@@ -1,15 +1,19 @@
 import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
+import Items from "./Items";
 import styles from "../css/FilterGroup.module.css";
 
 const Director = () => {
 	const { setDirector, movies } = useContext(MovieContext);
-	const [items, setItems] = useState("");
+	const [ items, setItems ] = useState("");
 
 	useEffect(() => {
 		if (movies) {
 			getItemsFromAllMovies();
 		}
+		return () => {
+			setDirector("");
+		};
 	}, [movies]);
 
 	const getItemsFromAllMovies = () => {
@@ -21,26 +25,7 @@ const Director = () => {
 		setItems([...new Set(result)]);
 	};
 
-	const renderDirector = () => {
-		return (
-			<select
-				name="director"
-        onChange={(e)=>setDirector(`&director=${e.target.value}`)   }			
-			>
-				<option value="" >
-					Director:
-				</option>
-				{items &&
-					items.map((item) => (
-						<option value={item} key={item}>
-							{item}
-						</option>
-					))}
-			</select>
-		);
-	};
-
-	return <div>{renderDirector()}</div>;
+	return <Items setVal={setDirector} name={"director"} items={items} />;
 };
 
 export default Director;

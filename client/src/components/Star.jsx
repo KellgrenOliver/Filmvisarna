@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
+import Items from "./Items";
 import styles from "../css/FilterGroup.module.css";
 
 const Star = () => {
@@ -10,32 +11,23 @@ const Star = () => {
 		if (movies) {
 			getItemsFromAllMovies();
 		}
+    return () => {
+      setStar("");
+    };
 	}, [movies]);
 
-	const getItemsFromAllMovies = () => {
-		let values = movies.map((movie) => movie.stars);
-		let result = [];
-		values.forEach((value) => {
-			result = result.concat(value);
-		});
-		setItems([...new Set(result)]);
+	const getItemsFromAllMovies =() => {
+      let values = movies.map((movie) => movie.stars);
+      let result = [];
+      console.log(values)
+      console.log(typeof(values[0]))
+      values.forEach((value) => {
+        result = result.concat(value);
+      });
+      setItems([...new Set(result)]);  
 	};
 
-	const renderStar = () => {
-		return (
-			<select name="star" onChange={(e) => setStar(`&star=${e.target.value}`)}>
-				<option value="">Star:</option>
-				{items &&
-					items.map((item) => (
-						<option value={item} key={item}>
-							{item}
-						</option>
-					))}
-			</select>
-		);
-	};
-
-	return <div>{renderStar()}</div>;
+	return <Items setVal={ setStar } name={"star"} items={items} />;
 };
 
 export default Star;

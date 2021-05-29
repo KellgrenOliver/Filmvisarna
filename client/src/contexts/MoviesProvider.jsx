@@ -20,11 +20,11 @@ const MovieProvider = (props) => {
 	}, []);
 
   useEffect(() => {
-    console.log(director)
     filter()
+   
   }, [searchString, lengthMin, lengthMax, language, genre, director, star, rating]);
 
-
+  console.log(star)
 	const fetchAllMovies = async () => {
 		let movieData = await fetch("/api/v1/movies");
 		movieData = await movieData.json();
@@ -35,7 +35,7 @@ const MovieProvider = (props) => {
 			setMovies(movieData);
 		}
 	};
-
+ 
 	const filter = async () => {
 		let response = await fetch(`/api/v1/movies/filter${lengthMin}${lengthMax}${language}${genre}${director}${star}${rating}${searchString}`);
 		let movieData = await response.json();
@@ -59,13 +59,20 @@ const MovieProvider = (props) => {
 		searchedMovies,
 		message,
     setSearchString,
+    searchString,
     setLengthMin,
     setLengthMax,
     setLanguage,
+    language,
     setDirector,
+    director,
     setStar,
+    star,
     setRating,
-    setGenre
+    rating,
+    setGenre,
+    genre,
+    
 	};
 
 	return (

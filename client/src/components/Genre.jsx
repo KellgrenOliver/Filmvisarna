@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../contexts/MoviesProvider";
+import Items from "./Items"
 import styles from "../css/FilterGroup.module.css";
 
 const Genre = () => {
@@ -10,6 +11,9 @@ const Genre = () => {
 		if (movies) {
 			getItemsFromAllMovies();
 		}
+    return () => {
+      setGenre("");
+    };
 	}, [movies]);
 
 	const getItemsFromAllMovies = () => {
@@ -20,27 +24,9 @@ const Genre = () => {
 		});
 		setItems([...new Set(result)]);
 	};
+  
 
-	const renderGenre = () => {
-		return (
-			<select
-				name="genre"
-        onChange={(e)=>setGenre(`&genre=${e.target.value}`)   }			
-			>
-				<option value="" >
-					Genre:
-				</option>
-				{items &&
-					items.map((item) => (
-						<option value={item} key={item}>
-							{item}
-						</option>
-					))}
-			</select>
-		);
-	};
-
-	return <div>{renderGenre()}</div>;
+	return <Items setVal={ setGenre } name={"genre"} items={items}/>
 };
 
 export default Genre;
