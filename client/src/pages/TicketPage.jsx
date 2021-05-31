@@ -2,6 +2,7 @@ import { MovieContext } from "../contexts/MoviesProvider";
 import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { useContext, useEffect } from "react";
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "../css/TicketPage.module.css";
 
 const TicketPage = (props) => {
@@ -71,7 +72,9 @@ const TicketPage = (props) => {
 						<h6>{screening.time}</h6>
 						<h6>Tickets</h6>
 						<h6>Price:</h6>
-						<button className={styles.button}>Book</button>
+						<Link to={`/booking/${movie._id}/${screening._id}`}>
+							<button className={styles.button}>Book</button>
+						</Link>
 					</div>
 				</div>
 			</div>
