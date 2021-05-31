@@ -56,16 +56,20 @@ async function getScreeningById(req, res) {
 async function getScreeningsFromMovie(req, res) {
 	const { movie } = req.params;
 	try {
-		const screening = await Screening.find({ movie }).populate([
-			"movie",
-			"auditorium",
-		]);
+    if(Object.keys(req.query).length===0){
+      const screening = await Screening.find({ movie }).populate([
+        "movie",
+        "auditorium",
+      ]);
 
-		if (!screening) {
-			return res.status(404).end();
-		}
+      if (!screening) {
+        return res.status(404).end();
+      }
+      
+      res.status(200).json(await appendBookedSeats(screening));
+      return
+    }
 
-		res.status(200).json(await appendBookedSeats(screening));
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
