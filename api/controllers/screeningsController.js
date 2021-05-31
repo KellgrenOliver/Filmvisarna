@@ -56,7 +56,6 @@ async function getScreeningById(req, res) {
 async function getScreeningsFromMovie(req, res) {
 	const { movie } = req.params;
 	try {
-    if(Object.keys(req.query).length===0){
       const screening = await Screening.find({ movie }).populate([
         "movie",
         "auditorium",
@@ -67,8 +66,7 @@ async function getScreeningsFromMovie(req, res) {
       }
       
       res.status(200).json(await appendBookedSeats(screening));
-      return
-    }
+
 
 	} catch (e) {
 		errorLog(e);
