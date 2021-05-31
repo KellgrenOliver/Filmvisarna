@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&family=Roboto:wght@100&display=swap");
 
+* {
+	box-sizing: border-box;
+}
 body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen",
@@ -55,3 +58,5 @@ h6 {
 p {
 	size: 1rem;
 }
+
+
