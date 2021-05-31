@@ -73,10 +73,47 @@ async function getScreeningsFromMovie(req, res) {
 		res.status(500).end();
 	}
 }
+async function getScreeningsFromMovieByFilter(req, res) {
+	const { movie } = req.params;
+	try {
+      let queryPriceMin = req.query.priceMin ?? 0;
+      let queryPriceMax = req.query.priceMax ?? Infinity;
+      let startDate = req.query.startDate ?? new Date("0000-01-01");
+      let endDate = req.query.endDate ?? new Date("9999-12-31");
+
+      let screening = await Screening.find({
+        movie : {
+          price: {
+            $gte: queryPriceMin,
+            $lte: queryPriceMax
+          },
+          time: {
+            $gte: new Date(startDate),
+            $lte: new Date(endDate)
+          }
+        }
+      }).populate([
+         "movie",
+        "auditorium",
+      ]);
+
+      if (!screening) {
+        return res.status(404).end();
+      }
+      
+      res.status(200).json(await appendBookedSeats(screening));
+
+
+	} catch (e) {
+		errorLog(e);
+		res.status(500).end();
+	}
+}
 
 module.exports = {
 	getScreenings,
 	getScreeningById,
 	getScreeningsFromMovie,
 	appendBookedSeats,
+  getScreeningsFromMovieByFilter
 };
