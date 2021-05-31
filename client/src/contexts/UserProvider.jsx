@@ -46,7 +46,8 @@ const UserProvider = (props) => {
 	// to save the changes which are coming from profile page
 
 	const updateUserInfo = async (userToUpdate) =>{
-		let result = await fetch("/api/v1/users/", {
+		// console.log(userToUpdate);
+		let result = await fetch(`api/v1/users/${user._id}`, {
 			method: "PUT",
 			headers: {
 				"content-type": "application/json"

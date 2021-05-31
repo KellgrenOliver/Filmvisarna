@@ -8,7 +8,7 @@ const Navbar = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		whoami();
+		// whoami();
 	}, [whoami, loggedIn]);
 
 	const handleSubmit = async () => {

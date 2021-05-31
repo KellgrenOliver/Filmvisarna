@@ -17,14 +17,14 @@ const ProfilePage = () => {
 	};
 
 	const updateHandler = () => {
-		const user = {};
-		user.email = email;
-		user.password = password;
-		user.newPassword = newPassword;
-		user.phone = phoneNumber;
+		const userFromForm = {};
+		userFromForm.email = email;
+		userFromForm.oldPassword = password;
+		userFromForm.newPassword = newPassword;
+		userFromForm.phone = phoneNumber;
 
 		setEditMode(false);
-		updateUserInfo(user);
+		updateUserInfo(userFromForm);
 	};
 	// to be able to edit the information in input
 	useEffect(() => {
@@ -32,7 +32,7 @@ const ProfilePage = () => {
 			setPhoneNumber(user.phone);
 			setEmail(user.email);
 			setPassword(user.password);
-			setNewPassword(user.password);
+			setNewPassword(user.newPassword);
 		}
 	}, [user]);
 
@@ -54,7 +54,7 @@ const ProfilePage = () => {
 				<span className={styles.infoDetail}>Email: {user.email}</span>
 			);
 			passwordContent = (
-				<span className={styles.infoDetail}>Current password: {"*****"}</span>
+				<span className={styles.infoDetail}>Current password (required): {"*****"}</span>
 			);
 
 			phoneContent = (
@@ -83,7 +83,6 @@ const ProfilePage = () => {
 					<input
 						type="password"
 						id="passwordinput"
-						value={password}
 						onChange={(event) => setPassword(event.target.value)}
 					/>
 				</div>
@@ -93,8 +92,8 @@ const ProfilePage = () => {
 					<label>New password</label>
 					<input
 						type="password"
-						id="passwordinput"
-						value={password}
+						id="newpasswordinput"
+						value={newPassword}
 						onChange={(event) => setNewPassword(event.target.value)}
 					/>
 				</div>
