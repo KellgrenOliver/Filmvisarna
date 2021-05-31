@@ -140,7 +140,7 @@ const ProfilePage = () => {
 						<h6>Last bookings</h6>
 						<hr />
 						<div className={styles.flex}>
-							<span>Bookings show here</span>
+							<span>booking</span>
 							<button className={styles.btn}>Delete</button>
 						</div>
 					</div>
