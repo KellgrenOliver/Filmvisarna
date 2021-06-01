@@ -11,12 +11,13 @@ const Navbar = () => {
 			<NavLink className={styles.link} exact to="/about">
 				About
 			</NavLink>
-			<NavLink className={styles.link} exact to="/booking">
-				Booking
+			<NavLink className={styles.link} exact to="/Profile">
+				Profile
 			</NavLink>
 			<NavLink className={styles.link} exact to="/login">
 				Login
 			</NavLink>
+			{/* <hr className={styles.hr} /> */}
 		</nav>
 	);
 };
