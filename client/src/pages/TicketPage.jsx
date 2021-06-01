@@ -2,12 +2,15 @@ import { MovieContext } from "../contexts/MoviesProvider";
 import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { useContext, useEffect } from "react";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styles from "../css/TicketPage.module.css";
 
 const TicketPage = (props) => {
 	const { findMovie } = useContext(MovieContext);
 	const movie = findMovie(props.match.params.movieId);
 	const { getScreeningById, screening } = useContext(ScreeningContext);
+
+	const history = useHistory();
 
 	useEffect(() => {
 		getScreeningById(props.match.params.screeningId);
@@ -16,6 +19,14 @@ const TicketPage = (props) => {
 	if (!movie || !screening) {
 		return <h1 className={styles.header}>Loading...</h1>;
 	}
+
+	const checkSeats = () => {
+		if (movie.rating === null) {
+			alert("You need to pick your seats");
+		} else {
+			history.push(`/booking/${movie._id}/${screening._id}`);
+		}
+	};
 
 	const content = () => (
 		<div className={styles.ticketPage}>
@@ -71,7 +82,9 @@ const TicketPage = (props) => {
 						<h6>{screening.time}</h6>
 						<h6>Tickets</h6>
 						<h6>Price:</h6>
-						<button className={styles.button}>Book</button>
+						<button onClick={checkSeats} className={styles.button}>
+							Book
+						</button>
 					</div>
 				</div>
 			</div>
