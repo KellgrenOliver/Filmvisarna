@@ -20,7 +20,7 @@ const logout = (req, res) => {
 		return res.status(405).json({ error: "You are already logged out." });
 	}
 	req.session.user = undefined;
-	res.status(200).end();
+	res.status(200).json({ success: "Logout successful." });
 };
 
 const login = async (req, res) => {
