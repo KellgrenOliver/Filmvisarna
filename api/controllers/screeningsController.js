@@ -56,34 +56,14 @@ async function getScreeningById(req, res) {
 async function getScreeningsFromMovie(req, res) {
 	const { movie } = req.params;
 	try {
-      const screening = await Screening.find({ movie }).populate([
-        "movie",
-        "auditorium",
-      ]);
 
-      if (!screening) {
-        return res.status(404).end();
-      }
-      
-      res.status(200).json(await appendBookedSeats(screening));
-
-
-	} catch (e) {
-		errorLog(e);
-		res.status(500).end();
-	}
-}
-async function getScreeningsFromMovieByFilter(req, res) {
-	const { movie } = req.params;
-	try {
-    
     if(Object.keys(req.query).length===0){
       let screening = await Screening.find({ movie }).populate([
         "movie",
         "auditorium",
       ]);
-      if (!screening) {
-        return res.status(404).end();
+      if (screening.length===0) {
+        return res.status(404).send({error:"Not found "}).end();
       }
      
       res.status(200).json(await appendBookedSeats(screening));
@@ -93,16 +73,15 @@ async function getScreeningsFromMovieByFilter(req, res) {
       let queryPriceMax = req.query.priceMax ?? Infinity;
       let startDate = req.query.startDate ?? new Date("0000-01-01");
       let endDate = req.query.endDate ?? new Date("9999-12-31");
-
       let screening = await Screening.find({   
           movie,      
           price: {
             $gte: queryPriceMin,
-            $lte: queryPriceMax
+            $lt: queryPriceMax
           },
           time: {
             $gte: new Date(startDate),
-            $lte: new Date(endDate)
+            $lt: new Date(endDate)
           }
         }
       ).populate(
@@ -111,11 +90,9 @@ async function getScreeningsFromMovieByFilter(req, res) {
           "auditorium",
         ]
       );
-
-      if (!screening) {
-        return res.status(404).end();
-      }
-      
+      if (!screenings || screening.length===0) {
+        return res.status(404).send({error:"Not found "}).end();
+      }     
       res.status(200).json(await appendBookedSeats(screening));
 
 	} catch (e) {
@@ -129,5 +106,4 @@ module.exports = {
 	getScreeningById,
 	getScreeningsFromMovie,
 	appendBookedSeats,
-  getScreeningsFromMovieByFilter
 };
