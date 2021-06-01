@@ -102,4 +102,5 @@ module.exports = {
 	placeBooking,
 	removeBooking,
 	getAllBookings,
+	bookings
 };

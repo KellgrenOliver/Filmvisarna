@@ -2,8 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
+import { BookingContext } from "../contexts/BookingProvider"
 
-const ProfilePage = () => {
+const ProfilePage = (props) => {
 	const [editMode, setEditMode] = useState(false);
 	const { whoami, user, updateUserInfo, message } = useContext(UserContext);
 	const [email, setEmail] = useState("");
@@ -11,6 +12,8 @@ const ProfilePage = () => {
 	const [newPassword, setNewPassword] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const history = useHistory();
+	const { findBooking } = useContext(BookingContext);
+	const booking = findBooking(props.match.params.bookingId);
 
 	const onEdit = () => {
 		setEditMode(true);
@@ -39,6 +42,8 @@ const ProfilePage = () => {
 	useEffect(() => {
 		whoami();
 	}, []);
+
+	
 
 	if (!user) {
 		return null; // redirect it to homePage
@@ -140,7 +145,7 @@ const ProfilePage = () => {
 						<h6>Last bookings</h6>
 						<hr />
 						<div className={styles.flex}>
-							<span>booking</span>
+							<span>{user.bookings}</span>
 							<button className={styles.btn}>Delete</button>
 						</div>
 					</div>
