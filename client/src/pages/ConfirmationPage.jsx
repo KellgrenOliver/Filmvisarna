@@ -4,6 +4,10 @@ import { UserContext } from "../contexts/UserProvider";
 import { useContext, useEffect } from "react";
 import React from "react";
 import styles from "../css/ConfirmationPage.module.css";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+
+dayjs.extend(advancedFormat);
 
 const ConfirmationPage = (props) => {
 	const { findMovie } = useContext(MovieContext);
@@ -25,7 +29,7 @@ const ConfirmationPage = (props) => {
 				<h4>Thanks for your order, {user.email}!</h4>
 				<h5>Salon: {screening.auditorium.id}</h5>
 				<h5>{movie.title}</h5>
-				<h5>{screening.time}</h5>
+				<h5>{dayjs(screening.time).format("MMMM Do HH:mm")}</h5>
 				<img className={styles.img} src={movie.poster} alt={movie.title} />
 			</div>
 		</div>
