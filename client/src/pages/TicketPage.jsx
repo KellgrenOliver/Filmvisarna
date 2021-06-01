@@ -4,6 +4,10 @@ import { useContext, useEffect } from "react";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import styles from "../css/TicketPage.module.css";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+
+dayjs.extend(advancedFormat);
 
 const TicketPage = (props) => {
 	const { findMovie } = useContext(MovieContext);
@@ -34,7 +38,7 @@ const TicketPage = (props) => {
 				<div className={styles.titleContainer}>
 					<h5>Salon: {screening.auditorium.id}</h5>
 					<h5 className={styles.title}>{movie.title}</h5>
-					<h5>{screening.time}</h5>
+					<h5>{dayjs(screening.time).format("MMMM Do HH:mm")}</h5>
 					<h5>
 						Rating: {movie.rating}, Language: {movie.language}
 					</h5>
@@ -79,7 +83,7 @@ const TicketPage = (props) => {
 					<img className={styles.img} src={movie.poster} alt={movie.title} />
 					<div className={styles.pay}>
 						<h6>{movie.title}</h6>
-						<h6>{screening.time}</h6>
+						<h6>{dayjs(screening.time).format("MMMM Do HH:mm")}</h6>
 						<h6>Tickets</h6>
 						<h6>Price:</h6>
 						<button onClick={checkSeats} className={styles.button}>
