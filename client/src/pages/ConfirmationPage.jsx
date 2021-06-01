@@ -26,7 +26,7 @@ const ConfirmationPage = (props) => {
 				<h5>Salon: {screening.auditorium.id}</h5>
 				<h5>{movie.title}</h5>
 				<h5>{screening.time}</h5>
-				<img src={movie.poster} alt={movie.title} />
+				<img className={styles.img} src={movie.poster} alt={movie.title} />
 			</div>
 		</div>
 	);
