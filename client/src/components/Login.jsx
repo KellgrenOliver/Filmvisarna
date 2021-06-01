@@ -47,7 +47,7 @@ const Login = () => {
 				<input
 					className={styles.inputField}
 					type="password"
-					placeholder="password"
+					placeholder="Password"
 					value={password}
 					onChange={handlePasswordChange}
 				/>
