@@ -9,7 +9,9 @@ const Navbar = () => {
 
 	useEffect(() => {
 		whoami();
-	}, [whoami, loggedIn]);
+	}, []);
+
+	console.log(loggedIn);
 
 	const handleSubmit = async () => {
 		let result = await logout();
