@@ -3,6 +3,7 @@ import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { UserContext } from "../contexts/UserProvider";
 import { useContext, useEffect } from "react";
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "../css/ConfirmationPage.module.css";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -26,6 +27,9 @@ const ConfirmationPage = (props) => {
 	const content = () => (
 		<div className={styles.confirmationPage}>
 			<div className={styles.container}>
+				<Link to="/" className={styles.x}>
+					X
+				</Link>
 				<h4>Thanks for your order, {user.email}!</h4>
 				<h5>Salon: {screening.auditorium.id}</h5>
 				<h5>{movie.title}</h5>

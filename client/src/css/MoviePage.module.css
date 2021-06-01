@@ -36,13 +36,17 @@
 .img {
 	float: left;
 	margin: 1rem;
-	width: 200px;
-	height: 300px;
+	width: 150px;
+	height: 250px;
 	border-radius: 10px;
 }
 
 hr {
 	margin-right: 1rem;
+}
+
+h3 {
+	margin: 0.5rem;
 }
 
 .tickets {
