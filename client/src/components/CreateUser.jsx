@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserProvider";
-import styles from "../css/CreateUser.module.css";
+import styles from "../css/Login.module.css";
 
 const CreateUser = () => {
 	const history = useHistory();
@@ -47,7 +47,7 @@ const CreateUser = () => {
 				<input
 					className={styles.inputField}
 					type="text"
-					placeholder="phone number"
+					placeholder="Phone Number"
 					value={phone}
 					onChange={handlePhoneChange}
 					required
@@ -65,13 +65,13 @@ const CreateUser = () => {
 				<input
 					className={styles.inputField}
 					type="password"
-					placeholder="password"
+					placeholder="Password"
 					value={password}
 					onChange={handlePasswordChange}
 					required
 				/>
 				<br />
-				<button type="submit" className={styles.btn}>
+				<button type="submit" className={styles.createUserBtn}>
 					Create new user
 				</button>
 			</form>
