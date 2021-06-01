@@ -1,10 +1,16 @@
 import { MovieContext } from "../contexts/MoviesProvider";
 import { ScreeningContext } from "../contexts/ScreeningProvider";
+import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
+import { UserContext } from "../contexts/UserProvider";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
 
 const Movie = (props) => {
+	const { loggedIn } = useContext(UserContext);
+
+	useEffect(() => {}, [loggedIn]);
+
 	const { findMovie } = useContext(MovieContext);
 	const { getScreeningsFromMovie, movieScreenings } =
 		useContext(ScreeningContext);
@@ -30,7 +36,9 @@ const Movie = (props) => {
 					{convertToDateObject(screening.time)}
 				</h6>
 				<h6 className={styles.ticketInfo}>Tal: {screening.movie.language}</h6>
-				<h6 className={styles.ticketBtn}>Biljetter</h6>
+				<Link to={`/ticket/${movie._id}/${screening._id}`}>
+					<h6 className={styles.ticketBtn}>Biljetter</h6>
+				</Link>
 			</div>
 		));
 
@@ -84,7 +92,13 @@ const Movie = (props) => {
 						<b>Rating:</b> {movie.rating}
 					</span>
 				</div>
-				<div>{movieScreenings && renderScreenings()}</div>
+				<div>
+					{loggedIn && (
+						<>
+							<div>{movieScreenings && renderScreenings()}</div>
+						</>
+					)}
+				</div>
 			</div>
 			<div className={styles.trailerContainer}>
 				<YouTube className={styles.trailer} videoId={movie.trailer} />
