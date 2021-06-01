@@ -41,7 +41,6 @@ const Login = () => {
 				<input
 					className={styles.inputField}
 					type="text"
-					placeholder="Email"
 					value={email}
 					onChange={handleEmailChange}
 				/>
@@ -49,17 +48,16 @@ const Login = () => {
 				<input
 					className={styles.inputField}
 					type="password"
-					placeholder="Password"
 					value={password}
 					onChange={handlePasswordChange}
 				/>
-				<p className={styles.link} onClick={handleClick}>
-					Create new user
-				</p>
 				<br />
 				<button type="submit" className={styles.btn}>
 					Login
 				</button>
+				<p className={styles.link} onClick={handleClick}>
+					Don't have an account? Create your account here
+				</p>
 			</form>
 		</div>
 	);
