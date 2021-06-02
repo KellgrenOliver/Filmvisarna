@@ -3,7 +3,7 @@ import { UserContext } from "../contexts/UserProvider";
 import { useHistory } from "react-router-dom";
 import styles from "../css/Login.module.css";
 
-const Login = () => {
+const Login = (props) => {
 	const history = useHistory();
 	const { login } = useContext(UserContext);
 	const [email, setEmail] = useState(null);
@@ -34,33 +34,42 @@ const Login = () => {
 		}
 	};
 
+	if (!props.show) {
+		return null;
+	}
+
 	return (
-		<div className={styles.card}>
-			<form className={styles.form} onSubmit={handleSubmit}>
-				<p>Email</p>
-				<input
-					className={styles.inputField}
-					type="text"
-					placeholder="Email"
-					value={email}
-					onChange={handleEmailChange}
-				/>
-				<p>Password</p>
-				<input
-					className={styles.inputField}
-					type="password"
-					placeholder="Password"
-					value={password}
-					onChange={handlePasswordChange}
-				/>
-				<p className={styles.link} onClick={handleClick}>
-					Create new user
-				</p>
-				<br />
-				<button type="submit" className={styles.btn}>
-					Login
-				</button>
-			</form>
+		<div className={styles.login}>
+			<div className={styles.card}>
+				<span onClick={props.onClose} className={styles.close}>
+					X
+				</span>
+				<form className={styles.form} onSubmit={handleSubmit}>
+					<p>Email</p>
+					<input
+						className={styles.inputField}
+						type="text"
+						placeholder="Email"
+						value={email}
+						onChange={handleEmailChange}
+					/>
+					<p>Password</p>
+					<input
+						className={styles.inputField}
+						type="password"
+						placeholder="Password"
+						value={password}
+						onChange={handlePasswordChange}
+					/>
+					<p className={styles.link} onClick={handleClick}>
+						Create new user
+					</p>
+					<br />
+					<button type="submit" className={styles.btn}>
+						Login
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 };
