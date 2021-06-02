@@ -21,11 +21,10 @@ const Login = (props) => {
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (email !== null && password !== null) {
 			let user = {
 				email,
 				password,
-			};
+			}
 			let result = await login(user);
 			console.log(result);
 
