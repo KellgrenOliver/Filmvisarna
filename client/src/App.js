@@ -12,6 +12,7 @@ import MoviesProvider from "./contexts/MoviesProvider";
 import ScreeningProvider from "./contexts/ScreeningProvider";
 import ProfilePage from "./pages/ProfilePage";
 
+
 const App = () => {
 	return (
 		<div>

@@ -4,10 +4,10 @@
 	margin: 3rem auto;
 	align-items: center;
 	width: 800px;
-	height: 400px;
 	background-color: rgb(235, 235, 235);
 	box-shadow: 10px 5px 5px rgb(70, 70, 70);
 	line-height: 1.5rem;
+	
 }
 
 .flex {
