@@ -4,6 +4,5 @@ const router = express.Router();
 
 router.post("", bookingsController.placeBooking);
 router.delete("/:id", bookingsController.removeBooking);
-router.get("/user/:userId", bookingsController.getAllBookings)
 
 module.exports = router;

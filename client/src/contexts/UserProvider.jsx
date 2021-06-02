@@ -21,7 +21,7 @@ const UserProvider = (props) => {
 			body: JSON.stringify(userToLogin),
 		});
 		result = await result.json(userToLogin);
-		setUser(result);
+		setUser(result.loggedInUser);
 		return result;
 	};
 

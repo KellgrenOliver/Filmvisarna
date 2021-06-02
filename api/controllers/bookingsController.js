@@ -76,31 +76,7 @@ async function removeBooking(req, res) {
 	}
 }
 
-async function getAllBookings(req, res) {
-	const { userId } = req.params;
-	const user = await User.findById(userId);
-	console.log(user);
-
-	try {
-		const bookings = await Booking.where({ user: user }).populate([
-			"auditorium",
-			"screening",
-		]);
-
-		if (!bookings) {
-			return res.status(404).end();
-		}
-
-		res.status(200).json(bookings);
-	} catch (e) {
-		errorLog(e);
-		res.status(500).end();
-	}
-}
-
 module.exports = {
 	placeBooking,
 	removeBooking,
-	getAllBookings,
-	bookings
 };
