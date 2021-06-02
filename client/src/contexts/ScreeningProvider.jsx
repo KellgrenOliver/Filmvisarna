@@ -28,12 +28,6 @@ const ScreeningProvider = (props) => {
 		setMovieScreenings(movieScreenings);
 	};
 
-	const getScreeningsFromMovieByFilter = async (movieId) => {
-		let movieScreeningsbyFilter = await fetch(`/api/v1/screenings/filter/${movieId}${priceMin}${priceMax}${startDate}${endDate}`);
-		movieScreeningsbyFilter = await movieScreeningsbyFilter.json();
-		setFilteredMovieScreenings(movieScreeningsbyFilter);
-	};
-
 	const getScreeningById = async (screeningId) => {
 		let screening = await fetch(`/api/v1/screenings/${screeningId}`);
 		screening = await screening.json();
