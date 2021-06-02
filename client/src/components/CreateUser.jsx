@@ -41,7 +41,7 @@ const CreateUser = (props) => {
 				password,
 			};
 			result = await login(user);
-			history.push("/");
+			props.onClose();
 		}
 	};
 	if (!props.showRegister) {
