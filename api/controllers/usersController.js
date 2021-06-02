@@ -116,10 +116,10 @@ async function update(req, res) {
 
 		if (!match) return res.status(401).end();
 
-		if (email && (await User.exists({ email }))) {
-			return res.status(422).json({ error: "Email must not be taken." });
-		} else if (phone && (await User.exists({ phone }))) {
-			return res.status(422).json({ error: "Phone number must not be taken." });
+		if (email && email !== user.email && (await User.exists({ email }))) {
+			return res.status(422).json({ error: "Email has already taken. Please choose another one." });
+		} else if (phone && phone !== user.phone && (await User.exists({ phone }))) {
+			return res.status(422).json({ error: "Phone has already taken. Please choose another one." });
 		}
 
 		const data = {
@@ -136,7 +136,7 @@ async function update(req, res) {
 		data.password = undefined;
 		req.session.user = user;
 
-		res.status(200).json(Object.assign(user, data));
+		res.status(200).json({success:"Success", obj: Object.assign(user, data)});
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
