@@ -77,11 +77,11 @@ async function getScreeningsFromMovie(req, res) {
           movie,      
           price: {
             $gte: queryPriceMin,
-            $lt: queryPriceMax
+            $lte: queryPriceMax
           },
           time: {
             $gte: new Date(startDate),
-            $lt: new Date(endDate)
+            $lte: new Date(endDate)
           }
         }
       ).populate(
