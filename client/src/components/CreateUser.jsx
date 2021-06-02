@@ -20,6 +20,10 @@ const CreateUser = () => {
 		setPassword(e.target.value);
 	};
 
+	const handleClick = () => {
+		history.push("/login");
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		let userToCreate = {
@@ -47,7 +51,6 @@ const CreateUser = () => {
 				<input
 					className={styles.inputField}
 					type="text"
-					placeholder="Phone Number"
 					value={phone}
 					onChange={handlePhoneChange}
 					required
@@ -56,7 +59,6 @@ const CreateUser = () => {
 				<input
 					className={styles.inputField}
 					type="text"
-					placeholder="Email"
 					value={email}
 					onChange={handleEmailChange}
 					required
@@ -65,15 +67,17 @@ const CreateUser = () => {
 				<input
 					className={styles.inputField}
 					type="password"
-					placeholder="Password"
 					value={password}
 					onChange={handlePasswordChange}
 					required
 				/>
 				<br />
-				<button type="submit" className={styles.createUserBtn}>
+				<button type="submit" className={styles.btn}>
 					Create new user
 				</button>
+				<p className={styles.link} onClick={handleClick}>
+					Already have an account? Login here
+				</p>
 			</form>
 		</div>
 	);
