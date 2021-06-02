@@ -5,7 +5,7 @@ import { UserContext } from "../contexts/UserProvider";
 
 const ProfilePage = (props) => {
 	const [editMode, setEditMode] = useState(false);
-	const { whoami, user, updateUserInfo, message } = useContext(UserContext);
+	const { whoami, user, updateUserInfo, message,setMessage } = useContext(UserContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
@@ -13,18 +13,35 @@ const ProfilePage = (props) => {
 	const history = useHistory();
 
 	const onEdit = () => {
+		setMessage(null);
 		setEditMode(true);
 	};
 
-	const updateHandler = () => {
+	const onEditCancelled = () => {
+		setMessage(null);
+		setEditMode(false);
+	}
+
+	const updateHandler = async () => {
+
+		if(!password) {
+			setMessage("Please enter your current password.");
+			setPassword(null);
+			return;
+		}
+
 		const userFromForm = {};
 		userFromForm.email = email;
 		userFromForm.oldPassword = password;
 		userFromForm.newPassword = newPassword;
 		userFromForm.phone = phoneNumber;
 
-		setEditMode(false);
-		updateUserInfo(userFromForm);
+
+		const result = await updateUserInfo(userFromForm);
+		
+		if(result) {
+			setEditMode(false);
+		}
 	};
 	// to be able to edit the information in input
 	useEffect(() => {
@@ -37,6 +54,7 @@ const ProfilePage = (props) => {
 	}, [user]);
 
 	useEffect(() => {
+		setMessage(null);
 		whoami();
 	}, []);
 
@@ -68,7 +86,7 @@ const ProfilePage = (props) => {
 					<label>Email address</label>
 					<input
 						type="text"
-						id="emailinput"
+						id={styles.emailinput}
 						value={email}
 						onChange={(event) => setEmail(event.target.value)}
 					/>
@@ -79,7 +97,7 @@ const ProfilePage = (props) => {
 					<label>Current password (required)</label>
 					<input
 						type="password"
-						id="passwordinput"
+						id={styles.passwordinput}
 						onChange={(event) => setPassword(event.target.value)}
 					/>
 				</div>
@@ -89,7 +107,7 @@ const ProfilePage = (props) => {
 					<label>New password</label>
 					<input
 						type="password"
-						id="newpasswordinput"
+						id={styles.newpasswordinput}
 						value={newPassword}
 						onChange={(event) => setNewPassword(event.target.value)}
 					/>
@@ -100,20 +118,29 @@ const ProfilePage = (props) => {
 					<label>Phone Number</label>
 					<input
 						type="text"
-						id="numberinput"
+						id={styles.numberinput}
 						value={phoneNumber}
 						onChange={(event) => setPhoneNumber(event.target.value)}
 					/>
 				</div>
 			);
 			buttonContent = (
-				<button
-					type="submit"
-					className={styles.mainBtn}
-					onClick={updateHandler}
-				>
-					Save changes
-				</button>
+				<div className={styles.flexBtn}>
+					<button
+						type="submit"
+						className={styles.mainBtn}
+						onClick={updateHandler}
+					>
+						Save changes
+					</button>
+					<button
+						type="button"
+						className={styles.btnCancel}
+						onClick={onEditCancelled}
+					>
+						Cancel
+					</button>
+				</div>
 			);
 		}
 
@@ -123,7 +150,7 @@ const ProfilePage = (props) => {
 					<div className={styles.booking}>
 						<div className={styles.info}>
 							<h6>Last booking</h6>
-							<hr />
+							< hr />
 						</div>
 						<div>
 							<span>Screening:{booking?.screening._id}</span>
@@ -154,7 +181,7 @@ const ProfilePage = (props) => {
 						<div>{passwordContent}</div>
 						<div>{newPasswordContent}</div>
 						<div>{phoneContent}</div>
-						<div className={styles.flex}>{buttonContent}</div>
+						<div >{buttonContent}</div>
 						<div>{message ? <p>{message}</p> : ""}</div>
 					</div>
 					<div>{renderBookings()}</div>

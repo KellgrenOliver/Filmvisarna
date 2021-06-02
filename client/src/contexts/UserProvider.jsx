@@ -47,7 +47,7 @@ const UserProvider = (props) => {
 	// to save the changes which are coming from profile page
 
 	const updateUserInfo = async (userToUpdate) =>{
-		// console.log(userToUpdate);
+		
 		let result = await fetch(`api/v1/users/${user._id}`, {
 			method: "PUT",
 			headers: {
@@ -55,12 +55,21 @@ const UserProvider = (props) => {
 			},
 			body: JSON.stringify(userToUpdate)
 		});
-	// to get the updated info from backend 
-		result = await result.json(userToUpdate);
-		setMessage(result.success);
-		const updatedUser = result.updatedUser;
-		setUser(updatedUser);
-		return result;
+		
+		if(result.status === 401) {
+			setMessage("Bad Credentials");
+			return false;
+		} else if(result.status === 200) {
+			// to get the updated info from backend 
+			result = await result.json(userToUpdate);
+			setMessage(result.success);
+			const updatedUser = result.obj;
+			setUser(updatedUser);
+			return updatedUser;
+		} else {
+			setMessage("Something went wrong!");
+			return false;
+		}
 	};
 
 	const values = {
@@ -72,6 +81,7 @@ const UserProvider = (props) => {
 		logout,
 		updateUserInfo,
 		message,
+		setMessage,
 		loggedIn: Boolean(user),
 	};
 
