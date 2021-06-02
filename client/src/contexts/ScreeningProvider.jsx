@@ -7,7 +7,7 @@ const ScreeningProvider = (props) => {
 	const [filteredMovieScreenings, setFilteredMovieScreenings] = useState([]);
 	const [screenings, setScreenings] = useState([]);
 	const [screening, setScreening] = useState(null);
-	const [priceMin, setPriceMin] = useState("");
+	const [priceMin, setPriceMin] = useState("?priceMin=120");
 	const [priceMax, setPriceMax] = useState("");
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
@@ -44,7 +44,7 @@ const ScreeningProvider = (props) => {
 		screening,
 		setScreening,
     filteredMovieScreenings,
-    getScreeningsFromMovieByFilter,
+    // getScreeningsFromMovieByFilter,
     priceMin,
     setPriceMin,
     priceMax,
