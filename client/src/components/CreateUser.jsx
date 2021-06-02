@@ -41,8 +41,8 @@ const CreateUser = (props) => {
 				password,
 			};
 			result = await login(user);
+			props.onClose();
 		}
-		props.onClose();
 	};
 	if (!props.showRegister) {
 		return null;
