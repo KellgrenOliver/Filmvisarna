@@ -8,6 +8,7 @@ const whoami = async (req, res) => {
 	try {
 		const user = await User.findById(req.session.user._id);
 		user.bookings = await getBookings(user._id);
+		user.password = undefined;
 		res.status(200).json(user);
 	} catch (e) {
 		errorLog(e);

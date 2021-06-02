@@ -41,7 +41,7 @@ async function placeBooking(req, res) {
 		await Booking.create({
 			auditorium: screening.auditorium,
 			movie: screening.movie,
-			screening: screening.id,
+			screening: screening._id,
 			user,
 			seats,
 		});

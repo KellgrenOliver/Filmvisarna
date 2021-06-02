@@ -9,7 +9,7 @@ async function userSeeder() {
 		await User.create({
 			email: "test@test.com",
 			password: "123123",
-			phone: 1234567890,
+			phone: "1234567890",
 		});
 	} catch (e) {
 		errorLog(e);
@@ -18,7 +18,7 @@ async function userSeeder() {
 
 async function getBookings(user) {
 	if (!user) user = req.session.user;
-	return await Booking.where({ user });
+	return await Booking.where({ user }).populate(["screening", "auditorium"]);
 }
 
 async function userExists({ email, phone }) {
