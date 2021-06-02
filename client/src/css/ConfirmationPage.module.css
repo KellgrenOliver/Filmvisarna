@@ -1,0 +1,30 @@
+.confirmationPage {
+	text-align: center;
+	margin-top: 3rem;
+}
+
+.container {
+	padding: 5px 5px 5px;
+	background-color: rgb(235, 235, 235);
+	width: 50%;
+	margin: auto;
+	border-radius: 10px;
+}
+
+.img {
+	width: 200px;
+	height: 320px;
+	margin: 2rem;
+	border-radius: 10px;
+}
+
+.x {
+	background-color: rgb(85, 11, 27);
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	float: right;
+	margin: 0.5rem;
+	padding: 0.5rem;
+	text-decoration: none;
+}

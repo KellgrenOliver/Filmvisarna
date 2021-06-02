@@ -20,12 +20,14 @@ const UserProvider = (props) => {
 			body: JSON.stringify(userToLogin),
 		});
 		result = await result.json(userToLogin);
+		setUser(result);
 		return result;
 	};
 
 	const logout = async () => {
 		let result = await fetch("/api/v1/users/logout");
 		result = await result.json(result);
+		setUser(null);
 		return result;
 	};
 
@@ -48,6 +50,7 @@ const UserProvider = (props) => {
 		user,
 		setUser,
 		logout,
+		loggedIn: Boolean(user),
 	};
 
 	return (

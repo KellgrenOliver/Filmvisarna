@@ -1,16 +1,48 @@
 import { MovieContext } from "../contexts/MoviesProvider";
-import { useContext } from "react";
+import { ScreeningContext } from "../contexts/ScreeningProvider";
+import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../contexts/UserProvider";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+
+dayjs.extend(advancedFormat);
 
 const Movie = (props) => {
+	const { loggedIn } = useContext(UserContext);
+
+	useEffect(() => {}, [loggedIn]);
+
 	const { findMovie } = useContext(MovieContext);
-  console.log(props)
+	const { getScreeningsFromMovie, movieScreenings } =
+		useContext(ScreeningContext);
+
 	const movie = findMovie(props.match.params.movieId);
+
+	useEffect(() => {
+		getScreeningsFromMovie(props.match.params.movieId);
+	}, []);
 
 	if (!movie) {
 		return null;
 	}
+
+	const renderScreenings = () =>
+		movieScreenings.map((screening, i) => (
+			<div className={styles.tickets} key={i}>
+				<h6 className={styles.ticketInfo}>
+					{dayjs(screening.time).format("MMMM Do HH:mm")}
+				</h6>
+				<h6 className={styles.ticketInfo}>
+					Language: {screening.movie.language}
+				</h6>
+				<Link to={`/ticket/${movie._id}/${screening._id}`}>
+					<h6 className={styles.ticketBtn}>Tickets</h6>
+				</Link>
+			</div>
+		));
 
 	return (
 		<div className={styles.moviePage}>
@@ -61,6 +93,13 @@ const Movie = (props) => {
 					<span>
 						<b>Rating:</b> {movie.rating}
 					</span>
+				</div>
+				<div>
+					{loggedIn && (
+						<>
+							<div>{movieScreenings && renderScreenings()}</div>
+						</>
+					)}
 				</div>
 			</div>
 			<div className={styles.trailerContainer}>

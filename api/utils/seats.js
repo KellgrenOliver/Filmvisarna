@@ -22,6 +22,27 @@ async function seatsSeeder() {
 	}
 }
 
+function getTicketsPrice(seats = [], standard = 100) {
+	if (!seats) return 0;
+	return seats.reduce((total, seat) => {
+		if (!seat.type) return total;
+
+		const calculatePrice = (multiplier) => total + standard * multiplier;
+
+		switch (seat.type.toLowerCase()) {
+			case "adult":
+				return calculatePrice(1);
+			case "senior":
+				return calculatePrice(0.8);
+			case "child":
+				return calculatePrice(0.7);
+			default:
+				return calculatePrice(1);
+		}
+	}, 0);
+}
+
 module.exports = {
 	seatsSeeder,
+	getTicketsPrice,
 };
