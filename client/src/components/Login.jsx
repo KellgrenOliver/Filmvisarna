@@ -39,8 +39,8 @@ const Login = (props) => {
 	}
 
 	return (
-		<div className={styles.login}>
-			<div className={styles.card}>
+		<div className={styles.login} onClick={props.onClose}>
+			<div className={styles.card} onClick={(e) => e.stopPropagation()}>
 				<span onClick={props.onClose} className={styles.close}>
 					X
 				</span>
@@ -59,15 +59,13 @@ const Login = (props) => {
 						value={password}
 						onChange={handlePasswordChange}
 					/>
-					<p className={styles.link} onClick={handleClick}>
-						Create new user
-					</p>
-					<br />
 					<button type="submit" className={styles.btn}>
-				<p className={styles.link} onClick={handleClick}>
-					Don't have an account? Create your account here
-				</p>
-			</form>
+						Login
+					</button>
+					<p className={styles.link} onClick={handleClick}>
+						Don't have an account? Create your account here
+					</p>
+				</form>
 			</div>
 		</div>
 	);

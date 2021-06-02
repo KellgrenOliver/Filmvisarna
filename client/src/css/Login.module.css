@@ -10,6 +10,10 @@
 	justify-content: center;
 }
 
+.close {
+	float: right;
+}
+
 .card {
 	background: rgb(235, 235, 235);
 	border-radius: 10px;
