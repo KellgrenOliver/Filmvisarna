@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserProvider";
-import styles from "../css/CreateUser.module.css";
+import styles from "../css/Login.module.css";
 
 const CreateUser = () => {
 	const history = useHistory();
@@ -18,6 +18,10 @@ const CreateUser = () => {
 	};
 	const handlePasswordChange = (e) => {
 		setPassword(e.target.value);
+	};
+
+	const handleClick = () => {
+		history.push("/login");
 	};
 
 	const handleSubmit = async (e) => {
@@ -47,7 +51,6 @@ const CreateUser = () => {
 				<input
 					className={styles.inputField}
 					type="text"
-					placeholder="phone number"
 					value={phone}
 					onChange={handlePhoneChange}
 					required
@@ -56,7 +59,6 @@ const CreateUser = () => {
 				<input
 					className={styles.inputField}
 					type="text"
-					placeholder="Email"
 					value={email}
 					onChange={handleEmailChange}
 					required
@@ -65,7 +67,6 @@ const CreateUser = () => {
 				<input
 					className={styles.inputField}
 					type="password"
-					placeholder="password"
 					value={password}
 					onChange={handlePasswordChange}
 					required
@@ -74,6 +75,9 @@ const CreateUser = () => {
 				<button type="submit" className={styles.btn}>
 					Create new user
 				</button>
+				<p className={styles.link} onClick={handleClick}>
+					Already have an account? Login here
+				</p>
 			</form>
 		</div>
 	);

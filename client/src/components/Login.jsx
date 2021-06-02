@@ -6,8 +6,8 @@ import styles from "../css/Login.module.css";
 const Login = () => {
 	const history = useHistory();
 	const { login } = useContext(UserContext);
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState(null);
+	const [password, setPassword] = useState(null);
 
 	const handleEmailChange = (e) => {
 		setEmail(e.target.value);
@@ -20,15 +20,17 @@ const Login = () => {
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		let user = {
-			email,
-			password,
-		};
-		let result = await login(user);
-		console.log(result);
+		if (email !== null && password !== null) {
+			let user = {
+				email,
+				password,
+			};
+			let result = await login(user);
+			console.log(result);
 
-		if (result.success) {
-			history.push("/");
+			if (result.success) {
+				history.push("/");
+			}
 		}
 	};
 
@@ -39,7 +41,6 @@ const Login = () => {
 				<input
 					className={styles.inputField}
 					type="text"
-					placeholder="Email"
 					value={email}
 					onChange={handleEmailChange}
 				/>
@@ -47,17 +48,16 @@ const Login = () => {
 				<input
 					className={styles.inputField}
 					type="password"
-					placeholder="password"
 					value={password}
 					onChange={handlePasswordChange}
 				/>
-				<p className={styles.link} onClick={handleClick}>
-					Create new user
-				</p>
 				<br />
 				<button type="submit" className={styles.btn}>
 					Login
 				</button>
+				<p className={styles.link} onClick={handleClick}>
+					Don't have an account? Create your account here
+				</p>
 			</form>
 		</div>
 	);
