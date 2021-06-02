@@ -21,18 +21,17 @@ const Login = (props) => {
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-			let user = {
-				email,
-				password,
-			}
-			let result = await login(user);
-			console.log(result);
+		let user = {
+			email,
+			password,
+		};
+		let result = await login(user);
+		console.log(result);
 
-			if (result.success) {
-				props.onClose();
-				setEmail("");
-				setPassword("");
-			}
+		if (result.success) {
+			props.onClose();
+			setEmail("");
+			setPassword("");
 		}
 	};
 
