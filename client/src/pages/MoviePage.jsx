@@ -21,7 +21,7 @@ const Movie = (props) => {
 	useEffect(() => {}, [loggedIn]);
 
 	const { findMovie } = useContext(MovieContext);
-	const { getScreeningsFromMovie, movieScreenings, filteredMovieScreenings,	getScreeningsFromMovieByFilter, priceMin, priceMax, startDate, endDate} =
+	const { getScreeningsFromMovie, movieScreenings } =
 		useContext(ScreeningContext);
 
 	const movie = findMovie(props.match.params.movieId);
@@ -30,48 +30,9 @@ const Movie = (props) => {
 		getScreeningsFromMovie(props.match.params.movieId);
 	}, []);
 
-	useEffect(() => {
-		getScreeningsFromMovieByFilter(props.match.params.movieId);
-	}, [priceMin, priceMax, startDate, endDate]);
-
-
-
-  console.log(loggedIn)
-  
 	if (!movie) {
-    return null;
+		return null;
 	}
-  
-	const renderScreenings = () => {
-    if(filteredMovieScreenings.length!==0 ){
-      console.log(filteredMovieScreenings)
-      filteredMovieScreenings.map((screening, i) => (
-        <div className={styles.tickets} key={i}>
-          <h6 className={styles.ticketInfo}>
-            {dayjs(screening.time).format("MMMM Do HH:mm")}
-          </h6>
-          <h6 className={styles.ticketInfo}>
-            Language: {screening.movie.language}
-          </h6>
-          <Link to={`/ticket/${movie._id}/${screening._id}`}>
-            <h6 className={styles.ticketBtn}>Tickets</h6>
-          </Link>
-        </div>
-      ));
-    }else {
-      movieScreenings.map((screening, i) => (
-        <div className={styles.tickets} key={i}>
-          <h6 className={styles.ticketInfo}>
-            {dayjs(screening.time).format("MMMM Do HH:mm")}
-          </h6>
-          <h6 className={styles.ticketInfo}>
-            Language: {screening.movie.language}
-          </h6>
-          <Link to={`/ticket/${movie._id}/${screening._id}`}>
-            <h6 className={styles.ticketBtn}>Tickets</h6>
-          </Link>
-        </div>
-      ));
 
 	const renderScreenings = () =>
 		movieScreenings.map((screening, i) => (
