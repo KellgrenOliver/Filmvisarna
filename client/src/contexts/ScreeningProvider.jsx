@@ -7,16 +7,14 @@ const ScreeningProvider = (props) => {
 	const [filteredMovieScreenings, setFilteredMovieScreenings] = useState([]);
 	const [screenings, setScreenings] = useState([]);
 	const [screening, setScreening] = useState(null);
-	const [priceMin, setPriceMin] = useState(null);
-	const [priceMax, setPriceMax] = useState(null);
-	const [startDate, setStartDate] = useState(null);
-	const [endDate, setEndDate] = useState(null);
+	const [priceMin, setPriceMin] = useState("");
+	const [priceMax, setPriceMax] = useState("");
+	const [startDate, setStartDate] = useState("");
+	const [endDate, setEndDate] = useState("");
 
 	useEffect(() => {
 		getScreenings();
 	}, []);
-
- 
 
 	const getScreenings = async () => {
 		let screenings = await fetch("/api/v1/screenings");
@@ -31,7 +29,7 @@ const ScreeningProvider = (props) => {
 	};
 
 	const getScreeningsFromMovieByFilter = async (movieId) => {
-		let movieScreeningsbyFilter = await fetch(`/api/v1/screenings/filter/${movieId}`);
+		let movieScreeningsbyFilter = await fetch(`/api/v1/screenings/filter/${movieId}${priceMin}${priceMax}${startDate}${endDate}`);
 		movieScreeningsbyFilter = await movieScreeningsbyFilter.json();
 		setFilteredMovieScreenings(movieScreeningsbyFilter);
 	};
@@ -51,6 +49,7 @@ const ScreeningProvider = (props) => {
 		movieScreenings,
 		screening,
 		setScreening,
+    filteredMovieScreenings,
     getScreeningsFromMovieByFilter,
     priceMin,
     setPriceMin,
