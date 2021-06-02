@@ -1,16 +1,19 @@
 import { MovieContext } from "../contexts/MoviesProvider";
 import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserProvider";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import Login from "../components/Login";
 
 dayjs.extend(advancedFormat);
 
 const Movie = (props) => {
+	const [show, setShow] = useState(false);
+
 	const { loggedIn } = useContext(UserContext);
 
 	useEffect(() => {}, [loggedIn]);
@@ -38,9 +41,24 @@ const Movie = (props) => {
 				<h6 className={styles.ticketInfo}>
 					Language: {screening.movie.language}
 				</h6>
-				<Link to={`/ticket/${movie._id}/${screening._id}`}>
-					<h6 className={styles.ticketBtn}>Tickets</h6>
-				</Link>
+				{loggedIn ? (
+					<>
+						<Link to={`/ticket/${movie._id}/${screening._id}`}>
+							<h6 className={styles.ticketBtn}>Tickets</h6>
+						</Link>
+					</>
+				) : (
+					<div>
+						<h6 onClick={() => setShow(true)} className={styles.ticketBtn}>
+							Tickets
+						</h6>
+						<Login
+							title="My Modal"
+							onClose={() => setShow(false)}
+							show={show}
+						/>
+					</div>
+				)}
 			</div>
 		));
 
@@ -95,11 +113,7 @@ const Movie = (props) => {
 					</span>
 				</div>
 				<div>
-					{loggedIn && (
-						<>
-							<div>{movieScreenings && renderScreenings()}</div>
-						</>
-					)}
+					<div>{movieScreenings && renderScreenings()}</div>
 				</div>
 			</div>
 			<div className={styles.trailerContainer}>

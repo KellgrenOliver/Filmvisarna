@@ -29,7 +29,7 @@ const Login = (props) => {
 			console.log(result);
 
 			if (result.success) {
-				history.push("/");
+				props.onClose();
 			}
 		}
 	};
