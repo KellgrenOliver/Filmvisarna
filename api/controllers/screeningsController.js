@@ -91,7 +91,7 @@ async function getScreeningsFromMovie(req, res) {
         ]
       );
       if (!screening || screening.length===0) {
-        return res.status(404).send({error:"Not found "}).end();
+        return res.status(404).json({error:"Not found "}).end();
       }     
       res.status(200).json(await appendBookedSeats(screening));
 
