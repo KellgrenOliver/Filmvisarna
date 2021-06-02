@@ -22,7 +22,7 @@ const Navbar = () => {
 			history.push("/");
 		}
 	};
-	console.log(showRegister);
+
 	return (
 		<div>
 			<nav className={styles.navbar}>
