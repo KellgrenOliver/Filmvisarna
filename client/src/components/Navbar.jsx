@@ -2,11 +2,13 @@ import { NavLink, useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserProvider";
 import { useContext, useEffect, useState } from "react";
 import Login from "./Login";
+import CreateUser from "./CreateUser";
 import styles from "../css/Navbar.module.css";
 
 const Navbar = () => {
 	const { logout, whoami, loggedIn } = useContext(UserContext);
 	const [show, setShow] = useState(false);
+	const [showRegister, setShowRegister] = useState(false);
 	const history = useHistory();
 
 	useEffect(() => {
@@ -20,7 +22,7 @@ const Navbar = () => {
 			history.push("/");
 		}
 	};
-
+	console.log(showRegister);
 	return (
 		<div>
 			<nav className={styles.navbar}>
@@ -45,7 +47,16 @@ const Navbar = () => {
 					</span>
 				)}
 			</nav>
-			<Login title="My Modal" onClose={() => setShow(false)} show={show} />
+			<Login
+				onClose={() => setShow(false)}
+				onHandleClick={() => setShowRegister(true)}
+				show={show}
+			/>
+			<CreateUser
+				onClose={() => setShowRegister(false)}
+				onOpen={() => setShow(true)}
+				showRegister={showRegister}
+			/>
 		</div>
 	);
 };

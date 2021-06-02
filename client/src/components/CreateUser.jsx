@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserProvider";
 import styles from "../css/Login.module.css";
 
-const CreateUser = () => {
+const CreateUser = (props) => {
 	const history = useHistory();
 	const { createUser, login } = useContext(UserContext);
 	const [phone, setPhone] = useState("");
@@ -21,7 +21,8 @@ const CreateUser = () => {
 	};
 
 	const handleClick = () => {
-		history.push("/login");
+		props.onClose();
+		props.onOpen();
 	};
 
 	const handleSubmit = async (e) => {
@@ -43,42 +44,49 @@ const CreateUser = () => {
 			history.push("/");
 		}
 	};
-
+	if (!props.showRegister) {
+		return null;
+	}
 	return (
-		<div className={styles.card}>
-			<form className={styles.form} onSubmit={handleSubmit}>
-				<p>Phone number</p>
-				<input
-					className={styles.inputField}
-					type="text"
-					value={phone}
-					onChange={handlePhoneChange}
-					required
-				/>
-				<p>Email</p>
-				<input
-					className={styles.inputField}
-					type="text"
-					value={email}
-					onChange={handleEmailChange}
-					required
-				/>
-				<p>Password</p>
-				<input
-					className={styles.inputField}
-					type="password"
-					value={password}
-					onChange={handlePasswordChange}
-					required
-				/>
-				<br />
-				<button type="submit" className={styles.btn}>
-					Create new user
-				</button>
-				<p className={styles.link} onClick={handleClick}>
-					Already have an account? Login here
-				</p>
-			</form>
+		<div className={styles.modal} onClick={props.onClose}>
+			<div className={styles.card} onClick={(e) => e.stopPropagation()}>
+				<span onClick={props.onClose} className={styles.close}>
+					X
+				</span>
+				<form className={styles.form} onSubmit={handleSubmit}>
+					<p>Phone number</p>
+					<input
+						className={styles.inputField}
+						type="text"
+						value={phone}
+						onChange={handlePhoneChange}
+						required
+					/>
+					<p>Email</p>
+					<input
+						className={styles.inputField}
+						type="text"
+						value={email}
+						onChange={handleEmailChange}
+						required
+					/>
+					<p>Password</p>
+					<input
+						className={styles.inputField}
+						type="password"
+						value={password}
+						onChange={handlePasswordChange}
+						required
+					/>
+					<br />
+					<button type="submit" className={styles.btn}>
+						Create new user
+					</button>
+					<p className={styles.link} onClick={handleClick}>
+						Already have an account? Login here
+					</p>
+				</form>
+			</div>
 		</div>
 	);
 };
