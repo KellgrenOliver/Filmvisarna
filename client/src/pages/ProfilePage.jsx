@@ -122,11 +122,11 @@ const ProfilePage = (props) => {
 				<div className={styles.flex} key={i}>
 					<div className={styles.booking}>
 						<div className={styles.info}>
-							<h6>Last bookings</h6>
+							<h6>Last booking</h6>
 							<hr />
 						</div>
 						<div>
-							<span>Screening:{booking?.screenings}</span>
+							<span>Screening:{booking?.screening._id}</span>
 						</div>
 						{booking.seats.map((seat) => (
 							<div>
