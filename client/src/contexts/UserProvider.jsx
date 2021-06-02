@@ -4,6 +4,7 @@ export const UserContext = createContext();
 
 const UserProvider = (props) => {
 	const [user, setUser] = useState(null);
+	const [ message, setMessage ] = useState(null);
 
 	const whoami = async () => {
 		let user = await fetch("/api/v1/users/whoami");
@@ -20,7 +21,7 @@ const UserProvider = (props) => {
 			body: JSON.stringify(userToLogin),
 		});
 		result = await result.json(userToLogin);
-		setUser(result);
+		setUser(result.loggedInUser);
 		return result;
 	};
 
@@ -43,6 +44,25 @@ const UserProvider = (props) => {
 		return result;
 	};
 
+	// to save the changes which are coming from profile page
+
+	const updateUserInfo = async (userToUpdate) =>{
+		// console.log(userToUpdate);
+		let result = await fetch(`api/v1/users/${user._id}`, {
+			method: "PUT",
+			headers: {
+				"content-type": "application/json"
+			},
+			body: JSON.stringify(userToUpdate)
+		});
+	// to get the updated info from backend 
+		result = await result.json(userToUpdate);
+		setMessage(result.success);
+		const updatedUser = result.updatedUser;
+		setUser(updatedUser);
+		return result;
+	};
+
 	const values = {
 		login,
 		createUser,
@@ -50,6 +70,8 @@ const UserProvider = (props) => {
 		user,
 		setUser,
 		logout,
+		updateUserInfo,
+		message,
 		loggedIn: Boolean(user),
 	};
 
