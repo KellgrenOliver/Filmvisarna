@@ -4,17 +4,25 @@ export const ScreeningContext = createContext();
 
 const ScreeningProvider = (props) => {
 	const [movieScreenings, setMovieScreenings] = useState([]);
-	const [filteredMovieScreenings, setFilteredMovieScreenings] = useState([]);
+	const [filteredMovieScreenings, setFilteredMovieScreenings] = useState(null);
 	const [screenings, setScreenings] = useState([]);
 	const [screening, setScreening] = useState(null);
-	const [priceMin, setPriceMin] = useState("?priceMin=120");
+	const [priceMin, setPriceMin] = useState("");
 	const [priceMax, setPriceMax] = useState("");
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
+	const [filterMovieId, setFilterMovieId] = useState("");
+	const [message, setMessage] = useState(null);
 
 	useEffect(() => {
 		getScreenings();
 	}, []);
+
+	useEffect(() => {
+		if (filterMovieId) {
+			getScreeningsFromMovieByFilter();
+		}
+	}, [priceMin, priceMax, startDate, endDate, filterMovieId]);
 
 	const getScreenings = async () => {
 		let screenings = await fetch("/api/v1/screenings");
@@ -26,6 +34,23 @@ const ScreeningProvider = (props) => {
 		let movieScreenings = await fetch(`/api/v1/screenings/movie/${movieId}`);
 		movieScreenings = await movieScreenings.json();
 		setMovieScreenings(movieScreenings);
+	};
+
+	const getScreeningsFromMovieByFilter = async () => {
+		let respons = await fetch(
+			`/api/v1/screenings/filter/${filterMovieId}${priceMin}${priceMax}${startDate}${endDate}`
+		);
+		let filterScreenings = await respons.json();
+		if (respons.status === 404) {
+			setFilteredMovieScreenings([]);
+			console.log(filterScreenings.error);
+			setMessage(filterScreenings.error);
+		} else if (respons.status === 500) {
+			setFilteredMovieScreenings(null);
+		} else if (respons.status === 200) {
+			setMessage(null);
+			setFilteredMovieScreenings(filterScreenings);
+		}
 	};
 
 	const getScreeningById = async (screeningId) => {
@@ -43,16 +68,18 @@ const ScreeningProvider = (props) => {
 		movieScreenings,
 		screening,
 		setScreening,
-    filteredMovieScreenings,
-    // getScreeningsFromMovieByFilter,
-    priceMin,
-    setPriceMin,
-    priceMax,
-    setPriceMax,
-    startDate,
-    setStartDate,
-    endDate,
-    setEndDate
+		filteredMovieScreenings,
+		getScreeningsFromMovieByFilter,
+		priceMin,
+		setPriceMin,
+		priceMax,
+		setPriceMax,
+		startDate,
+		setStartDate,
+		endDate,
+		setEndDate,
+		setFilterMovieId,
+		message,
 	};
 
 	return (

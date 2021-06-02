@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserProvider";
@@ -9,17 +8,14 @@ import Login from "./Login";
 import CreateUser from "./CreateUser";
 
 dayjs.extend(advancedFormat);
-
 const Screening = (props) => {
 	const [show, setShow] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
-
 	const { loggedIn } = useContext(UserContext);
-
 	useEffect(() => {}, [loggedIn]);
-
+	console.log(props.message);
 	return (
-		<div className={styles.tickets} key={i}>
+		<div className={styles.tickets}>
 			<h6 className={styles.ticketInfo}>
 				{dayjs(props.screening.time).format("MMMM Do HH:mm")}
 			</h6>
