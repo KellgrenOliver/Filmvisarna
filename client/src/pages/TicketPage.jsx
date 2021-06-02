@@ -2,12 +2,19 @@ import { MovieContext } from "../contexts/MoviesProvider";
 import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { useContext, useEffect } from "react";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styles from "../css/TicketPage.module.css";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+
+dayjs.extend(advancedFormat);
 
 const TicketPage = (props) => {
 	const { findMovie } = useContext(MovieContext);
 	const movie = findMovie(props.match.params.movieId);
 	const { getScreeningById, screening } = useContext(ScreeningContext);
+
+	const history = useHistory();
 
 	useEffect(() => {
 		getScreeningById(props.match.params.screeningId);
@@ -17,13 +24,21 @@ const TicketPage = (props) => {
 		return <h1 className={styles.header}>Loading...</h1>;
 	}
 
+	const checkSeats = () => {
+		if (movie.rating === null) {
+			alert("You need to pick your seats");
+		} else {
+			history.push(`/booking/${movie._id}/${screening._id}`);
+		}
+	};
+
 	const content = () => (
 		<div className={styles.ticketPage}>
 			<div className={styles.container}>
 				<div className={styles.titleContainer}>
 					<h5>Salon: {screening.auditorium.id}</h5>
 					<h5 className={styles.title}>{movie.title}</h5>
-					<h5>{screening.time}</h5>
+					<h5>{dayjs(screening.time).format("MMMM Do HH:mm")}</h5>
 					<h5>
 						Rating: {movie.rating}, Language: {movie.language}
 					</h5>
@@ -68,10 +83,12 @@ const TicketPage = (props) => {
 					<img className={styles.img} src={movie.poster} alt={movie.title} />
 					<div className={styles.pay}>
 						<h6>{movie.title}</h6>
-						<h6>{screening.time}</h6>
+						<h6>{dayjs(screening.time).format("MMMM Do HH:mm")}</h6>
 						<h6>Tickets</h6>
 						<h6>Price:</h6>
-						<button className={styles.button}>Book</button>
+						<button onClick={checkSeats} className={styles.button}>
+							Book
+						</button>
 					</div>
 				</div>
 			</div>

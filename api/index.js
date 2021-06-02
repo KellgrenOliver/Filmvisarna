@@ -38,7 +38,7 @@ app.use(
 
 // Routes
 app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/auditorium", auditoriumRoutes);
+app.use("/api/v1/auditoria", auditoriumRoutes);
 app.use("/api/v1/movies", moviesRoutes);
 app.use("/api/v1/bookings", bookingsRoutes);
 app.use("/api/v1/screenings", screeningsRoutes);

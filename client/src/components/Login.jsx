@@ -49,7 +49,6 @@ const Login = (props) => {
 					<input
 						className={styles.inputField}
 						type="text"
-						placeholder="Email"
 						value={email}
 						onChange={handleEmailChange}
 					/>
@@ -57,7 +56,6 @@ const Login = (props) => {
 					<input
 						className={styles.inputField}
 						type="password"
-						placeholder="Password"
 						value={password}
 						onChange={handlePasswordChange}
 					/>
@@ -66,9 +64,10 @@ const Login = (props) => {
 					</p>
 					<br />
 					<button type="submit" className={styles.btn}>
-						Login
-					</button>
-				</form>
+				<p className={styles.link} onClick={handleClick}>
+					Don't have an account? Create your account here
+				</p>
+			</form>
 			</div>
 		</div>
 	);
