@@ -43,7 +43,7 @@ const ProfilePage = (props) => {
 	if (!user) {
 		return null; // redirect it to homePage
 	} else {
-		console.log(user);
+		// console.log(user);
 		let emailContent;
 		let passwordContent;
 		let newPasswordContent;
@@ -128,8 +128,8 @@ const ProfilePage = (props) => {
 						<div>
 							<span>Screening:{booking?.screening._id}</span>
 						</div>
-						{booking.seats.map((seat) => (
-							<div>
+						{booking.seats.map((seat, i) => (
+							<div key={i}>
 								Seat: {seat.row}, {seat.id}
 							</div>
 						))}

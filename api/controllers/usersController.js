@@ -136,7 +136,7 @@ async function update(req, res) {
 		data.password = undefined;
 		req.session.user = user;
 
-		res.status(200).json(Object.assign(user, data));
+		res.status(200).json({success:"Success", obj: Object.assign(user, data)});
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
