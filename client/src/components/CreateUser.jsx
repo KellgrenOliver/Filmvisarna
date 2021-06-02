@@ -1,48 +1,67 @@
-import { useContext, useState } from "react";
-import { UserContext } from "../contexts/UserProvider";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../contexts/UserProvider";
 import styles from "../css/Login.module.css";
 
-const Login = () => {
+const CreateUser = () => {
 	const history = useHistory();
-	const { login } = useContext(UserContext);
-	const [email, setEmail] = useState(null);
-	const [password, setPassword] = useState(null);
+	const { createUser, login } = useContext(UserContext);
+	const [phone, setPhone] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
+	const handlePhoneChange = (e) => {
+		setPhone(e.target.value);
+	};
 	const handleEmailChange = (e) => {
 		setEmail(e.target.value);
 	};
 	const handlePasswordChange = (e) => {
 		setPassword(e.target.value);
 	};
+
 	const handleClick = () => {
-		history.push("/createUser");
+		history.push("/login");
 	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (email !== null && password !== null) {
+		let userToCreate = {
+			phone,
+			email,
+			password,
+		};
+
+		let result = await createUser(userToCreate);
+		console.log(result);
+		if (result.success) {
 			let user = {
 				email,
 				password,
 			};
-			let result = await login(user);
-			console.log(result);
-
-			if (result.success) {
-				history.push("/");
-			}
+			result = await login(user);
+			history.push("/");
 		}
 	};
 
 	return (
 		<div className={styles.card}>
 			<form className={styles.form} onSubmit={handleSubmit}>
+				<p>Phone number</p>
+				<input
+					className={styles.inputField}
+					type="text"
+					value={phone}
+					onChange={handlePhoneChange}
+					required
+				/>
 				<p>Email</p>
 				<input
 					className={styles.inputField}
 					type="text"
 					value={email}
 					onChange={handleEmailChange}
+					required
 				/>
 				<p>Password</p>
 				<input
@@ -50,17 +69,18 @@ const Login = () => {
 					type="password"
 					value={password}
 					onChange={handlePasswordChange}
+					required
 				/>
 				<br />
 				<button type="submit" className={styles.btn}>
-					Login
+					Create new user
 				</button>
 				<p className={styles.link} onClick={handleClick}>
-					Don't have an account? Create your account here
+					Already have an account? Login here
 				</p>
 			</form>
 		</div>
 	);
 };
 
-export default Login;
+export default CreateUser;

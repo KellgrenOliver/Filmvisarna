@@ -20,24 +20,26 @@ const UserProvider = (props) => {
 			body: JSON.stringify(userToLogin),
 		});
 		result = await result.json(userToLogin);
+		setUser(result);
 		return result;
 	};
 
 	const logout = async () => {
 		let result = await fetch("/api/v1/users/logout");
 		result = await result.json(result);
+		setUser(null);
 		return result;
 	};
 
-	const createUser = async (userToRegister) => {
+	const createUser = async (userToCreate) => {
 		let result = await fetch("/api/v1/users/", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
 			},
-			body: JSON.stringify(userToRegister),
+			body: JSON.stringify(userToCreate),
 		});
-		result = await result.json(userToRegister);
+		result = await result.json(userToCreate);
 		return result;
 	};
 
@@ -48,6 +50,7 @@ const UserProvider = (props) => {
 		user,
 		setUser,
 		logout,
+		loggedIn: Boolean(user),
 	};
 
 	return (

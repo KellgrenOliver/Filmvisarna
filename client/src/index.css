@@ -1,5 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&family=Roboto:wght@100&display=swap");
 
+:root {
+	/* Variables */
+	/* Example: `color: rgb(var(--color-brand);`  */
+
+	--color-brand: 71, 7, 24; /* Wine red brand color */
+	--color-background: 235, 235, 235; /* Primary element background color */
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+*:focus {
+	outline: none;
+}
+
 body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen",
@@ -11,6 +29,7 @@ body {
 	background-color: black;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-attachment: fixed;
 }
 
 code {
