@@ -16,7 +16,8 @@ const Login = (props) => {
 		setPassword(e.target.value);
 	};
 	const handleClick = () => {
-		history.push("/createUser");
+		props.onHandleClick();
+		props.onClose();
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -41,7 +42,7 @@ const Login = (props) => {
 	}
 
 	return (
-		<div className={styles.login} onClick={props.onClose}>
+		<div className={styles.modal} onClick={props.onClose}>
 			<div className={styles.card} onClick={(e) => e.stopPropagation()}>
 				<span onClick={props.onClose} className={styles.close}>
 					X
