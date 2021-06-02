@@ -30,6 +30,8 @@ const Login = (props) => {
 
 			if (result.success) {
 				props.onClose();
+				setEmail("");
+				setPassword("");
 			}
 		}
 	};
