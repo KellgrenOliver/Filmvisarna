@@ -8,11 +8,13 @@ import styles from "../css/MoviePage.module.css";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import Login from "../components/Login";
+import CreateUser from "../components/CreateUser";
 
 dayjs.extend(advancedFormat);
 
 const Movie = (props) => {
 	const [show, setShow] = useState(false);
+	const [showRegister, setShowRegister] = useState(false);
 
 	const { loggedIn } = useContext(UserContext);
 
@@ -53,10 +55,17 @@ const Movie = (props) => {
 							Tickets
 						</h6>
 						<Login
-							title="My Modal"
 							onClose={() => setShow(false)}
+							onHandleClick={() => setShowRegister(true)}
 							show={show}
 						/>
+						<div>
+							<CreateUser
+								onClose={() => setShowRegister(false)}
+								onOpen={() => setShow(true)}
+								showRegister={showRegister}
+							/>
+						</div>
 					</div>
 				)}
 			</div>
