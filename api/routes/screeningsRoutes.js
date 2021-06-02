@@ -3,6 +3,7 @@ const router = express.Router();
 
 const screeningsController = require("../controllers/screeningsController");
 
+router.get("/filter/:movie", screeningsController.getScreeningsFromMovie);
 router.get("/movie/:movie", screeningsController.getScreeningsFromMovie);
 router.get("/:id", screeningsController.getScreeningById);
 router.get("", screeningsController.getScreenings);

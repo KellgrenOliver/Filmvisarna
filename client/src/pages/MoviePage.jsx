@@ -16,7 +16,7 @@ const Movie = (props) => {
 	useEffect(() => {}, [loggedIn]);
 
 	const { findMovie } = useContext(MovieContext);
-	const { getScreeningsFromMovie, movieScreenings } =
+	const { getScreeningsFromMovie, movieScreenings,	getScreeningsFromMovieByFilter, priceMin, priceMax, startDate, endDate} =
 		useContext(ScreeningContext);
 
 	const movie = findMovie(props.match.params.movieId);
@@ -24,6 +24,10 @@ const Movie = (props) => {
 	useEffect(() => {
 		getScreeningsFromMovie(props.match.params.movieId);
 	}, []);
+
+	useEffect(() => {
+		getScreeningsFromMovieByFilter(props.match.params.movieId);
+	}, [priceMin, priceMax, startDate, endDate]);
 
 	if (!movie) {
 		return null;
