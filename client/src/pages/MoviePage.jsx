@@ -6,6 +6,7 @@ import styles from "../css/MoviePage.module.css";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import Screening from "../components/Screening";
+import ScreeningFilter from "../components/ScreeningFilter";
 
 dayjs.extend(advancedFormat);
 const Movie = (props) => {
@@ -81,6 +82,9 @@ const Movie = (props) => {
 						<b>Rating:</b> {movie.rating}
 					</span>
 				</div>
+        <div>
+          <ScreeningFilter />
+        </div>
 				{message ? <h3>{message}</h3> : ""}
 				<div>
 					{!filteredMovieScreenings
