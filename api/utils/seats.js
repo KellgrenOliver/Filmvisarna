@@ -52,10 +52,10 @@ async function getBookedSeats(screening) {
 		const seats = new Set();
 		bookings.forEach((booking) => {
 			booking.seats.forEach((seat) => {
-				seats.add(String(seat._id));
+				seats.add(seat);
 			});
 		});
-		return seats;
+		return [...seats];
 	} catch (e) {
 		errorLog(e);
 		return [];

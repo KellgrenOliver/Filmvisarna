@@ -10,10 +10,6 @@ async function getScreenings(req, res) {
 			return res.status(404).end();
 		}
 
-		for (let i = 0; i < screenings.length; i++) {
-			screenings[i].bookedSeats = [...(await getBookedSeats(screenings[i]))];
-		}
-
 		res.status(200).json(screenings);
 	} catch (e) {
 		errorLog(e);
@@ -24,14 +20,14 @@ async function getScreenings(req, res) {
 async function getScreeningById(req, res) {
 	const { id } = req.params;
 	try {
-		const screening = await Screening.findById(id).populate([
+		let screening = await Screening.findById(id).populate([
 			"movie",
 			"auditorium",
 		]);
 
 		if (!screening) return res.status(404).end();
 
-		screening.bookedSeats = [...(await getBookedSeats(screening))];
+		screening.bookedSeats = await getBookedSeats(screening);
 
 		res.status(200).json(screening);
 	} catch (e) {
@@ -49,10 +45,8 @@ async function getScreeningsFromMovie(req, res) {
 				"auditorium",
 			]);
 			if (screening.length === 0) {
-				return res.status(404).send({ error: "Not found " }).end();
+				return res.status(404).json({ error: "Not found " });
 			}
-
-			screening.bookedSeats = [...(await getBookedSeats(screening))];
 
 			return res.status(200).json(screening);
 		}
@@ -76,8 +70,6 @@ async function getScreeningsFromMovie(req, res) {
 		if (!screening || screening.length === 0) {
 			return res.status(404).json({ error: "No results were found." });
 		}
-
-		screening.bookedSeats = [...(await getBookedSeats(screening))];
 
 		res.status(200).json(screening);
 	} catch (e) {

@@ -2,16 +2,17 @@ const Booking = require("../models/Booking");
 const Screening = require("../models/Screening");
 const errorLog = require("../utils/errorLog");
 const { getBookedSeats } = require("../utils/seats");
+const { validateBody } = require("../utils/validation");
 
 async function placeBooking(req, res) {
+	if (!validateBody(req.body, ["screeningId", "seats"])) {
+		return res.status(400).json({
+			error: "Please provide a screening id, a seats array and a movie id",
+		});
+	}
+
 	const { user } = req.session;
 	const { screeningId, seats } = req.body;
-
-	if (!screeningId || !seats) {
-		return res
-			.status(400)
-			.json({ error: "Please provide a screening id and seats array" });
-	}
 
 	try {
 		if (await Booking.exists({ user, screening: screeningId })) {
@@ -30,7 +31,13 @@ async function placeBooking(req, res) {
 
 		const bookedSeats = await getBookedSeats(screening);
 
-		if (seats.some((seat) => bookedSeats.has(seat))) {
+		if (
+			seats.some((seat) =>
+				bookedSeats.find(
+					(bookedSeat) => String(bookedSeat._id) === String(seat)
+				)
+			)
+		) {
 			return res
 				.status(403)
 				.json({ error: "One or more of these seats are already booked." });
