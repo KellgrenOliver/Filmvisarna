@@ -22,27 +22,18 @@ async function placeBooking(req, res) {
 				.json({ error: "You have already booked this screening." });
 		}
 
-		const screening = await Screening.findById(screeningId);
+		const screening = await Screening.findById(screeningId).populate(
+			"auditorium",
+			"movie"
+		);
 		if (!screening) {
 			return res.status(404).json({ error: "Screening not found." });
 		}
 
-		const { _id: auditorium } = await Auditorium.findOne({
-			_id: screening.auditorium,
-		});
-		if (!auditorium) {
-			return res.status(404).json({ error: "Auditorium not found." });
-		}
-
-		const { _id: movie } = await Movie.findOne({ _id: screening.movie });
-		if (!movie) {
-			return res.status(404).json({ error: "Movie not found." });
-		}
-
 		await Booking.create({
-			auditorium: auditorium._id,
+			auditorium: screening.auditorium._id,
 			screening: screening._id,
-			movie: movie._id,
+			movie: screening.movie._id,
 			user: user._id,
 			seats,
 		});
