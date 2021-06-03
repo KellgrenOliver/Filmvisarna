@@ -7,7 +7,6 @@
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
 	width: 50%;
-	height: 400px;
 	margin: auto;
 }
 
@@ -20,7 +19,7 @@
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
 	width: 50%;
-	height: 400px;
+	height: 100%;
 	margin: auto;
 }
 
@@ -37,12 +36,51 @@
 .img {
 	float: left;
 	margin: 1rem;
-	width: 250px;
-	height: 370px;
+	width: 150px;
+	height: 250px;
+	border-radius: 10px;
 }
 
 hr {
 	margin-right: 1rem;
+}
+
+.moviePage h3 {
+	margin: 0.5rem;
+}
+
+.tickets {
+	width: 100%;
+	margin-top: 1rem;
+	display: flex;
+	justify-content: space-between;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(71, 7, 24);
+	border-top-style: solid;
+	border-top-color: rgb(71, 7, 24);
+	height: 2rem;
+}
+
+.ticketInfo {
+	margin: 0;
+	max-height: 100%;
+	width: 100%;
+	text-decoration: none;
+}
+
+.ticketBtn {
+	text-decoration: none;
+	width: 100%;
+	margin: 0;
+	max-height: 100%;
+	border-color: rgb(71, 7, 24);
+	cursor: pointer;
+	color: rgb(71, 7, 24);
+}
+
+.ticketBtn:hover {
+	background-color: rgb(71, 7, 24);
+	color: rgb(235, 235, 235);
 }
 
 @media only screen and (max-width: 600px) {

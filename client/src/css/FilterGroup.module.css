@@ -1,0 +1,54 @@
+.groupContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.filterContainer {
+	display: flex;
+	margin: 1rem auto;
+}
+
+.iconButton {
+	background-color: white;
+	padding: 0;
+}
+
+.iconButton :hover {
+	background-color: gray;
+}
+
+.searchContainer {
+	margin: 0 auto;
+	width: 40vw;
+}
+
+/* Search conponent */
+
+.searchField [type="text"] {
+	width: 100%;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	background-color: white;
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	padding: 12px 20px 12px 40px;
+}
+
+/*Item Component*/
+.select {
+	padding-top: 5px;
+	padding-bottom: 4.5px;
+	padding-left: 5px;
+	color: #707070;
+	background-color: white;
+	border: 0px;
+	border-right: gray 0.5px solid;
+	width: 9rem;
+}
+
+.option {
+	color: black;
+}
