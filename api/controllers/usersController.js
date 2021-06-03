@@ -7,6 +7,8 @@ const { userExists, getBookings, validateEmail } = require("../utils/user");
 const whoami = async (req, res) => {
 	try {
 		const user = await User.findById(req.session.user._id);
+		user.password = undefined;
+
 		user.bookings = await getBookings(user._id);
 		res.status(200).json(user);
 	} catch (e) {
@@ -95,7 +97,7 @@ async function register(req, res) {
 
 async function update(req, res) {
 	if (!validateBody(req.body, ["oldPassword"])) {
-		return res.status(400).json({ error: "Please fill all the fields." });
+		return res.status(400).json({ error: "Please fill required fields." });
 	}
 
 	const { email, phone, oldPassword, newPassword } = req.body;
@@ -116,10 +118,10 @@ async function update(req, res) {
 
 		if (!match) return res.status(401).end();
 
-		if (email && (await User.exists({ email }))) {
-			return res.status(422).json({ error: "Email must not be taken." });
-		} else if (phone && (await User.exists({ phone }))) {
-			return res.status(422).json({ error: "Phone number must not be taken." });
+		if (email && email !== user.email && (await User.exists({ email }))) {
+			return res.status(422).json({ error: "Email has already taken. Please choose another one." });
+		} else if (phone && phone !== user.phone && (await User.exists({ phone }))) {
+			return res.status(422).json({ error: "Phone has already taken. Please choose another one." });
 		}
 
 		const data = {
@@ -136,7 +138,8 @@ async function update(req, res) {
 		data.password = undefined;
 		req.session.user = user;
 
-		res.status(200).json(Object.assign(user, data));
+		user.bookings = await getBookings(user);
+		res.status(200).json({success:"Information has been edited successfully!", obj: Object.assign(user, data)});
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
