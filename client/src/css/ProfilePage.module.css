@@ -1,13 +1,11 @@
 .container {
-	justify-content: center;
 	padding: 3rem;
 	margin: 3rem auto;
-	align-items: center;
-	width: 800px;
+	width: 70%;
 	background-color: rgb(235, 235, 235);
-	box-shadow: 10px 5px 5px rgb(70, 70, 70);
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgb(165, 165, 165);
 	line-height: 1.5rem;
-	
 }
 
 .flex {
@@ -15,9 +13,10 @@
 	justify-content: space-between;
 }
 
-/* .info {
-	margin-right: 10px;                 
-} */
+.flexBtn {
+	display: flex;
+	justify-content: space-evenly;
+}
 
 .info h6 {
 	margin: 0%;
@@ -25,9 +24,6 @@
 
 .mainBtn {
 	margin-top: 30px;
-	display: flex;
-	justify-content: center;
-	
 	color: rgb(71, 7, 24);
 	border-radius: 7px;
 	padding: 10px;
@@ -59,6 +55,32 @@
 
 .btn:hover {
 	font-weight: bold;
+}
+
+.btnCancel {
+	margin-top: 30px;
+	background-color:  rgb(71, 7, 24);
+	color:rgb(235, 235, 235);
+	border-radius: 7px;
+	padding: 10px;
+	font-weight: bold;
+	cursor: pointer;
+	border-color: rgb(71, 7, 24);
+}
+
+.btnCancel:hover {
+	background-color: rgb(235, 235, 235) ;
+	color: rgb(71, 7, 24);
+}
+
+#emailinput, #passwordinput, #newpasswordinput, #numberinput {
+	width: 100%;
+	text-align: left;
+	padding: 10px;
+}
+
+.info hr {
+	margin: 0 0 1rem 0;
 }
 
 

@@ -15,7 +15,6 @@ const Search = () => {
 	};
 
 	return (
-		<div>
 			<input
 				className={styles.searchField}
 				type="text"
@@ -23,7 +22,6 @@ const Search = () => {
 				name="search"
 				onChange={handleSearch}
 			></input>
-		</div>
 	);
 };
 
