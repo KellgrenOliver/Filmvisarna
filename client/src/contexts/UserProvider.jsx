@@ -8,7 +8,7 @@ const UserProvider = (props) => {
 
 	const whoami = async () => {
 		let user = await fetch("/api/v1/users/whoami");
-		user = await user.json();
+		user = await user.json(user);
 		setUser(user);
 	};
 

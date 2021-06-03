@@ -1,16 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
 
-const ProfilePage = (props) => {
+const ProfilePage = () => {
 	const [editMode, setEditMode] = useState(false);
-	const { whoami, user, updateUserInfo, message,setMessage } = useContext(UserContext);
+	const { whoami, user, updateUserInfo, message, setMessage } =
+		useContext(UserContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
-	const history = useHistory();
 
 	const onEdit = () => {
 		setMessage(null);
@@ -20,11 +19,10 @@ const ProfilePage = (props) => {
 	const onEditCancelled = () => {
 		setMessage(null);
 		setEditMode(false);
-	}
+	};
 
 	const updateHandler = async () => {
-
-		if(!password) {
+		if (!password) {
 			setMessage("Please enter your current password.");
 			setPassword(null);
 			return;
@@ -36,10 +34,9 @@ const ProfilePage = (props) => {
 		userFromForm.newPassword = newPassword;
 		userFromForm.phone = phoneNumber;
 
-
 		const result = await updateUserInfo(userFromForm);
-		
-		if(result) {
+
+		if (result) {
 			setEditMode(false);
 		}
 	};
@@ -150,7 +147,7 @@ const ProfilePage = (props) => {
 					<div className={styles.booking}>
 						<div className={styles.info}>
 							<h6>Last booking</h6>
-							< hr />
+							<hr />
 						</div>
 						<div>
 							<span>Screening:{booking?.screening._id}</span>
@@ -181,7 +178,7 @@ const ProfilePage = (props) => {
 						<div>{passwordContent}</div>
 						<div>{newPasswordContent}</div>
 						<div>{phoneContent}</div>
-						<div >{buttonContent}</div>
+						<div>{buttonContent}</div>
 						<div>{message ? <p>{message}</p> : ""}</div>
 					</div>
 					<div>{renderBookings()}</div>
