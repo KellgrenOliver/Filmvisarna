@@ -20,7 +20,7 @@ const ConfirmationPage = (props) => {
 		getScreeningById(props.match.params.screeningId);
 	}, []);
 
-	if (!movie || !screening) {
+	if (!movie || !screening || !user) {
 		return <h1 className={styles.header}>Loading...</h1>;
 	}
 
