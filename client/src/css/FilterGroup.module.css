@@ -17,8 +17,9 @@
 
 /* Search conponent */
 
-input[type="text"]  {
+#searchField {
 	width: 100%;
+  text-align: left;
 	box-sizing: border-box;
 	border: 2px solid #ccc;
 	border-radius: 5px;
