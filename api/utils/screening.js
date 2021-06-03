@@ -2,7 +2,7 @@ const Auditorium = require("../models/Auditorium");
 const Movie = require("../models/Movie");
 const Screening = require("../models/Screening");
 
-async function screeningSeeder(perAuditorium = 5) {
+async function screeningSeeder(perAuditorium = 30) {
 	await Screening.createCollection();
 	await Screening.collection.drop();
 

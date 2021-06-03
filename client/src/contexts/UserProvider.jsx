@@ -4,6 +4,7 @@ export const UserContext = createContext();
 
 const UserProvider = (props) => {
 	const [user, setUser] = useState(null);
+	const [message, setMessage] = useState(null);
 
 	const whoami = async () => {
 		let user = await fetch("/api/v1/users/whoami");
@@ -20,7 +21,7 @@ const UserProvider = (props) => {
 			body: JSON.stringify(userToLogin),
 		});
 		result = await result.json(userToLogin);
-		setUser(result);
+		setUser(result.loggedInUser);
 		return result;
 	};
 
@@ -40,7 +41,36 @@ const UserProvider = (props) => {
 			body: JSON.stringify(userToCreate),
 		});
 		result = await result.json(userToCreate);
+		setUser(userToCreate);
 		return result;
+	};
+
+	// to save the changes which are coming from profile page
+
+	const updateUserInfo = async (userToUpdate) =>{
+		
+		let result = await fetch(`api/v1/users/${user._id}`, {
+			method: "PUT",
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify(userToUpdate),
+		});
+		
+		if(result.status === 401) {
+			setMessage("Bad Credentials");
+			return false;
+		} else if(result.status === 200) {
+			// to get the updated info from backend 
+			result = await result.json(userToUpdate);
+			setMessage(result.success);
+			const updatedUser = result.obj;
+			setUser(updatedUser);
+			return updatedUser;
+		} else {
+			setMessage("Something went wrong!");
+			return false;
+		}
 	};
 
 	const values = {
@@ -50,6 +80,9 @@ const UserProvider = (props) => {
 		user,
 		setUser,
 		logout,
+		updateUserInfo,
+		message,
+		setMessage,
 		loggedIn: Boolean(user),
 	};
 

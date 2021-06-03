@@ -18,7 +18,10 @@ async function userSeeder() {
 
 async function getBookings(user) {
 	if (!user) user = req.session.user;
-	return await Booking.where({ user }).populate(["screening", "auditorium"]);
+	return await Booking.where({ user }).populate([
+		"auditorium",
+		"screening",
+		"seats"]);
 }
 
 async function userExists({ email, phone }) {

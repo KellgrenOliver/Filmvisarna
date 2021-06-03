@@ -9,27 +9,19 @@
 	margin: 1rem auto;
 }
 
-.iconButton {
-	background-color: white;
-	padding: 0;
-}
-
-.iconButton :hover {
-	background-color: gray;
-}
-
 .searchContainer {
 	margin: 0 auto;
+  padding:0;
 	width: 40vw;
 }
 
 /* Search conponent */
 
-.searchField [type="text"] {
+input[type="text"]  {
 	width: 100%;
 	box-sizing: border-box;
 	border: 2px solid #ccc;
-	border-radius: 4px;
+	border-radius: 5px;
 	font-size: 16px;
 	background-color: white;
 	background-position: 10px 10px;
