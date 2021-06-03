@@ -47,7 +47,7 @@ const ScreeningProvider = (props) => {
 			setMessage(filterScreenings.error);
 		} else if (respons.status === 500) {
 			setFilteredMovieScreenings(null);
-		} else if (respons.status === 200) {
+		} else {
 			setMessage(null);
 			setFilteredMovieScreenings(filterScreenings);
 		}

@@ -27,7 +27,7 @@ const Movie = (props) => {
 		getScreeningsFromMovie(props.match.params.movieId);
 	}, []);
 
-	setPriceMin("?priceMin=120");
+	setPriceMin("?priceMin=50");
 	if (!movie) {
 		return null;
 	}
