@@ -14,7 +14,6 @@ const Length = () => {
 	}, []);
   
 	const handleLength = (e) => {
-		console.log(e.target.value);
 		if (e.target.value === "0") {
 			setLengthMin(`?lengthMin=` + 0);
 			setLengthMax(`&lengthMax=` + Infinity);
