@@ -4,7 +4,7 @@ export const UserContext = createContext();
 
 const UserProvider = (props) => {
 	const [user, setUser] = useState(null);
-	const [ message, setMessage ] = useState(null);
+	const [message, setMessage] = useState(null);
 
 	const whoami = async () => {
 		let user = await fetch("/api/v1/users/whoami");
@@ -41,6 +41,7 @@ const UserProvider = (props) => {
 			body: JSON.stringify(userToCreate),
 		});
 		result = await result.json(userToCreate);
+		setUser(userToCreate);
 		return result;
 	};
 
@@ -51,9 +52,9 @@ const UserProvider = (props) => {
 		let result = await fetch(`api/v1/users/${user._id}`, {
 			method: "PUT",
 			headers: {
-				"content-type": "application/json"
+				"content-type": "application/json",
 			},
-			body: JSON.stringify(userToUpdate)
+			body: JSON.stringify(userToUpdate),
 		});
 		
 		if(result.status === 401) {
