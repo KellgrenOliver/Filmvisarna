@@ -40,10 +40,10 @@ async function placeBooking(req, res) {
 		}
 
 		await Booking.create({
-			auditorium: screening.auditorium,
-			movie: screening.movie,
+			auditorium: auditorium._id,
 			screening: screening._id,
-			user,
+			movie: movie._id,
+			user: user._id,
 			seats,
 		});
 

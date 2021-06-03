@@ -21,7 +21,9 @@ async function getBookings(user) {
 	return await Booking.where({ user }).populate([
 		"auditorium",
 		"screening",
-		"seats"]);
+		"seats",
+		"movie",
+	]);
 }
 
 async function userExists({ email, phone }) {
