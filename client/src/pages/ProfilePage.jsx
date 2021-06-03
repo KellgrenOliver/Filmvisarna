@@ -5,7 +5,8 @@ import { UserContext } from "../contexts/UserProvider";
 
 const ProfilePage = (props) => {
 	const [editMode, setEditMode] = useState(false);
-	const { whoami, user, updateUserInfo, message,setMessage } = useContext(UserContext);
+	const { whoami, user, updateUserInfo, message, setMessage } =
+		useContext(UserContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
@@ -20,11 +21,10 @@ const ProfilePage = (props) => {
 	const onEditCancelled = () => {
 		setMessage(null);
 		setEditMode(false);
-	}
+	};
 
 	const updateHandler = async () => {
-
-		if(!password) {
+		if (!password) {
 			setMessage("Please enter your current password.");
 			setPassword(null);
 			return;
@@ -36,10 +36,9 @@ const ProfilePage = (props) => {
 		userFromForm.newPassword = newPassword;
 		userFromForm.phone = phoneNumber;
 
-
 		const result = await updateUserInfo(userFromForm);
-		
-		if(result) {
+
+		if (result) {
 			setEditMode(false);
 		}
 	};
@@ -148,20 +147,30 @@ const ProfilePage = (props) => {
 			return user.bookings.map((booking, i) => (
 				<div className={styles.flex} key={i}>
 					<div className={styles.booking}>
-						<div className={styles.info}>
-							<h6>Last booking</h6>
-							< hr />
-						</div>
-						<div>
-							<span>Screening:{booking?.screening._id}</span>
-						</div>
-						{booking.seats.map((seat, i) => (
-							<div key={i}>
-								Seat: {seat.row}, {seat.id}
+						<div className={styles.bookingContainer}>
+							<div className={styles.flex}>
+								<div>
+									<div>
+										{/* <span>Screening:{booking?.screening._id}</span> */}
+										<span>Movie: Green Mile </span>
+									</div>
+									{booking.seats.map((seat, i) => (
+										<div key={i}>
+											Seat: {seat.row}
+											{seat.id}
+										</div>
+									))}
+									<div>
+										<span>Time: </span>
+									</div>
+									<div>
+										<span>Price: </span>
+									</div>
+								</div>
+								<div>
+									<button className={styles.btnCancel}>Delete</button>
+								</div>
 							</div>
-						))}
-						<div>
-							<button className={styles.btn}>Delete</button>
 						</div>
 					</div>
 				</div>
@@ -181,10 +190,16 @@ const ProfilePage = (props) => {
 						<div>{passwordContent}</div>
 						<div>{newPasswordContent}</div>
 						<div>{phoneContent}</div>
-						<div >{buttonContent}</div>
+						<div>{buttonContent}</div>
 						<div>{message ? <p>{message}</p> : ""}</div>
 					</div>
-					<div>{renderBookings()}</div>
+					<div>
+						<div className={styles.info}>
+							<h6>Last bookings</h6>
+							<hr />
+						</div>
+						<div>{renderBookings()}</div>
+					</div>
 				</div>
 			</div>
 		);
