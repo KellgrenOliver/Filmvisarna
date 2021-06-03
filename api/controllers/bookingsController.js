@@ -1,9 +1,7 @@
-const Auditorium = require("../models/Auditorium");
 const Booking = require("../models/Booking");
-const Movie = require("../models/Movie");
 const Screening = require("../models/Screening");
-const User = require("../models/User");
 const errorLog = require("../utils/errorLog");
+const { getBookedSeats } = require("../utils/seats");
 
 async function placeBooking(req, res) {
 	const { user } = req.session;
@@ -28,6 +26,14 @@ async function placeBooking(req, res) {
 		);
 		if (!screening) {
 			return res.status(404).json({ error: "Screening not found." });
+		}
+
+		const bookedSeats = await getBookedSeats(screening);
+
+		if (seats.some((seat) => bookedSeats.has(seat))) {
+			return res
+				.status(403)
+				.json({ error: "One or more of these seats are already booked." });
 		}
 
 		await Booking.create({
