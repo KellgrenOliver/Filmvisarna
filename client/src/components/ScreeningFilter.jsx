@@ -5,6 +5,16 @@ const ScreeningFilter=()=> {
   const { setPriceMin, setPriceMax, setStartDate, setEndDate, movieScreenings}= useContext(ScreeningContext);
   const [items, setItems] = useState("");
 
+  useEffect(() => {
+		if (movieScreenings) {
+			getItemsFromAllScreenings();
+		}
+    return () => {
+      setPriceMin("");
+      setPriceMax("");
+    };
+	}, [movieScreenings]);
+
   const getItemsFromAllScreenings = () => { 
     let values = movieScreenings.map((screening) => screening.price);
     setItems([...new Set(values)]);
@@ -13,11 +23,11 @@ const ScreeningFilter=()=> {
 
   const handleOnChange = (e) => {
 		if (e.target.value === "") {
-			setPriceMin("");
+			setPriceMin("?priceMin=0");
 			setPriceMax("");
 		} else {
-      setPriceMin(e.target.value)
-      setPriceMax(e.target.value)
+      setPriceMin(`?priceMin=${e.target.value}`)
+      setPriceMax(`&priceMax=${e.target.value}`)
 		}
 	};
   

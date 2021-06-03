@@ -7,7 +7,7 @@ const ScreeningProvider = (props) => {
 	const [filteredMovieScreenings, setFilteredMovieScreenings] = useState(null);
 	const [screenings, setScreenings] = useState([]);
 	const [screening, setScreening] = useState(null);
-	const [priceMin, setPriceMin] = useState("");
+	const [priceMin, setPriceMin] = useState("?priceMin=0");
 	const [priceMax, setPriceMax] = useState("");
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
@@ -37,20 +37,24 @@ const ScreeningProvider = (props) => {
 	};
 
 	const getScreeningsFromMovieByFilter = async () => {
-		let respons = await fetch(
-			`/api/v1/screenings/filter/${filterMovieId}${priceMin}${priceMax}${startDate}${endDate}`
-		);
-		let filterScreenings = await respons.json();
-		if (respons.status === 404) {
-			setFilteredMovieScreenings([]);
-			console.log(filterScreenings.error);
-			setMessage(filterScreenings.error);
-		} else if (respons.status === 500) {
-			setFilteredMovieScreenings(null);
-		} else {
-			setMessage(null);
-			setFilteredMovieScreenings(filterScreenings);
-		}
+    try{
+      let respons = await fetch(
+        `/api/v1/screenings/filter/${filterMovieId}${priceMin}${priceMax}${startDate}${endDate}`
+      );
+      let filterScreenings = await respons.json();
+      if (respons.status === 404) {
+        setFilteredMovieScreenings([]);
+        console.log(filterScreenings.error);
+        setMessage(filterScreenings.error);
+      } else if (respons.status === 500) {
+        setFilteredMovieScreenings(null);
+      } else if (respons.status === 200){
+        setMessage(null);
+        setFilteredMovieScreenings(filterScreenings);
+      }
+    } catch(e) {
+      console.log(e)
+    }
 	};
 
 	const getScreeningById = async (screeningId) => {
