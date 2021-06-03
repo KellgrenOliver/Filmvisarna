@@ -8,7 +8,7 @@ const UserProvider = (props) => {
 
 	const whoami = async () => {
 		let user = await fetch("/api/v1/users/whoami");
-		user = await user.json(user);
+		user = await user.json();
 		setUser(user);
 	};
 
@@ -47,8 +47,7 @@ const UserProvider = (props) => {
 
 	// to save the changes which are coming from profile page
 
-	const updateUserInfo = async (userToUpdate) =>{
-		
+	const updateUserInfo = async (userToUpdate) => {
 		let result = await fetch(`api/v1/users/${user._id}`, {
 			method: "PUT",
 			headers: {
@@ -56,12 +55,12 @@ const UserProvider = (props) => {
 			},
 			body: JSON.stringify(userToUpdate),
 		});
-		
-		if(result.status === 401) {
+
+		if (result.status === 401) {
 			setMessage("Bad Credentials");
 			return false;
-		} else if(result.status === 200) {
-			// to get the updated info from backend 
+		} else if (result.status === 200) {
+			// to get the updated info from backend
 			result = await result.json(userToUpdate);
 			setMessage(result.success);
 			const updatedUser = result.obj;
