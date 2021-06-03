@@ -6,7 +6,7 @@ import styles from "../css/MoviePage.module.css";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import Screening from "../components/Screening";
-import ScreeningFilter from "../components/ScreeningFilter";
+import Price from "../components/Price";
 
 dayjs.extend(advancedFormat);
 const Movie = (props) => {
@@ -17,7 +17,6 @@ const Movie = (props) => {
 		filteredMovieScreenings,
 		setFilterMovieId,
 		message,
-		setPriceMin,
 	} = useContext(ScreeningContext);
 
 	const movie = findMovie(props.match.params.movieId);
@@ -82,7 +81,7 @@ const Movie = (props) => {
 					</span>
 				</div>
         <div>
-          <ScreeningFilter />
+          <Price />
         </div>
 				{message ? <h3>{message}</h3> : ""}
 				<div>
