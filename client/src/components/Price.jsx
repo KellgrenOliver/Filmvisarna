@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { ScreeningContext } from "../contexts/ScreeningProvider";
+import Items from "./Items"
 import styles from "../css/FilterGroup.module.css";
 const Price = () => {
 	const {
 		setPriceMin,
 		setPriceMax,
-		setStartDate,
-		setEndDate,
 		movieScreenings,
 	} = useContext(ScreeningContext);
 	const [items, setItems] = useState("");
@@ -35,7 +34,7 @@ const Price = () => {
 			setPriceMax(`&priceMax=${e.target.value}`);
 		}
 	};
-
+  
 	return (
 		<div className={styles.customSelect}>
 			<select className={styles.select} onChange={handleOnChange}>
