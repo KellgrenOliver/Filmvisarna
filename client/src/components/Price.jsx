@@ -15,8 +15,7 @@ const Price = () => {
 			getItemsFromAllScreenings();
 		}
 		return () => {
-			setPriceMin("");
-			setPriceMax("");
+			setPriceMin("?priceMin=0");
 		};
 	}, [movieScreenings]);
 

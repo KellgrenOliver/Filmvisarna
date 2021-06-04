@@ -39,7 +39,7 @@ const ScreeningProvider = (props) => {
 	const getScreeningsFromMovieByFilter = async () => {
     try{
       let respons = await fetch(
-        `/api/v1/screenings/filter/${filterMovieId}${priceMin}${priceMax}${startDate}${endDate}`
+        `/api/v1/screenings/filter/${filterMovieId}${priceMin}${priceMax}${startDate}`
       );
       let filterScreenings = await respons.json();
       if (respons.status === 404) {

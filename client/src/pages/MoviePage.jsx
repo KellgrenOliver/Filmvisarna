@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import Screening from "../components/Screening";
 import Price from "../components/Price";
-import Date  from "../components/Date";
+import Dates  from "../components/Dates";
 
 dayjs.extend(advancedFormat);
 const Movie = (props) => {
@@ -83,7 +83,7 @@ const Movie = (props) => {
 				</div>
         <div>
           <Price />
-          <Date />
+          <Dates />
         </div>
 				{message ? <h3>{message}</h3> : ""}
 				<div>
