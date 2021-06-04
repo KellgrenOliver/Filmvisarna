@@ -7,7 +7,6 @@ import styles from "../css/HomePage.module.css";
 const Home = () => {
 	const { movies, searchedMovies, message } = useContext(MovieContext);
 	useEffect(() => {
-		console.log(searchedMovies);
 		renderMovies();
 	}, [searchedMovies, message]);
 

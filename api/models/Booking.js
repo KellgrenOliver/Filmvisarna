@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-
+const Seat = require("./Seat");
 const bookingSchema = new Schema(
 	{
 		auditorium: {
@@ -8,7 +8,7 @@ const bookingSchema = new Schema(
 			ref: "Auditorium",
 			required: true,
 		},
-		seats: [{ type: Array, required: true }],
+		seats: [{ type: Schema.Types.ObjectId, ref: Seat}],
 		user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 		screening: {
 			type: Schema.Types.ObjectId,
