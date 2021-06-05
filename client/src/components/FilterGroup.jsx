@@ -31,13 +31,7 @@ const FilterGroup = () => {
 			getRatingItems();
 		}
 		return () => {
-			setLanguage("");
-			setGenre("");
-			setDirector("");
-			setStar("");
-			setRating("");
-			setLengthMin(`?lengthMin=` + 0);
-			setLengthMax(`&lengthMax=` + Infinity);
+      handleReset()
 		};
 	}, [movies]);
 
@@ -78,16 +72,27 @@ const FilterGroup = () => {
 		setRatingItems([...new Set(value)]);
 	};
 
+  const handleReset = () =>{
+    setLanguage("");
+    setGenre("");
+    setDirector("");
+    setStar("");
+    setRating("");
+    setLengthMin(`?lengthMin=` + 0);
+    setLengthMax(`&lengthMax=` + Infinity);
+  }
+
 	return (
 		<div className={styles.groupContainer}>
-			<div className={styles.filterContainer}>
+			<form className={styles.filterContainer}>
 				<Length setLengthMin={setLengthMin} setLengthMax={setLengthMax} />
 				<Items setVal={setLanguage} name={"language"} items={languageItems} />
 				<Items setVal={setGenre} name={"genres"} items={genreItems} />
 				<Items setVal={setDirector} name={"directors"} items={directorItems} />
 				<Items setVal={setStar} name={"stars"} items={starItems} />
 				<Items setVal={setRating} name={"rating"} items={ratingItems} />
-			</div>
+        <button className={styles.resetButton} type="reset" onClick = {handleReset}>Reset</button>
+			</form>
 			<div className={styles.searchContainer}>
 				<Search />
 			</div>

@@ -13,7 +13,7 @@ const Items = (props) => {
 	return (
 		<div className={styles.customSelect}>
 			<select className={styles.select} name={props.name} onChange={handleOnChange}>
-				<option className={styles.option} value="">{props.name}:</option>
+				<option className={styles.option} value="">{props.name.toUpperCase()}:</option>
 				{props.items &&
 					props.items.map((item) => (
 						<option className={styles.option} value={item} key={item}>

@@ -24,10 +24,10 @@ const Length = (props) => {
 		return (
 			<div className={styles.customSelect}>
 				<select className={styles.select} onChange={handleLength}>
-					<option className={styles.option} value="0">Length:</option>
+					<option className={styles.option} value="0">LENGTH:</option>
 					<option className={styles.option} value="1">0-99 min</option>
 					<option className={styles.option} value="2">100-199 min</option>
-					<option className={styles.option} value="3">200 min</option>
+					<option className={styles.option} value="3">200- min </option>
 				</select>
 			</div>
 		);
