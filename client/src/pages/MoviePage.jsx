@@ -6,8 +6,7 @@ import styles from "../css/MoviePage.module.css";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import Screening from "../components/Screening";
-import Price from "../components/Price";
-import Dates  from "../components/Dates";
+import FilterScreeningGroup from "../components/FilterScreeningGroup";
 
 dayjs.extend(advancedFormat);
 const Movie = (props) => {
@@ -82,8 +81,7 @@ const Movie = (props) => {
 					</span>
 				</div>
         <div>
-          <Price />
-          <Dates />
+          <FilterScreeningGroup />
         </div>
 				{message ? <h3>{message}</h3> : ""}
 				<div>
