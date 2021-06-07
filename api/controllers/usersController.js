@@ -135,12 +135,10 @@ async function update(req, res) {
 			return res.status(422).json({ error: "Phone number must not be taken." });
 		}
 
-		const data = {
-			email: email ?? user.email,
-			phone: phone ?? user.phone,
-			password: newPassword ?? user.password,
-		};
+		const data = {};
 
+		if (email && email !== user.email) data.email = email;
+		if (phone && phone !== user.phone) data.phone = phone;
 		if (newPassword) data.password = await bcrypt.hash(newPassword, 10);
 
 		await User.findByIdAndUpdate(id, data);
