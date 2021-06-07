@@ -7,7 +7,7 @@ const { validateBody } = require("../utils/validation");
 async function placeBooking(req, res) {
 	if (!validateBody(req.body, ["screeningId", "seats"])) {
 		return res.status(400).json({
-			error: "Please provide a screening id, a seats array and a movie id",
+			error: "Please provide a screening id and a seats array",
 		});
 	}
 
