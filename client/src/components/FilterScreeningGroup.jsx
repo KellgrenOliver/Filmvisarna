@@ -6,6 +6,7 @@ import styles from "../css/FilterScreeningGroup.module.css";
 const FilterScreeningGroup = () => {
 	const {
 		setStartDate,
+    endDate,
 		setEndDate,
 		setPriceMin,
 		setPriceMax,
@@ -19,9 +20,7 @@ const FilterScreeningGroup = () => {
 			getPriceItemsFromAllScreenings();
 		}
 		return () => {
-			setPriceMin("?priceMin=0");
-			setStartDate("");
-			setEndDate("");
+			handleReset();
 		};
 	}, [movieScreenings]);
 
@@ -30,14 +29,23 @@ const FilterScreeningGroup = () => {
 		setPriceItems([...new Set(values)]);
 	};
 
+	const handleReset = () => {
+		setPriceMin("?priceMin=0");
+		setStartDate("");
+		setEndDate("");
+	};
+
 	return (
 		<div className={styles.groupContainer}>
-				<Price
-					items={priceItems}
-					setPriceMin={setPriceMin}
-					setPriceMax={setPriceMax}
-				/>
-				<Dates setStartDate={setStartDate} setEndDate={setEndDate} />
+			<Price
+				items={priceItems}
+				setPriceMin={setPriceMin}
+				setPriceMax={setPriceMax}
+			/>
+			<Dates endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
+			<button type="reset" onClick={handleReset}>
+				reset
+			</button>
 		</div>
 	);
 };

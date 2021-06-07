@@ -34,7 +34,7 @@ const Dates = (props) => {
 				selected={date}
 				onChange={handleChange}
 				customInput={
-					<button className={styles.selectDate}><FontAwesomeIcon icon={faCalendarAlt} color="rgb(71, 7, 24)" size ="lg"/> {pickerDate}</button>
+					<button className={styles.selectDate}><FontAwesomeIcon icon={faCalendarAlt} color="rgb(71, 7, 24)" size ="lg"/> {props.endDate !=="" && pickerDate}</button>
 				}
 			/>
 		</div>

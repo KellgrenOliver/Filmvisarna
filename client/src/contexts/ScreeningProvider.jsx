@@ -44,7 +44,6 @@ const ScreeningProvider = (props) => {
       let filterScreenings = await respons.json();
       if (respons.status === 404) {
         setFilteredMovieScreenings([]);
-        console.log(filterScreenings.error);
         setMessage(filterScreenings.error);
       } else if (respons.status === 500) {
         setFilteredMovieScreenings(null);

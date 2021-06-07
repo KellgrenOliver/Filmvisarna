@@ -20,8 +20,6 @@ const Movie = (props) => {
 	} = useContext(ScreeningContext);
 
 	const movie = findMovie(props.match.params.movieId);
-	console.log(filteredMovieScreenings);
-	console.log(message);
 	useEffect(() => {
 		setFilterMovieId(props.match.params.movieId);
 		getScreeningsFromMovie(props.match.params.movieId);
