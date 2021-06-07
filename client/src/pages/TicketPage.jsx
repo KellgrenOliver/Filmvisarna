@@ -32,6 +32,8 @@ const TicketPage = (props) => {
 		}
 	};
 
+	console.log(screening.auditorium.id.seats);
+
 	const content = () => (
 		<div className={styles.ticketPage}>
 			<div className={styles.container}>
