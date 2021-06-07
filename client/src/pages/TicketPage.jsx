@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import styles from "../css/TicketPage.module.css";
 import dayjs from "dayjs";
 import _ from "lodash";
-import { getTicketsPrice } from "../../../api/utils/seats";
+import { getTicketsPrice } from "../utils/seats";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 
 dayjs.extend(advancedFormat);
