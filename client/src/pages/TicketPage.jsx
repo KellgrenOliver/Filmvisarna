@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import _ from "lodash";
 import { getTicketsPrice } from "../utils/seats";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import CounterInput from "react-counter-input";
 
 dayjs.extend(advancedFormat);
 
@@ -59,20 +60,15 @@ const TicketPage = (props) => {
 					<h5>Salon: {screening.auditorium.id}</h5>
 					<h5 className={styles.title}>{movie.title}</h5>
 					<h5>{dayjs(screening.time).format("MMMM Do HH:mm")}</h5>
-					<h5>
-						Rating: {movie.rating}, Language: {movie.language}
-					</h5>
+					<h5>Language: {movie.language}</h5>
 				</div>
 				<h5 className={styles.bioduk}>S C R E E N</h5>
 				<div>
-					<h5>Select tickets</h5>
 					<div className={styles.numberContainer}>
-						<input
-							className={styles.numberInput}
-							type="number"
-							min={0}
-							max={46}
-						/>
+						<h6>Select number of tickets</h6>
+						<div className={styles.counter}>
+							<CounterInput min={0} max={4} onCountChange={(count) => count} />
+						</div>
 					</div>
 					<div key={auditorium.id}>
 						<div className={styles.seatContainer}>
@@ -102,18 +98,19 @@ const TicketPage = (props) => {
 				<div className={styles.payContainer}>
 					<img className={styles.img} src={movie.poster} alt={movie.title} />
 					<div className={styles.pay}>
-						<h6>{movie.title}</h6>
-						<h6>{dayjs(screening.time).format("MMMM Do HH:mm")}</h6>
-						<h6>Tickets</h6>
 						<div>
 							{selectedSeats.map((seat) => (
-								<span>
-									{seat.id}
-									{seat.row}
-								</span>
+								<div className={styles.ticket}>
+									<span>
+										Row:<b>{seat.row}</b> Seat:<b>{seat.id}</b> Price:
+										<b>{screening.price}SEK</b>
+									</span>
+								</div>
 							))}
 						</div>
-						<h6>Price:{getTicketsPrice(selectedSeats, screening.price)}</h6>
+						<h6>
+							Total price:{getTicketsPrice(selectedSeats, screening.price)}SEK
+						</h6>
 						<button onClick={checkSeats} className={styles.button}>
 							Book
 						</button>
