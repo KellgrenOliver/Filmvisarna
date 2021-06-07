@@ -12,7 +12,9 @@ const Screening = (props) => {
 	const [show, setShow] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
 	const { loggedIn } = useContext(UserContext);
+
 	useEffect(() => {}, [loggedIn]);
+  
 	return (
 		<div className={styles.tickets}>
 			<h6 className={styles.ticketInfo}>
