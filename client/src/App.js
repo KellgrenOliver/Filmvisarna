@@ -7,9 +7,11 @@ import UserProvider from "./contexts/UserProvider";
 import AboutPage from "./pages/AboutPage";
 import MoviePage from "./pages/MoviePage";
 import TicketPage from "./pages/TicketPage";
+import ConfirmationPage from "./pages/ConfirmationPage";
 import MoviesProvider from "./contexts/MoviesProvider";
 import ScreeningProvider from "./contexts/ScreeningProvider";
 import ProfilePage from "./pages/ProfilePage";
+
 
 const App = () => {
 	return (
@@ -29,6 +31,10 @@ const App = () => {
 								exact
 								path="/ticket/:movieId/:screeningId"
 								component={TicketPage}
+							/>
+							<Route
+								path="/booking/:movieId/:screeningId"
+								component={ConfirmationPage}
 							/>
 						</UserProvider>
 					</MoviesProvider>
