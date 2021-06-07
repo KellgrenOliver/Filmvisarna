@@ -2,13 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
-import { MovieContext } from "../contexts/MoviesProvider";
+import dayjs from "dayjs";
 
-const ProfilePage = (props) => {
+
+const ProfilePage = () => {
 	const [editMode, setEditMode] = useState(false);
 	const { whoami, user, updateUserInfo, message, setMessage } =
 		useContext(UserContext);
-	const { movies, movie} = useContext(MovieContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
@@ -162,7 +162,7 @@ const ProfilePage = (props) => {
 										</div>
 									))}
 									<div>
-										<span>Time: {booking?.screening.time} </span>
+										<span>{dayjs(booking?.screening.time).format("MMMM Do HH:mm")}</span>
 									</div>
 									<div>
 										<span>Price: {booking?.screening.price}</span>
