@@ -9,7 +9,7 @@ async function userSeeder() {
 		await User.create({
 			email: "test@test.com",
 			password: "123123",
-			phone: 1234567890,
+			phone: "1234567890",
 		});
 	} catch (e) {
 		errorLog(e);
@@ -22,6 +22,7 @@ async function getBookings(user) {
 		"auditorium",
 		"screening",
 		"seats",
+		"movie",
 	]);
 }
 
