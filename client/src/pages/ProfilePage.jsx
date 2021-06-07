@@ -144,9 +144,7 @@ const ProfilePage = (props) => {
 				</div>
 			);
 		}
-		debugger;
-		console.log(booking);
-
+		
 		const renderBookings = () => {
 			return user.bookings.map((booking, i) => (
 				<div className={styles.flex} key={i}>
@@ -155,14 +153,7 @@ const ProfilePage = (props) => {
 							<div className={styles.flex}>
 								<div>
 									<div>
-										{/* <span>Screening:{booking?.screening._id}</span> */}
-										{/* <span>Movie:{movie} </span> */}
-										{booking.movies.map((movie, i) => (
-										<div key={i}>
-											Movie: {movie.title}
-											
-										</div>
-									))}
+										Movie: 
 									</div>
 									{booking.seats.map((seat, i) => (
 										<div key={i}>
@@ -171,10 +162,10 @@ const ProfilePage = (props) => {
 										</div>
 									))}
 									<div>
-										<span>Time: </span>
+										<span>Time: {booking?.screening.time} </span>
 									</div>
 									<div>
-										<span>Price: </span>
+										<span>Price: {booking?.screening.price}</span>
 									</div>
 								</div>
 								<div>
