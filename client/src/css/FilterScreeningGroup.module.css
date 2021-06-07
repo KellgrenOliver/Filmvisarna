@@ -1,7 +1,7 @@
 .groupContainer {
   margin:1rem;
 	display: flex;
-	justify-content:flex-end;
+	justify-content:center;
 }
 
 #customSelect{
@@ -21,6 +21,10 @@
 	width: 7rem;
 }
 
+.priceForm{
+  display:flex
+}
+
 .selectDate {
   text-align: left;
   padding-top: 5px;
@@ -29,7 +33,6 @@
 	color: black;
 	background-color:rgb(235,235,235);
 	border: 0px;
-  width: 7rem;
 }
 
 

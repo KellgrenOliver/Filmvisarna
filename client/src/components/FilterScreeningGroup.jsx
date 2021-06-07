@@ -20,9 +20,7 @@ const FilterScreeningGroup = () => {
 			getPriceItemsFromAllScreenings();
 		}
 		return () => {
-			setPriceMin("?priceMin=0");
-			setStartDate("");
-			setEndDate("");
+      handleReset()
 		};
 	}, [movieScreenings]);
 
@@ -31,18 +29,29 @@ const FilterScreeningGroup = () => {
 		setPriceItems([...new Set(values)]);
 	};
 
+	const handleReset = () => {
+		setPriceMin("?priceMin=0");
+		setStartDate("");
+		setEndDate("");
+	};
+
 	return (
 		<div className={styles.groupContainer}>
-			<Price
-				items={priceItems}
-				setPriceMin={setPriceMin}
-				setPriceMax={setPriceMax}
-			/>
 			<Dates
 				endDate={endDate}
 				setStartDate={setStartDate}
 				setEndDate={setEndDate}
 			/>
+			<form className={styles.priceForm}>
+				<Price
+					items={priceItems}
+					setPriceMin={setPriceMin}
+					setPriceMax={setPriceMax}
+				/>
+				<button type="reset" onClick={handleReset}>
+					reset
+				</button>
+			</form>
 		</div>
 	);
 };
