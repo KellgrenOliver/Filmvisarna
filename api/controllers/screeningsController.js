@@ -37,6 +37,26 @@ async function getScreeningById(req, res) {
 }
 
 async function getScreeningsFromMovie(req, res) {
+	try {	
+      const { movie } = req.params;
+
+        let screening = await Screening.find({ movie }).populate([
+          "movie",
+          "auditorium",
+        ]);
+  
+        if (screening.length === 0) {
+          return res.status(404).json({ error: "No results were found." });
+        }
+  
+        return res.status(200).json(screening);    
+	} catch (e) {
+		errorLog(e);
+		res.status(500).end();
+	}
+}
+
+async function getScreeningsFromMovieByFilter(req, res) {
 	try {
 		const { movie } = req.params;
 
@@ -79,9 +99,9 @@ async function getScreeningsFromMovie(req, res) {
 		res.status(500).end();
 	}
 }
-
 module.exports = {
 	getScreenings,
 	getScreeningById,
 	getScreeningsFromMovie,
+  getScreeningsFromMovieByFilter
 };
