@@ -2,7 +2,12 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const errorLog = require("../utils/errorLog");
 const { validateBody } = require("../utils/validation");
-const { userExists, getBookings, validateEmail } = require("../utils/user");
+const {
+	userExists,
+	getBookings,
+	validateEmail,
+	validatePassword,
+} = require("../utils/user");
 
 const whoami = async (req, res) => {
 	try {
@@ -74,6 +79,11 @@ async function register(req, res) {
 		return res.status(422).json({ error: "Invalid email." });
 	}
 
+	const errors = validatePassword(password);
+	if (errors.length > 0) {
+		return res.status(422).json({ errors });
+	}
+
 	try {
 		if (await userExists({ email, phone })) {
 			return res.status(422).json({
@@ -119,9 +129,17 @@ async function update(req, res) {
 		if (!match) return res.status(401).end();
 
 		if (email && email !== user.email && (await User.exists({ email }))) {
-			return res.status(422).json({ error: "Email has already taken. Please choose another one." });
-		} else if (phone && phone !== user.phone && (await User.exists({ phone }))) {
-			return res.status(422).json({ error: "Phone has already taken. Please choose another one." });
+			return res
+				.status(422)
+				.json({ error: "Email has already taken. Please choose another one." });
+		} else if (
+			phone &&
+			phone !== user.phone &&
+			(await User.exists({ phone }))
+		) {
+			return res
+				.status(422)
+				.json({ error: "Phone has already taken. Please choose another one." });
 		}
 
 		const data = {
@@ -139,7 +157,10 @@ async function update(req, res) {
 		req.session.user = user;
 
 		user.bookings = await getBookings(user);
-		res.status(200).json({success:"Information has been edited successfully!", obj: Object.assign(user, data)});
+		res.status(200).json({
+			success: "Information has been edited successfully!",
+			obj: Object.assign(user, data),
+		});
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
