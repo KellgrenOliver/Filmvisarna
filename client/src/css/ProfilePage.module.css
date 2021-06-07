@@ -77,10 +77,23 @@
 	width: 100%;
 	text-align: left;
 	padding: 10px;
+	border-radius: 10px;
+	height: 40px;
+	border: none;
 }
 
 .info hr {
 	margin: 0 0 1rem 0;
+}
+
+.bookingContainer {
+	width: 100%;
+	text-align: left;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: white;
+	border: none;
+	margin-bottom: 1rem;
 }
 
 
