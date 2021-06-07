@@ -1,25 +1,27 @@
-import { useContext } from "react"
-import { MovieContext } from "../contexts/MoviesProvider"
+import { useContext, useEffect } from "react";
+import { MovieContext } from "../contexts/MoviesProvider";
 import styles from "../css/FilterGroup.module.css";
 
 const Search = () => {
-  const { search } = useContext(MovieContext);
+	const { setSearchString } = useContext(MovieContext);
+	useEffect(() => {
+		return () => {
+			setSearchString("");
+		};
+	}, []);
 
-  const handleSearch = (e) =>{
-    let searchString = `?search=${e.target.value}`
-    search(searchString)
-  }
-  
+	const handleSearch = (e) => {
+		setSearchString(`&search=${e.target.value}`);
+	};
+
 	return (
-		<div>
 			<input
-				className={styles.searchField}
+				id={styles.searchField}
 				type="text"
 				placeholder="Search..."
 				name="search"
 				onChange={handleSearch}
 			></input>
-		</div>
 	);
 };
 

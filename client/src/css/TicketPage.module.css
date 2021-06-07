@@ -1,0 +1,134 @@
+.header {
+	color: white;
+	text-align: center;
+}
+
+.ticketPage {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.container {
+	text-align: center;
+	padding: 5px 5px 5px;
+	background-color: rgb(235, 235, 235);
+	width: 70%;
+	border-radius: 10px;
+	margin: auto;
+	padding: 2rem;
+}
+
+.bioduk {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	margin: auto;
+	color: white;
+	background-color: rgb(85, 11, 27);
+	width: 90%;
+	height: 50px;
+}
+
+.title {
+	color: rgb(85, 11, 27);
+}
+
+.platserContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.tPlatser {
+	width: 30px;
+	height: 30px;
+	border: 1px solid black;
+	background-color: rgb(192, 192, 192);
+}
+
+.oPlatser {
+	width: 30px;
+	height: 30px;
+	border: 1px solid black;
+	background-color: rgb(195, 44, 44);
+}
+
+.dStolval {
+	width: 30px;
+	height: 30px;
+	border: 1px solid black;
+	background-color: rgb(233, 170, 36);
+}
+
+.platserTitle {
+	margin-right: 1rem;
+	margin-left: 1rem;
+	display: flex;
+	align-items: center;
+}
+
+.numberInput {
+	width: 70px !important;
+	height: 30px !important;
+}
+
+.numberContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.titleContainer {
+	display: flex;
+	justify-content: center;
+}
+
+h5 {
+	margin: 2rem;
+	font-size: 1.2rem;
+}
+
+h6 {
+	margin: 0.25rem;
+}
+
+.ticketTitle {
+	margin-left: 2rem;
+	margin-right: 0.5rem;
+}
+
+.img {
+	width: 200px;
+	height: 320px;
+	margin: 2rem;
+	border-radius: 10px;
+}
+
+.payContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	width: 50%;
+}
+
+.pay {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.button {
+	font-size: 1rem;
+	background-color: rgb(85, 11, 27);
+	color: white;
+	border: none;
+	width: 200px;
+	height: 50px;
+}
+
+.button:hover {
+	cursor: pointer;
+	background-color: rgb(51, 5, 15);
+}

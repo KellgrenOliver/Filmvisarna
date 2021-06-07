@@ -15,11 +15,11 @@ const getMoviesByFilter = async (req, res) => {
     let querySearch = new RegExp(`${req.query.search ?? ""}\\w*`, "gi");
     let queryLengthMin = req.query.lengthMin ?? 0;
     let queryLengthMax = req.query.lengthMax ?? Infinity;
-    let queryLanguage = new RegExp(`^${req.query.language ?? ""}\\w*`, 'gi');
-    let queryGenre = new RegExp(`^${req.query.genre ?? ""}\\w*`, 'gi');
-    let queryDirector = new RegExp(`^${req.query.director ?? ""}\\w*`, 'gi');
-    let queryStar = new RegExp(`^${req.query.star ?? ""}\\w*`, 'gi');
-    let queryRating = new RegExp(`^${req.query.rating ?? ""}\\w*`, 'gi');
+    let queryLanguage = new RegExp(`^${req.query.language ?? ""}`, 'gi');
+    let queryGenre = new RegExp(`^${req.query.genres ?? ""}`, 'gi');
+    let queryDirector = new RegExp(`^${req.query.directors ?? ""}`, 'gi');
+    let queryStar = new RegExp(`^${req.query.stars ?? ""}`, 'gi');
+    let queryRating = new RegExp(`${req.query.rating ?? ""}$`, 'gi');
 
     let movies = await Movie.find({
         language: queryLanguage,
@@ -47,7 +47,7 @@ const getMoviesByFilter = async (req, res) => {
 
     if (movies.length === 0) {
       res.status(404).json({
-        error: "The movies doesn't match"
+        error: "No movies matched"
       })
       return
     }
