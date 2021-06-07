@@ -20,8 +20,14 @@ async function getBookings(user) {
 	if (!user) user = req.session.user;
 	return await Booking.where({ user }).populate([
 		"auditorium",
-		"screening",
-		"seats"]);
+		{
+			path: "screening",
+			populate: {
+				path: "movie"
+			},
+		},
+		"seats",
+	]);
 }
 
 async function userExists({ email, phone }) {

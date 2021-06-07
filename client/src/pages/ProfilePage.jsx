@@ -153,7 +153,7 @@ const ProfilePage = (props) => {
 							<div className={styles.flex}>
 								<div>
 									<div>
-										Movie: 
+									<span>Movie title: {booking?.screening.movie.title} </span>
 									</div>
 									{booking.seats.map((seat, i) => (
 										<div key={i}>
