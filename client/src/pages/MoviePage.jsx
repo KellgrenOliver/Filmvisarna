@@ -80,9 +80,7 @@ const Movie = (props) => {
 						<b>Rating:</b> {movie.rating}
 					</span>
 				</div>
-        <div>
           <FilterScreeningGroup />
-        </div>
 				{message ? <h3>{message}</h3> : ""}
 				<div>
 					{!filteredMovieScreenings

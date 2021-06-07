@@ -3,7 +3,6 @@ import { ScreeningContext } from "../contexts/ScreeningProvider";
 import Price from "./Price";
 import Dates from "./Dates";
 import styles from "../css/FilterScreeningGroup.module.css";
-import { set } from "mongoose";
 const FilterScreeningGroup = () => {
 	const {
 		setStartDate,
@@ -33,14 +32,12 @@ const FilterScreeningGroup = () => {
 
 	return (
 		<div className={styles.groupContainer}>
-			<div className={styles.filterContainer}>
 				<Price
 					items={priceItems}
 					setPriceMin={setPriceMin}
 					setPriceMax={setPriceMax}
 				/>
 				<Dates setStartDate={setStartDate} setEndDate={setEndDate} />
-			</div>
 		</div>
 	);
 };

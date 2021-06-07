@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { ScreeningContext } from "../contexts/ScreeningProvider";
-import Items from "./Items"
-import styles from "../css/FilterGroup.module.css";
+
+import styles from "../css/FilterScreeningGroup.module.css";
 const Price = (props) => {
 
 	const handleOnChange = (e) => {
@@ -15,9 +13,9 @@ const Price = (props) => {
 	};
   
 	return (
-		<div className={styles.customSelect}>
-			<select className={styles.select} onChange={handleOnChange}>
-				<option className={styles.option} value="">
+		<div id={styles.customSelect}>
+			<select id={styles.select} onChange={handleOnChange}>
+				<option id={styles.option} value="">
 					Price:
 				</option>
 				{props.items &&

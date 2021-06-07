@@ -1,5 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../css/FilterScreeningGroup.module.css";
 const Dates = (props) => {
@@ -27,12 +29,12 @@ const Dates = (props) => {
 	};
 
 	return (
-		<div className={styles.customSelect}>
+		<div id={styles.customSelect}>
 			<DatePicker
 				selected={date}
 				onChange={handleChange}
 				customInput={
-					<button className={styles.selectDate}>Date: {pickerDate}</button>
+					<button className={styles.selectDate}><FontAwesomeIcon icon={faCalendarAlt} color="rgb(71, 7, 24)" size ="lg"/> {pickerDate}</button>
 				}
 			/>
 		</div>

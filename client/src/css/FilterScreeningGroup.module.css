@@ -1,0 +1,38 @@
+.groupContainer {
+  margin:1rem;
+	display: flex;
+	justify-content:flex-end;
+}
+
+#customSelect{
+  margin-right:2rem;
+  border:none;
+  border-bottom: rgb(71, 7, 24);
+}
+
+#select{
+	padding-top: 5px;
+	padding-bottom: 4.5px;
+	padding-left: 5px;
+	color: black;
+	background-color:rgb(235,235,235);
+	border: 0px;
+	border-bottom:rgb(71, 7, 24) 3px solid;
+	width: 9rem;
+}
+
+.selectDate {
+  text-align: left;
+  padding-top: 5px;
+	padding-bottom: 4.5px;
+	padding-left: 5px;
+	color: black;
+	background-color:rgb(235,235,235);
+	border: 0px;
+  width: 9rem;
+}
+
+
+#option{
+	color: black;
+} 
