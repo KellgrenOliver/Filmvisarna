@@ -48,7 +48,7 @@ const FilterScreeningGroup = () => {
 					setPriceMin={setPriceMin}
 					setPriceMax={setPriceMax}
 				/>
-				<button type="reset" onClick={handleReset}>
+				<button className={styles.resetButton} type="reset" onClick={handleReset}>
 					reset
 				</button>
 			</form>
