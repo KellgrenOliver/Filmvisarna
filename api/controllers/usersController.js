@@ -10,6 +10,7 @@ const whoami = async (req, res) => {
 		user.password = undefined;
 
 		user.bookings = await getBookings(user._id);
+		user.password = undefined;
 		res.status(200).json(user);
 	} catch (e) {
 		errorLog(e);
