@@ -1,5 +1,6 @@
 import { MovieContext } from "../contexts/MoviesProvider";
 import { ScreeningContext } from "../contexts/ScreeningProvider";
+import { BookingContext } from "../contexts/BookingProvider";
 import { useContext, useEffect } from "react";
 import React from "react";
 import { useHistory } from "react-router-dom";
@@ -13,14 +14,18 @@ const TicketPage = (props) => {
 	const { findMovie } = useContext(MovieContext);
 	const movie = findMovie(props.match.params.movieId);
 	const { getScreeningById, screening } = useContext(ScreeningContext);
+	const { getAuditoriumById, auditorium } = useContext(BookingContext);
 
 	const history = useHistory();
 
 	useEffect(() => {
 		getScreeningById(props.match.params.screeningId);
+		getAuditoriumById(props.match.params.auditoriumId);
+		console.log(props.match.params.auditoriumId);
 	}, []);
+	console.log("hej");
 
-	if (!movie || !screening) {
+	if (!movie || !screening || !auditorium) {
 		return <h1 className={styles.header}>Loading...</h1>;
 	}
 
@@ -31,8 +36,6 @@ const TicketPage = (props) => {
 			history.push(`/booking/${movie._id}/${screening._id}`);
 		}
 	};
-
-	console.log(screening.auditorium.id.seats);
 
 	const content = () => (
 		<div className={styles.ticketPage}>
@@ -47,7 +50,14 @@ const TicketPage = (props) => {
 				</div>
 				<h5>1. Choose seats</h5>
 				<h5 className={styles.bioduk}>S C R E E N</h5>
-				<h5>Seats</h5>
+				<div key={auditorium.id}>
+					{auditorium.seats.map((seat) => (
+						<div>
+							<span className={styles.seats}>{seat.row}</span>
+							<span className={styles.seats}>{seat.id}</span>
+						</div>
+					))}
+				</div>
 				<div className={styles.platserContainer}>
 					<div className={styles.tPlatser} />
 					<span className={styles.platserTitle}>Available seats</span>
@@ -96,7 +106,11 @@ const TicketPage = (props) => {
 			</div>
 		</div>
 	);
-	return <div>{screening && content()}</div>;
+	return (
+		<div>
+			<div>{content()}</div>
+		</div>
+	);
 };
 
 export default TicketPage;

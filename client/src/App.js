@@ -30,7 +30,7 @@ const App = () => {
 								<Route exact path="/createUser" component={CreateUser} />
 								<Route
 									exact
-									path="/ticket/:movieId/:screeningId"
+									path="/ticket/:movieId/:screeningId/:auditoriumId"
 									component={TicketPage}
 								/>
 								<Route
