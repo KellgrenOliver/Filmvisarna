@@ -2,11 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
+import { MovieContext } from "../contexts/MoviesProvider";
 
 const ProfilePage = (props) => {
 	const [editMode, setEditMode] = useState(false);
 	const { whoami, user, updateUserInfo, message, setMessage } =
 		useContext(UserContext);
+	const { movies, movie} = useContext(MovieContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
@@ -142,6 +144,8 @@ const ProfilePage = (props) => {
 				</div>
 			);
 		}
+		debugger;
+		console.log(booking);
 
 		const renderBookings = () => {
 			return user.bookings.map((booking, i) => (
@@ -152,7 +156,13 @@ const ProfilePage = (props) => {
 								<div>
 									<div>
 										{/* <span>Screening:{booking?.screening._id}</span> */}
-										<span>Movie: Green Mile </span>
+										{/* <span>Movie:{movie} </span> */}
+										{booking.movies.map((movie, i) => (
+										<div key={i}>
+											Movie: {movie.title}
+											
+										</div>
+									))}
 									</div>
 									{booking.seats.map((seat, i) => (
 										<div key={i}>
