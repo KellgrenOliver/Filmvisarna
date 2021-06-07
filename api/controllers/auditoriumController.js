@@ -36,7 +36,7 @@ async function getAuditoriumById(req, res) {
 	try {
 		const auditorium = await Auditorium.findOne({ _id: id });
 
-		if (!auditorium?.length) {
+		if (!auditorium) {
 			return res.status(404).end();
 		}
 
