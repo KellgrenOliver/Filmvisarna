@@ -16,6 +16,10 @@ async function getAuditoria(req, res) {
 	try {
 		const auditoria = await Auditorium.find();
 
+		if (!auditoria.length) {
+			return res.status(404).end();
+		}
+
 		for (let i = 0; i < auditoria.length; i++) {
 			await addRelations(auditoria[i]);
 		}
@@ -31,6 +35,11 @@ async function getAuditoriumById(req, res) {
 	const { id } = req.params;
 	try {
 		const auditorium = await Auditorium.findOne({ _id: id });
+
+		if (!auditorium?.length) {
+			return res.status(404).end();
+		}
+
 		await addRelations(auditorium);
 		res.status(200).json(auditorium);
 	} catch (e) {
