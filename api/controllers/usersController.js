@@ -108,7 +108,7 @@ async function register(req, res) {
 
 async function update(req, res) {
 	if (!validateBody(req.body, ["oldPassword"])) {
-		return res.status(400).json({ error: "Please fill required fields." });
+		return res.status(400).json({ error: "Please fill all the fields." });
 	}
 
 	const { email, phone, oldPassword, newPassword } = req.body;
@@ -129,18 +129,10 @@ async function update(req, res) {
 
 		if (!match) return res.status(401).end();
 
-		if (email && email !== user.email && (await User.exists({ email }))) {
-			return res
-				.status(422)
-				.json({ error: "Email has already taken. Please choose another one." });
-		} else if (
-			phone &&
-			phone !== user.phone &&
-			(await User.exists({ phone }))
-		) {
-			return res
-				.status(422)
-				.json({ error: "Phone has already taken. Please choose another one." });
+		if (email && (await User.exists({ email }))) {
+			return res.status(422).json({ error: "Email must not be taken." });
+		} else if (phone && (await User.exists({ phone }))) {
+			return res.status(422).json({ error: "Phone number must not be taken." });
 		}
 
 		const data = {
@@ -157,11 +149,7 @@ async function update(req, res) {
 		data.password = undefined;
 		req.session.user = user;
 
-		user.bookings = await getBookings(user);
-		res.status(200).json({
-			success: "Information has been edited successfully!",
-			obj: Object.assign(user, data),
-		});
+		res.status(200).json(Object.assign(user, data));
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
