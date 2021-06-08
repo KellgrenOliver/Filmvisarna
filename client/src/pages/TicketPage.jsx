@@ -2,26 +2,28 @@ import { MovieContext } from "../contexts/MoviesProvider";
 import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { BookingContext } from "../contexts/BookingProvider";
 import { useContext, useEffect, useState } from "react";
-import React from "react";
-import { useHistory } from "react-router-dom";
 import styles from "../css/TicketPage.module.css";
 import dayjs from "dayjs";
-import _ from "lodash";
+import _, { indexOf } from "lodash";
 import { getTicketsPrice } from "../utils/seats";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import CounterInput from "react-counter-input";
 import Seat from "../components/Seat";
+import TicketCounter from "../components/TicketCounter";
 
 dayjs.extend(advancedFormat);
 
+const MAX_SELECT = 5;
+
 const TicketPage = (props) => {
 	const [selectedSeats, setSelectedSeats] = useState([]);
+	const [hoveredSeats, setHoveredSeats] = useState([]);
+
 	const { findMovie } = useContext(MovieContext);
-	const movie = findMovie(props.match.params.movieId);
 	const { getScreeningById, screening } = useContext(ScreeningContext);
 	const { getAuditoriumById, auditorium } = useContext(BookingContext);
 
-	const history = useHistory();
+	const movie = findMovie(props.match.params.movieId);
 
 	useEffect(() => {
 		getScreeningById(props.match.params.screeningId);
@@ -32,16 +34,33 @@ const TicketPage = (props) => {
 		return <h1 className={styles.header}>Loading...</h1>;
 	}
 
-	const selectSeat = (seat) => {
-		setSelectedSeats((selectedSeats) => [...selectedSeats, seat]);
+	const getSeatsToRight = (seat, row = []) => {
+		const seats = [];
+		for (let i = row.indexOf(seat); i < row.length; i++) {
+			seats.push(row[i]);
+			if (seats.length >= MAX_SELECT) break;
+		}
+		return seats;
 	};
+
+	const hoverSeats = (seat, row) => {
+		const seats = getSeatsToRight(seat, row);
+		const hoveredSeats = [];
+		for (let i = 0; i < seats.length; i++) {
+			if (isBooked(seats[i])) break;
+			hoveredSeats.push(seats[i]);
+		}
+		setHoveredSeats(hoveredSeats);
+	};
+
+	const selectHovered = () => setSelectedSeats(hoveredSeats);
 
 	const checkSeats = async () => {
 		if (!selectedSeats.length) {
 			return alert("You need to pick your seats");
 		}
-		const response = await fetch("/api/v1/bookings", {
-			method: "post",
+		const { status } = await fetch("/api/v1/bookings", {
+			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -50,49 +69,31 @@ const TicketPage = (props) => {
 				screeningId: screening._id,
 			}),
 		});
-		if (response.status === 200) {
-			setSelectedSeats([]);
-			history.push(`/booking/${movie._id}/${screening._id}`);
+		if (status === 200) {
+			// setSelectedSeats([]); // TODO: gör en check att om användaren bokat biljetter från denna screening, rediracta bort, och ta bort denna rad när ni är klara
+			props.history.push(`/booking/${movie._id}/${screening._id}`);
 		} else {
-			alert("Something went wrong..");
+			alert("Something went wrong!");
 		}
 	};
 
 	const groupSeats = () => {
-		let chunks = [];
+		let rows = [];
 		let seats = _.groupBy(auditorium.seats, "row");
 		for (const property in seats) {
-			chunks.push(seats[property]);
+			rows.push(seats[property]);
 		}
-		return chunks;
+		return rows;
 	};
 
-	const toggleSeat = (seat) => {
-		if (seatExists(seat)) {
-			removeSeat(seat);
-		} else {
-			selectSeat(seat);
-		}
-	};
+	const isBooked = (seat) =>
+		screening.bookedSeats.some((bookedSeat) => bookedSeat._id === seat._id);
 
-	const removeSeat = (seatToRemove) => {
-		setSelectedSeats((seats) =>
-			seats.filter((seat) => seat._id !== seatToRemove._id)
-		);
-	};
+	const isSelected = (seatToFind) =>
+		selectedSeats.some((seat) => seat._id === seatToFind._id);
 
-	console.log(auditorium.seats);
-
-	const isBooked = (seat) => {
-		return screening.bookedSeats.some((element) => {
-			console.log(element, seat, element._id === seat._id);
-			return element._id === seat._id;
-		});
-	};
-
-	const seatExists = (seatToFind) => {
-		return selectedSeats.some((seat) => seat._id === seatToFind._id);
-	};
+	const isHovered = (seatToFind) =>
+		hoveredSeats.some((seat) => seat._id === seatToFind._id);
 
 	const content = () => (
 		<div className={styles.ticketPage}>
@@ -103,7 +104,7 @@ const TicketPage = (props) => {
 					<h5>{dayjs(screening.time).format("MMMM Do HH:mm")}</h5>
 					<h5>Language: {movie.language}</h5>
 				</div>
-				<h5 className={styles.bioduk}>S C R E E N</h5>
+				<h5 className={styles.bioduk}>SCREEN</h5>
 				<div>
 					<div className={styles.numberContainer}>
 						<div className={styles.counter}>
@@ -121,14 +122,19 @@ const TicketPage = (props) => {
 					</div>
 					<div key={auditorium.id}>
 						<div className={styles.seatContainer}>
-							{groupSeats().map((chunk, i) => (
+							{groupSeats().map((row, i) => (
 								<div key={i} className={styles.seatRow}>
-									{chunk.map((seat, i) => (
+									{row.map((seat) => (
 										<Seat
-											active={seatExists(seat)}
-											toggle={toggleSeat}
 											seat={seat}
+											row={row}
+											active={isSelected(seat)}
+											isHovered={isHovered(seat)}
 											isBooked={isBooked(seat)}
+											hoverSeats={hoverSeats}
+											selectHovered={selectHovered}
+											setHoveredSeats={setHoveredSeats}
+											key={seat._id}
 										/>
 									))}
 								</div>
@@ -150,7 +156,7 @@ const TicketPage = (props) => {
 					<div className={styles.pay}>
 						<div>
 							{selectedSeats.map((seat) => (
-								<div className={styles.ticket}>
+								<div className={styles.ticket} key={seat._id}>
 									<span>
 										Row:<b>{seat.row}</b> Seat:<b>{seat.id}</b> Price:
 										<b>{screening.price}SEK</b>
@@ -158,7 +164,9 @@ const TicketPage = (props) => {
 								</div>
 							))}
 						</div>
-						<h6>Total: {getTicketsPrice(selectedSeats, screening.price)}SEK</h6>
+						<h6>
+							Total: {getTicketsPrice(selectedSeats, screening.price)} SEK
+						</h6>
 						<button onClick={checkSeats} className={styles.button}>
 							Book
 						</button>
