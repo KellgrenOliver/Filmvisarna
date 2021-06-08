@@ -55,6 +55,10 @@ const ProfilePage = () => {
 			setEditMode(false);
 		}
 	};
+
+	const deleteHandler = () => {
+		console.log(user);
+	}
 	// to be able to edit the information in input
 	useEffect(() => {
 		if (user) {
@@ -186,7 +190,7 @@ const ProfilePage = () => {
 									</div>
 								</div>
 								<div>
-									<button className={styles.btnCancel}>Delete</button>
+									<button className={styles.btnCancel} onClick={deleteHandler}>Delete</button>
 								</div>
 							</div>
 						</div>
