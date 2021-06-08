@@ -56,8 +56,9 @@ const ProfilePage = () => {
 		}
 	};
 
-	const deleteHandler = () => {
-		console.log(user);
+	const deleteHandler = (id) => {
+    console.log(id)
+		console.log(user.bookings.filter((book)=>book._id));
 	}
 	// to be able to edit the information in input
 	useEffect(() => {
@@ -161,8 +162,8 @@ const ProfilePage = () => {
 		}
 		
 		const renderBookings = () => {
-			return user.bookings.map((booking, i) => (
-				<div className={styles.flex} key={i}>
+			return user.bookings.map((booking) => (
+				<div className={styles.flex} key={booking._id}>
 					<div className={styles.booking}>
 						<div className={styles.bookingContainer}>
 							<div className={styles.flex}>
@@ -190,7 +191,7 @@ const ProfilePage = () => {
 									</div>
 								</div>
 								<div>
-									<button className={styles.btnCancel} onClick={deleteHandler}>Delete</button>
+									<button className={styles.btnCancel} onClick={()=>deleteHandler(booking._id)}>Delete</button>
 								</div>
 							</div>
 						</div>
