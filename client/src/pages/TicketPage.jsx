@@ -106,8 +106,16 @@ const TicketPage = (props) => {
 				<h5 className={styles.bioduk}>S C R E E N</h5>
 				<div>
 					<div className={styles.numberContainer}>
-						<h6>Select number of tickets</h6>
 						<div className={styles.counter}>
+							<h6>Adult</h6>
+							<CounterInput min={0} max={4} onCountChange={(count) => count} />
+						</div>
+						<div className={styles.counter}>
+							<h6>Senior</h6>
+							<CounterInput min={0} max={4} onCountChange={(count) => count} />
+						</div>
+						<div className={styles.counter}>
+							<h6>Child</h6>
 							<CounterInput min={0} max={4} onCountChange={(count) => count} />
 						</div>
 					</div>
