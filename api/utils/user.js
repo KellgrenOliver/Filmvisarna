@@ -20,9 +20,13 @@ async function getBookings(user) {
 	if (!user) user = req.session.user;
 	return await Booking.where({ user }).populate([
 		"auditorium",
-		"screening",
+		{
+			path: "screening",
+			populate: {
+				path: "movie"
+			},
+		},
 		"seats",
-		"movie",
 	]);
 }
 

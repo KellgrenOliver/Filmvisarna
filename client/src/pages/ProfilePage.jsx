@@ -2,8 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
+import dayjs from "dayjs";
 
-const ProfilePage = (props) => {
+const ProfilePage = () => {
 	const [editMode, setEditMode] = useState(false);
 	const { whoami, user, updateUserInfo, message, setMessage } =
 		useContext(UserContext);
@@ -12,6 +13,18 @@ const ProfilePage = (props) => {
 	const [newPassword, setNewPassword] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const history = useHistory();
+
+	const getSeatValueWeight = (seatType) => {
+		switch (seatType.toLowerCase()) {
+			case "senior":
+				return 0.8;
+			case "child":
+				return 0.7;
+			default:
+				return 1;
+		}
+	}
+
 
 	const onEdit = () => {
 		setMessage(null);
@@ -69,10 +82,10 @@ const ProfilePage = (props) => {
 
 		if (!editMode) {
 			emailContent = (
-				<span className={styles.infoDetail}>Email: {user.email}</span>
+				<span className={styles.infoDetail}><b>Email:</b>{" "}{user.email}</span>
 			);
 			phoneContent = (
-				<span className={styles.infoDetail}>Phone number: {user.phone}</span>
+				<span className={styles.infoDetail}><b>Phone number:</b>{" "}{user.phone}</span>
 			);
 			buttonContent = (
 				<button className={styles.mainBtn} onClick={onEdit}>
@@ -82,7 +95,7 @@ const ProfilePage = (props) => {
 		} else {
 			emailContent = (
 				<div>
-					<label>Email address</label>
+					<label><b>Email address: </b></label>
 					<input
 						type="text"
 						id={styles.emailinput}
@@ -93,7 +106,7 @@ const ProfilePage = (props) => {
 			);
 			passwordContent = (
 				<div>
-					<label>Current password (required)</label>
+					<label><b>Current password (required): </b></label>
 					<input
 						type="password"
 						id={styles.passwordinput}
@@ -103,7 +116,7 @@ const ProfilePage = (props) => {
 			);
 			newPasswordContent = (
 				<div>
-					<label>New password</label>
+					<label><b>New password: </b></label>
 					<input
 						type="password"
 						id={styles.newpasswordinput}
@@ -114,7 +127,7 @@ const ProfilePage = (props) => {
 			);
 			phoneContent = (
 				<div>
-					<label>Phone Number</label>
+					<label><b>Phone Number: </b></label>
 					<input
 						type="text"
 						id={styles.numberinput}
@@ -142,7 +155,7 @@ const ProfilePage = (props) => {
 				</div>
 			);
 		}
-
+		
 		const renderBookings = () => {
 			return user.bookings.map((booking, i) => (
 				<div className={styles.flex} key={i}>
@@ -151,20 +164,25 @@ const ProfilePage = (props) => {
 							<div className={styles.flex}>
 								<div>
 									<div>
-										{/* <span>Screening:{booking?.screening._id}</span> */}
-										<span>Movie: Green Mile </span>
+									<span><b>Movie title:</b>{booking?.screening.movie.title} </span>
 									</div>
 									{booking.seats.map((seat, i) => (
 										<div key={i}>
-											Seat: {seat.row}
+											<b>Seat: </b>{seat.row}
 											{seat.id}
+											{" "}
+											{seat.type}
 										</div>
+										
 									))}
+
 									<div>
-										<span>Time: </span>
+										<span><b>Time: </b>{dayjs(booking?.screening.time).format("MMMM Do HH:mm")}</span>
 									</div>
 									<div>
-										<span>Price: </span>
+										<span><b>Price:</b>{ booking.seats.reduce( (acc, seat) => {
+											return acc + (booking.screening.price * getSeatValueWeight(seat.type))
+										},0) }</span>
 									</div>
 								</div>
 								<div>
