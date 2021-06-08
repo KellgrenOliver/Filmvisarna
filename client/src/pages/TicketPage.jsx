@@ -6,12 +6,11 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import styles from "../css/TicketPage.module.css";
 import dayjs from "dayjs";
-import _, { forEach } from "lodash";
+import _ from "lodash";
 import { getTicketsPrice } from "../utils/seats";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import CounterInput from "react-counter-input";
 import Seat from "../components/Seat";
-import { json } from "express";
 
 dayjs.extend(advancedFormat);
 
