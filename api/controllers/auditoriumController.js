@@ -17,7 +17,7 @@ async function getAuditoria(req, res) {
 		const auditoria = await Auditorium.find();
 
 		if (!auditoria.length) {
-			return res.status(404).end();
+			return res.status(202).json(auditoria);
 		}
 
 		for (let i = 0; i < auditoria.length; i++) {
