@@ -159,17 +159,20 @@ h6 {
 	cursor: pointer;
 }
 
-.seatBox:hover {
-	background-color: rgb(233, 170, 36);
-	box-shadow: darkgray 5px 5px 5px;
+.seatBox:hover:not(.seatBoxActive, .seatBoxBooked) {
+	background-color: rgb(139, 139, 139);
 }
 .seatBoxActive {
 	background-color: rgb(233, 170, 36);
-	box-shadow: darkgray 5px 5px 5px;
 }
 .seatBoxInactive {
-	background-color: gray;
+	background-color: rgb(192, 192, 192);
 }
+
+.seatBoxBooked {
+	background-color: rgb(195, 44, 44);
+}
+
 .seatRow {
 	display: flex;
 }

@@ -6,11 +6,12 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import styles from "../css/TicketPage.module.css";
 import dayjs from "dayjs";
-import _ from "lodash";
+import _, { forEach } from "lodash";
 import { getTicketsPrice } from "../utils/seats";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import CounterInput from "react-counter-input";
-import Seats from "../components/Seats";
+import Seat from "../components/Seat";
+import { json } from "express";
 
 dayjs.extend(advancedFormat);
 
@@ -21,30 +22,40 @@ const TicketPage = (props) => {
 	const { getScreeningById, screening } = useContext(ScreeningContext);
 	const { getAuditoriumById, auditorium } = useContext(BookingContext);
 
-	const [state, setState] = useState("");
-
 	const history = useHistory();
 
 	useEffect(() => {
 		getScreeningById(props.match.params.screeningId);
 		getAuditoriumById(props.match.params.auditoriumId);
-		console.log(props.match.params.auditoriumId);
 	}, []);
 
 	if (!movie || !screening || !auditorium) {
 		return <h1 className={styles.header}>Loading...</h1>;
 	}
 
-	const checkSeats = () => {
-		if (movie === null) {
-			alert("You need to pick your seats");
-		} else {
-			history.push(`/booking/${movie._id}/${screening._id}`);
-		}
-	};
-
 	const selectSeat = (seat) => {
 		setSelectedSeats((selectedSeats) => [...selectedSeats, seat]);
+	};
+
+	const checkSeats = async () => {
+		// if (!selectedSeats.length) {
+		// 	return alert("You need to pick your seats");
+		// }
+		// const response = await fetch("api/v1/bookings", {
+		// 	method: "post",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 	},
+		// 	body: JSON.stringify({
+		// 		seats: selectedSeats,
+		// 		screeningId: screening._id,
+		// 	}),
+		// });
+		// if (response.status === 200) {
+		// 	history.push(`/booking/${movie._id}/${screening._id}`);
+		// } else {
+		// 	alert("Something went wrong..");
+		// }
 	};
 
 	const groupSeats = () => {
@@ -54,6 +65,33 @@ const TicketPage = (props) => {
 			chunks.push(seats[property]);
 		}
 		return chunks;
+	};
+
+	const toggleSeat = (seat) => {
+		if (seatExists(seat)) {
+			removeSeat(seat);
+		} else {
+			selectSeat(seat);
+		}
+	};
+
+	const removeSeat = (seatToRemove) => {
+		setSelectedSeats((seats) =>
+			seats.filter((seat) => seat._id !== seatToRemove._id)
+		);
+	};
+
+	console.log(auditorium.seats);
+
+	const isBooked = (seat) => {
+		return screening.bookedSeats.some((element) => {
+			console.log(element, seat, element._id === seat._id);
+			return element._id === seat._id;
+		});
+	};
+
+	const seatExists = (seatToFind) => {
+		return selectedSeats.some((seat) => seat._id === seatToFind._id);
 	};
 
 	const content = () => (
@@ -78,7 +116,12 @@ const TicketPage = (props) => {
 							{groupSeats().map((chunk, i) => (
 								<div key={i} className={styles.seatRow}>
 									{chunk.map((seat, i) => (
-										<Seats onClick={() => selectSeat(seat)} />
+										<Seat
+											active={seatExists(seat)}
+											toggle={toggleSeat}
+											seat={seat}
+											isBooked={isBooked(seat)}
+										/>
 									))}
 								</div>
 							))}
@@ -107,9 +150,7 @@ const TicketPage = (props) => {
 								</div>
 							))}
 						</div>
-						<h6>
-							Total price:{getTicketsPrice(selectedSeats, screening.price)}SEK
-						</h6>
+						<h6>Total: {getTicketsPrice(selectedSeats, screening.price)}SEK</h6>
 						<button onClick={checkSeats} className={styles.button}>
 							Book
 						</button>
