@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
 import dayjs from "dayjs";
 
 const RenderBookings = () => {
-	const { whoami, user, deleteBooking } = useContext(UserContext);
+	const { user, deleteBooking } = useContext(UserContext);
 
 	const getSeatValueWeight = (seatType) => {
 		switch (seatType.toLowerCase()) {

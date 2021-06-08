@@ -61,7 +61,6 @@ const ProfilePage = () => {
 	if (!user) {
 		return null; // redirect it to homePage
 	} else {
-		
 		let emailContent;
 		let passwordContent;
 		let newPasswordContent;
@@ -70,10 +69,14 @@ const ProfilePage = () => {
 
 		if (!editMode) {
 			emailContent = (
-				<span className={styles.infoDetail}><b>Email:</b>{" "}{user.email}</span>
+				<span className={styles.infoDetail}>
+					<b>Email:</b> {user.email}
+				</span>
 			);
 			phoneContent = (
-				<span className={styles.infoDetail}><b>Phone number:</b>{" "}{user.phone}</span>
+				<span className={styles.infoDetail}>
+					<b>Phone number:</b> {user.phone}
+				</span>
 			);
 			buttonContent = (
 				<button className={styles.mainBtn} onClick={onEdit}>
@@ -83,7 +86,9 @@ const ProfilePage = () => {
 		} else {
 			emailContent = (
 				<div>
-					<label><b>Email address: </b></label>
+					<label>
+						<b>Email address: </b>
+					</label>
 					<input
 						type="text"
 						id={styles.emailinput}
@@ -94,7 +99,9 @@ const ProfilePage = () => {
 			);
 			passwordContent = (
 				<div>
-					<label><b>Current password (required): </b></label>
+					<label>
+						<b>Current password (required): </b>
+					</label>
 					<input
 						type="password"
 						id={styles.passwordinput}
@@ -104,7 +111,9 @@ const ProfilePage = () => {
 			);
 			newPasswordContent = (
 				<div>
-					<label><b>New password: </b></label>
+					<label>
+						<b>New password: </b>
+					</label>
 					<input
 						type="password"
 						id={styles.newpasswordinput}
@@ -115,7 +124,9 @@ const ProfilePage = () => {
 			);
 			phoneContent = (
 				<div>
-					<label><b>Phone Number: </b></label>
+					<label>
+						<b>Phone Number: </b>
+					</label>
 					<input
 						type="text"
 						id={styles.numberinput}
@@ -143,9 +154,7 @@ const ProfilePage = () => {
 				</div>
 			);
 		}
-		
-		
-    console.log("hej")
+
 		return (
 			<div className={styles.container}>
 				<h3>Welcome!</h3>
@@ -167,7 +176,7 @@ const ProfilePage = () => {
 							<h6>Last bookings</h6>
 							<hr />
 						</div>
-           <RenderBookings />						
+						<RenderBookings />
 					</div>
 				</div>
 			</div>
