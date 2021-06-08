@@ -2,7 +2,12 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const errorLog = require("../utils/errorLog");
 const { validateBody } = require("../utils/validation");
-const { userExists, getBookings, validateEmail } = require("../utils/user");
+const {
+	userExists,
+	getBookings,
+	validateEmail,
+	validatePassword,
+} = require("../utils/user");
 
 const whoami = async (req, res) => {
 	try {
@@ -10,6 +15,7 @@ const whoami = async (req, res) => {
 		user.password = undefined;
 
 		user.bookings = await getBookings(user._id);
+		user.password = undefined;
 		res.status(200).json(user);
 	} catch (e) {
 		errorLog(e);
@@ -74,6 +80,11 @@ async function register(req, res) {
 		return res.status(422).json({ error: "Invalid email." });
 	}
 
+	const errors = validatePassword(password);
+	if (errors.length > 0) {
+		return res.status(422).json({ error: errors });
+	}
+
 	try {
 		if (await userExists({ email, phone })) {
 			return res.status(422).json({
@@ -97,7 +108,7 @@ async function register(req, res) {
 
 async function update(req, res) {
 	if (!validateBody(req.body, ["oldPassword"])) {
-		return res.status(400).json({ error: "Please fill required fields." });
+		return res.status(400).json({ error: "Please fill all the fields." });
 	}
 
 	const { email, phone, oldPassword, newPassword } = req.body;
@@ -118,18 +129,16 @@ async function update(req, res) {
 
 		if (!match) return res.status(401).end();
 
-		if (email && email !== user.email && (await User.exists({ email }))) {
-			return res.status(422).json({ error: "Email has already taken. Please choose another one." });
-		} else if (phone && phone !== user.phone && (await User.exists({ phone }))) {
-			return res.status(422).json({ error: "Phone has already taken. Please choose another one." });
+		if (email && (await User.exists({ email }))) {
+			return res.status(422).json({ error: "Email must not be taken." });
+		} else if (phone && (await User.exists({ phone }))) {
+			return res.status(422).json({ error: "Phone number must not be taken." });
 		}
 
-		const data = {
-			email: email ?? user.email,
-			phone: phone ?? user.phone,
-			password: newPassword ?? user.password,
-		};
+		const data = {};
 
+		if (email && email !== user.email) data.email = email;
+		if (phone && phone !== user.phone) data.phone = phone;
 		if (newPassword) data.password = await bcrypt.hash(newPassword, 10);
 
 		await User.findByIdAndUpdate(id, data);
@@ -138,8 +147,7 @@ async function update(req, res) {
 		data.password = undefined;
 		req.session.user = user;
 
-		user.bookings = await getBookings(user);
-		res.status(200).json({success:"Information has been edited successfully!", obj: Object.assign(user, data)});
+		res.status(200).json(Object.assign(user, data));
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();

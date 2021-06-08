@@ -2,6 +2,7 @@ const Auditorium = require("../models/Auditorium");
 const Seat = require("../models/Seat");
 const errorLog = require("./errorLog");
 const seats = require("../../seats.json");
+const Booking = require("../models/Booking");
 
 async function seatsSeeder() {
 	try {
@@ -22,14 +23,19 @@ async function seatsSeeder() {
 	}
 }
 
-function getTicketsPrice(seats = [], standard = 100) {
+function getTicketsPrice(seats = [], price = 100) {
 	if (!seats) return 0;
+
 	return seats.reduce((total, seat) => {
-		if (!seat.type) return total;
+		if (!seat) return total;
 
-		const calculatePrice = (multiplier) => total + standard * multiplier;
+		function calculatePrice(multiplier) {
+			const ticketPrice = price * multiplier;
+			seat.price = ticketPrice;
+			return total + ticketPrice;
+		}
 
-		switch (seat.type.toLowerCase()) {
+		switch (seat.type?.toLowerCase()) {
 			case "adult":
 				return calculatePrice(1);
 			case "senior":
@@ -42,7 +48,27 @@ function getTicketsPrice(seats = [], standard = 100) {
 	}, 0);
 }
 
+async function getBookedSeats(screening) {
+	try {
+		const bookings = await Booking.where({ screening: screening._id }).populate(
+			"seats"
+		);
+
+		const seats = new Set();
+		bookings.forEach((booking) => {
+			booking.seats.forEach((seat) => {
+				seats.add(seat);
+			});
+		});
+		return [...seats];
+	} catch (e) {
+		errorLog(e);
+		return [];
+	}
+}
+
 module.exports = {
 	seatsSeeder,
 	getTicketsPrice,
+	getBookedSeats,
 };

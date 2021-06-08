@@ -9,7 +9,7 @@ async function userSeeder() {
 		await User.create({
 			email: "test@test.com",
 			password: "123123",
-			phone: 1234567890,
+			phone: "1234567890",
 		});
 	} catch (e) {
 		errorLog(e);
@@ -40,9 +40,36 @@ function validateEmail(email) {
 	return regex.test(email);
 }
 
+function validatePassword(password) {
+	const errors = [];
+
+	if (password.length < 8) {
+		errors.push("Password must not be shorter than 8 characters.");
+	} else if (password.length > 60) {
+		errors.push("Password must not be greater than 60 characters.");
+	}
+
+	// One digit
+	if (!/(?=.*[0-9])/.test(password)) {
+		errors.push("Password must contain at least one digit.");
+	}
+
+	// One lower case
+	if (!/(?=.*[a-z])/.test(password)) {
+		errors.push("Password must contain at least one lowercase character.");
+	}
+
+	if (!/(?=.*[A-Z])/.test(password)) {
+		errors.push("Password must contain at least one uppercase character.");
+	}
+
+	return errors;
+}
+
 module.exports = {
 	userSeeder,
 	userExists,
 	getBookings,
 	validateEmail,
+	validatePassword,
 };
