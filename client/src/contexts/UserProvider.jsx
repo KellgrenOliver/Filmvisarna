@@ -89,7 +89,6 @@ const UserProvider = (props) => {
 			setUser({ ...user, bookings: updatedBookings });
 		}
 	};
-	console.log(user);
 
 	const values = {
 		login,

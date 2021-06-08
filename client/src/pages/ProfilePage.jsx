@@ -61,7 +61,7 @@ const ProfilePage = () => {
 	if (!user) {
 		return null; // redirect it to homePage
 	} else {
-		// console.log(user);
+		
 		let emailContent;
 		let passwordContent;
 		let newPasswordContent;
