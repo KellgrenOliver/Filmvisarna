@@ -37,24 +37,25 @@ const TicketPage = (props) => {
 	};
 
 	const checkSeats = async () => {
-		// if (!selectedSeats.length) {
-		// 	return alert("You need to pick your seats");
-		// }
-		// const response = await fetch("api/v1/bookings", {
-		// 	method: "post",
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 	},
-		// 	body: JSON.stringify({
-		// 		seats: selectedSeats,
-		// 		screeningId: screening._id,
-		// 	}),
-		// });
-		// if (response.status === 200) {
-		// 	history.push(`/booking/${movie._id}/${screening._id}`);
-		// } else {
-		// 	alert("Something went wrong..");
-		// }
+		if (!selectedSeats.length) {
+			return alert("You need to pick your seats");
+		}
+		const response = await fetch("/api/v1/bookings", {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				seats: selectedSeats,
+				screeningId: screening._id,
+			}),
+		});
+		if (response.status === 200) {
+			setSelectedSeats([]);
+			history.push(`/booking/${movie._id}/${screening._id}`);
+		} else {
+			alert("Something went wrong..");
+		}
 	};
 
 	const groupSeats = () => {
