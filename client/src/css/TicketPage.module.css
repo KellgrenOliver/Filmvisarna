@@ -163,7 +163,13 @@ h6 {
 	background-color: rgb(233, 170, 36);
 	box-shadow: darkgray 5px 5px 5px;
 }
-
+.seatBoxActive {
+	background-color: rgb(233, 170, 36);
+	box-shadow: darkgray 5px 5px 5px;
+}
+.seatBoxInactive {
+	background-color: gray;
+}
 .seatRow {
 	display: flex;
 }

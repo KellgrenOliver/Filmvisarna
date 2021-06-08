@@ -10,6 +10,7 @@ import _ from "lodash";
 import { getTicketsPrice } from "../utils/seats";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import CounterInput from "react-counter-input";
+import Seats from "../components/Seats";
 
 dayjs.extend(advancedFormat);
 
@@ -19,6 +20,8 @@ const TicketPage = (props) => {
 	const movie = findMovie(props.match.params.movieId);
 	const { getScreeningById, screening } = useContext(ScreeningContext);
 	const { getAuditoriumById, auditorium } = useContext(BookingContext);
+
+	const [state, setState] = useState("");
 
 	const history = useHistory();
 
@@ -75,11 +78,7 @@ const TicketPage = (props) => {
 							{groupSeats().map((chunk, i) => (
 								<div key={i} className={styles.seatRow}>
 									{chunk.map((seat, i) => (
-										<div
-											key={i}
-											onClick={() => selectSeat(seat)}
-											className={styles.seatBox}
-										></div>
+										<Seats onClick={() => selectSeat(seat)} />
 									))}
 								</div>
 							))}
