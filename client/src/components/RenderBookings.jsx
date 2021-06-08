@@ -4,8 +4,7 @@ import { UserContext } from "../contexts/UserProvider";
 import dayjs from "dayjs";
 
 const RenderBookings = () => {
-	const { whoami, user, deleteBooking} = useContext(UserContext);
-
+	const { whoami, user, deleteBooking } = useContext(UserContext);
 
 	const getSeatValueWeight = (seatType) => {
 		switch (seatType.toLowerCase()) {
@@ -18,10 +17,9 @@ const RenderBookings = () => {
 		}
 	};
 
-  const handleDelete =(id)=>{
-    deleteBooking(id)
-  }
-
+	const handleDelete = (id) => {
+		deleteBooking(id);
+	};
 
 	return (
 		<div>
