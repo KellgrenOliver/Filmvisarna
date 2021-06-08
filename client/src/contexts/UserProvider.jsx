@@ -73,6 +73,8 @@ const UserProvider = (props) => {
 		}
 	};
 
+	
+
 	const values = {
 		login,
 		createUser,
@@ -83,7 +85,7 @@ const UserProvider = (props) => {
 		updateUserInfo,
 		message,
 		setMessage,
-		loggedIn: Boolean(user),
+		loggedIn: Boolean(user)
 	};
 
 	return (

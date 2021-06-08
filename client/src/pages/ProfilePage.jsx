@@ -56,10 +56,35 @@ const ProfilePage = () => {
 		}
 	};
 
-	const deleteHandler = (id) => {
-    console.log(id)
-		console.log(user.bookings.filter((book)=>book._id));
-	}
+
+
+
+
+
+useEffect(()=> {
+	renderBookings()
+}, [user]);
+
+
+
+
+	
+	
+	const deleteBooking = async (id) => {
+		let result = await fetch (`/api/v1/bookings/${id}`, {
+			
+			method: "DELETE",
+			headers: {
+						"content-type": "application/json",
+						}
+		});
+
+		result = await result.json();
+		whoami();
+	};
+	console.log(user);
+
+	
 	// to be able to edit the information in input
 	useEffect(() => {
 		if (user) {
@@ -191,7 +216,7 @@ const ProfilePage = () => {
 									</div>
 								</div>
 								<div>
-									<button className={styles.btnCancel} onClick={()=>deleteHandler(booking._id)}>Delete</button>
+									<button className={styles.btnCancel} onClick={()=>deleteBooking(booking._id)}>Delete</button>
 								</div>
 							</div>
 						</div>
