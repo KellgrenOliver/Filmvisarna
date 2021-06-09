@@ -31,7 +31,11 @@ const App = () => {
 								path="/screening/:screeningId"
 								component={TicketPage}
 							/>
-							<Route path="/booking/:bookingId" component={ConfirmationPage} />
+							<Route
+								exact
+								path="/booking/:bookingId"
+								component={ConfirmationPage}
+							/>
 						</UserProvider>
 					</MoviesProvider>
 				</ScreeningProvider>
