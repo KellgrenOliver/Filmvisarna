@@ -141,7 +141,7 @@ const TicketPage = (props) => {
 				<h5 className={styles.bioduk}>SCREEN</h5>
 				<div>
 					<TicketCounters
-						value={tickets}
+						tickets={tickets}
 						setTickets={setTickets}
 						max={MAX_SELECT}
 					/>
