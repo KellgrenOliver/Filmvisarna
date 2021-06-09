@@ -28,3 +28,9 @@
 	padding: 0.5rem;
 	text-decoration: none;
 }
+
+.ticket {
+	padding: 20px 20px 20px;
+	background-color: grey;
+	margin: 1rem;
+}

@@ -2,6 +2,7 @@ import { UserContext } from "../contexts/UserProvider";
 import { useContext } from "react";
 import React from "react";
 import { Link } from "react-router-dom";
+import { getTicketsPrice } from "../utils/seats";
 import styles from "../css/ConfirmationPage.module.css";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -32,14 +33,17 @@ const ConfirmationPage = (props) => {
 				<h5>{booking.movie.title}</h5>
 				<h5>
 					{booking.seats.map((seat) => (
-						<div>
-							{seat.row}
-							{seat.id}
-							{seat.price}
+						<div className={styles.ticket}>
+							Row: {seat.row}
+							Seat: {seat.id}
+							Price: {seat.price}
 						</div>
 					))}
 				</h5>
 				<h5>{dayjs(booking.screening.time).format("MMMM Do HH:mm")}</h5>
+				<h6>
+					Total: {getTicketsPrice(booking.seats, booking.screening.price)} SEK
+				</h6>
 				<img
 					className={styles.img}
 					src={booking.movie.poster}
