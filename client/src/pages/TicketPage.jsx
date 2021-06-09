@@ -62,29 +62,28 @@ const TicketPage = (props) => {
 		if (hoverContainsBooked()) return;
 
 		let { adult, child, senior } = tickets;
-		const seats = [];
+		const seats = hoveredSeats;
 
-		const ticket = () => {
+		const ticket = (seat) => {
 			if (adult) {
 				adult--;
-				return "adult";
-			}
-			if (child) {
+				seat.type = "";
+			} else if (child) {
 				child--;
-				return "child";
-			}
-			if (senior) {
+				seat.type = "";
+			} else if (senior) {
 				senior--;
-				return "senior";
+				seat.type = "";
 			}
-			return undefined;
 		};
 
+		let i = 0;
 		while (adult || child || senior) {
-			hoveredSeats.forEach((seat) => {
-				seats.push({ ...seat, type: ticket() });
-			});
 			if (seats.length >= ticketsAmount) break;
+			const seat = seats[i];
+			if (!seat) break;
+			ticket(seats[i]);
+			i++;
 		}
 
 		setSelectedSeats(seats);
