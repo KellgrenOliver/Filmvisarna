@@ -2,12 +2,21 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const errorLog = require("../utils/errorLog");
 const { validateBody } = require("../utils/validation");
-const { userExists, getBookings, validateEmail } = require("../utils/user");
+const {
+	userExists,
+	getBookings,
+	validateEmail,
+	validatePassword,
+} = require("../utils/user");
 
 const whoami = async (req, res) => {
+	if (!req.session.user) return res.status(401).end();
 	try {
 		const user = await User.findById(req.session.user._id);
+		user.password = undefined;
+
 		user.bookings = await getBookings(user._id);
+		user.password = undefined;
 		res.status(200).json(user);
 	} catch (e) {
 		errorLog(e);
@@ -20,7 +29,7 @@ const logout = (req, res) => {
 		return res.status(405).json({ error: "You are already logged out." });
 	}
 	req.session.user = undefined;
-	res.status(200).end();
+	res.status(200).json({ success: "Logout successful." });
 };
 
 const login = async (req, res) => {
@@ -48,7 +57,7 @@ const login = async (req, res) => {
 		user.password = undefined;
 		req.session.user = user;
 
-		user.bookings = await getBookings(user);
+		user.bookings = await getBookings(user._id);
 
 		res.status(200).json({ success: true, loggedInUser: user });
 	} catch (e) {
@@ -70,6 +79,11 @@ async function register(req, res) {
 
 	if (!validateEmail(email)) {
 		return res.status(422).json({ error: "Invalid email." });
+	}
+
+	const errors = validatePassword(password);
+	if (errors.length > 0) {
+		return res.status(422).json({ error: errors });
 	}
 
 	try {
@@ -122,12 +136,10 @@ async function update(req, res) {
 			return res.status(422).json({ error: "Phone number must not be taken." });
 		}
 
-		const data = {
-			email: email ?? user.email,
-			phone: phone ?? user.phone,
-			password: newPassword ?? user.password,
-		};
+		const data = {};
 
+		if (email && email !== user.email) data.email = email;
+		if (phone && phone !== user.phone) data.phone = phone;
 		if (newPassword) data.password = await bcrypt.hash(newPassword, 10);
 
 		await User.findByIdAndUpdate(id, data);

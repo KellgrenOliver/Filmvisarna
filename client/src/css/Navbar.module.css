@@ -17,8 +17,8 @@
 	padding: 10px;
 }
 
-.hr {
-	margin: 2rem;
+span {
+	cursor: pointer;
 }
 
 .link:hover {
