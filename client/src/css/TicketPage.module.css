@@ -28,6 +28,7 @@
 	background-color: rgb(85, 11, 27);
 	width: 90%;
 	height: 50px;
+	letter-spacing: 3px;
 }
 
 .title {
@@ -110,10 +111,11 @@ h6 {
 	justify-content: center;
 	align-items: center;
 	margin: auto;
-	width: 50%;
+	width: 60%;
 }
 
 .pay {
+	margin: 1rem;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -126,9 +128,72 @@ h6 {
 	border: none;
 	width: 200px;
 	height: 50px;
+	border-radius: 10px;
 }
 
 .button:hover {
 	cursor: pointer;
 	background-color: rgb(51, 5, 15);
+}
+
+.seatContainer {
+	width: 90%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: auto;
+	margin-bottom: 2rem;
+}
+
+.seatBox {
+	padding: 1rem;
+	width: 40px;
+	user-select: none;
+	height: 40px;
+	border: 1px solid black;
+	background-color: rgb(192, 192, 192);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1rem;
+	position: relative;
+	cursor: pointer;
+}
+
+.seatBoxHovered::before {
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.seatBoxActive {
+	background-color: rgb(233, 170, 36);
+}
+.seatBoxInactive {
+	background-color: rgb(192, 192, 192);
+}
+
+.seatBoxBooked {
+	background-color: rgb(85, 11, 27);
+	color: rgb(235, 235, 235);
+}
+
+.seatBoxUnbookable {
+	background-color: red;
+	color: rgb(235, 235, 235);
+}
+
+.seatRow {
+	display: flex;
+}
+
+.counter {
+	font-size: 1.5rem;
+	margin: 1rem;
 }

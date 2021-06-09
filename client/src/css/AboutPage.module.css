@@ -6,8 +6,10 @@
 	align-items: center;
 	max-width: 100%;
 	background-color: rgb(235, 235, 235);
-	box-shadow: 10px 5px 5px rgb(70, 70, 70);
 	line-height: 1.5rem;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgb(165, 165, 165);
+	padding: 2rem 3rem 2rem 3rem;
 }
 
 .container {

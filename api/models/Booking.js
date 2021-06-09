@@ -8,13 +8,14 @@ const bookingSchema = new Schema(
 			ref: "Auditorium",
 			required: true,
 		},
-		seats: [{ type: Schema.Types.ObjectId, ref: Seat}],
+		seats: { type: Array, required: true },
 		user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 		screening: {
 			type: Schema.Types.ObjectId,
 			ref: "Screening",
 			required: true,
 		},
+		movie: { type: Schema.Types.ObjectId, ref: "Movie", required: true },
 	},
 	{ timestamps: true }
 );

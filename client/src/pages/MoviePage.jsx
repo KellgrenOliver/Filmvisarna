@@ -45,7 +45,9 @@ const Movie = (props) => {
 				</h6>
 				{loggedIn ? (
 					<>
-						<Link to={`/ticket/${movie._id}/${screening._id}`}>
+						<Link
+							to={`/ticket/${movie._id}/${screening._id}/${screening.auditorium._id}`}
+						>
 							<h6 className={styles.ticketBtn}>Tickets</h6>
 						</Link>
 					</>

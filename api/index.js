@@ -25,6 +25,7 @@ const auditoriumRoutes = require("./routes/auditoriumRoutes");
 const moviesRoutes = require("./routes/moviesRoutes");
 const bookingsRoutes = require("./routes/bookingsRoutes");
 const screeningsRoutes = require("./routes/screeningsRoutes");
+const { screeningSeeder } = require("./utils/screening");
 
 // Middlewares
 app.use(express.json());

@@ -3,7 +3,7 @@ import { MovieContext } from "../contexts/MoviesProvider";
 import styles from "../css/FilterGroup.module.css";
 
 const Search = () => {
-	const { filter, setSearchString } = useContext(MovieContext);
+	const { setSearchString } = useContext(MovieContext);
 	useEffect(() => {
 		return () => {
 			setSearchString("");
@@ -15,15 +15,13 @@ const Search = () => {
 	};
 
 	return (
-		<div>
 			<input
-				className={styles.searchField}
+				id={styles.searchField}
 				type="text"
 				placeholder="Search..."
 				name="search"
 				onChange={handleSearch}
 			></input>
-		</div>
 	);
 };
 
