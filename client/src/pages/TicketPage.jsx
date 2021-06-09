@@ -1,6 +1,4 @@
-import { MovieContext } from "../contexts/MoviesProvider";
 import { ScreeningContext } from "../contexts/ScreeningProvider";
-import { BookingContext } from "../contexts/BookingProvider";
 import { useContext, useEffect, useState } from "react";
 import styles from "../css/TicketPage.module.css";
 import dayjs from "dayjs";
@@ -9,12 +7,15 @@ import { getTicketsPrice } from "../utils/seats";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import Seat from "../components/Seat";
 import TicketCounters from "../components/TicketCounters";
+import { getAuditoriumById } from "../utils/auditorium";
 
 dayjs.extend(advancedFormat);
 
 const MAX_SELECT = 5;
 
 const TicketPage = (props) => {
+	const [screening, setScreening] = useState();
+
 	const [selectedSeats, setSelectedSeats] = useState([]);
 	const [hoveredSeats, setHoveredSeats] = useState([]);
 	const [tickets, setTickets] = useState({
@@ -23,20 +24,20 @@ const TicketPage = (props) => {
 		child: 0,
 	});
 
-	const { findMovie } = useContext(MovieContext);
-	const { getScreeningById, screening } = useContext(ScreeningContext);
-	const { getAuditoriumById, auditorium } = useContext(BookingContext);
+	const { getScreeningById, screenings } = useContext(ScreeningContext);
 
 	const ticketsAmount = tickets.adult + tickets.child + tickets.senior;
 
-	const movie = findMovie(props.match.params.movieId);
-
 	useEffect(() => {
-		getScreeningById(props.match.params.screeningId);
-		getAuditoriumById(props.match.params.auditoriumId);
-	}, [props.match.params.screeningId, props.match.params.auditoriumId]);
+		(async () => {
+			const screening = await getScreeningById(props.match.params.screeningId);
+			if (screening) {
+				setScreening(screening);
+			}
+		})();
+	}, [props.match.params.screeningId, screenings]);
 
-	if (!movie || !screening || !auditorium) {
+	if (!screening) {
 		return <h1 className={styles.header}>Loading...</h1>;
 	}
 
@@ -105,7 +106,7 @@ const TicketPage = (props) => {
 
 	const groupSeats = () => {
 		const rows = [];
-		const seats = _.groupBy(auditorium.seats, "row");
+		const seats = _.groupBy(screening.auditorium.seats, "row");
 		for (const property in seats) {
 			rows.push(seats[property]);
 		}
@@ -128,9 +129,9 @@ const TicketPage = (props) => {
 			<div className={styles.container}>
 				<div className={styles.titleContainer}>
 					<h5>Salon: {screening.auditorium.id}</h5>
-					<h5 className={styles.title}>{movie.title}</h5>
+					<h5 className={styles.title}>{screening.movie.title}</h5>
 					<h5>{dayjs(screening.time).format("MMMM Do HH:mm")}</h5>
-					<h5>Language: {movie.language}</h5>
+					<h5>Language: {screening.movie.language}</h5>
 				</div>
 				<h5 className={styles.bioduk}>SCREEN</h5>
 				<div>
@@ -139,7 +140,7 @@ const TicketPage = (props) => {
 						setTickets={setTickets}
 						max={MAX_SELECT}
 					/>
-					<div key={auditorium.id}>
+					<div key={screening.auditorium.id}>
 						<div className={styles.seatContainer}>
 							{groupSeats().map((row, i) => (
 								<div key={i} className={styles.seatRow}>
@@ -172,7 +173,11 @@ const TicketPage = (props) => {
 				</div>
 
 				<div className={styles.payContainer}>
-					<img className={styles.img} src={movie.poster} alt={movie.title} />
+					<img
+						className={styles.img}
+						src={screening.movie.poster}
+						alt={screening.movie.title}
+					/>
 					<div className={styles.pay}>
 						<div>
 							{selectedSeats.map((seat) => (
