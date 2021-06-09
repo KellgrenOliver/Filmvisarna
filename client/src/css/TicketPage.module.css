@@ -150,6 +150,7 @@ h6 {
 .seatBox {
 	padding: 1rem;
 	width: 40px;
+	user-select: none;
 	height: 40px;
 	border: 1px solid black;
 	background-color: rgb(192, 192, 192);
@@ -161,7 +162,7 @@ h6 {
 	cursor: pointer;
 }
 
-.seatBoxHovered::after {
+.seatBoxHovered::before {
 	content: "";
 	width: 100%;
 	height: 100%;
@@ -183,18 +184,16 @@ h6 {
 	color: rgb(235, 235, 235);
 }
 
+.seatBoxUnbookable {
+	background-color: red;
+	color: rgb(235, 235, 235);
+}
+
 .seatRow {
 	display: flex;
 }
 
 .counter {
 	font-size: 1.5rem;
-	margin: 1rem;
-}
-
-.ticket {
-	border: 1px solid rgb(0, 0, 0);
-	border-radius: 10px;
-	padding: 8px;
 	margin: 1rem;
 }

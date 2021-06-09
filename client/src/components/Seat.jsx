@@ -7,14 +7,18 @@ const Seats = (props) => {
 		return styles.seatBoxInactive;
 	};
 
+	const hoverColor = () => {
+		if (!props.isHovered) return;
+		return props.hoverContainsBooked()
+			? styles.seatBoxUnbookable
+			: styles.seatBoxHovered;
+	};
+
 	return (
 		<div className={styles.seatContainer}>
 			<div className={styles.seatRow}>
 				<button
-					disabled={props.isBooked}
-					className={`${styles.seatBox} ${color()} ${
-						props.isHovered ? styles.seatBoxHovered : ""
-					}`}
+					className={`${styles.seatBox} ${color()} ${hoverColor()}`}
 					onClick={props.selectHovered}
 					onMouseEnter={() => props.hoverSeats(props.seat, props.row)}
 					onMouseLeave={() => props.setHoveredSeats([])}

@@ -4,12 +4,11 @@ import { BookingContext } from "../contexts/BookingProvider";
 import { useContext, useEffect, useState } from "react";
 import styles from "../css/TicketPage.module.css";
 import dayjs from "dayjs";
-import _, { indexOf } from "lodash";
+import _ from "lodash";
 import { getTicketsPrice } from "../utils/seats";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import CounterInput from "react-counter-input";
 import Seat from "../components/Seat";
-import TicketCounter from "../components/TicketCounter";
+import TicketCounters from "../components/TicketCounters";
 
 dayjs.extend(advancedFormat);
 
@@ -18,6 +17,11 @@ const MAX_SELECT = 5;
 const TicketPage = (props) => {
 	const [selectedSeats, setSelectedSeats] = useState([]);
 	const [hoveredSeats, setHoveredSeats] = useState([]);
+	const [tickets, setTickets] = useState({
+		adult: 2,
+		senior: 0,
+		child: 0,
+	});
 
 	const { findMovie } = useContext(MovieContext);
 	const { getScreeningById, screening } = useContext(ScreeningContext);
@@ -38,7 +42,7 @@ const TicketPage = (props) => {
 		const seats = [];
 		for (let i = row.indexOf(seat); i < row.length; i++) {
 			seats.push(row[i]);
-			if (seats.length >= MAX_SELECT) break;
+			if (seats.length >= tickets.adult + tickets.child + tickets.senior) break;
 		}
 		return seats;
 	};
@@ -47,18 +51,18 @@ const TicketPage = (props) => {
 		const seats = getSeatsToRight(seat, row);
 		const hoveredSeats = [];
 		for (let i = 0; i < seats.length; i++) {
-			if (isBooked(seats[i])) break;
 			hoveredSeats.push(seats[i]);
 		}
 		setHoveredSeats(hoveredSeats);
 	};
 
-	const selectHovered = () => setSelectedSeats(hoveredSeats);
+	const selectHovered = () => {
+		if (hoverContainsBooked()) return;
+		setSelectedSeats(hoveredSeats);
+	};
 
-	const checkSeats = async () => {
-		if (!selectedSeats.length) {
-			return alert("You need to pick your seats");
-		}
+	const placeBooking = async () => {
+		if (!selectedSeats.length) return alert("You need to pick your seats");
 		const { status } = await fetch("/api/v1/bookings", {
 			method: "POST",
 			headers: {
@@ -70,7 +74,7 @@ const TicketPage = (props) => {
 			}),
 		});
 		if (status === 200) {
-			// setSelectedSeats([]); // TODO: gör en check att om användaren bokat biljetter från denna screening, rediracta bort, och ta bort denna rad när ni är klara
+			// TODO: gör en check att om användaren bokat biljetter från denna screening, rediracta bort, och ta bort denna rad när ni är klara
 			props.history.push(`/booking/${movie._id}/${screening._id}`);
 		} else {
 			alert("Something went wrong!");
@@ -78,8 +82,8 @@ const TicketPage = (props) => {
 	};
 
 	const groupSeats = () => {
-		let rows = [];
-		let seats = _.groupBy(auditorium.seats, "row");
+		const rows = [];
+		const seats = _.groupBy(auditorium.seats, "row");
 		for (const property in seats) {
 			rows.push(seats[property]);
 		}
@@ -95,6 +99,8 @@ const TicketPage = (props) => {
 	const isHovered = (seatToFind) =>
 		hoveredSeats.some((seat) => seat._id === seatToFind._id);
 
+	const hoverContainsBooked = () => hoveredSeats.some((seat) => isBooked(seat));
+
 	const content = () => (
 		<div className={styles.ticketPage}>
 			<div className={styles.container}>
@@ -106,20 +112,11 @@ const TicketPage = (props) => {
 				</div>
 				<h5 className={styles.bioduk}>SCREEN</h5>
 				<div>
-					<div className={styles.numberContainer}>
-						<div className={styles.counter}>
-							<h6>Adult</h6>
-							<CounterInput min={0} max={4} onCountChange={(count) => count} />
-						</div>
-						<div className={styles.counter}>
-							<h6>Senior</h6>
-							<CounterInput min={0} max={4} onCountChange={(count) => count} />
-						</div>
-						<div className={styles.counter}>
-							<h6>Child</h6>
-							<CounterInput min={0} max={4} onCountChange={(count) => count} />
-						</div>
-					</div>
+					<TicketCounters
+						value={tickets}
+						setTickets={setTickets}
+						max={MAX_SELECT}
+					/>
 					<div key={auditorium.id}>
 						<div className={styles.seatContainer}>
 							{groupSeats().map((row, i) => (
@@ -134,6 +131,7 @@ const TicketPage = (props) => {
 											hoverSeats={hoverSeats}
 											selectHovered={selectHovered}
 											setHoveredSeats={setHoveredSeats}
+											hoverContainsBooked={hoverContainsBooked}
 											key={seat._id}
 										/>
 									))}
@@ -167,7 +165,7 @@ const TicketPage = (props) => {
 						<h6>
 							Total: {getTicketsPrice(selectedSeats, screening.price)} SEK
 						</h6>
-						<button onClick={checkSeats} className={styles.button}>
+						<button onClick={placeBooking} className={styles.button}>
 							Book
 						</button>
 					</div>
