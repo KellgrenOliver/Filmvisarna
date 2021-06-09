@@ -177,8 +177,10 @@ const TicketPage = (props) => {
 							{selectedSeats.map((seat) => (
 								<div className={styles.ticket} key={seat._id}>
 									<span>
-										Row:<b>{seat.row}</b> Seat:<b>{seat.id}</b> Price:
-										<b>{seat.price}SEK</b>
+										Row: <b>{seat.row} </b>
+										Seat: <b>{seat.id} </b>
+										Price: <b>{seat.price} SEK </b>
+										Age: <b>{seat.type} </b>
 									</span>
 								</div>
 							))}
