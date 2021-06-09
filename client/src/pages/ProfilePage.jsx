@@ -178,6 +178,13 @@ const ProfilePage = () => {
 						</div>
 						<RenderBookings />
 					</div>
+					<div>
+						<div className={styles.info}>
+							<h6>Upcoming bookings</h6>
+							<hr />
+						</div>
+						<RenderBookings />
+					</div>
 				</div>
 			</div>
 		);
