@@ -25,9 +25,7 @@ async function seatsSeeder() {
 
 async function getBookedSeats(screening) {
 	try {
-		const bookings = await Booking.where({ screening: screening._id }).populate(
-			"seats"
-		);
+		const bookings = await Booking.where({ screening: screening._id });
 
 		const seats = new Set();
 		bookings.forEach((booking) => {

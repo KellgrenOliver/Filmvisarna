@@ -185,7 +185,7 @@ const TicketPage = (props) => {
 								<div className={styles.ticket} key={seat._id}>
 									<span>
 										Row:<b>{seat.row}</b> Seat:<b>{seat.id}</b> Price:
-										<b>{screening.price}SEK</b>
+										<b>{seat.price}SEK</b>
 									</span>
 								</div>
 							))}
