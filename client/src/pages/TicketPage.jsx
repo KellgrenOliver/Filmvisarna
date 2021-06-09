@@ -67,13 +67,13 @@ const TicketPage = (props) => {
 		const ticket = (seat) => {
 			if (adult) {
 				adult--;
-				seat.type = "";
+				seat.type = "adult";
 			} else if (child) {
 				child--;
-				seat.type = "";
+				seat.type = "child";
 			} else if (senior) {
 				senior--;
-				seat.type = "";
+				seat.type = "senior";
 			}
 		};
 
