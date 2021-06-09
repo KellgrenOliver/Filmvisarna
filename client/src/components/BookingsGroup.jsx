@@ -1,25 +1,28 @@
 import React, { useState, useContext, useEffect } from "react";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
-import RenderBookings from "../components/RenderBookings";
-
+import UpcomingBookings from "./UpcomingBookings";
+import LastBookings from "./LastBookings";
+import dayjs from "dayjs";
 const BookingsGroup = () => {
 	
 	const { whoami, user } =
 		useContext(UserContext);
-	
-	
-	
 
-	
-	
+    const[upcomingBookings, setUpcomingBookings]=useState([])
+    const[lastBookings, setLastBookings]=useState([])
 
 	useEffect(() => {
-		setMessage(null);
+    getAllUpcomingBookings()
 		whoami();
 	}, []);
 
-	
+  const getAllUpcomingBookings =()=>{
+    let now = new Date()
+    let bookings = user.bookings.map((booking)=>booking.screening.time )
+    console.log(bookings)
+  }
+
 
 		return (
 			<div>
@@ -28,14 +31,14 @@ const BookingsGroup = () => {
 						<h6>Last bookings</h6>
 						<hr />
 					</div>
-					<RenderBookings  />
+					<LastBookings  />
 				</div>
 				<div>
 					<div className={styles.info}>
 						<h6>Upcoming bookings</h6>
 						<hr />
 					</div>
-					<RenderBookings />
+					<UpcomingBookings />
 				</div>
 			</div>
 		);

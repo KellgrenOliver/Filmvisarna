@@ -3,7 +3,7 @@ import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
 import dayjs from "dayjs";
 
-const RenderBookings = () => {
+const UpcomingBookings = () => {
 	const { user, deleteBooking } = useContext(UserContext);
 
 	const getSeatValueWeight = (seatType) => {
@@ -83,4 +83,4 @@ const RenderBookings = () => {
 	);
 };
 
-export default RenderBookings;
+export default UpcomingBookings;
