@@ -1,21 +1,22 @@
 .confirmationPage {
 	text-align: center;
-	margin-top: 3rem;
+	color: white;
 }
 
 .container {
 	padding: 5px 5px 5px;
-	background-color: rgb(235, 235, 235);
 	width: 50%;
 	margin: auto;
 	border-radius: 10px;
 }
 
 .img {
-	width: 200px;
-	height: 320px;
-	margin: 2rem;
+	width: 150px;
+	height: 230px;
 	border-radius: 10px;
+	display: flex;
+	/* float: left; */
+	margin-left: 2rem;
 }
 
 .qrImg {
@@ -25,7 +26,7 @@
 	border-radius: 10px;
 }
 
-.x {
+/* .x {
 	background-color: rgb(85, 11, 27);
 	color: white;
 	border-radius: 5px;
@@ -34,11 +35,52 @@
 	margin: 0.5rem;
 	padding: 0.5rem;
 	text-decoration: none;
-}
+} */
 
 .ticket {
-	padding: 20px 20px 20px;
-	background-color: grey;
-	margin: 1rem;
+	display: flex;
+	padding: 1px 1px 1px;
+	background-color: rgb(85, 85, 85);
+	margin-bottom: 3rem;
 	border-radius: 10px;
+}
+
+.infoContainer {
+	width: 70%;
+	border-right: dotted 4px rgb(235, 235, 235);
+	text-align: center;
+}
+
+.total {
+	margin-bottom: 1rem;
+	text-decoration: underline;
+}
+
+.ticketHeader {
+	margin-top: 0;
+	border-top-left-radius: 10px;
+	background-color: rgb(85, 11, 27);
+	padding: 5px;
+	text-align: center;
+	color: rgb(224, 224, 224);
+}
+
+.ticketFooter {
+	margin-bottom: 0;
+	border-bottom-left-radius: 10px;
+	background-color: rgb(85, 11, 27);
+	padding: 5px;
+	text-align: center;
+	color: rgb(224, 224, 224);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ticketInfo {
+	margin-top: 3rem;
+}
+
+.marginFooter {
+	margin-bottom: 2rem;
 }
