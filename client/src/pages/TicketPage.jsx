@@ -59,8 +59,7 @@ const TicketPage = (props) => {
 	};
 
 	const selectHovered = () => {
-		console.log(hoveredSeats.length, ticketsAmount);
-		if (hoverContainsBooked() || hoveredSeats.length < ticketsAmount) return;
+		if (hoverContainsBooked || hoveredSeats.length < ticketsAmount) return;
 
 		let { adult, child, senior } = tickets;
 		const seats = hoveredSeats;
@@ -128,7 +127,7 @@ const TicketPage = (props) => {
 	const isHovered = (seatToFind) =>
 		hoveredSeats.some((seat) => seat._id === seatToFind._id);
 
-	const hoverContainsBooked = () => hoveredSeats.some((seat) => isBooked(seat));
+	const hoverContainsBooked = hoveredSeats.some((seat) => isBooked(seat));
 
 	const content = () => (
 		<div className={styles.ticketPage}>

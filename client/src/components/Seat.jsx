@@ -9,7 +9,7 @@ const Seats = (props) => {
 
 	const hoverColor = () => {
 		if (!props.isHovered) return;
-		return props.hoverContainsBooked()
+		return props.hoverContainsBooked
 			? styles.seatBoxUnbookable
 			: styles.seatBoxHovered;
 	};
