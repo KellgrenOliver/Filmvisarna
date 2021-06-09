@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext();
 
@@ -6,10 +6,18 @@ const UserProvider = (props) => {
 	const [user, setUser] = useState(null);
 	const [message, setMessage] = useState(null);
 
+	useEffect(() => {
+		whoami();
+	}, []);
+
 	const whoami = async () => {
 		let user = await fetch("/api/v1/users/whoami");
 		user = await user.json(user);
 		setUser(user);
+	};
+
+	const addBooking = (booking) => {
+		setUser((user) => ({ ...user, bookings: [...user.bookings, booking] }));
 	};
 
 	const login = async (userToLogin) => {
@@ -47,8 +55,7 @@ const UserProvider = (props) => {
 
 	// to save the changes which are coming from profile page
 
-	const updateUserInfo = async (userToUpdate) =>{
-		
+	const updateUserInfo = async (userToUpdate) => {
 		let result = await fetch(`api/v1/users/${user._id}`, {
 			method: "PUT",
 			headers: {
@@ -56,12 +63,12 @@ const UserProvider = (props) => {
 			},
 			body: JSON.stringify(userToUpdate),
 		});
-		
-		if(result.status === 401) {
+
+		if (result.status === 401) {
 			setMessage("Bad Credentials");
 			return false;
-		} else if(result.status === 200) {
-			// to get the updated info from backend 
+		} else if (result.status === 200) {
+			// to get the updated info from backend
 			result = await result.json(userToUpdate);
 			setMessage(result.success);
 			const updatedUser = result.obj;
@@ -70,6 +77,20 @@ const UserProvider = (props) => {
 		} else {
 			setMessage("Something went wrong!");
 			return false;
+		}
+	};
+
+	const deleteBooking = async (id) => {
+		let response = await fetch(`/api/v1/bookings/${id}`, {
+			method: "DELETE",
+			headers: {
+				"content-type": "application/json",
+			},
+		});
+
+		if (response.status === 200) {
+			const updatedBookings = user.bookings.filter((b) => b._id !== id);
+			setUser({ ...user, bookings: updatedBookings });
 		}
 	};
 
@@ -83,7 +104,9 @@ const UserProvider = (props) => {
 		updateUserInfo,
 		message,
 		setMessage,
+		addBooking,
 		loggedIn: Boolean(user),
+		deleteBooking,
 	};
 
 	return (

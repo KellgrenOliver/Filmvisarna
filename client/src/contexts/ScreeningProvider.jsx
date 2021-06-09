@@ -27,7 +27,7 @@ const ScreeningProvider = (props) => {
 	const getScreenings = async () => {
 		let screenings = await fetch("/api/v1/screenings");
 		screenings = await screenings.json();
-		setScreenings(screenings.screenings);
+		setScreenings(screenings);
 	};
 
 	const getScreeningsFromMovie = async (movieId) => {
@@ -37,29 +37,28 @@ const ScreeningProvider = (props) => {
 	};
 
 	const getScreeningsFromMovieByFilter = async () => {
-    try{
-      let respons = await fetch(
-        `/api/v1/screenings/filter/${filterMovieId}${priceMin}${priceMax}${startDate}${endDate}`
-      );
-      let filterScreenings = await respons.json();
-      if (respons.status === 404) {
-        setFilteredMovieScreenings([]);
-        setMessage(filterScreenings.error);
-      } else if (respons.status === 500) {
-        setFilteredMovieScreenings(null);
-      } else if (respons.status === 200){
-        setMessage(null);
-        setFilteredMovieScreenings(filterScreenings);
-      }
-    } catch(e) {
-      console.log(e)
-    }
+		try {
+			let respons = await fetch(
+				`/api/v1/screenings/filter/${filterMovieId}${priceMin}${priceMax}${startDate}${endDate}`
+			);
+			let filterScreenings = await respons.json();
+			if (respons.status === 404) {
+				setFilteredMovieScreenings([]);
+				setMessage(filterScreenings.error);
+			} else if (respons.status === 500) {
+				setFilteredMovieScreenings(null);
+			} else if (respons.status === 200) {
+				setMessage(null);
+				setFilteredMovieScreenings(filterScreenings);
+			}
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	const getScreeningById = async (screeningId) => {
-		let screening = await fetch(`/api/v1/screenings/${screeningId}`);
-		screening = await screening.json();
-		setScreening(screening);
+		const response = await fetch(`/api/v1/screenings/${screeningId}`);
+		return await response.json();
 	};
 
 	const values = {
