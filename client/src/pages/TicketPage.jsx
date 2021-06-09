@@ -24,7 +24,7 @@ const TicketPage = (props) => {
 		child: 0,
 	});
 
-	const { getScreeningById, screenings } = useContext(ScreeningContext);
+	const { getScreeningById } = useContext(ScreeningContext);
 
 	const ticketsAmount = tickets.adult + tickets.child + tickets.senior;
 
@@ -35,7 +35,7 @@ const TicketPage = (props) => {
 				setScreening(screening);
 			}
 		})();
-	}, [props.match.params.screeningId, screenings]);
+	}, [props.match.params.screeningId]);
 
 	if (!screening) {
 		return <h1 className={styles.header}>Loading...</h1>;
