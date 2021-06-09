@@ -16,13 +16,22 @@ const MAX_SELECT = 5;
 const TicketPage = (props) => {
 	const [screening, setScreening] = useState();
 
-	const [selectedSeats, setSelectedSeats] = useState([]);
+	const [selectedSeats, setSelectedSeats] = useState(
+		JSON.parse(localStorage.getItem("selectedSeats")) ?? []
+	);
 	const [hoveredSeats, setHoveredSeats] = useState([]);
-	const [tickets, setTickets] = useState({
-		adult: 2,
-		senior: 0,
-		child: 0,
-	});
+	const [tickets, setTickets] = useState(
+		JSON.parse(localStorage.getItem("tickets")) ?? {
+			adult: 2,
+			senior: 0,
+			child: 0,
+		}
+	);
+
+	useEffect(() => {
+		localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
+		localStorage.setItem("tickets", JSON.stringify(tickets));
+	}, [selectedSeats, tickets]);
 
 	const { getScreeningById } = useContext(ScreeningContext);
 	const { addBooking } = useContext(UserContext);
