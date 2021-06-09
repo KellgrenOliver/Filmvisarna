@@ -7,6 +7,7 @@ import { getTicketsPrice } from "../utils/seats";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import Seat from "../components/Seat";
 import TicketCounters from "../components/TicketCounters";
+import { UserContext } from "../contexts/UserProvider";
 
 dayjs.extend(advancedFormat);
 
@@ -24,6 +25,7 @@ const TicketPage = (props) => {
 	});
 
 	const { getScreeningById } = useContext(ScreeningContext);
+	const { addBooking } = useContext(UserContext);
 
 	const ticketsAmount = tickets.adult + tickets.child + tickets.senior;
 
@@ -95,8 +97,9 @@ const TicketPage = (props) => {
 			}),
 		});
 		if (response.status === 200) {
-			const { bookingId } = await response.json();
-			props.history.push(`/booking/${bookingId}`);
+			const booking = await response.json();
+			addBooking(booking);
+			props.history.push(`/booking/${booking._id}`);
 			// TODO: gör en check att om användaren bokat biljetter från denna screening, rediracta bort, och ta bort denna rad när ni är klara
 		} else {
 			alert("Something went wrong!");
