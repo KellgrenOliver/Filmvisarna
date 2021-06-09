@@ -20,12 +20,8 @@ async function userSeeder() {
 async function getBookings(user) {
 	return await Booking.where({ user }).populate([
 		"auditorium",
-		{
-			path: "screening",
-			populate: {
-				path: "movie",
-			},
-		},
+		"screening",
+		"movie",
 	]);
 }
 
