@@ -6,10 +6,22 @@ const MovieProvider = (props) => {
 	const [movies, setMovies] = useState([]);
 	const [searchedMovies, setSearchedMovies] = useState(null);
 	const [message, setMessage] = useState(null);
+  const [searchString, setSearchString] = useState ("")
+  const [lengthMin, setLengthMin]=useState("?lengthMin=0");
+  const [lengthMax, setLengthMax]=useState("");
+  const [language, setLanguage]=useState("");
+  const [genre, setGenre]=useState("");
+  const [director, setDirector]=useState("");
+  const [star, setStar]=useState("");
+  const [rating, setRating]=useState("");
 
 	useEffect(() => {
 		fetchAllMovies();
 	}, []);
+
+  useEffect(() => {
+    filter() 
+  }, [searchString, lengthMin, lengthMax, language, genre, director, star, rating]);
 
 	const fetchAllMovies = async () => {
 		let movieData = await fetch("/api/v1/movies");
@@ -21,15 +33,16 @@ const MovieProvider = (props) => {
 			setMovies(movieData);
 		}
 	};
-
-	const search = async (searchString) => {
-		let response = await fetch(`/api/v1/movies${searchString}`);
+ 
+	const filter = async () => {
+		let response = await fetch(`/api/v1/movies/filter${lengthMin}${lengthMax}${language}${genre}${director}${star}${rating}${searchString}`);
 		let movieData = await response.json();
-		console.log(movieData);
 		if (response.status === 404) {
 			setSearchedMovies([]);
 			setMessage(movieData.error);
-		} else {
+		}else if (response.status === 400) {
+      setSearchedMovies(null);
+    } else {
 			setSearchedMovies(movieData);
 			setMessage(null);
 		}
@@ -42,9 +55,24 @@ const MovieProvider = (props) => {
 		setMovies,
 		findMovie,
 		fetchAllMovies,
-		search,
+		filter,
 		searchedMovies,
 		message,
+    setSearchString,
+    searchString,
+    setLengthMin,
+    setLengthMax,
+    setLanguage,
+    language,
+    setDirector,
+    director,
+    setStar,
+    star,
+    setRating,
+    rating,
+    setGenre,
+    genre,
+    
 	};
 
 	return (
