@@ -32,7 +32,12 @@ const TicketPage = (props) => {
 	useEffect(() => {
 		getScreeningById(props.match.params.screeningId);
 		getAuditoriumById(props.match.params.auditoriumId);
-	}, []);
+	}, [
+		props.match.params.screeningId,
+		props.match.params.auditoriumId,
+		getScreeningById,
+		getAuditoriumById,
+	]);
 
 	if (!movie || !screening || !auditorium) {
 		return <h1 className={styles.header}>Loading...</h1>;

@@ -9,7 +9,7 @@ export default function TicketCounters({ value, max, setTickets }) {
 		ticketCounters.adult + ticketCounters.senior + ticketCounters.child;
 
 	const decrement = (ticket, value) => {
-		if (!ticket || ticketCountersTotal() <= 0 || value <= 0) return;
+		if (!ticket || ticketCountersTotal() <= 1 || value <= 0) return;
 
 		setTicketCounters((ticketCounters) => ({
 			...ticketCounters,
