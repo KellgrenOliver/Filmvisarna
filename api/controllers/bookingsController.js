@@ -51,7 +51,13 @@ async function placeBooking(req, res) {
 			seats,
 		});
 
-		res.status(200).json(booking);
+		res
+			.status(200)
+			.json(
+				await booking
+					.populate(["movie", "auditorium", "screening"])
+					.execPopulate()
+			);
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
