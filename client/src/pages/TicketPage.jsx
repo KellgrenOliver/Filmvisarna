@@ -7,7 +7,6 @@ import { getTicketsPrice } from "../utils/seats";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import Seat from "../components/Seat";
 import TicketCounters from "../components/TicketCounters";
-import { getAuditoriumById } from "../utils/auditorium";
 
 dayjs.extend(advancedFormat);
 
