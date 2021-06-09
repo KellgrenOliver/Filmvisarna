@@ -49,14 +49,7 @@ const TicketPage = (props) => {
 		return seats;
 	};
 
-	const hoverSeats = (seat, row) => {
-		const seats = getSeatsToRight(seat, row);
-		const hoveredSeats = [];
-		for (let i = 0; i < seats.length; i++) {
-			hoveredSeats.push(seats[i]);
-		}
-		setHoveredSeats(hoveredSeats);
-	};
+	const hoverSeats = (seat, row) => setHoveredSeats(getSeatsToRight(seat, row));
 
 	const selectHovered = () => {
 		if (hoverContainsBooked || hoveredSeats.length < ticketsAmount) return;
