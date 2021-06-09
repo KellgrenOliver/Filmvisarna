@@ -1,7 +1,5 @@
-import { MovieContext } from "../contexts/MoviesProvider";
-import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { UserContext } from "../contexts/UserProvider";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/ConfirmationPage.module.css";
@@ -11,18 +9,17 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 dayjs.extend(advancedFormat);
 
 const ConfirmationPage = (props) => {
-	const { findMovie } = useContext(MovieContext);
-	const { user } = useContext(UserContext);
-	const movie = findMovie(props.match.params.movieId);
-	const { getScreeningById, screening } = useContext(ScreeningContext);
+	const { findBooking, user } = useContext(UserContext);
 
-	useEffect(() => {
-		getScreeningById(props.match.params.screeningId);
-	}, []);
+	const booking = findBooking(props.match.params.bookingId);
+	console.log("hej");
+	console.log(booking);
 
-	if (!movie || !screening || !user) {
+	if (!booking) {
 		return <h1 className={styles.header}>Loading...</h1>;
 	}
+
+	console.log(booking.movie.title);
 
 	const content = () => (
 		<div className={styles.confirmationPage}>
@@ -31,14 +28,27 @@ const ConfirmationPage = (props) => {
 					X
 				</Link>
 				<h4>Thanks for your order, {user.email}!</h4>
-				<h5>Salon: {screening.auditorium.id}</h5>
-				<h5>{movie.title}</h5>
-				<h5>{dayjs(screening.time).format("MMMM Do HH:mm")}</h5>
-				<img className={styles.img} src={movie.poster} alt={movie.title} />
+				{/* <h5>Salon: {screening.auditorium.id}</h5> */}
+				<h5>{booking.movie.title}</h5>
+				<h5>
+					{booking.seats.map((seat) => (
+						<div>
+							{seat.row}
+							{seat.id}
+							{seat.price}
+						</div>
+					))}
+				</h5>
+				<h5>{dayjs(booking.screening.time).format("MMMM Do HH:mm")}</h5>
+				<img
+					className={styles.img}
+					src={booking.movie.poster}
+					alt={booking.movie.title}
+				/>
 			</div>
 		</div>
 	);
-	return <div>{screening && content()}</div>;
+	return <div>{booking && content()}</div>;
 };
 
 export default ConfirmationPage;
