@@ -43,7 +43,7 @@ async function placeBooking(req, res) {
 				.json({ error: "One or more of these seats are already booked." });
 		}
 
-		await Booking.create({
+		const { _id } = await Booking.create({
 			auditorium: screening.auditorium._id,
 			screening: screening._id,
 			movie: screening.movie._id,
@@ -51,7 +51,7 @@ async function placeBooking(req, res) {
 			seats,
 		});
 
-		res.status(200).end();
+		res.status(200).json({ bookingId: _id });
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();

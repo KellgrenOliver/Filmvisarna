@@ -34,7 +34,7 @@ const App = () => {
 									component={TicketPage}
 								/>
 								<Route
-									path="/booking/:movieId/:screeningId"
+									path="/booking/:bookingId"
 									component={ConfirmationPage}
 								/>
 							</UserProvider>
