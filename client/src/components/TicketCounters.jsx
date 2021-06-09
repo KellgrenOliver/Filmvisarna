@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styles from "../css/TicketPage.module.css";
 import TicketCounter from "./TicketCounter";
 
