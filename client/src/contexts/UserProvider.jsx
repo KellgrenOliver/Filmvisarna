@@ -16,6 +16,10 @@ const UserProvider = (props) => {
 		setUser(user);
 	};
 
+	const addBooking = (booking) => {
+		setUser((user) => ({ ...user, bookings: [...user.bookings, booking] }));
+	};
+
 	const login = async (userToLogin) => {
 		let result = await fetch("/api/v1/users/login", {
 			method: "POST",
@@ -100,6 +104,7 @@ const UserProvider = (props) => {
 		updateUserInfo,
 		message,
 		setMessage,
+		addBooking,
 		loggedIn: Boolean(user),
 		deleteBooking,
 	};
