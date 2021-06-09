@@ -59,7 +59,7 @@ const TicketPage = (props) => {
 	};
 
 	const selectHovered = () => {
-		if (hoverContainsBooked()) return;
+		if (hoverContainsBooked() || hoveredSeats.length < ticketsAmount) return;
 
 		let { adult, child, senior } = tickets;
 		const seats = hoveredSeats;
