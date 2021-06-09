@@ -1,10 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext();
 
 const UserProvider = (props) => {
 	const [user, setUser] = useState(null);
 	const [message, setMessage] = useState(null);
+
+	useEffect(() => {
+		whoami();
+	}, []);
 
 	const whoami = async () => {
 		let user = await fetch("/api/v1/users/whoami");
@@ -76,6 +80,20 @@ const UserProvider = (props) => {
 		}
 	};
 
+	const deleteBooking = async (id) => {
+		let response = await fetch(`/api/v1/bookings/${id}`, {
+			method: "DELETE",
+			headers: {
+				"content-type": "application/json",
+			},
+		});
+
+		if (response.status === 200) {
+			const updatedBookings = user.bookings.filter((b) => b._id !== id);
+			setUser({ ...user, bookings: updatedBookings });
+		}
+	};
+
 	const values = {
 		login,
 		createUser,
@@ -88,6 +106,7 @@ const UserProvider = (props) => {
 		setMessage,
 		addBooking,
 		loggedIn: Boolean(user),
+		deleteBooking,
 	};
 
 	return (
