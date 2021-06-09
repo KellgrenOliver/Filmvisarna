@@ -27,17 +27,14 @@ const TicketPage = (props) => {
 	const { getScreeningById, screening } = useContext(ScreeningContext);
 	const { getAuditoriumById, auditorium } = useContext(BookingContext);
 
+	const ticketsAmount = tickets.adult + tickets.child + tickets.senior;
+
 	const movie = findMovie(props.match.params.movieId);
 
 	useEffect(() => {
 		getScreeningById(props.match.params.screeningId);
 		getAuditoriumById(props.match.params.auditoriumId);
-	}, [
-		props.match.params.screeningId,
-		props.match.params.auditoriumId,
-		getScreeningById,
-		getAuditoriumById,
-	]);
+	}, [props.match.params.screeningId, props.match.params.auditoriumId]);
 
 	if (!movie || !screening || !auditorium) {
 		return <h1 className={styles.header}>Loading...</h1>;
@@ -47,7 +44,7 @@ const TicketPage = (props) => {
 		const seats = [];
 		for (let i = row.indexOf(seat); i < row.length; i++) {
 			seats.push(row[i]);
-			if (seats.length >= tickets.adult + tickets.child + tickets.senior) break;
+			if (seats.length >= ticketsAmount) break;
 		}
 		return seats;
 	};
@@ -63,11 +60,39 @@ const TicketPage = (props) => {
 
 	const selectHovered = () => {
 		if (hoverContainsBooked()) return;
-		setSelectedSeats(hoveredSeats);
+
+		let { adult, child, senior } = tickets;
+		const seats = [];
+
+		const ticket = () => {
+			if (adult) {
+				adult--;
+				return "adult";
+			}
+			if (child) {
+				child--;
+				return "child";
+			}
+			if (senior) {
+				senior--;
+				return "senior";
+			}
+			return undefined;
+		};
+
+		while (adult || child || senior) {
+			hoveredSeats.forEach((seat) => {
+				seats.push({ ...seat, type: ticket() });
+			});
+			if (seats.length >= ticketsAmount) break;
+		}
+
+		setSelectedSeats(seats);
 	};
 
 	const placeBooking = async () => {
 		if (!selectedSeats.length) return alert("You need to pick your seats");
+
 		const { status } = await fetch("/api/v1/bookings", {
 			method: "POST",
 			headers: {
