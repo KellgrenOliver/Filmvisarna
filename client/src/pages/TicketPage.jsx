@@ -84,7 +84,7 @@ const TicketPage = (props) => {
 	const placeBooking = async () => {
 		if (!selectedSeats.length) return alert("You need to pick your seats");
 
-		const { status } = await fetch("/api/v1/bookings", {
+		const response = await fetch("/api/v1/bookings", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -94,9 +94,10 @@ const TicketPage = (props) => {
 				screeningId: screening._id,
 			}),
 		});
-		if (status === 200) {
+		if (response.status === 200) {
+			const { bookingId } = await response.json();
+			props.history.push(`/booking/${bookingId}`);
 			// TODO: gör en check att om användaren bokat biljetter från denna screening, rediracta bort, och ta bort denna rad när ni är klara
-			props.history.push(`/booking/${movie._id}/${screening._id}`);
 		} else {
 			alert("Something went wrong!");
 		}
