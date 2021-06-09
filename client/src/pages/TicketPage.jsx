@@ -64,7 +64,7 @@ const TicketPage = (props) => {
 		let { adult, child, senior } = tickets;
 		const seats = hoveredSeats;
 
-		const ticket = (seat) => {
+		const addTypeToSeat = (seat) => {
 			if (adult) {
 				adult--;
 				seat.type = "adult";
@@ -81,7 +81,7 @@ const TicketPage = (props) => {
 		while (adult || child || senior) {
 			const seat = seats[i];
 			if (!seat) break;
-			ticket(seat);
+			addTypeToSeat(seat);
 			i++;
 		}
 
