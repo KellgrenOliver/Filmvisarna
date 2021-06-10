@@ -146,15 +146,16 @@ const TicketPage = (props) => {
 					<h5>{dayjs(screening.time).format("MMMM Do HH:mm")}</h5>
 					<h5>Language: {screening.movie.language}</h5>
 				</div>
-				<h5 className={styles.bioduk}>SCREEN</h5>
 				<div>
-					<TicketCounters
-						tickets={tickets}
-						setTickets={setTickets}
-						max={MAX_SELECT}
-					/>
 					<div key={screening.auditorium.id}>
 						<div className={styles.seatContainer}>
+							<h5 className={styles.bioduk}>S C R E E N</h5>
+							<TicketCounters
+								className={styles.counter}
+								tickets={tickets}
+								setTickets={setTickets}
+								max={MAX_SELECT}
+							/>
 							{groupSeats().map((row, i) => (
 								<div key={i} className={styles.seatRow}>
 									{row.map((seat) => (
