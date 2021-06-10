@@ -81,11 +81,8 @@
 		flex-direction: column;
 	}
 	.ticket {
-		display: flex;
-		justify-content: center;
-		margin: auto;
-		margin-bottom: 2rem;
-		width: 300px;
+		margin-bottom: 3rem;
+		width: 100%;
 	}
 }
 
