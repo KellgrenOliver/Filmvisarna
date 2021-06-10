@@ -8,6 +8,7 @@ const Login = (props) => {
 	const { login } = useContext(UserContext);
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const handleEmailChange = (e) => {
 		setEmail(e.target.value);
@@ -18,6 +19,7 @@ const Login = (props) => {
 	const handleClick = () => {
 		props.onHandleClick();
 		props.onClose();
+		setErrorMessage("");
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -27,7 +29,9 @@ const Login = (props) => {
 		};
 		let result = await login(user);
 		console.log(result);
-
+		if (result.error) {
+			setErrorMessage(result.error);
+		}
 		if (result.success) {
 			props.onClose();
 			setEmail("");
@@ -52,6 +56,7 @@ const Login = (props) => {
 						type="text"
 						value={email}
 						onChange={handleEmailChange}
+						required
 					/>
 					<p>Password</p>
 					<input
@@ -59,7 +64,9 @@ const Login = (props) => {
 						type="password"
 						value={password}
 						onChange={handlePasswordChange}
+						required
 					/>
+					{errorMessage && <p className={styles.error}> {errorMessage} </p>}
 					<button type="submit" className={styles.btn}>
 						Login
 					</button>

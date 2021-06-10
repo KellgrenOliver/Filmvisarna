@@ -94,8 +94,16 @@ const UserProvider = (props) => {
 		}
 	};
 
+	const findBooking = (id) => {
+		if (!user) {
+			return null;
+		}
+		return user.bookings.find((booking) => booking._id === id);
+	};
+
 	const values = {
 		login,
+		findBooking,
 		createUser,
 		whoami,
 		user,

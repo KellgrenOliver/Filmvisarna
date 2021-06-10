@@ -83,7 +83,7 @@ async function register(req, res) {
 
 	const errors = validatePassword(password);
 	if (errors.length > 0) {
-		return res.status(422).json({ error: errors });
+		return res.status(422).json({ error: errors[0] });
 	}
 
 	try {

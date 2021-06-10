@@ -9,6 +9,7 @@ const CreateUser = (props) => {
 	const [phone, setPhone] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const handlePhoneChange = (e) => {
 		setPhone(e.target.value);
@@ -35,6 +36,9 @@ const CreateUser = (props) => {
 
 		let result = await createUser(userToCreate);
 		console.log(result);
+		if (result.error) {
+			setErrorMessage(result.error);
+		}
 		if (result.success) {
 			let user = {
 				email,
@@ -78,6 +82,7 @@ const CreateUser = (props) => {
 						onChange={handlePasswordChange}
 						required
 					/>
+					{errorMessage && <p className={styles.error}> {errorMessage} </p>}
 					<br />
 					<button type="submit" className={styles.btn}>
 						Create new user
