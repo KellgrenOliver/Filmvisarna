@@ -9,6 +9,7 @@ import Screening from "../components/Screening";
 import FilterScreeningGroup from "../components/FilterScreeningGroup";
 
 dayjs.extend(advancedFormat);
+
 const Movie = (props) => {
 	const { findMovie } = useContext(MovieContext);
 	const {
@@ -20,6 +21,7 @@ const Movie = (props) => {
 	} = useContext(ScreeningContext);
 
 	const movie = findMovie(props.match.params.movieId);
+
 	useEffect(() => {
 		setFilterMovieId(props.match.params.movieId);
 		getScreeningsFromMovie(props.match.params.movieId);
@@ -28,6 +30,7 @@ const Movie = (props) => {
 	if (!movie) {
 		return null;
 	}
+
 	return (
 		<div className={styles.moviePage}>
 			<div className={styles.container}>
@@ -78,24 +81,18 @@ const Movie = (props) => {
 						<b>Rating:</b> {movie.rating}
 					</span>
 				</div>
-          <FilterScreeningGroup />
-				{message ? <h3 className={styles.message}>{message}</h3> : ""}
 				<div>
-					{!filteredMovieScreenings
-						? movieScreenings.map((screening, i) => (
-								<Screening
-									screening={screening}
-									movie={movie}
-									key={i}
-								/>
-						  ))
-						: filteredMovieScreenings.map((screening, i) => (
-								<Screening
-									screening={screening}
-									movie={movie}
-									key={i}
-								/>
-						  ))}
+					<FilterScreeningGroup />
+					{message ? <h3 className={styles.message}>{message}</h3> : ""}
+					<div>
+						{!filteredMovieScreenings
+							? movieScreenings.map((screening, i) => (
+									<Screening screening={screening} movie={movie} key={i} />
+							  ))
+							: filteredMovieScreenings.map((screening, i) => (
+									<Screening screening={screening} movie={movie} key={i} />
+							  ))}
+					</div>
 				</div>
 			</div>
 			<div className={styles.trailerContainer}>

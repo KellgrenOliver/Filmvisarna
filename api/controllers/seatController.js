@@ -19,7 +19,7 @@ const addSeatsToAuditorium = async (req, res) => {
 
 	res.json({ auditorium, seat });
 };
+
 module.exports = {
 	addSeatsToAuditorium,
-	getAllSeats,
 };

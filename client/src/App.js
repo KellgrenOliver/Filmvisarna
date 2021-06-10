@@ -12,7 +12,6 @@ import MoviesProvider from "./contexts/MoviesProvider";
 import ScreeningProvider from "./contexts/ScreeningProvider";
 import ProfilePage from "./pages/ProfilePage";
 
-
 const App = () => {
 	return (
 		<div>
@@ -29,11 +28,12 @@ const App = () => {
 							<Route exact path="/createUser" component={CreateUser} />
 							<Route
 								exact
-								path="/ticket/:movieId/:screeningId"
+								path="/screening/:screeningId"
 								component={TicketPage}
 							/>
 							<Route
-								path="/booking/:movieId/:screeningId"
+								exact
+								path="/booking/:bookingId"
 								component={ConfirmationPage}
 							/>
 						</UserProvider>

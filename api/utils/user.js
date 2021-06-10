@@ -1,6 +1,7 @@
 const errorLog = require("./errorLog");
 const User = require("../models/User");
 const Booking = require("../models/Booking");
+const Seat = require("../models/Seat");
 
 async function userSeeder() {
 	try {
@@ -17,16 +18,10 @@ async function userSeeder() {
 }
 
 async function getBookings(user) {
-	if (!user) user = req.session.user;
 	return await Booking.where({ user }).populate([
 		"auditorium",
-		{
-			path: "screening",
-			populate: {
-				path: "movie"
-			},
-		},
-		"seats",
+		"screening",
+		"movie",
 	]);
 }
 
