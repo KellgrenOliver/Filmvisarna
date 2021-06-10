@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
 import dayjs from "dayjs";
+import Modal from "./profilePageModal";
 
 const RenderBookings = () => {
 	const { user, deleteBooking } = useContext(UserContext);
+	const [showModal, setShowModal] = useState(false);
 
 	const getSeatValueWeight = (seatType) => {
 		switch (seatType.toLowerCase()) {
@@ -23,6 +25,11 @@ const RenderBookings = () => {
 
 	return (
 		<div>
+			<Modal
+				onClose={() => setShowModal(false)}
+				onDelete={() => handleDelete()}
+				showModal={showModal}
+			/>
 			{user.bookings.length !== 0 ? (
 				user.bookings.map((booking) => (
 					<div className={styles.flex} key={booking._id}>
@@ -66,7 +73,7 @@ const RenderBookings = () => {
 									<div>
 										<button
 											className={styles.btnCancel}
-											onClick={() => handleDelete(booking._id)}
+											onClick={() => setShowModal(true)}
 										>
 											Delete
 										</button>

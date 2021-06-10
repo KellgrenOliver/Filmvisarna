@@ -46,11 +46,9 @@
 	border-radius: 7px;
 	border-color: rgb(71, 7, 24);
 	background-color: transparent;
-	color:  rgb(71, 7, 24);
+	color: rgb(71, 7, 24);
 	margin-bottom: 10px;
 	margin-left: 10px;
-	
-	
 }
 
 .btn:hover {
@@ -59,8 +57,8 @@
 
 .btnCancel {
 	margin-top: 30px;
-	background-color:  rgb(71, 7, 24);
-	color:rgb(235, 235, 235);
+	background-color: rgb(71, 7, 24);
+	color: rgb(235, 235, 235);
 	border-radius: 7px;
 	padding: 10px;
 	font-weight: bold;
@@ -69,11 +67,14 @@
 }
 
 .btnCancel:hover {
-	background-color: rgb(235, 235, 235) ;
+	background-color: rgb(235, 235, 235);
 	color: rgb(71, 7, 24);
 }
 
-#emailinput, #passwordinput, #newpasswordinput, #numberinput {
+#emailinput,
+#passwordinput,
+#newpasswordinput,
+#numberinput {
 	width: 100%;
 	text-align: left;
 	padding: 10px;
@@ -95,18 +96,3 @@
 	border: none;
 	margin-bottom: 1rem;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
