@@ -27,7 +27,7 @@ const UpcomingBookings = (props) => {
 				props.renderBookings.map((booking) => (
 					<div className={styles.flex} key={booking._id}>
 						<div className={styles.booking}>
-							<div className={styles.bookingContainer}>
+							<div className={ props.upcoming ? styles.bookingContainer : styles.shadow}>
 								<div className={styles.flex}>
 									<div>
 										<div>
@@ -64,12 +64,13 @@ const UpcomingBookings = (props) => {
 										</div>
 									</div>
 									<div>
-										<button
+										{props.upcoming && <button
 											className={styles.btnCancel}
 											onClick={() => handleDelete(booking._id)}
 										>
 											Cancle
-										</button>
+										</button> }
+										
 									</div>
 								</div>
 							</div>

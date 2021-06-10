@@ -17,17 +17,24 @@ const BookingsGroup = () => {
 		<div className={styles.wrapper}>
 			<div>
 				<div className={styles.info}>
-					<h6>Last bookings</h6>
+					<div className={styles.title}>
+						<h6>Last bookings</h6>
+					</div>
 					<hr />
 				</div>
 				<RenderBookings renderBookings={lastBookings} />
 			</div>
 			<div>
 				<div className={styles.info}>
-					<h6>Upcoming bookings</h6>
+					<div className={styles.title}>
+						<h6>Upcoming bookings</h6>
+					</div>
 					<hr />
 				</div>
-				<RenderBookings renderBookings={upcomingBooking} />
+				<RenderBookings
+					renderBookings={upcomingBooking}
+					upcoming={"upcoming"}
+				/>
 			</div>
 		</div>
 	);

@@ -159,8 +159,8 @@ const ProfilePage = () => {
 				<h3>Welcome!</h3>
 				<div className={styles.flex}>
 					<div className={styles.info}>
-						<div>
-							<h6>Personal information</h6>
+						<div className={styles.title}>
+							<h6 >Personal information</h6>
 						</div>
 						<hr></hr>
 						<div>{emailContent}</div>
