@@ -3,12 +3,8 @@ import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { useContext, useEffect } from "react";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
-import dayjs from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat";
 import Screening from "../components/Screening";
 import FilterScreeningGroup from "../components/FilterScreeningGroup";
-
-dayjs.extend(advancedFormat);
 
 const Movie = (props) => {
 	const { findMovie } = useContext(MovieContext);
