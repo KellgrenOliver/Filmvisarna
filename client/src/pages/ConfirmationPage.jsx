@@ -20,8 +20,6 @@ const ConfirmationPage = (props) => {
 		return <h1 className={styles.header}>Loading...</h1>;
 	}
 
-	console.log(booking.movie);
-
 	const content = () => (
 		<div className={styles.confirmationPage}>
 			<div className={styles.container}>
@@ -32,6 +30,7 @@ const ConfirmationPage = (props) => {
 				<h6 className={styles.total}>
 					Total: {getTicketsPrice(booking.seats, booking.screening.price)} SEK
 				</h6>
+				<h6>Booking ID: {booking._id}</h6>
 				<h5>
 					{booking.seats.map((seat) => (
 						<div className={styles.ticket}>
