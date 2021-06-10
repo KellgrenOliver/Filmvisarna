@@ -68,7 +68,7 @@ const UpcomingBookings = (props) => {
 											className={styles.btnCancel}
 											onClick={() => handleDelete(booking._id)}
 										>
-											Cancle
+											Cancel
 										</button> }
 										
 									</div>
