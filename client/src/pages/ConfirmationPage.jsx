@@ -1,9 +1,7 @@
-import { MovieContext } from "../contexts/MoviesProvider";
-import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { UserContext } from "../contexts/UserProvider";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { getTicketsPrice } from "../utils/seats";
 import styles from "../css/ConfirmationPage.module.css";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -11,34 +9,54 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 dayjs.extend(advancedFormat);
 
 const ConfirmationPage = (props) => {
-	const { findMovie } = useContext(MovieContext);
-	const { user } = useContext(UserContext);
-	const movie = findMovie(props.match.params.movieId);
-	const { getScreeningById, screening } = useContext(ScreeningContext);
+	const { findBooking, user } = useContext(UserContext);
 
-	useEffect(() => {
-		getScreeningById(props.match.params.screeningId);
-	}, []);
+	const booking = findBooking(props.match.params.bookingId);
 
-	if (!movie || !screening || !user) {
+	if (!booking) {
 		return <h1 className={styles.header}>Loading...</h1>;
 	}
 
 	const content = () => (
 		<div className={styles.confirmationPage}>
 			<div className={styles.container}>
-				<Link to="/" className={styles.x}>
-					X
-				</Link>
 				<h4>Thanks for your order, {user.email}!</h4>
-				<h5>Salon: {screening.auditorium.id}</h5>
-				<h5>{movie.title}</h5>
-				<h5>{dayjs(screening.time).format("MMMM Do HH:mm")}</h5>
-				<img className={styles.img} src={movie.poster} alt={movie.title} />
+				<h6 className={styles.total}>
+					Total: {getTicketsPrice(booking.seats, booking.screening.price)} SEK
+				</h6>
+				<h6>Booking ID: {booking._id.slice(0, 8)}</h6>
+				<h5>
+					{booking.seats.map((seat) => (
+						<div key={seat.id} className={styles.ticket}>
+							<div className={styles.infoContainer}>
+								<div className={styles.ticketHeader}>{booking.movie.title}</div>
+								<div className={styles.ticketInfo}>
+									<div>Salon: {booking.auditorium.id}</div>
+									<div>Row: {seat.row}</div>
+									<div className={styles.marginFooter}>Seat: {seat.id}</div>
+									<div className={styles.ticketFooter}>
+										<div>
+											{dayjs(booking.screening.time).format("MMMM Do HH:mm")}
+										</div>
+
+										<div>{seat.price}SEK</div>
+									</div>
+								</div>
+							</div>
+							<img
+								className={styles.qrImg}
+								src={
+									"https://media.nbcbayarea.com/2020/10/qr-code-huge.png?resize=906,1024"
+								}
+								alt="QR Code"
+							/>
+						</div>
+					))}
+				</h5>
 			</div>
 		</div>
 	);
-	return <div>{screening && content()}</div>;
+	return <div>{booking && content()}</div>;
 };
 
 export default ConfirmationPage;

@@ -14,15 +14,26 @@ dayjs.extend(advancedFormat);
 const MAX_SELECT = 5;
 
 const TicketPage = (props) => {
+	const { screeningId } = props.match.params;
+	const localScreenings = JSON.parse(localStorage.getItem("screenings")) ?? {};
+
+	const [selectedSeats, setSelectedSeats] = useState(
+		localScreenings[screeningId]?.selectedSeats ?? []
+	);
+	const [tickets, setTickets] = useState(
+		localScreenings[screeningId]?.tickets ?? {
+			adult: 2,
+			senior: 0,
+			child: 0,
+		}
+	);
+	const [hoveredSeats, setHoveredSeats] = useState([]);
 	const [screening, setScreening] = useState();
 
-	const [selectedSeats, setSelectedSeats] = useState([]);
-	const [hoveredSeats, setHoveredSeats] = useState([]);
-	const [tickets, setTickets] = useState({
-		adult: 2,
-		senior: 0,
-		child: 0,
-	});
+	useEffect(() => {
+		localScreenings[screeningId] = { selectedSeats, tickets };
+		localStorage.setItem("screenings", JSON.stringify(localScreenings));
+	}, [selectedSeats, tickets, screeningId]);
 
 	const { getScreeningById } = useContext(ScreeningContext);
 	const { addBooking } = useContext(UserContext);
@@ -31,12 +42,12 @@ const TicketPage = (props) => {
 
 	useEffect(() => {
 		(async () => {
-			const screening = await getScreeningById(props.match.params.screeningId);
+			const screening = await getScreeningById(screeningId);
 			if (screening) {
 				setScreening(screening);
 			}
 		})();
-	}, [props.match.params.screeningId]);
+	}, [screeningId]);
 
 	if (!screening) {
 		return <h1 className={styles.header}>Loading...</h1>;
