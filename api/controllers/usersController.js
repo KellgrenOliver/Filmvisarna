@@ -10,6 +10,7 @@ const {
 } = require("../utils/user");
 
 const whoami = async (req, res) => {
+	if (!req.session.user) return res.status(401).end();
 	try {
 		const user = await User.findById(req.session.user._id);
 		user.password = undefined;
@@ -56,7 +57,7 @@ const login = async (req, res) => {
 		user.password = undefined;
 		req.session.user = user;
 
-		user.bookings = await getBookings(user);
+		user.bookings = await getBookings(user._id);
 
 		res.status(200).json({ success: true, loggedInUser: user });
 	} catch (e) {

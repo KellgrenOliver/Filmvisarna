@@ -1,4 +1,5 @@
 const Screening = require("../models/Screening");
+const Seat = require("../models/Seat");
 const errorLog = require("../utils/errorLog");
 const { getBookedSeats } = require("../utils/seats");
 
@@ -28,6 +29,9 @@ async function getScreeningById(req, res) {
 		if (!screening) return res.status(404).end();
 
 		screening.bookedSeats = await getBookedSeats(screening);
+		screening.auditorium.seats = await Seat.where({
+			auditorium: screening.auditorium,
+		});
 
 		res.status(200).json(screening);
 	} catch (e) {
@@ -37,19 +41,19 @@ async function getScreeningById(req, res) {
 }
 
 async function getScreeningsFromMovie(req, res) {
-	try {	
-      const { movie } = req.params;
+	try {
+		const { movie } = req.params;
 
-        let screening = await Screening.find({ movie }).populate([
-          "movie",
-          "auditorium",
-        ]);
-  
-        if (screening.length === 0) {
-          return res.status(404).json({ error: "No results were found." });
-        }
-  
-        return res.status(200).json(screening);    
+		let screening = await Screening.find({ movie }).populate([
+			"movie",
+			"auditorium",
+		]);
+
+		if (screening.length === 0) {
+			return res.status(404).json({ error: "No results were found." });
+		}
+
+		return res.status(200).json(screening);
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
@@ -103,5 +107,5 @@ module.exports = {
 	getScreenings,
 	getScreeningById,
 	getScreeningsFromMovie,
-  getScreeningsFromMovieByFilter
+	getScreeningsFromMovieByFilter,
 };
