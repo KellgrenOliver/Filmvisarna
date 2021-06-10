@@ -1,48 +1,36 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
-import UpcomingBookings from "./UpcomingBookings";
-import LastBookings from "./LastBookings";
-import dayjs from "dayjs";
+import RenderBookings from "./RenderBookings";
+
 const BookingsGroup = () => {
-	
-	const { whoami, user } =
-		useContext(UserContext);
+	const { user } = useContext(UserContext);
 
-    const[upcomingBookings, setUpcomingBookings]=useState([])
-    const[lastBookings, setLastBookings]=useState([])
+	const lastBookings = user.bookings.filter(
+		(b) => new Date(b.screening.time) <= new Date()
+	);
+	const upcomingBooking = user.bookings.filter(
+		(b) => new Date(b.screening.time) > new Date()
+	);
 
-	useEffect(() => {
-    getAllUpcomingBookings()
-		whoami();
-	}, []);
-
-  const getAllUpcomingBookings =()=>{
-    let now = new Date()
-    let bookings = user.bookings.map((booking)=>booking.screening.time )
-    console.log(bookings)
-  }
-
-
-		return (
+	return (
+		<div className={styles.wrapper}>
 			<div>
-				<div>
-					<div className={styles.info}>
-						<h6>Last bookings</h6>
-						<hr />
-					</div>
-					<LastBookings  />
+				<div className={styles.info}>
+					<h6>Last bookings</h6>
+					<hr />
 				</div>
-				<div>
-					<div className={styles.info}>
-						<h6>Upcoming bookings</h6>
-						<hr />
-					</div>
-					<UpcomingBookings />
-				</div>
+				<RenderBookings renderBookings={lastBookings} />
 			</div>
-		);
-	
+			<div>
+				<div className={styles.info}>
+					<h6>Upcoming bookings</h6>
+					<hr />
+				</div>
+				<RenderBookings renderBookings={upcomingBooking} />
+			</div>
+		</div>
+	);
 };
 
 export default BookingsGroup;

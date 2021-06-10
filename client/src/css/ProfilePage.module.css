@@ -13,6 +13,13 @@
 	justify-content: space-between;
 }
 
+.wrapper {
+	display: flex;
+	flex-wrap: nowrap;
+
+}
+
+
 .flexBtn {
 	display: flex;
 	justify-content: space-evenly;
