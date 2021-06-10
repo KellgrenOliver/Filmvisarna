@@ -3,7 +3,7 @@ import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
 import dayjs from "dayjs";
 
-const RenderBookings = () => {
+const UpcomingBookings = (props) => {
 	const { user, deleteBooking } = useContext(UserContext);
 
 	const getSeatValueWeight = (seatType) => {
@@ -24,10 +24,10 @@ const RenderBookings = () => {
 	return (
 		<div>
 			{user.bookings.length !== 0 ? (
-				user.bookings.map((booking) => (
+				props.renderBookings.map((booking) => (
 					<div className={styles.flex} key={booking._id}>
 						<div className={styles.booking}>
-							<div className={styles.bookingContainer}>
+							<div className={ props.upcoming ? styles.bookingContainer : styles.shadow}>
 								<div className={styles.flex}>
 									<div>
 										<div>
@@ -64,12 +64,13 @@ const RenderBookings = () => {
 										</div>
 									</div>
 									<div>
-										<button
+										{props.upcoming && <button
 											className={styles.btnCancel}
 											onClick={() => handleDelete(booking._id)}
 										>
-											Delete
-										</button>
+											Cancel
+										</button> }
+										
 									</div>
 								</div>
 							</div>
@@ -83,4 +84,4 @@ const RenderBookings = () => {
 	);
 };
 
-export default RenderBookings;
+export default UpcomingBookings;
