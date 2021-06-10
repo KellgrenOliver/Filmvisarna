@@ -26,17 +26,6 @@
 	border-radius: 10px;
 }
 
-/* .x {
-	background-color: rgb(85, 11, 27);
-	color: white;
-	border-radius: 5px;
-	cursor: pointer;
-	float: right;
-	margin: 0.5rem;
-	padding: 0.5rem;
-	text-decoration: none;
-} */
-
 .ticket {
 	display: flex;
 	padding: 1px 1px 1px;
