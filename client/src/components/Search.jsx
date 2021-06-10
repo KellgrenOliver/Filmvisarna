@@ -15,15 +15,13 @@ const Search = () => {
 	};
 
 	return (
-		<div>
 			<input
-				className={styles.searchField}
+				id={styles.searchField}
 				type="text"
 				placeholder="Search..."
 				name="search"
 				onChange={handleSearch}
 			></input>
-		</div>
 	);
 };
 

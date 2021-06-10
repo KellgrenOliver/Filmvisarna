@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
+import RenderBookings from "../components/RenderBookings";
 
 const ProfilePage = () => {
 	const [editMode, setEditMode] = useState(false);
@@ -40,6 +41,7 @@ const ProfilePage = () => {
 			setEditMode(false);
 		}
 	};
+
 	// to be able to edit the information in input
 	useEffect(() => {
 		if (user) {
@@ -58,7 +60,6 @@ const ProfilePage = () => {
 	if (!user) {
 		return null; // redirect it to homePage
 	} else {
-		// console.log(user);
 		let emailContent;
 		let passwordContent;
 		let newPasswordContent;
@@ -67,10 +68,14 @@ const ProfilePage = () => {
 
 		if (!editMode) {
 			emailContent = (
-				<span className={styles.infoDetail}>Email: {user.email}</span>
+				<span className={styles.infoDetail}>
+					<b>Email:</b> {user.email}
+				</span>
 			);
 			phoneContent = (
-				<span className={styles.infoDetail}>Phone number: {user.phone}</span>
+				<span className={styles.infoDetail}>
+					<b>Phone number:</b> {user.phone}
+				</span>
 			);
 			buttonContent = (
 				<button className={styles.mainBtn} onClick={onEdit}>
@@ -80,7 +85,9 @@ const ProfilePage = () => {
 		} else {
 			emailContent = (
 				<div>
-					<label>Email address</label>
+					<label>
+						<b>Email address: </b>
+					</label>
 					<input
 						type="text"
 						id={styles.emailinput}
@@ -91,7 +98,9 @@ const ProfilePage = () => {
 			);
 			passwordContent = (
 				<div>
-					<label>Current password (required)</label>
+					<label>
+						<b>Current password (required): </b>
+					</label>
 					<input
 						type="password"
 						id={styles.passwordinput}
@@ -101,7 +110,9 @@ const ProfilePage = () => {
 			);
 			newPasswordContent = (
 				<div>
-					<label>New password</label>
+					<label>
+						<b>New password: </b>
+					</label>
 					<input
 						type="password"
 						id={styles.newpasswordinput}
@@ -112,7 +123,9 @@ const ProfilePage = () => {
 			);
 			phoneContent = (
 				<div>
-					<label>Phone Number</label>
+					<label>
+						<b>Phone Number: </b>
+					</label>
 					<input
 						type="text"
 						id={styles.numberinput}
@@ -181,7 +194,13 @@ const ProfilePage = () => {
 						<div>{buttonContent}</div>
 						<div>{message ? <p>{message}</p> : ""}</div>
 					</div>
-					<div>{renderBookings()}</div>
+					<div>
+						<div className={styles.info}>
+							<h6>Last bookings</h6>
+							<hr />
+						</div>
+						<RenderBookings />
+					</div>
 				</div>
 			</div>
 		);

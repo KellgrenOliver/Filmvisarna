@@ -5,7 +5,7 @@ const AboutPage = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.boxContainer}>
-				<p>
+				<div>
 					<h3>About us</h3>
 					Aubameyang is part of the company Filmvisarna AB which is a small
 					cinema chain. We have a couple of movie theaters in Malmö and have
@@ -30,7 +30,7 @@ const AboutPage = () => {
 					information.<br></br>Telephone number : 040 987 987 <br></br>Email:
 					Info@aubameyang.com<br></br>Address: fruitcake macaroon 28, 211 14,
 					Malmö.
-				</p>
+					</div>
 			</div>
 		</div>
 	);
