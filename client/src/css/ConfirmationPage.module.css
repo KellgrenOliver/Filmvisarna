@@ -10,15 +10,6 @@
 	border-radius: 10px;
 }
 
-.img {
-	width: 150px;
-	height: 230px;
-	border-radius: 10px;
-	display: flex;
-	/* float: left; */
-	margin-left: 2rem;
-}
-
 .qrImg {
 	width: 150px;
 	height: 150px;
@@ -72,4 +63,40 @@
 
 .marginFooter {
 	margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+	.container {
+		width: 90%;
+	}
+	.qrImg {
+		width: 80px;
+		height: 80px;
+		margin: auto 0.5rem;
+	}
+	.ticketFooter {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+	.ticket {
+		display: flex;
+		justify-content: center;
+		margin: auto;
+		margin-bottom: 2rem;
+		width: 300px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+	.container {
+		width: 80%;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 766px) {
+	.container {
+		width: 90%;
+	}
 }
