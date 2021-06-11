@@ -112,28 +112,6 @@
 	margin-bottom: 1rem;
 }
 
-<<<<<<< HEAD
-
-/* tablet and desktop and extra large */
-@media only screen and (min-width: 768px) {
-	.container {
-		max-width: 720px;
-		margin: 2rem auto;
-	}
-
-}
-/* desktop and extra large*/
-@media only screen and (min-width: 992px) {
-	.container {
-		max-width: 960px;
-	}
-}
-
-@media only screen and (min-width: 1200px) {
-	.container {
-		max-width: 1140px;
-	}
-}
 
 
 
@@ -145,8 +123,6 @@
 
 
 
-
-=======
 .shadow {
 	background-color: rgba(148, 137, 137, 0.201);
 	width: 100%;
@@ -156,4 +132,3 @@
 	border: none;
 	margin-bottom: 1rem;
 }
->>>>>>> dev
