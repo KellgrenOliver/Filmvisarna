@@ -33,7 +33,7 @@ const UpcomingBookings = (props) => {
 										<div>
 											<span>
 												<b>Movie title:</b>
-												{booking?.screening.movie.title}{" "}
+												{booking?.screening.movie.title}
 											</span>
 										</div>
 										{booking.seats.map((seat, i) => (
