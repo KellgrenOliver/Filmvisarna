@@ -6,7 +6,7 @@ import Modal from "./profilePageModal";
 
 const UpcomingBookings = (props) => {
 	const { user, deleteBooking } = useContext(UserContext);
-	const [showModal, setShowModal] = useState(false);
+	const [showModal, setShowModal] = useState(true);
 
 	const getSeatValueWeight = (seatType) => {
 		switch (seatType.toLowerCase()) {
@@ -30,11 +30,16 @@ const UpcomingBookings = (props) => {
 				onDelete={() => handleDelete()}
 				showModal={showModal}
 			/>
+
 			{user.bookings.length !== 0 ? (
 				props.renderBookings.map((booking) => (
 					<div className={styles.flex} key={booking._id}>
 						<div className={styles.booking}>
-							<div className={ props.upcoming ? styles.bookingContainer : styles.shadow}>
+							<div
+								className={
+									props.upcoming ? styles.bookingContainer : styles.shadow
+								}
+							>
 								<div className={styles.flex}>
 									<div>
 										<div>
@@ -71,13 +76,14 @@ const UpcomingBookings = (props) => {
 										</div>
 									</div>
 									<div>
-										{props.upcoming && <button
-											className={styles.btnCancel}
-											onClick={() => setShowModal(true)}
-										>
-											Cancel
-										</button> }
-										
+										{props.upcoming && (
+											<button
+												className={styles.btnCancel}
+												onClick={() => setShowModal(true)}
+											>
+												Cancel
+											</button>
+										)}
 									</div>
 								</div>
 							</div>
