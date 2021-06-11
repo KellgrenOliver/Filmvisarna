@@ -9,6 +9,9 @@
   border:none;
   border-bottom: rgb(71, 7, 24);
 }
+#customSelect :first-child{
+  position: static;
+}
 
 #select{
 	padding-top: 5px;
@@ -43,6 +46,11 @@
 	color: black;
 	background-color:rgb(235,235,235);
 	border: 0px;
+}
+
+#calendar{
+  color:rgb(71, 7, 24);
+  font-size:1.5rem;
 }
 
 
