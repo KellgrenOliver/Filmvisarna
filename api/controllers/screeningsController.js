@@ -88,7 +88,7 @@ async function getScreeningsFromMovieByFilter(req, res) {
 				$lte: queryPriceMax,
 			},
 			time: {
-				$gte: new Date(),
+				$gte: new Date(startDate),
 				$lte: new Date(endDate),
 			},
 		}).populate(["movie", "auditorium"]);
