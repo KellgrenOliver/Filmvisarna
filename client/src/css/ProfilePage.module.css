@@ -1,22 +1,14 @@
 .container {
 	padding: 3rem;
 	margin: 3rem auto;
-	width: 70%;
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
 	box-shadow: 5px 5px 5px rgb(165, 165, 165);
 	line-height: 1.5rem;
+	max-width: 100%;
 }
 
-/* .container h3{
-	padding-left: 35px;
-} */
 
-.flex {
-	display: flex;
-	justify-content: space-between;
-	
-}
 
 .wrapper {
 	display: inline-flex;
@@ -28,6 +20,8 @@
 	display: flex;
 	justify-content: space-evenly;
 }
+
+
 
 .info h6 {
 	margin: 0%;
@@ -112,17 +106,6 @@
 	margin-bottom: 1rem;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 .shadow {
 	background-color: rgba(148, 137, 137, 0.201);
 	width: 100%;
@@ -132,3 +115,33 @@
 	border: none;
 	margin-bottom: 1rem;
 }
+
+/* tablet and desktop and extra large */
+@media only screen and (min-width: 768px) {
+	.container {
+		max-width: 720px;
+		margin: 2rem auto;
+	}
+	
+
+}
+/* desktop and extra large*/
+@media only screen and (min-width: 992px) {
+	.container {
+		max-width: 960px;
+	}
+
+	.flex {
+		display: flex;
+		justify-content: space-between;
+		
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.container {
+		max-width: 1140px;
+	}
+}
+
+
