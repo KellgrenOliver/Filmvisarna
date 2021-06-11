@@ -19,3 +19,16 @@
 	height: 15%;
 	text-align: center;
 }
+
+.btn {
+	border-radius: 10px;
+	background-color: rgb(71, 7, 24);
+	border: none;
+	color: white;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: bolder;
+	padding: 5px 21px;
+	text-decoration: none;
+	margin: 1rem;
+}
