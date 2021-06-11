@@ -4,7 +4,6 @@ import { UserContext } from "../contexts/UserProvider";
 import styles from "../css/Login.module.css";
 
 const CreateUser = (props) => {
-	const history = useHistory();
 	const { createUser, login } = useContext(UserContext);
 	const [phone, setPhone] = useState("");
 	const [email, setEmail] = useState("");
@@ -24,6 +23,13 @@ const CreateUser = (props) => {
 	const handleClick = () => {
 		props.onClose();
 		props.onOpen();
+		resetForm();
+	};
+
+	const resetForm = () => {
+		setEmail("");
+		setPassword("");
+		setPhone("");
 	};
 
 	const handleSubmit = async (e) => {
@@ -46,15 +52,21 @@ const CreateUser = (props) => {
 			};
 			result = await login(user);
 			props.onClose();
+			resetForm();
 		}
 	};
+	const closeModal = () => {
+		props.onClose();
+		resetForm();
+	};
+
 	if (!props.showRegister) {
 		return null;
 	}
 	return (
-		<div className={styles.modal} onClick={props.onClose}>
+		<div className={styles.modal} onClick={closeModal}>
 			<div className={styles.card} onClick={(e) => e.stopPropagation()}>
-				<span onClick={props.onClose} className={styles.close}>
+				<span onClick={closeModal} className={styles.close}>
 					X
 				</span>
 				<form className={styles.form} onSubmit={handleSubmit}>
