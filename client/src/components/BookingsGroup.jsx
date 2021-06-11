@@ -13,6 +13,7 @@ const BookingsGroup = () => {
 		(b) => new Date(b.screening.time) > new Date()
 	);
 
+	console.log(lastBookings);
 	return (
 		<div className={styles.wrapper}>
 			<div>
