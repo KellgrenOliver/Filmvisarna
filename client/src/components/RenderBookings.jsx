@@ -4,7 +4,7 @@ import { UserContext } from "../contexts/UserProvider";
 import dayjs from "dayjs";
 import Modal from "./profilePageModal";
 
-const RenderBookings = () => {
+const UpcomingBookings = (props) => {
 	const { user, deleteBooking } = useContext(UserContext);
 	const [showModal, setShowModal] = useState(false);
 
@@ -31,10 +31,10 @@ const RenderBookings = () => {
 				showModal={showModal}
 			/>
 			{user.bookings.length !== 0 ? (
-				user.bookings.map((booking) => (
+				props.renderBookings.map((booking) => (
 					<div className={styles.flex} key={booking._id}>
 						<div className={styles.booking}>
-							<div className={styles.bookingContainer}>
+							<div className={ props.upcoming ? styles.bookingContainer : styles.shadow}>
 								<div className={styles.flex}>
 									<div>
 										<div>
@@ -71,12 +71,13 @@ const RenderBookings = () => {
 										</div>
 									</div>
 									<div>
-										<button
+										{props.upcoming && <button
 											className={styles.btnCancel}
 											onClick={() => setShowModal(true)}
 										>
-											Delete
-										</button>
+											Cancel
+										</button> }
+										
 									</div>
 								</div>
 							</div>
@@ -90,4 +91,4 @@ const RenderBookings = () => {
 	);
 };
 
-export default RenderBookings;
+export default UpcomingBookings;

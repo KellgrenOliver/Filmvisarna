@@ -8,9 +8,20 @@
 	line-height: 1.5rem;
 }
 
+/* .container h3{
+	padding-left: 35px;
+} */
+
 .flex {
 	display: flex;
 	justify-content: space-between;
+	
+}
+
+.wrapper {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 30px;
 }
 
 .flexBtn {
@@ -21,6 +32,10 @@
 .info h6 {
 	margin: 0%;
 }
+
+/* .title {
+	height: 30px;
+} */
 
 .mainBtn {
 	margin-top: 30px;
@@ -93,6 +108,16 @@
 	padding: 10px;
 	border-radius: 10px;
 	background-color: white;
+	border: none;
+	margin-bottom: 1rem;
+}
+
+.shadow {
+	background-color: rgba(148, 137, 137, 0.201);
+	width: 100%;
+	text-align: left;
+	padding: 10px;
+	border-radius: 10px;
 	border: none;
 	margin-bottom: 1rem;
 }

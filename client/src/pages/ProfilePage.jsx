@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
-import RenderBookings from "../components/RenderBookings";
+import BookingsGroup from "../components/BookingsGroup";
 
 const ProfilePage = () => {
 	const [editMode, setEditMode] = useState(false);
@@ -160,8 +159,8 @@ const ProfilePage = () => {
 				<h3>Welcome!</h3>
 				<div className={styles.flex}>
 					<div className={styles.info}>
-						<div>
-							<h6>Personal information</h6>
+						<div className={styles.title}>
+							<h6 >Personal information</h6>
 						</div>
 						<hr></hr>
 						<div>{emailContent}</div>
@@ -171,13 +170,7 @@ const ProfilePage = () => {
 						<div>{buttonContent}</div>
 						<div>{message ? <p>{message}</p> : ""}</div>
 					</div>
-					<div>
-						<div className={styles.info}>
-							<h6>Last bookings</h6>
-							<hr />
-						</div>
-						<RenderBookings />
-					</div>
+				    <BookingsGroup /> 
 				</div>
 			</div>
 		);
