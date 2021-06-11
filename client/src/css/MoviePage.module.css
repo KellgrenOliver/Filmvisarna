@@ -61,11 +61,17 @@ hr {
 	height: 2rem;
 }
 
-.ticketInfo {
-	margin: 0;
+.ticketInfo, .ticketTime {
+  margin: 0;
 	max-height: 100%;
-	width: 100%;
+	/* width: 100%; */
+  flex-basis:40%;
 	text-decoration: none;
+}
+
+.ticketTime{
+ flex-basis:35%;
+
 }
 
 .ticketBtn {
@@ -76,6 +82,7 @@ hr {
 	border-color: rgb(71, 7, 24);
 	cursor: pointer;
 	color: rgb(71, 7, 24);
+  flex-basis:20%;
 }
 
 .ticketBtn:hover {
@@ -102,6 +109,10 @@ hr {
 	hr {
 		margin-right: 0;
 	}
+
+.ticketInfo, .ticketTime{
+    font-size: 4vw;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
