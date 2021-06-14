@@ -5,11 +5,7 @@ const Screening = require("../models/Screening");
 const HOUR_IN_MILLISECONDS = 1000 * 60 * 60;
 const DAY_IN_MILLISECONDS = HOUR_IN_MILLISECONDS * 24;
 
-async function createScreening({ date, movie, auditorium }) {
-	return new Screening({ movie, auditorium, time: date });
-}
-
-function getRandomMovie(movies = []) {
+function getRandomMovieId(movies = []) {
 	return movies[Math.floor(Math.random() * movies.length)];
 }
 
@@ -26,22 +22,22 @@ async function screeningSeeder() {
 		for (let j = 0; j < 31; j++) {
 			// Per day
 			const screenings = [
-				await createScreening({
-					date: start + DAY_IN_MILLISECONDS * j,
+				new Screening({
+					time: start + DAY_IN_MILLISECONDS * j,
 					auditorium: auditoria[i]._id,
-					movie: getRandomMovie(movies),
+					movie: getRandomMovieId(movies),
 					price: 100,
 				}),
-				await createScreening({
-					date: start + DAY_IN_MILLISECONDS * j + HOUR_IN_MILLISECONDS * 3,
+				new Screening({
+					time: start + DAY_IN_MILLISECONDS * j + HOUR_IN_MILLISECONDS * 3,
 					auditorium: auditoria[i]._id,
-					movie: getRandomMovie(movies),
+					movie: getRandomMovieId(movies),
 					price: 125,
 				}),
-				await createScreening({
-					date: start + DAY_IN_MILLISECONDS * j + HOUR_IN_MILLISECONDS * 6,
+				new Screening({
+					time: start + DAY_IN_MILLISECONDS * j + HOUR_IN_MILLISECONDS * 6,
 					auditorium: auditoria[i]._id,
-					movie: getRandomMovie(movies),
+					movie: getRandomMovieId(movies),
 					price: 150,
 				}),
 			];
