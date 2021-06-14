@@ -80,6 +80,7 @@ const Movie = (props) => {
 				<div>
 					<FilterScreeningGroup />
 					{message ? <h3 className={styles.message}>{message}</h3> : ""}
+          {movieScreenings && 
 					<div>
 						{!filteredMovieScreenings
 							? movieScreenings.map((screening, i) => (
@@ -89,6 +90,7 @@ const Movie = (props) => {
 									<Screening screening={screening} movie={movie} key={i} />
 							  ))}
 					</div>
+          }
 				</div>
 			</div>
 			<div className={styles.trailerContainer}>

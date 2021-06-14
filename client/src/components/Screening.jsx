@@ -25,7 +25,7 @@ const Screening = (props) => {
 			</h6>
 			{loggedIn ? (
 				<>
-          <Link to={`/screening/${props.screening._id}`}>
+          <Link className={styles.ticketLink} to={`/screening/${props.screening._id}`}>
 						<h6 className={styles.ticketBtn}>Tickets</h6>
 					</Link>
 				</>

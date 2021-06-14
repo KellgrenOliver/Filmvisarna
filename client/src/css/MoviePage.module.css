@@ -64,7 +64,6 @@ hr {
 .ticketInfo, .ticketTime {
   margin: 0;
 	max-height: 100%;
-	/* width: 100%; */
   flex-basis:40%;
 	text-decoration: none;
 }
@@ -75,7 +74,6 @@ hr {
 }
 
 .ticketBtn {
-	text-decoration: none;
 	width: 100%;
 	margin: 0;
 	max-height: 100%;
@@ -83,6 +81,10 @@ hr {
 	cursor: pointer;
 	color: rgb(71, 7, 24);
   flex-basis:20%;
+}
+
+.ticketLink{
+  text-decoration: none;
 }
 
 .ticketBtn:hover {
@@ -111,7 +113,7 @@ hr {
 	}
 
 .ticketInfo, .ticketTime{
-    font-size: 4vw;
+    font-size: 3vw;
   }
 }
 
