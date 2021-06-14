@@ -26,16 +26,19 @@ async function screeningSeeder() {
 					time: start + DAY_IN_MILLISECONDS * j,
 					auditorium: auditoria[i]._id,
 					movie: getRandomMovieId(movies),
+					price: 100,
 				}),
 				new Screening({
 					time: start + DAY_IN_MILLISECONDS * j + HOUR_IN_MILLISECONDS * 3,
 					auditorium: auditoria[i]._id,
 					movie: getRandomMovieId(movies),
+					price: 125,
 				}),
 				new Screening({
 					time: start + DAY_IN_MILLISECONDS * j + HOUR_IN_MILLISECONDS * 6,
 					auditorium: auditoria[i]._id,
 					movie: getRandomMovieId(movies),
+					price: 150,
 				}),
 			];
 			await Screening.insertMany(screenings);
