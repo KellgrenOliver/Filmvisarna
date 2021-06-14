@@ -40,15 +40,15 @@ const UpcomingBookings = (props) => {
 								}
 							>
 								<div className={styles.flex}>
-									<div>
-										<div>
-											<span>
-												<b>Movie title:</b>
+									<div className={styles.left}>
+										<div >
+											<span >
+												<b>Movie title: </b>
 												{booking?.movie.title}
 											</span>
 										</div>
 										{booking.seats.map((seat, i) => (
-											<div key={i}>
+											<div key={i} className={styles.marginSeat}>
 												<b>Seat: </b>
 												{seat.row}
 												{seat.id} {seat.type}
@@ -63,7 +63,7 @@ const UpcomingBookings = (props) => {
 										</div>
 										<div>
 											<span>
-												<b>Price:</b>
+												<b>Price: </b>
 												{booking.seats.reduce((acc, seat) => {
 													return (
 														acc +
@@ -71,10 +71,11 @@ const UpcomingBookings = (props) => {
 															getSeatValueWeight(seat.type)
 													);
 												}, 0)}
+												{" "} SEK
 											</span>
 										</div>
 									</div>
-									<div>
+									<div className={styles.center}>
 										{props.upcoming && (
 											<button
 												className={styles.btnCancel}
