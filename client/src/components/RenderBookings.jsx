@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
 import dayjs from "dayjs";
+import Modal from "./profilePageModal";
 
-const RenderBookings = () => {
+const UpcomingBookings = (props) => {
 	const { user, deleteBooking } = useContext(UserContext);
+	const [showModal, setShowModal] = useState(false);
 
 	const getSeatValueWeight = (seatType) => {
 		switch (seatType.toLowerCase()) {
@@ -24,16 +26,25 @@ const RenderBookings = () => {
 	return (
 		<div>
 			{user.bookings.length !== 0 ? (
-				user.bookings.map((booking) => (
+				props.renderBookings.map((booking) => (
 					<div className={styles.flex} key={booking._id}>
+						<Modal
+							onClose={() => setShowModal(false)}
+							onDelete={() => handleDelete(booking._id)}
+							showModal={showModal}
+						/>
 						<div className={styles.booking}>
-							<div className={styles.bookingContainer}>
+							<div
+								className={
+									props.upcoming ? styles.bookingContainer : styles.shadow
+								}
+							>
 								<div className={styles.flex}>
 									<div>
 										<div>
 											<span>
 												<b>Movie title:</b>
-												{booking?.screening.movie.title}{" "}
+												{booking?.movie.title}
 											</span>
 										</div>
 										{booking.seats.map((seat, i) => (
@@ -64,12 +75,14 @@ const RenderBookings = () => {
 										</div>
 									</div>
 									<div>
-										<button
-											className={styles.btnCancel}
-											onClick={() => handleDelete(booking._id)}
-										>
-											Delete
-										</button>
+										{props.upcoming && (
+											<button
+												className={styles.btnCancel}
+												onClick={() => setShowModal(true)}
+											>
+												Cancel
+											</button>
+										)}
 									</div>
 								</div>
 							</div>
@@ -83,4 +96,4 @@ const RenderBookings = () => {
 	);
 };
 
-export default RenderBookings;
+export default UpcomingBookings;

@@ -70,6 +70,10 @@ input[type="text"],
 	background-color: rgb(59, 7, 21);
 	color: rgb(235, 235, 235);
 }
+.error {
+	text-decoration: underline;
+	text-decoration-color: rgb(146, 37, 64);
+}
 
 @media only screen and (max-width: 600px) {
 	.card {
