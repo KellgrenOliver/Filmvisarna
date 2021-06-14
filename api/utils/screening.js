@@ -2,21 +2,47 @@ const Auditorium = require("../models/Auditorium");
 const Movie = require("../models/Movie");
 const Screening = require("../models/Screening");
 
-async function screeningSeeder(perAuditorium = 30) {
+const HOUR_IN_MILLISECONDS = 1000 * 60 * 60;
+const DAY_IN_MILLISECONDS = HOUR_IN_MILLISECONDS * 24;
+
+async function createScreening({ date, movie, auditorium }) {
+	return new Screening({ movie, auditorium, time: date });
+}
+
+function getRandomMovie(movies = []) {
+	return movies[Math.floor(Math.random() * movies.length)];
+}
+
+async function screeningSeeder() {
 	await Screening.createCollection();
 	await Screening.collection.drop();
 
-	const movieCount = await Movie.countDocuments();
-	const auditoriumCount = await Auditorium.countDocuments();
+	const movies = await Movie.find();
+	const auditoria = await Auditorium.find();
 
-	for (let i = 0; i < auditoriumCount; i++) {
-		for (let j = 0; j < perAuditorium; j++) {
-			const { _id: movie } = await Movie.findOne().skip(
-				Math.floor(Math.random() * movieCount)
-			);
-			const { _id: auditorium } = await Auditorium.findOne().skip(i);
+	for (let i = 0; i < auditoria.length; i++) {
+		let start = new Date().setHours(15, 0, 0, 0);
 
-			await Screening.create(new Screening({ movie, auditorium }));
+		for (let j = 0; j < 31; j++) {
+			// Per day
+			const screenings = [
+				await createScreening({
+					date: start + DAY_IN_MILLISECONDS * j,
+					auditorium: auditoria[i]._id,
+					movie: getRandomMovie(movies),
+				}),
+				await createScreening({
+					date: start + DAY_IN_MILLISECONDS * j + HOUR_IN_MILLISECONDS * 3,
+					auditorium: auditoria[i]._id,
+					movie: getRandomMovie(movies),
+				}),
+				await createScreening({
+					date: start + DAY_IN_MILLISECONDS * j + HOUR_IN_MILLISECONDS * 6,
+					auditorium: auditoria[i]._id,
+					movie: getRandomMovie(movies),
+				}),
+			];
+			await Screening.insertMany(screenings);
 		}
 	}
 }
