@@ -6,30 +6,27 @@
 	box-shadow: 5px 5px 5px rgb(165, 165, 165);
 	line-height: 1.5rem;
 	max-width: 100%;
+	text-align: center;
 }
 
-
-
-.wrapper {
-	display: inline-flex;
-	flex-wrap: wrap;
-	gap: 30px;
+.container h3 {
+	display: none;
 }
 
 .flexBtn {
 	display: flex;
 	justify-content: space-evenly;
+
 }
 
-
+.info {
+	margin-bottom: 3rem;
+}
 
 .info h6 {
 	margin: 0%;
 }
 
-/* .title {
-	height: 30px;
-} */
 
 .mainBtn {
 	margin-top: 30px;
@@ -73,6 +70,7 @@
 	font-weight: bold;
 	cursor: pointer;
 	border-color: rgb(71, 7, 24);
+	text-align: center;
 }
 
 .btnCancel:hover {
@@ -122,11 +120,29 @@
 		max-width: 720px;
 		margin: 2rem auto;
 	}
+
+	.wrapper {
+		display: inline-flex;
+		flex-wrap: wrap;
+		gap: 30px;
+		
+	}
+
+	.btnCancel {
+		margin-top: 30px;
+		background-color: rgb(71, 7, 24);
+		color: rgb(235, 235, 235);
+		border-radius: 7px;
+		padding: 10px;
+		font-weight: bold;
+		cursor: pointer;
+		border-color: rgb(71, 7, 24);
+	}
 	
 
 }
-/* desktop and extra large*/
-@media only screen and (min-width: 992px) {
+/* tablet and desktop and extra large */
+@media only screen and (min-width: 768px) {
 	.container {
 		max-width: 960px;
 	}
@@ -138,10 +154,17 @@
 	}
 }
 
+
+/* desktop and extra large*/
+@media only screen and (min-width: 992px) {
+	.container {
+		max-width: 960px;
+	}
+}
+
+/* extra large */
 @media only screen and (min-width: 1200px) {
 	.container {
 		max-width: 1140px;
 	}
 }
-
-
