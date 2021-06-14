@@ -22,9 +22,7 @@ const Seats = (props) => {
 					onClick={props.selectHovered}
 					onMouseEnter={() => props.hoverSeats(props.seat, props.row)}
 					onMouseLeave={() => props.setHoveredSeats([])}
-				>
-					{props.seat.id}
-				</button>
+				></button>
 			</div>
 		</div>
 	);
