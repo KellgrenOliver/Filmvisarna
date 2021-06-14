@@ -96,7 +96,7 @@ hr {
 	text-align: center;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
 	.container {
 		width: 90%;
 		height: 100%;
@@ -113,7 +113,7 @@ hr {
 	}
 
 .ticketInfo, .ticketTime{
-    font-size: 3vw;
+    font-size: 4vw;
   }
 }
 
