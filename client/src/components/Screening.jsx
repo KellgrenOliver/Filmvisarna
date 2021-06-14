@@ -21,7 +21,7 @@ const Screening = (props) => {
 				{dayjs(props.screening.time).format("MMMM Do HH:mm")}
 			</h6>
 			<h6 className={styles.ticketInfo}>
-				Language: {props.screening.movie.language}
+				Price: {props.screening.price}
 			</h6>
 			{loggedIn ? (
 				<>
