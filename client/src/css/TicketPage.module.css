@@ -36,12 +36,6 @@
 	color: rgb(85, 11, 27);
 }
 
-.platserContainer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 .platserTitle {
 	margin-right: 1rem;
 	margin-left: 1rem;
@@ -52,12 +46,6 @@
 .numberInput {
 	width: 70px !important;
 	height: 30px !important;
-}
-
-.numberContainer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 h5 {
@@ -79,6 +67,7 @@ h6 {
 	padding: 5px;
 	border-radius: 10px;
 	border: 1px solid black;
+	width: 500px;
 }
 
 .img {
@@ -86,14 +75,6 @@ h6 {
 	height: 320px;
 	margin: 2rem;
 	border-radius: 10px;
-}
-
-.payContainer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: auto;
-	width: 80%;
 }
 
 .pay {
@@ -119,7 +100,7 @@ h6 {
 }
 
 .seatContainer {
-	width: 300px;
+	width: 90%;
 	background-color: rgb(37, 37, 37);
 	display: flex;
 	align-items: center;
@@ -191,31 +172,49 @@ h6 {
 span {
 	padding: 1rem;
 }
+.tPlatser {
+	width: 30px;
+	height: 30px;
+	border: 1px solid black;
+	background-color: rgb(192, 192, 192);
+}
+
+.oPlatser {
+	width: 30px;
+	height: 30px;
+	border: 1px solid black;
+	background-color: rgb(195, 44, 44);
+}
+
+.dStolval {
+	width: 30px;
+	height: 30px;
+	border: 1px solid black;
+	background-color: rgb(233, 170, 36);
+}
+.platserContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 @media only screen and (min-width: 600px) {
 	.titleContainer {
 		display: flex;
 		justify-content: center;
 	}
-	.tPlatser {
-		width: 30px;
-		height: 30px;
-		border: 1px solid black;
-		background-color: rgb(192, 192, 192);
-	}
 
-	.oPlatser {
-		width: 30px;
-		height: 30px;
-		border: 1px solid black;
-		background-color: rgb(195, 44, 44);
+	.numberContainer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
-
-	.dStolval {
-		width: 30px;
-		height: 30px;
-		border: 1px solid black;
-		background-color: rgb(233, 170, 36);
+	.payContainer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: auto;
+		width: 80%;
 	}
 }
 
@@ -226,23 +225,27 @@ span {
 	.seatBox {
 		width: 20px;
 		height: 20px;
-		padding: 5px;
-		margin: 0.2rem;
+		padding: 10px;
+		margin: 0.5rem;
+	}
+	.bioduk {
+		margin-bottom: 0rem;
 	}
 	h5 {
 		margin: 1rem;
 	}
 	.seatRow {
-		width: 30px;
+		width: 20px;
 		height: 5px;
 	}
 	.seatContainer {
+		width: 100%;
 		background-color: none;
 		margin-bottom: 1rem;
 	}
 	.img {
-		width: 135px;
-		height: 160px;
+		width: 150px;
+		height: 220px;
 		margin: 0;
 	}
 	.button {
@@ -253,7 +256,67 @@ span {
 	}
 	.counter,
 	span {
-		padding: 0.2rem;
+		font-size: 1rem;
+		margin-bottom: 0.2rem;
+	}
+	.platserContainer {
+		display: none;
+	}
+	.ticket {
+		width: 100%;
+		margin: auto;
+		margin-bottom: 1rem;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 785px) {
+	.container {
+		width: 90%;
+	}
+	.seatBox {
+		width: 20px;
+		height: 20px;
+		padding: 10px;
+		margin: 0.5rem;
+	}
+	.bioduk {
+		margin-bottom: 0rem;
+	}
+	h5 {
+		margin: 1rem;
+	}
+	.seatRow {
+		width: 20px;
+		height: 5px;
+	}
+	.seatContainer {
+		width: 100%;
+		background-color: none;
+		margin-bottom: 1rem;
+	}
+	.img {
+		width: 150px;
+		height: 220px;
+		margin: 0;
+	}
+	.button {
+		width: 160px;
+	}
+	.counter {
+		font-size: 0.5rem;
+	}
+	.counter,
+	span {
+		font-size: 1rem;
+		margin-bottom: 0.2rem;
+	}
+	.platserContainer {
+		display: none;
+	}
+	.ticket {
+		width: 100%;
+		margin: auto;
+		margin-bottom: 1rem;
 	}
 }
 
