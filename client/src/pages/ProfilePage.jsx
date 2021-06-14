@@ -1,16 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import styles from "../css/ProfilePage.module.css";
 import { UserContext } from "../contexts/UserProvider";
+import BookingsGroup from "../components/BookingsGroup";
 
-const ProfilePage = (props) => {
+const ProfilePage = () => {
 	const [editMode, setEditMode] = useState(false);
-	const { whoami, user, updateUserInfo, message,setMessage } = useContext(UserContext);
+	const { whoami, user, updateUserInfo, message, setMessage } =
+		useContext(UserContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
-	const history = useHistory();
 
 	const onEdit = () => {
 		setMessage(null);
@@ -20,11 +20,10 @@ const ProfilePage = (props) => {
 	const onEditCancelled = () => {
 		setMessage(null);
 		setEditMode(false);
-	}
+	};
 
 	const updateHandler = async () => {
-
-		if(!password) {
+		if (!password) {
 			setMessage("Please enter your current password.");
 			setPassword(null);
 			return;
@@ -36,13 +35,13 @@ const ProfilePage = (props) => {
 		userFromForm.newPassword = newPassword;
 		userFromForm.phone = phoneNumber;
 
-
 		const result = await updateUserInfo(userFromForm);
-		
-		if(result) {
+
+		if (result) {
 			setEditMode(false);
 		}
 	};
+
 	// to be able to edit the information in input
 	useEffect(() => {
 		if (user) {
@@ -61,7 +60,6 @@ const ProfilePage = (props) => {
 	if (!user) {
 		return null; // redirect it to homePage
 	} else {
-		// console.log(user);
 		let emailContent;
 		let passwordContent;
 		let newPasswordContent;
@@ -70,10 +68,14 @@ const ProfilePage = (props) => {
 
 		if (!editMode) {
 			emailContent = (
-				<span className={styles.infoDetail}>Email: {user.email}</span>
+				<span className={styles.infoDetail}>
+					<b>Email:</b> {user.email}
+				</span>
 			);
 			phoneContent = (
-				<span className={styles.infoDetail}>Phone number: {user.phone}</span>
+				<span className={styles.infoDetail}>
+					<b>Phone number:</b> {user.phone}
+				</span>
 			);
 			buttonContent = (
 				<button className={styles.mainBtn} onClick={onEdit}>
@@ -83,7 +85,9 @@ const ProfilePage = (props) => {
 		} else {
 			emailContent = (
 				<div>
-					<label>Email address</label>
+					<label>
+						<b>Email address: </b>
+					</label>
 					<input
 						type="text"
 						id={styles.emailinput}
@@ -94,7 +98,9 @@ const ProfilePage = (props) => {
 			);
 			passwordContent = (
 				<div>
-					<label>Current password (required)</label>
+					<label>
+						<b>Current password (required): </b>
+					</label>
 					<input
 						type="password"
 						id={styles.passwordinput}
@@ -104,7 +110,9 @@ const ProfilePage = (props) => {
 			);
 			newPasswordContent = (
 				<div>
-					<label>New password</label>
+					<label>
+						<b>New password: </b>
+					</label>
 					<input
 						type="password"
 						id={styles.newpasswordinput}
@@ -115,7 +123,9 @@ const ProfilePage = (props) => {
 			);
 			phoneContent = (
 				<div>
-					<label>Phone Number</label>
+					<label>
+						<b>Phone Number: </b>
+					</label>
 					<input
 						type="text"
 						id={styles.numberinput}
@@ -144,47 +154,23 @@ const ProfilePage = (props) => {
 			);
 		}
 
-		const renderBookings = () => {
-			return user.bookings.map((booking, i) => (
-				<div className={styles.flex} key={i}>
-					<div className={styles.booking}>
-						<div className={styles.info}>
-							<h6>Last booking</h6>
-							< hr />
-						</div>
-						<div>
-							<span>Screening:{booking?.screening._id}</span>
-						</div>
-						{booking.seats.map((seat, i) => (
-							<div key={i}>
-								Seat: {seat.row}, {seat.id}
-							</div>
-						))}
-						<div>
-							<button className={styles.btn}>Delete</button>
-						</div>
-					</div>
-				</div>
-			));
-		};
-
 		return (
 			<div className={styles.container}>
 				<h3>Welcome!</h3>
 				<div className={styles.flex}>
 					<div className={styles.info}>
-						<div>
-							<h6>Personal information</h6>
+						<div className={styles.title}>
+							<h6 >Personal information</h6>
 						</div>
 						<hr></hr>
 						<div>{emailContent}</div>
 						<div>{passwordContent}</div>
 						<div>{newPasswordContent}</div>
 						<div>{phoneContent}</div>
-						<div >{buttonContent}</div>
+						<div>{buttonContent}</div>
 						<div>{message ? <p>{message}</p> : ""}</div>
 					</div>
-					<div>{renderBookings()}</div>
+				    <BookingsGroup /> 
 				</div>
 			</div>
 		);

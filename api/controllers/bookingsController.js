@@ -1,19 +1,18 @@
-const Auditorium = require("../models/Auditorium");
 const Booking = require("../models/Booking");
-const Movie = require("../models/Movie");
 const Screening = require("../models/Screening");
-const User = require("../models/User");
 const errorLog = require("../utils/errorLog");
+const { getBookedSeats } = require("../utils/seats");
+const { validateBody } = require("../utils/validation");
 
 async function placeBooking(req, res) {
+	if (!validateBody(req.body, ["screeningId", "seats"])) {
+		return res.status(400).json({
+			error: "Please provide a screening id and a seats array",
+		});
+	}
+
 	const { user } = req.session;
 	const { screeningId, seats } = req.body;
-
-	if (!screeningId || !seats) {
-		return res
-			.status(400)
-			.json({ error: "Please provide a screening id and seats array" });
-	}
 
 	try {
 		if (await Booking.exists({ user, screening: screeningId })) {
@@ -22,32 +21,43 @@ async function placeBooking(req, res) {
 				.json({ error: "You have already booked this screening." });
 		}
 
-		const screening = await Screening.findById(screeningId);
+		const screening = await Screening.findById(screeningId).populate(
+			"auditorium",
+			"movie"
+		);
 		if (!screening) {
 			return res.status(404).json({ error: "Screening not found." });
 		}
 
-		const { _id: auditorium } = await Auditorium.findOne({
-			_id: screening.auditorium,
-		});
-		if (!auditorium) {
-			return res.status(404).json({ error: "Auditorium not found." });
+		const bookedSeats = await getBookedSeats(screening);
+
+		if (
+			seats.some((seat) =>
+				bookedSeats.find(
+					(bookedSeat) => String(bookedSeat._id) === String(seat)
+				)
+			)
+		) {
+			return res
+				.status(403)
+				.json({ error: "One or more of these seats are already booked." });
 		}
 
-		const { _id: movie } = await Movie.findOne({ _id: screening.movie });
-		if (!movie) {
-			return res.status(404).json({ error: "Movie not found." });
-		}
-
-		await Booking.create({
-			auditorium: screening.auditorium,
-			movie: screening.movie,
-			screening: screening.id,
-			user,
+		const booking = await Booking.create({
+			auditorium: screening.auditorium._id,
+			screening: screening._id,
+			movie: screening.movie._id,
+			user: user._id,
 			seats,
 		});
 
-		res.status(200).end();
+		res
+			.status(200)
+			.json(
+				await booking
+					.populate(["movie", "auditorium", "screening"])
+					.execPopulate()
+			);
 	} catch (e) {
 		errorLog(e);
 		res.status(500).end();
