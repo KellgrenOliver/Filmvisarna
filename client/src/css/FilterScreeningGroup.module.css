@@ -1,51 +1,50 @@
 .groupContainer {
-  margin:1rem;
+	margin: 1rem;
 	display: flex;
-	justify-content:center;
+	justify-content: center;
 }
 
-#customSelect{
-  margin-right:2rem;
-  border:none;
-  border-bottom: rgb(71, 7, 24);
+#customSelect {
+	margin-right: 2rem;
+	border: none;
+	border-bottom: rgb(71, 7, 24);
 }
 
-#select{
+#select {
 	padding-top: 5px;
 	padding-bottom: 4.5px;
 	padding-left: 5px;
 	color: black;
-	background-color:rgb(235,235,235);
+	background-color: rgb(235, 235, 235);
 	border: 0px;
-	border-bottom:rgb(71, 7, 24) 3px solid;
+	border-bottom: rgb(71, 7, 24) 3px solid;
 	width: 7rem;
 }
 
-.priceForm{
-  display:flex;
+.priceForm {
+	display: flex;
 }
 
-.resetButton{
-  border: rgb(71, 7, 24) 2px solid;
-  border-radius: 5px;
-  color: rgb(71, 7, 24);
+.resetButton {
+	border: rgb(71, 7, 24) 2px solid;
+	border-radius: 5px;
+	color: rgb(71, 7, 24);
 }
 .resetButton:hover {
-  background-color: rgba(71, 7, 24, 0.8);
-  color: white;
+	background-color: rgba(71, 7, 24, 0.8);
+	color: white;
 }
 
 .selectDate {
-  text-align: left;
-  padding-top: 5px;
+	text-align: left;
+	padding-top: 5px;
 	padding-bottom: 4.5px;
 	padding-left: 5px;
 	color: black;
-	background-color:rgb(235,235,235);
+	background-color: rgb(235, 235, 235);
 	border: 0px;
 }
 
-
-#option{
+#option {
 	color: black;
-} 
+}
