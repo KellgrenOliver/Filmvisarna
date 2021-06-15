@@ -15,7 +15,7 @@ const BookingsGroup = () => {
 
 	console.log(lastBookings);
 	return (
-		<React.Fragment>
+		<React.Fragment >
 			<div className={styles.wrapper}>
 				<div className={styles.info}>
 					<div className={styles.title}>
@@ -35,7 +35,9 @@ const BookingsGroup = () => {
 					</div>
 					<hr />
 				</div>
-				<RenderBookings renderBookings={lastBookings} />
+				<RenderBookings 
+				renderBookings={lastBookings} 
+				/>
 			</div>
 		</React.Fragment>
 	);
