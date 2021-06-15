@@ -1,5 +1,5 @@
 import { ScreeningContext } from "../contexts/ScreeningProvider";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "../css/TicketPage.module.css";
 import dayjs from "dayjs";
 import _ from "lodash";
@@ -141,20 +141,21 @@ const TicketPage = (props) => {
 		<div className={styles.ticketPage}>
 			<div className={styles.container}>
 				<div className={styles.titleContainer}>
-					<h5>Salon: {screening.auditorium.id}</h5>
 					<h5 className={styles.title}>{screening.movie.title}</h5>
+					<h5>Salon: {screening.auditorium.id}</h5>
 					<h5>{dayjs(screening.time).format("MMMM Do HH:mm")}</h5>
 					<h5>Language: {screening.movie.language}</h5>
 				</div>
-				<h5 className={styles.bioduk}>SCREEN</h5>
 				<div>
-					<TicketCounters
-						tickets={tickets}
-						setTickets={setTickets}
-						max={MAX_SELECT}
-					/>
 					<div key={screening.auditorium.id}>
 						<div className={styles.seatContainer}>
+							<h5 className={styles.bioduk}>S C R E E N</h5>
+							<TicketCounters
+								className={styles.counter}
+								tickets={tickets}
+								setTickets={setTickets}
+								max={MAX_SELECT}
+							/>
 							{groupSeats().map((row, i) => (
 								<div key={i} className={styles.seatRow}>
 									{row.map((seat) => (
@@ -186,11 +187,6 @@ const TicketPage = (props) => {
 				</div>
 
 				<div className={styles.payContainer}>
-					<img
-						className={styles.img}
-						src={screening.movie.poster}
-						alt={screening.movie.title}
-					/>
 					<div className={styles.pay}>
 						<div>
 							{selectedSeats.map((seat) => (
@@ -203,6 +199,11 @@ const TicketPage = (props) => {
 									</span>
 								</div>
 							))}
+							<img
+								className={styles.img}
+								src={screening.movie.poster}
+								alt={screening.movie.title}
+							/>
 						</div>
 						<h6>
 							Total: {getTicketsPrice(selectedSeats, screening.price)} SEK

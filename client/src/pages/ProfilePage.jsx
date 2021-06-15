@@ -145,7 +145,7 @@ const ProfilePage = () => {
 					</button>
 					<button
 						type="button"
-						className={styles.btnCancel}
+						className={styles.btnCancelInfo}
 						onClick={onEditCancelled}
 					>
 						Cancel
@@ -158,19 +158,21 @@ const ProfilePage = () => {
 			<div className={styles.container}>
 				<h3>Welcome!</h3>
 				<div className={styles.flex}>
-					<div className={styles.info}>
+					<div className={`${styles.info} ${styles.wrapper}`}>
 						<div className={styles.title}>
-							<h6 >Personal information</h6>
+							<h6>Personal information</h6>
 						</div>
 						<hr></hr>
-						<div>{emailContent}</div>
-						<div>{passwordContent}</div>
-						<div>{newPasswordContent}</div>
-						<div>{phoneContent}</div>
+						<div className={styles.form}>
+							<div>{emailContent}</div>
+							<div>{passwordContent}</div>
+							<div>{newPasswordContent}</div>
+							<div>{phoneContent}</div>
+						</div>
 						<div>{buttonContent}</div>
 						<div>{message ? <p>{message}</p> : ""}</div>
 					</div>
-				    <BookingsGroup /> 
+					<BookingsGroup />
 				</div>
 			</div>
 		);

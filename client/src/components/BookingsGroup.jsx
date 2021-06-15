@@ -13,18 +13,10 @@ const BookingsGroup = () => {
 		(b) => new Date(b.screening.time) > new Date()
 	);
 
+	console.log(lastBookings);
 	return (
-		<div className={styles.wrapper}>
-			<div>
-				<div className={styles.info}>
-					<div className={styles.title}>
-						<h6>Last bookings</h6>
-					</div>
-					<hr />
-				</div>
-				<RenderBookings renderBookings={lastBookings} />
-			</div>
-			<div>
+		<React.Fragment >
+			<div className={styles.wrapper}>
 				<div className={styles.info}>
 					<div className={styles.title}>
 						<h6>Upcoming bookings</h6>
@@ -36,7 +28,18 @@ const BookingsGroup = () => {
 					upcoming={"upcoming"}
 				/>
 			</div>
-		</div>
+			<div className={styles.wrapper}>
+				<div className={styles.info}>
+					<div className={styles.title}>
+						<h6>Last bookings</h6>
+					</div>
+					<hr />
+				</div>
+				<RenderBookings 
+				renderBookings={lastBookings} 
+				/>
+			</div>
+		</React.Fragment>
 	);
 };
 

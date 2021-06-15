@@ -6,16 +6,36 @@
 
 .filterContainer {
 	display: flex;
+	flex-wrap: wrap;
+	margin: 1rem auto;
+}
+
+.filterFirst {
+	display: flex;
+	margin: 1rem auto;
+}
+.filterMiddle {
+	display: flex;
+	margin: 1rem auto;
+}
+.filterBtn {
+	display: flex;
+	margin: 1rem auto;
+}
+
+.filterLast {
+	display: flex;
 	margin: 1rem auto;
 }
 
 .searchContainer {
 	margin: 0 auto;
-  padding:0;
+	padding: 0;
 	width: 40vw;
 }
-.resetButton{
-  padding-top: 5px;
+
+.resetButton {
+	padding-top: 5px;
 	padding-bottom: 4.5px;
 	padding-left: 5px;
 	color: #707070;
@@ -23,17 +43,18 @@
 	border: 0px;
 	border-right: gray 0.5px solid;
 	width: 3rem;
+	margin: 0 auto;
 }
 
-.resetButton:hover{
-  color: white;
-  background-color:rgb(80, 80, 80);
+.resetButton:hover {
+	color: white;
+	background-color: rgb(80, 80, 80);
 }
 /* Search conponent */
 
 #searchField {
 	width: 100%;
-  text-align: left;
+	text-align: left;
 	box-sizing: border-box;
 	border: 2px solid #ccc;
 	border-radius: 5px;
@@ -41,7 +62,7 @@
 	background-color: white;
 	background-position: 10px 10px;
 	background-repeat: no-repeat;
-	padding:2px 10px
+	padding: 2px 10px;
 }
 
 /*Item Component*/
@@ -58,4 +79,58 @@
 
 .option {
 	color: black;
+}
+
+@media only screen and (max-width: 440px) {
+	.select {
+		width: 100%;
+	}
+
+	.filterFirst {
+		flex-basis: 52%;
+		margin: 0 auto;
+	}
+
+	.filterLast {
+		flex-basis: 52%;
+		margin: 0 auto;
+	}
+
+	.filterMiddle {
+		flex-basis: 52%;
+		margin: 0 auto;
+	}
+
+	.filterContainer {
+		align-items: center;
+	}
+
+	.searchContainer {
+		width: 80vw;
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	.filterFirst {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.filterLast {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.filterMiddle {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.filterBtn {
+		flex-basis: 52%;
+	}
+
+	.searchContainer {
+		width: 50vw;
+	}
 }
