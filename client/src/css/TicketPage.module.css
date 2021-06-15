@@ -168,10 +168,11 @@ h6 {
 	color: white;
 }
 
-.counter,
-span {
+/* span has been remove because it was styled generally*/
+.counter {
 	padding: 1rem;
 }
+
 .tPlatser {
 	width: 30px;
 	height: 30px;
@@ -340,8 +341,8 @@ span {
 	.counter {
 		font-size: 1rem;
 	}
-	.counter,
-	span {
+	/* span has been remove because it was styled generally */
+	.counter {
 		padding: 0.5rem;
 	}
 	.platserTitle {
