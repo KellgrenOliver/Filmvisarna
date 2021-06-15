@@ -79,7 +79,7 @@ async function getScreeningsFromMovieByFilter(req, res) {
 
 		let queryPriceMin = req.query.priceMin ?? 0;
 		let queryPriceMax = req.query.priceMax ?? Infinity;
-		let startDate = req.query.startDate ?? new Date("0000-01-01");
+		let startDate = req.query.startDate ?? new Date();
 		let endDate = req.query.endDate ?? new Date("9999-12-31");
 		let screening = await Screening.find({
 			movie,
