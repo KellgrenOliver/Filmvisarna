@@ -128,6 +128,12 @@
 
 .left {
 	text-align: left;
+	margin-left: 1rem;
+}
+
+.form {
+	margin-top: 2.5rem;
+	margin-left: 1rem;
 }
 
 
@@ -165,9 +171,7 @@
 
 /* desktop and extra large*/
 @media only screen and (min-width: 992px) {
-	.container {
-		max-width: 960px;
-	}
+	
 	.flex {
 		display: flex;
 		justify-content: space-around;
@@ -185,6 +189,8 @@
 	.wrapper {
 		margin: 0 15px;
 	}
+
+	
 	
 }
 

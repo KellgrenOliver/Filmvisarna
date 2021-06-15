@@ -42,13 +42,12 @@ const ProfilePage = () => {
 		}
 	};
 
-	// to be able to edit the information in input
 	useEffect(() => {
 		if (user) {
-			setPhoneNumber(user.phone);
-			setEmail(user.email);
-			setPassword(user.password);
-			setNewPassword(user.newPassword);
+			setPhoneNumber();
+			setEmail();
+			setPassword();
+			setNewPassword();
 		}
 	}, [user]);
 
@@ -89,6 +88,7 @@ const ProfilePage = () => {
 						<b>Email address: </b>
 					</label>
 					<input
+						placeholder={"Insert your new email address "}
 						type="text"
 						id={styles.emailinput}
 						value={email}
@@ -102,6 +102,7 @@ const ProfilePage = () => {
 						<b>Current password (required): </b>
 					</label>
 					<input
+						placeholder={"Insert your current password"}
 						type="password"
 						id={styles.passwordinput}
 						onChange={(event) => setPassword(event.target.value)}
@@ -114,6 +115,7 @@ const ProfilePage = () => {
 						<b>New password: </b>
 					</label>
 					<input
+						placeholder={"Insert your new password"}
 						type="password"
 						id={styles.newpasswordinput}
 						value={newPassword}
@@ -127,6 +129,7 @@ const ProfilePage = () => {
 						<b>Phone Number: </b>
 					</label>
 					<input
+						placeholder={"Insert your new phone number"}
 						type="text"
 						id={styles.numberinput}
 						value={phoneNumber}
