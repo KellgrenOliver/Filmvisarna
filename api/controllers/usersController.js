@@ -130,9 +130,13 @@ async function update(req, res) {
 
 		if (!match) return res.status(401).end();
 
-		if (email && (await User.exists({ email }))) {
+		if (email && email !== user.email && (await User.exists({ email }))) {
 			return res.status(422).json({ error: "Email must not be taken." });
-		} else if (phone && (await User.exists({ phone }))) {
+		} else if (
+			phone &&
+			phone !== user.phone &&
+			(await User.exists({ phone }))
+		) {
 			return res.status(422).json({ error: "Phone number must not be taken." });
 		}
 
