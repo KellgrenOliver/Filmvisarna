@@ -31,6 +31,7 @@ const FilterScreeningGroup = () => {
 
 	const handleReset = () => {
 		setPriceMin("?priceMin=0");
+    setPriceMax("")
 		setStartDate("");
 		setEndDate("");
 	};

@@ -15,9 +15,10 @@ const bookingSchema = new Schema(
 			ref: "Screening",
 			required: true,
 		},
-		movie: { type: Schema.Types.ObjectId, ref: "Movie", required: true },
+		movie: { type: Schema.Types.ObjectId, ref: "Movie", required: true }
 	},
-	{ timestamps: true }
+	{ timestamps: true },
+	
 );
 
 module.exports = mongoose.model("Booking", bookingSchema);
