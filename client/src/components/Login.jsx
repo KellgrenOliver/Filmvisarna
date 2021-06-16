@@ -28,7 +28,7 @@ const Login = (props) => {
 			password,
 		};
 		let result = await login(user);
-		console.log(result);
+
 		if (result.error) {
 			setErrorMessage(result.error);
 		}

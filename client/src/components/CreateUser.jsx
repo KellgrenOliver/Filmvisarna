@@ -40,7 +40,6 @@ const CreateUser = (props) => {
 		};
 
 		let result = await createUser(userToCreate);
-		console.log(result);
 		if (result.error) {
 			setErrorMessage(result.error);
 		}
