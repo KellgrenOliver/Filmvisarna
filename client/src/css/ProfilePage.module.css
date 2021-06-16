@@ -20,7 +20,6 @@
 .flexBtn {
 	display: flex;
 	justify-content: space-evenly;
-
 }
 
 .info {
@@ -30,7 +29,6 @@
 .info h6 {
 	margin: 0%;
 }
-
 
 .mainBtn {
 	margin-top: 3rem;
@@ -65,7 +63,8 @@
 	font-weight: bold;
 }
 
-.btnCancel, .btnCancelInfo{
+.btnCancel,
+.btnCancelInfo {
 	margin-top: 1rem;
 	background-color: rgb(71, 7, 24);
 	color: rgb(235, 235, 235);
@@ -76,7 +75,8 @@
 	text-align: center;
 }
 
-.btnCancel:hover, .btnCancelInfo:hover {
+.btnCancel:hover,
+.btnCancelInfo:hover {
 	background-color: rgb(235, 235, 235);
 	color: rgb(71, 7, 24);
 	cursor: pointer;
@@ -84,7 +84,6 @@
 
 .btnCancelInfo {
 	margin-top: 3rem;
-	
 }
 
 #emailinput,
@@ -128,8 +127,13 @@
 
 .left {
 	text-align: left;
+	margin-left: 1rem;
 }
 
+.form {
+	margin-top: 2.5rem;
+	margin-left: 1rem;
+}
 
 /* tablet and desktop and extra large */
 @media only screen and (min-width: 768px) {
@@ -147,12 +151,12 @@
 		height: 40px;
 		border: none;
 		margin-bottom: 20px;
-	}	
+	}
 
 	.form {
 		text-align: left;
 	}
-	
+
 	.center {
 		text-align: center;
 	}
@@ -162,16 +166,11 @@
 	}
 }
 
-
 /* desktop and extra large*/
 @media only screen and (min-width: 992px) {
-	.container {
-		max-width: 960px;
-	}
 	.flex {
 		display: flex;
 		justify-content: space-around;
-		
 	}
 
 	.bookingContainer {
@@ -185,7 +184,6 @@
 	.wrapper {
 		margin: 0 15px;
 	}
-	
 }
 
 /* extra large */
@@ -198,4 +196,3 @@
 		margin: 0;
 	}
 }
-
