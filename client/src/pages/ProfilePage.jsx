@@ -57,7 +57,7 @@ const ProfilePage = () => {
 	}, []);
 
 	if (!user) {
-		return null; // redirect it to homePage
+		return null;
 	} else {
 		let emailContent;
 		let passwordContent;
