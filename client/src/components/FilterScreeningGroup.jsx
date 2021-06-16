@@ -25,12 +25,15 @@ const FilterScreeningGroup = () => {
 	}, [movieScreenings]);
 
 	const getPriceItemsFromAllScreenings = () => {
-		let values = movieScreenings.map((screening) => screening.price);
-		setPriceItems([...new Set(values)]);
+    if(movieScreenings){
+      let values = movieScreenings.map((screening) => screening.price);
+      setPriceItems([...new Set(values)]);
+    }
 	};
 
 	const handleReset = () => {
 		setPriceMin("?priceMin=0");
+    setPriceMax("")
 		setStartDate("");
 		setEndDate("");
 	};

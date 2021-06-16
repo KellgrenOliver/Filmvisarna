@@ -5,15 +5,22 @@ export const UserContext = createContext();
 const UserProvider = (props) => {
 	const [user, setUser] = useState(null);
 	const [message, setMessage] = useState(null);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		whoami();
 	}, []);
 
 	const whoami = async () => {
-		let user = await fetch("/api/v1/users/whoami");
-		user = await user.json(user);
-		setUser(user);
+		try {
+			let user = await fetch("/api/v1/users/whoami");
+			user = await user.json(user);
+			setUser(user);
+		} catch (e) {
+			console.error(e);
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	const addBooking = (booking) => {
@@ -115,6 +122,7 @@ const UserProvider = (props) => {
 		addBooking,
 		loggedIn: Boolean(user),
 		deleteBooking,
+		loading,
 	};
 
 	return (

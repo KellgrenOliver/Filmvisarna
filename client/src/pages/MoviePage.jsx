@@ -3,12 +3,8 @@ import { ScreeningContext } from "../contexts/ScreeningProvider";
 import { useContext, useEffect } from "react";
 import YouTube from "react-youtube";
 import styles from "../css/MoviePage.module.css";
-import dayjs from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat";
 import Screening from "../components/Screening";
 import FilterScreeningGroup from "../components/FilterScreeningGroup";
-
-dayjs.extend(advancedFormat);
 
 const Movie = (props) => {
 	const { findMovie } = useContext(MovieContext);
@@ -84,6 +80,7 @@ const Movie = (props) => {
 				<div>
 					<FilterScreeningGroup />
 					{message ? <h3 className={styles.message}>{message}</h3> : ""}
+          {movieScreenings && 
 					<div>
 						{!filteredMovieScreenings
 							? movieScreenings.map((screening, i) => (
@@ -93,6 +90,7 @@ const Movie = (props) => {
 									<Screening screening={screening} movie={movie} key={i} />
 							  ))}
 					</div>
+          }
 				</div>
 			</div>
 			<div className={styles.trailerContainer}>

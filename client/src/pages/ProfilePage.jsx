@@ -42,13 +42,12 @@ const ProfilePage = () => {
 		}
 	};
 
-	// to be able to edit the information in input
 	useEffect(() => {
 		if (user) {
-			setPhoneNumber(user.phone);
-			setEmail(user.email);
-			setPassword(user.password);
-			setNewPassword(user.newPassword);
+			setPhoneNumber();
+			setEmail();
+			setPassword();
+			setNewPassword();
 		}
 	}, [user]);
 
@@ -58,7 +57,7 @@ const ProfilePage = () => {
 	}, []);
 
 	if (!user) {
-		return null; // redirect it to homePage
+		return null;
 	} else {
 		let emailContent;
 		let passwordContent;
@@ -89,6 +88,7 @@ const ProfilePage = () => {
 						<b>Email address: </b>
 					</label>
 					<input
+						placeholder={"Insert your new email address "}
 						type="text"
 						id={styles.emailinput}
 						value={email}
@@ -102,6 +102,7 @@ const ProfilePage = () => {
 						<b>Current password (required): </b>
 					</label>
 					<input
+						placeholder={"Insert your current password"}
 						type="password"
 						id={styles.passwordinput}
 						onChange={(event) => setPassword(event.target.value)}
@@ -114,6 +115,7 @@ const ProfilePage = () => {
 						<b>New password: </b>
 					</label>
 					<input
+						placeholder={"Insert your new password"}
 						type="password"
 						id={styles.newpasswordinput}
 						value={newPassword}
@@ -127,6 +129,7 @@ const ProfilePage = () => {
 						<b>Phone Number: </b>
 					</label>
 					<input
+						placeholder={"Insert your new phone number"}
 						type="text"
 						id={styles.numberinput}
 						value={phoneNumber}
@@ -145,7 +148,7 @@ const ProfilePage = () => {
 					</button>
 					<button
 						type="button"
-						className={styles.btnCancel}
+						className={styles.btnCancelInfo}
 						onClick={onEditCancelled}
 					>
 						Cancel
@@ -158,19 +161,21 @@ const ProfilePage = () => {
 			<div className={styles.container}>
 				<h3>Welcome!</h3>
 				<div className={styles.flex}>
-					<div className={styles.info}>
+					<div className={`${styles.info} ${styles.wrapper}`}>
 						<div className={styles.title}>
-							<h6 >Personal information</h6>
+							<h6>Personal information</h6>
 						</div>
 						<hr></hr>
-						<div>{emailContent}</div>
-						<div>{passwordContent}</div>
-						<div>{newPasswordContent}</div>
-						<div>{phoneContent}</div>
+						<div className={styles.form}>
+							<div>{emailContent}</div>
+							<div>{passwordContent}</div>
+							<div>{newPasswordContent}</div>
+							<div>{phoneContent}</div>
+						</div>
 						<div>{buttonContent}</div>
 						<div>{message ? <p>{message}</p> : ""}</div>
 					</div>
-				    <BookingsGroup /> 
+					<BookingsGroup />
 				</div>
 			</div>
 		);

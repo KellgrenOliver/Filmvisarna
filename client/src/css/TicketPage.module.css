@@ -168,10 +168,10 @@ h6 {
 	color: white;
 }
 
-.counter,
-span {
+.counter span {
 	padding: 1rem;
 }
+
 .tPlatser {
 	width: 30px;
 	height: 30px;
@@ -183,7 +183,7 @@ span {
 	width: 30px;
 	height: 30px;
 	border: 1px solid black;
-	background-color: rgb(195, 44, 44);
+	background-color: rgb(85, 11, 27);
 }
 
 .dStolval {
@@ -254,8 +254,7 @@ span {
 	.counter {
 		font-size: 0.5rem;
 	}
-	.counter,
-	span {
+	.counter span {
 		font-size: 1rem;
 		margin-bottom: 0.2rem;
 	}
@@ -305,8 +304,7 @@ span {
 	.counter {
 		font-size: 0.5rem;
 	}
-	.counter,
-	span {
+	.counter span {
 		font-size: 1rem;
 		margin-bottom: 0.2rem;
 	}
@@ -340,8 +338,7 @@ span {
 	.counter {
 		font-size: 1rem;
 	}
-	.counter,
-	span {
+	.counter span {
 		padding: 0.5rem;
 	}
 	.platserTitle {

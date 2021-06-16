@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import styles from "../css/FilterScreeningGroup.module.css";
 const Dates = (props) => {
 
-	const [date, setDate] = useState(new Date());
+	const [date] = useState(new Date());
 	const [pickerDate, setPickerDate] = useState("");
 
 	const handleChange = (value) => {
@@ -16,6 +16,7 @@ const Dates = (props) => {
 			(value.getMonth() + 1) +
 			"-" +
 			value.getDate();
+
 		let nextDate = new Date(value.setDate(value.getDate() + 1));
 		nextDate =
 			nextDate.getFullYear() +
@@ -33,8 +34,9 @@ const Dates = (props) => {
 			<DatePicker
 				selected={date}
 				onChange={handleChange}
+        minDate={new Date()}
 				customInput={
-					<button className={styles.selectDate}><FontAwesomeIcon icon={faCalendarAlt} color="rgb(71, 7, 24)" size ="lg"/> {props.endDate !=="" && pickerDate}</button>
+					<button className={styles.selectDate}><FontAwesomeIcon icon={faCalendarAlt} id={styles.calendar} /> {props.endDate !=="" && pickerDate}</button>
 				}
 			/>
 		</div>

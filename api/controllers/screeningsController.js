@@ -44,7 +44,10 @@ async function getScreeningsFromMovie(req, res) {
 	try {
 		const { movie } = req.params;
 
-		let screening = await Screening.find({ movie }).populate([
+		let screening = await Screening.find({ movie }).sort({
+      time: 1,
+      price: 1
+    }).populate([
 			"movie",
 			"auditorium",
 		]);
@@ -65,10 +68,13 @@ async function getScreeningsFromMovieByFilter(req, res) {
 		const { movie } = req.params;
 
 		if (Object.keys(req.query).length === 0) {
-			let screening = await Screening.find({ movie }).populate([
+			let screening = await Screening.find({ movie }).sort({
+        time: 1,
+        price: 1
+      }).populate([
 				"movie",
 				"auditorium",
-			]);
+			])
 
 			if (screening.length === 0) {
 				return res.status(404).json({ error: "No results were found." });
@@ -79,7 +85,7 @@ async function getScreeningsFromMovieByFilter(req, res) {
 
 		let queryPriceMin = req.query.priceMin ?? 0;
 		let queryPriceMax = req.query.priceMax ?? Infinity;
-		let startDate = req.query.startDate ?? new Date("0000-01-01");
+		let startDate = req.query.startDate ?? new Date();
 		let endDate = req.query.endDate ?? new Date("9999-12-31");
 		let screening = await Screening.find({
 			movie,
@@ -91,7 +97,10 @@ async function getScreeningsFromMovieByFilter(req, res) {
 				$gte: new Date(startDate),
 				$lte: new Date(endDate),
 			},
-		}).populate(["movie", "auditorium"]);
+		}).sort({
+      time: 1,
+      price: 1
+    }).populate(["movie", "auditorium"]);
 
 		if (!screening || screening.length === 0) {
 			return res.status(404).json({ error: "No results were found." });

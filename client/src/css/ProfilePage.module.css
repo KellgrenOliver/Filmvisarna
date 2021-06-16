@@ -1,27 +1,20 @@
 .container {
 	padding: 3rem;
 	margin: 3rem auto;
-	width: 70%;
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
 	box-shadow: 5px 5px 5px rgb(165, 165, 165);
 	line-height: 1.5rem;
+	max-width: 100%;
+	text-align: center;
 }
 
-/* .container h3{
-	padding-left: 35px;
-} */
+.container h3 {
+	display: none;
+}
 
 .flex {
-	display: flex;
-	justify-content: space-between;
-	
-}
-
-.wrapper {
-	display: inline-flex;
-	flex-wrap: wrap;
-	gap: 30px;
+	margin: 1rem 0;
 }
 
 .flexBtn {
@@ -29,19 +22,19 @@
 	justify-content: space-evenly;
 }
 
+.info {
+	margin-bottom: 3rem;
+}
+
 .info h6 {
 	margin: 0%;
 }
 
-/* .title {
-	height: 30px;
-} */
-
 .mainBtn {
-	margin-top: 30px;
+	margin-top: 3rem;
 	color: rgb(71, 7, 24);
 	border-radius: 7px;
-	padding: 10px;
+	padding: 1rem;
 	font-weight: bold;
 	cursor: pointer;
 	border-color: rgb(71, 7, 24);
@@ -70,20 +63,27 @@
 	font-weight: bold;
 }
 
-.btnCancel {
-	margin-top: 30px;
+.btnCancel,
+.btnCancelInfo {
+	margin-top: 1rem;
 	background-color: rgb(71, 7, 24);
 	color: rgb(235, 235, 235);
 	border-radius: 7px;
-	padding: 10px;
+	padding: 1rem;
 	font-weight: bold;
-	cursor: pointer;
 	border-color: rgb(71, 7, 24);
+	text-align: center;
 }
 
-.btnCancel:hover {
+.btnCancel:hover,
+.btnCancelInfo:hover {
 	background-color: rgb(235, 235, 235);
 	color: rgb(71, 7, 24);
+	cursor: pointer;
+}
+
+.btnCancelInfo {
+	margin-top: 3rem;
 }
 
 #emailinput,
@@ -102,14 +102,17 @@
 	margin: 0 0 1rem 0;
 }
 
+.booking {
+	width: 100%;
+}
+
 .bookingContainer {
 	width: 100%;
-	text-align: left;
 	padding: 10px;
 	border-radius: 10px;
 	background-color: white;
 	border: none;
-	margin-bottom: 1rem;
+	margin-bottom: 1.5rem;
 }
 
 .shadow {
@@ -120,4 +123,76 @@
 	border-radius: 10px;
 	border: none;
 	margin-bottom: 1rem;
+}
+
+.left {
+	text-align: left;
+	margin-left: 1rem;
+}
+
+.form {
+	margin-top: 2.5rem;
+	margin-left: 1rem;
+}
+
+/* tablet and desktop and extra large */
+@media only screen and (min-width: 768px) {
+	.container {
+		max-width: 960px;
+	}
+
+	#emailinput,
+	#passwordinput,
+	#newpasswordinput,
+	#numberinput {
+		width: 100%;
+		padding: 10px;
+		border-radius: 10px;
+		height: 40px;
+		border: none;
+		margin-bottom: 20px;
+	}
+
+	.form {
+		text-align: left;
+	}
+
+	.center {
+		text-align: center;
+	}
+
+	.btnCancel {
+		margin-top: 1rem;
+	}
+}
+
+/* desktop and extra large*/
+@media only screen and (min-width: 992px) {
+	.flex {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.bookingContainer {
+		margin-bottom: 0.5rem;
+	}
+
+	.btnCancel {
+		margin-right: 1rem;
+	}
+
+	.wrapper {
+		margin: 0 15px;
+	}
+}
+
+/* extra large */
+@media only screen and (min-width: 1200px) {
+	.container {
+		max-width: 1350px;
+	}
+
+	.wrapper {
+		margin: 0;
+	}
 }

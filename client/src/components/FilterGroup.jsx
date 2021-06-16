@@ -31,7 +31,7 @@ const FilterGroup = () => {
 			getRatingItems();
 		}
 		return () => {
-      handleReset()
+			handleReset();
 		};
 	}, [movies]);
 
@@ -72,26 +72,44 @@ const FilterGroup = () => {
 		setRatingItems([...new Set(value)]);
 	};
 
-  const handleReset = () =>{
-    setLanguage("");
-    setGenre("");
-    setDirector("");
-    setStar("");
-    setRating("");
-    setLengthMin(`?lengthMin=` + 0);
-    setLengthMax(`&lengthMax=` + Infinity);
-  }
+	const handleReset = () => {
+		setLanguage("");
+		setGenre("");
+		setDirector("");
+		setStar("");
+		setRating("");
+		setLengthMin(`?lengthMin=` + 0);
+		setLengthMax(`&lengthMax=` + Infinity);
+	};
 
 	return (
 		<div className={styles.groupContainer}>
 			<form className={styles.filterContainer}>
-				<Length setLengthMin={setLengthMin} setLengthMax={setLengthMax} />
-				<Items setVal={setLanguage} name={"language"} items={languageItems} />
-				<Items setVal={setGenre} name={"genres"} items={genreItems} />
-				<Items setVal={setDirector} name={"directors"} items={directorItems} />
-				<Items setVal={setStar} name={"stars"} items={starItems} />
-				<Items setVal={setRating} name={"rating"} items={ratingItems} />
-        <button className={styles.resetButton} type="reset" onClick = {handleReset}>Reset</button>
+				<div className={styles.filterFirst}>
+					<Length setLengthMin={setLengthMin} setLengthMax={setLengthMax} />
+					<Items setVal={setLanguage} name={"language"} items={languageItems} />
+				</div>
+				<div className={styles.filterMiddle}>
+					<Items setVal={setGenre} name={"genres"} items={genreItems} />{" "}
+					<Items
+						setVal={setDirector}
+						name={"directors"}
+						items={directorItems}
+					/>
+				</div>
+				<div className={styles.filterLast}>
+					<Items setVal={setStar} name={"stars"} items={starItems} />
+					<Items setVal={setRating} name={"rating"} items={ratingItems} />
+				</div>
+				<div className={styles.filterBtn}>
+					<button
+						className={styles.resetButton}
+						type="reset"
+						onClick={handleReset}
+					>
+						Reset
+					</button>
+				</div>
 			</form>
 			<div className={styles.searchContainer}>
 				<Search />
