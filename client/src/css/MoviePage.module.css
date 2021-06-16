@@ -6,7 +6,7 @@
 	padding: 5px 5px 5px;
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
-	width: 50%;
+	width: 60%;
 	margin: auto;
 }
 
@@ -18,7 +18,7 @@
 	padding: 5px 5px 5px;
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
-	width: 50%;
+	width: 60%;
 	height: 100%;
 	margin: auto;
   overflow: hidden;
@@ -112,7 +112,7 @@ hr {
 	}
 
 .ticketInfo, .ticketTime{
-    font-size: 3vw;
+    font-size: 3.5vw;
   }
 }
 
