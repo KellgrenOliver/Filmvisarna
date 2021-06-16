@@ -14,7 +14,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* margin-top: 2rem !important; */
 	padding: 5px 5px 5px;
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
@@ -102,6 +101,7 @@ hr {
 		height: 100%;
 	}
 	.trailerContainer {
+		padding: 1rem;
 		width: 90%;
 	}
 	.trailer {
@@ -118,13 +118,14 @@ hr {
 	}
 }
 
-@media only screen and (max-width: 768px) {
+@media (min-width: 600px) and (max-width: 768px) {
 	.container {
 		width: 80%;
 	}
 	.trailerContainer {
 		width: 80%;
 	}
+
 	.trailer {
 		width: 580px;
 		height: 370px;
