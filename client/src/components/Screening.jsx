@@ -17,15 +17,15 @@ const Screening = (props) => {
   
 	return (
 		<div className={styles.tickets}>
-			<h6 className={styles.ticketInfo}>
+			<h6 className={styles.ticketTime}>
 				{dayjs(props.screening.time).format("MMMM Do HH:mm")}
 			</h6>
 			<h6 className={styles.ticketInfo}>
-				Language: {props.screening.movie.language}
+				Price: {props.screening.price}
 			</h6>
 			{loggedIn ? (
 				<>
-          <Link to={`/screening/${props.screening._id}`}>
+          <Link className={styles.ticketLink} to={`/screening/${props.screening._id}`}>
 						<h6 className={styles.ticketBtn}>Tickets</h6>
 					</Link>
 				</>
