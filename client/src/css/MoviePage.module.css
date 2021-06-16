@@ -104,7 +104,7 @@ hr {
 		width: 90%;
 	}
 	.trailer {
-		max-width: 300px;
+		width: 300px;
 		height: 350px;
 	}
 	hr {
@@ -112,19 +112,19 @@ hr {
 	}
 
 .ticketInfo, .ticketTime{
-    font-size: 4vw;
+    font-size: 3vw;
   }
 }
 
-@media  only screen and (min-width: 600px) {
+@media  only screen and (max-width: 768px) {
 	.container {
 		width: 80%;
 	}
 	.trailerContainer {
-		min-width: 80%;
+		width: 80%;
 	}
 	.trailer {
-		max-width: 580px;
+		width: 580px;
 		height: 370px;
 	}
 }
