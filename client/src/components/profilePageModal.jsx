@@ -14,7 +14,7 @@ const Modal = (props) => {
 	return (
 		<div className={styles.modal} onClick={props.onClose}>
 			<div className={styles.card} onClick={(e) => e.stopPropagation()}>
-				<div classname={styles.wrapper}>
+				<div className={styles.wrapper}>
 					<p>Are you sure you want to unbook this booking?</p>
 					<button className={styles.btn} onClick={handleDelete}>
 						Yes

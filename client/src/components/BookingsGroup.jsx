@@ -13,7 +13,6 @@ const BookingsGroup = () => {
 		(b) => new Date(b.screening.time) > new Date()
 	);
 
-	console.log(lastBookings);
 	return (
 		<React.Fragment >
 			<div className={styles.wrapper}>
