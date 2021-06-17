@@ -25,8 +25,15 @@ async function placeBooking(req, res) {
 			"auditorium",
 			"movie"
 		);
+
 		if (!screening) {
 			return res.status(404).json({ error: "Screening not found." });
+		}
+
+		if (new Date() > screening.time) {
+			return res
+				.status(403)
+				.json({ error: "This screening is no longer bookable." });
 		}
 
 		const bookedSeats = await getBookedSeats(screening);
@@ -41,6 +48,10 @@ async function placeBooking(req, res) {
 			return res
 				.status(403)
 				.json({ error: "One or more of these seats are already booked." });
+		}
+
+		if (seats.length >= 5) {
+			return res.status(400).json({ error: "You can't book this many seats." });
 		}
 
 		const booking = await Booking.create({
@@ -69,12 +80,16 @@ async function removeBooking(req, res) {
 	const { id } = req.params;
 
 	try {
-		const booking = await Booking.findOne({ _id: id });
+		const booking = await Booking.findById(id).populate("screening");
 
 		if (!booking) {
 			return res.status(404).end();
 		} else if (String(booking.user) !== String(user._id)) {
 			return res.status(403).end();
+		} else if (new Date() > booking.screening.time) {
+			return res
+				.status(403)
+				.json({ error: "This screening is no longer unbookable." });
 		}
 
 		await Booking.deleteOne(booking);
