@@ -1,5 +1,3 @@
-import { useContext, useEffect } from "react";
-import { MovieContext } from "../contexts/MoviesProvider";
 import styles from "../css/FilterGroup.module.css";
 
 const Length = (props) => {

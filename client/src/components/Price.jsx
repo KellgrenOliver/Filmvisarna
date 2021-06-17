@@ -1,4 +1,3 @@
-
 import styles from "../css/FilterScreeningGroup.module.css";
 const Price = (props) => {
 
