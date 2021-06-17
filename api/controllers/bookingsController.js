@@ -25,6 +25,7 @@ async function placeBooking(req, res) {
 			"auditorium",
 			"movie"
 		);
+
 		if (!screening) {
 			return res.status(404).json({ error: "Screening not found." });
 		}
@@ -69,12 +70,16 @@ async function removeBooking(req, res) {
 	const { id } = req.params;
 
 	try {
-		const booking = await Booking.findOne({ _id: id });
+		const booking = await Booking.findById(id).populate("screening");
 
 		if (!booking) {
 			return res.status(404).end();
 		} else if (String(booking.user) !== String(user._id)) {
 			return res.status(403).end();
+		} else if (new Date() > booking.screening.time) {
+			return res
+				.status(403)
+				.json({ error: "This screening is no longer unbookable." });
 		}
 
 		await Booking.deleteOne(booking);
