@@ -21,7 +21,7 @@ const Search = () => {
 				placeholder="Search..."
 				name="search"
 				onChange={handleSearch}
-			></input>
+			/>
 	);
 };
 
