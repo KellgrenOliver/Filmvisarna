@@ -4,7 +4,7 @@ import { UserContext } from "../contexts/UserProvider";
 import dayjs from "dayjs";
 import Modal from "./profilePageModal";
 
-const UpcomingBookings = (props) => {
+const RenderBookings = (props) => {
 	const { user, deleteBooking } = useContext(UserContext);
 	const [showModal, setShowModal] = useState(false);
 
@@ -97,4 +97,4 @@ const UpcomingBookings = (props) => {
 	);
 };
 
-export default UpcomingBookings;
+export default RenderBookings;
