@@ -16,6 +16,7 @@ const FilterGroup = () => {
 		setRating,
 		movies,
 	} = useContext(MovieContext);
+  
 	const [languageItems, setLanguageItems] = useState("");
 	const [genreItems, setGenreItems] = useState("");
 	const [directorItems, setDirectorItems] = useState("");

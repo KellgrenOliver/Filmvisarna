@@ -1,10 +1,8 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserProvider";
-import { useHistory } from "react-router-dom";
 import styles from "../css/Login.module.css";
 
 const Login = (props) => {
-	const history = useHistory();
 	const { login } = useContext(UserContext);
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
