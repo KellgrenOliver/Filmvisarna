@@ -4,6 +4,6 @@ const auth = require("../middlewares/auth");
 const router = express.Router();
 
 router.post("", auth, bookingsController.placeBooking);
-router.delete("/:id", bookingsController.removeBooking);
+router.delete("/:id", auth, bookingsController.removeBooking);
 
 module.exports = router;
