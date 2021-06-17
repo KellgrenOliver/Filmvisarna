@@ -17,7 +17,6 @@ const Navbar = () => {
 
 	const handleSubmit = async () => {
 		let result = await logout();
-		console.log(result);
 		if (result.success) {
 			history.push("/");
 		}

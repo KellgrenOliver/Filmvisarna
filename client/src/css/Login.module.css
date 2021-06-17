@@ -12,6 +12,8 @@
 
 .close {
 	float: right;
+	margin-top: -20px;
+	margin-right: -15px;
 }
 
 .card {
@@ -69,6 +71,10 @@ input[type="text"],
 .btn:hover {
 	background-color: rgb(59, 7, 21);
 	color: rgb(235, 235, 235);
+}
+.error {
+	text-decoration: underline;
+	text-decoration-color: rgb(146, 37, 64);
 }
 
 @media only screen and (max-width: 600px) {

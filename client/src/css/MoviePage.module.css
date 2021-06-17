@@ -6,7 +6,7 @@
 	padding: 5px 5px 5px;
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
-	width: 50%;
+	width: 60%;
 	margin: auto;
 }
 
@@ -14,13 +14,13 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 2rem !important;
 	padding: 5px 5px 5px;
 	background-color: rgb(235, 235, 235);
 	border-radius: 10px;
-	width: 50%;
+	width: 60%;
 	height: 100%;
-	margin: auto;
+	margin: 2rem auto;
+	overflow: hidden;
 }
 
 .trailer {
@@ -53,7 +53,7 @@ hr {
 	width: 100%;
 	margin-top: 1rem;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	border-bottom-style: solid;
 	border-bottom-color: rgb(71, 7, 24);
 	border-top-style: solid;
@@ -61,26 +61,38 @@ hr {
 	height: 2rem;
 }
 
-.ticketInfo {
+.ticketInfo,
+.ticketTime {
 	margin: 0;
 	max-height: 100%;
-	width: 100%;
+	flex-basis: 40%;
 	text-decoration: none;
 }
 
+.ticketTime {
+	flex-basis: 35%;
+}
+
 .ticketBtn {
-	text-decoration: none;
 	width: 100%;
 	margin: 0;
 	max-height: 100%;
-	border-color: rgb(71, 7, 24);
 	cursor: pointer;
 	color: rgb(71, 7, 24);
+	flex-basis: 20%;
+}
+
+.ticketLink {
+	text-decoration: none;
 }
 
 .ticketBtn:hover {
 	background-color: rgb(71, 7, 24);
 	color: rgb(235, 235, 235);
+}
+
+.message {
+	text-align: center;
 }
 
 @media only screen and (max-width: 600px) {
@@ -89,6 +101,7 @@ hr {
 		height: 100%;
 	}
 	.trailerContainer {
+		padding: 1rem;
 		width: 90%;
 	}
 	.trailer {
@@ -98,15 +111,21 @@ hr {
 	hr {
 		margin-right: 0;
 	}
+
+	.ticketInfo,
+	.ticketTime {
+		font-size: 3.5vw;
+	}
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 600px) and (max-width: 768px) {
 	.container {
 		width: 80%;
 	}
 	.trailerContainer {
 		width: 80%;
 	}
+
 	.trailer {
 		width: 580px;
 		height: 370px;

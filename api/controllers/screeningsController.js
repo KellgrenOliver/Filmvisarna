@@ -1,4 +1,5 @@
 const Screening = require("../models/Screening");
+const Seat = require("../models/Seat");
 const errorLog = require("../utils/errorLog");
 const { getBookedSeats } = require("../utils/seats");
 
@@ -28,6 +29,9 @@ async function getScreeningById(req, res) {
 		if (!screening) return res.status(404).end();
 
 		screening.bookedSeats = await getBookedSeats(screening);
+		screening.auditorium.seats = await Seat.where({
+			auditorium: screening.auditorium,
+		});
 
 		res.status(200).json(screening);
 	} catch (e) {
@@ -40,11 +44,37 @@ async function getScreeningsFromMovie(req, res) {
 	try {
 		const { movie } = req.params;
 
+		let screening = await Screening.find({ movie }).sort({
+      time: 1,
+      price: 1
+    }).populate([
+			"movie",
+			"auditorium",
+		]);
+
+		if (screening.length === 0) {
+			return res.status(404).json({ error: "No results were found." });
+		}
+
+		return res.status(200).json(screening);
+	} catch (e) {
+		errorLog(e);
+		res.status(500).end();
+	}
+}
+
+async function getScreeningsFromMovieByFilter(req, res) {
+	try {
+		const { movie } = req.params;
+
 		if (Object.keys(req.query).length === 0) {
-			let screening = await Screening.find({ movie }).populate([
+			let screening = await Screening.find({ movie }).sort({
+        time: 1,
+        price: 1
+      }).populate([
 				"movie",
 				"auditorium",
-			]);
+			])
 
 			if (screening.length === 0) {
 				return res.status(404).json({ error: "No results were found." });
@@ -55,7 +85,7 @@ async function getScreeningsFromMovie(req, res) {
 
 		let queryPriceMin = req.query.priceMin ?? 0;
 		let queryPriceMax = req.query.priceMax ?? Infinity;
-		let startDate = req.query.startDate ?? new Date("0000-01-01");
+		let startDate = req.query.startDate ?? new Date();
 		let endDate = req.query.endDate ?? new Date("9999-12-31");
 		let screening = await Screening.find({
 			movie,
@@ -67,7 +97,10 @@ async function getScreeningsFromMovie(req, res) {
 				$gte: new Date(startDate),
 				$lte: new Date(endDate),
 			},
-		}).populate(["movie", "auditorium"]);
+		}).sort({
+      time: 1,
+      price: 1
+    }).populate(["movie", "auditorium"]);
 
 		if (!screening || screening.length === 0) {
 			return res.status(404).json({ error: "No results were found." });
@@ -79,9 +112,9 @@ async function getScreeningsFromMovie(req, res) {
 		res.status(500).end();
 	}
 }
-
 module.exports = {
 	getScreenings,
 	getScreeningById,
 	getScreeningsFromMovie,
+	getScreeningsFromMovieByFilter,
 };

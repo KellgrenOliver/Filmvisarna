@@ -6,12 +6,23 @@
 
 	--color-brand: 71, 7, 24; /* Wine red brand color */
 	--color-background: 235, 235, 235; /* Primary element background color */
+
+	/* Breakpoints */
+	--bp-phone: 768px;
+	--bp-tablet: 992px;
+	--bp-desktop: 1200px;
 }
 
 *,
 *::before,
 *::after {
 	box-sizing: border-box;
+}
+
+html,
+body {
+	max-width: 100%;
+	overflow-x: hidden;
 }
 
 *:focus {
