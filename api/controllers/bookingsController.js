@@ -30,6 +30,12 @@ async function placeBooking(req, res) {
 			return res.status(404).json({ error: "Screening not found." });
 		}
 
+		if (new Date() > screening.time) {
+			return res
+				.status(403)
+				.json({ error: "This screening is no longer bookable." });
+		}
+
 		const bookedSeats = await getBookedSeats(screening);
 
 		if (
