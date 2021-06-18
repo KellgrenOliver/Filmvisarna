@@ -50,7 +50,7 @@ async function placeBooking(req, res) {
 				.json({ error: "One or more of these seats are already booked." });
 		}
 
-		if (seats.length >= 5) {
+		if (seats.length > 5) {
 			return res.status(400).json({ error: "You can't book this many seats." });
 		}
 
