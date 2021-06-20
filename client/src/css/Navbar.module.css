@@ -1,0 +1,35 @@
+.navbar {
+	text-align: center;
+	border-bottom: 3px solid rgb(163, 163, 163);
+	border-left: 3px solid rgb(163, 163, 163);
+	border-right: 3px solid rgb(163, 163, 163);
+	width: 80%;
+	margin: auto;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+}
+
+.link {
+	color: rgb(235, 235, 235);
+	font-size: 1rem;
+	margin: 0 1rem;
+	text-decoration: none;
+	padding: 10px;
+}
+
+span {
+	cursor: pointer;
+}
+
+.link:hover {
+	border-bottom: 3px solid rgb(85, 11, 27);
+}
+
+@media only screen and (max-width: 600px) {
+	.navbar {
+		width: 100%;
+	}
+	.link {
+		margin: 0 auto;
+	}
+}

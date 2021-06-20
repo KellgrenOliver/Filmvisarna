@@ -1,0 +1,41 @@
+.boxContainer {
+	display: flex;
+	justify-content: center;
+	padding: 1.5rem;
+	margin: 2rem 0;
+	align-items: center;
+	max-width: 100%;
+	background-color: rgb(235, 235, 235);
+	line-height: 1.5rem;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgb(165, 165, 165);
+	padding: 2rem 3rem 2rem 3rem;
+}
+
+.container {
+	max-width: 100%;
+}
+
+/* tablet and desktop and extra large */
+@media only screen and (min-width: 768px) {
+	.container {
+		max-width: 720px;
+		margin: 2rem auto;
+	}
+
+	.box-container {
+		margin: 2rem auto;
+	}
+}
+/* desktop and extra large*/
+@media only screen and (min-width: 992px) {
+	.container {
+		max-width: 960px;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.container {
+		max-width: 1140px;
+	}
+}

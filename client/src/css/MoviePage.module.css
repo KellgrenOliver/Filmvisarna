@@ -1,0 +1,133 @@
+.moviePage {
+	margin-top: 2rem;
+}
+
+.container {
+	padding: 5px 5px 5px;
+	background-color: rgb(235, 235, 235);
+	border-radius: 10px;
+	width: 60%;
+	margin: auto;
+}
+
+.trailerContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 5px 5px;
+	background-color: rgb(235, 235, 235);
+	border-radius: 10px;
+	width: 60%;
+	height: 100%;
+	margin: 2rem auto;
+	overflow: hidden;
+}
+
+.trailer {
+	padding: 2rem;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	width: 690px;
+	height: 370px;
+	align-items: center;
+}
+
+.img {
+	float: left;
+	margin: 1rem;
+	width: 150px;
+	height: 250px;
+	border-radius: 10px;
+}
+
+hr {
+	margin-right: 1rem;
+}
+
+.moviePage h3 {
+	margin: 0.5rem;
+}
+
+.tickets {
+	width: 100%;
+	margin-top: 1rem;
+	display: flex;
+	justify-content: space-around;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(71, 7, 24);
+	border-top-style: solid;
+	border-top-color: rgb(71, 7, 24);
+	height: 2rem;
+}
+
+.ticketInfo,
+.ticketTime {
+	margin: 0;
+	max-height: 100%;
+	flex-basis: 40%;
+	text-decoration: none;
+}
+
+.ticketTime {
+	flex-basis: 35%;
+}
+
+.ticketBtn {
+	width: 100%;
+	margin: 0;
+	max-height: 100%;
+	cursor: pointer;
+	color: rgb(71, 7, 24);
+	flex-basis: 20%;
+}
+
+.ticketLink {
+	text-decoration: none;
+}
+
+.ticketBtn:hover {
+	background-color: rgb(71, 7, 24);
+	color: rgb(235, 235, 235);
+}
+
+.message {
+	text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+	.container {
+		width: 90%;
+		height: 100%;
+	}
+	.trailerContainer {
+		padding: 1rem;
+		width: 90%;
+	}
+	.trailer {
+		width: 300px;
+		height: 350px;
+	}
+	hr {
+		margin-right: 0;
+	}
+
+	.ticketInfo,
+	.ticketTime {
+		font-size: 3.5vw;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+	.container {
+		width: 80%;
+	}
+	.trailerContainer {
+		width: 80%;
+	}
+
+	.trailer {
+		width: 580px;
+		height: 370px;
+	}
+}
